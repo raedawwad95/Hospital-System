@@ -9,4 +9,4 @@ var DepartmentSchema=mongoose.Schema({
 
 
 var Department=mongoose.model('Department',DepartmentSchema);
-module.exports=Departments
+module.exports=Department
