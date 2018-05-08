@@ -6,9 +6,11 @@ DepartmentRouter.route('/')
 	DepartmentController.retriveDepts(req,res);
 })
 .post(function(req,res){
-	DepartmentController.createDept(req,res)
+	DepartmentController.createDept(req,res);
 })
-
+.put(function(req,res){
+	DepartmentController.addDoctor(req,res);
+})
 
 
 module.exports=DepartmentRouter;
