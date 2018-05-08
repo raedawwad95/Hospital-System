@@ -1,4 +1,5 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var doctorSchema = mongoose.Schema({
 	userName:{
@@ -43,7 +44,26 @@ var doctorSchema = mongoose.Schema({
 		required:true
 	}
 
-})
+});
+doctorSchema.pre('save',function(next){
+	var doctorUser=this;
+	bcrypt.hash(doctorUser.password,10,function(err,hash){
+		if(err){
+			return next(err)
+		}
+		doctorUser.password =hash;
+		next();
+	});
+});
+
+doctorSchema.methods.comparePassword =function(password,fun){
+	bcrypt.compare(password,this.password,function(err,isMatch){
+		if(err){
+			fun(err)
+		}
+		fun(null,isMatch)
+	});
+}
 
 var Doctors = mongoose.model('Doctors',doctorSchema);
 
