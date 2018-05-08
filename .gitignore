@@ -1,3 +1,6 @@
+node_modules
+react-client/dist/bundle.js
+react-client/dist/bundle.js.map 
 # Logs
 logs
 *.log
@@ -56,5 +59,3 @@ typings/
 
 # dotenv environment variables file
 .env
-node_modules
-react-client/dist/bundle.js
