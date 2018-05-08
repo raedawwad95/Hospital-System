@@ -7,15 +7,13 @@ import {
   Route,
   Link
 } from 'react-router-dom';
- 
+import Home from './components/Home.jsx'
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
-
   componentDidMount() {
   }
-
   render () {
     return (
     <Router history={browserHistory}>
@@ -46,7 +44,7 @@ class App extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Route exact path="/" render={()=><Home user={this.state.user}/>}/>
+        <Route exact path="/" render={()=><Home />}/>
       </div>
     </Router>
     )
