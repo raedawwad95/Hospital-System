@@ -1,9 +1,4 @@
 import React from 'react';
-import ShowComments from './showcomments.jsx';
-import AddItems from './AddItems.jsx';
-import Comments from './comments.jsx';
-import ItemDisplay from './ItemDisplay.jsx';
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -11,24 +6,6 @@ class Home extends React.Component {
       arr:[]
     }
   }
-  
-  // componentDidMount() {
-  //   var that = this;
-  //   $.ajax({
-  //     url: '/link',
-  //     method: "GET"
-  //   })
-  //   .done(function(data) {
-  //     console.log(data)
-  //     that.setState({
-  //       arr: data
-  //     })
-  //   })
-  //   .fail(function (jqXHR, textStatus) {
-  //     alert("no match found!");
-  //   });
-  // }
-
   render(){
     return(
       <div>
