@@ -1,6 +1,8 @@
 node_modules
 react-client/dist/bundle.js
 react-client/dist/bundle.js.map 
+react-Admin/dist/bundle.js
+react-Admin/dist/bundle.js.map 
 # Logs
 logs
 *.log

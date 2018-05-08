@@ -10,10 +10,8 @@ var path = require('path');
 
 // Build directory is where the bundle file will be placed
 var BUILD_DIR = path.resolve(__dirname, 'react-client/dist');
-var BUILD_ADMIN_DIR = path.resolve(__dirname, 'react-Admin/dist');
 // App directory is where all of your raw JSX files will be placed
 var APP_DIR = path.resolve(__dirname, 'react-client/src');
-var ADMIN_DIR = path.resolve(__dirname, 'react-Admin/src');
 
 // The files in the app directory will get transpiled and packaged into one
 // file, bundle.js, which will get saved in the BUILD_DIR. 
@@ -42,24 +40,4 @@ var config = {
   }
 };
 
-var configAdmin = {
-  entry: ADMIN_DIR + '/index.jsx',
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?/,
-        include: ADMIN_DIR,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react']
-        }
-      }
-    ]
-  },
-  output: {
-    path: BUILD_ADMIN_DIR,
-    filename: 'bundle.js'
-  }
-};
-
-module.exports = [config,configAdmin];
+module.exports = config;
