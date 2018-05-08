@@ -3,7 +3,8 @@ var mongoose = require('mongoose')
 var doctorSchema = mongoose.Schema({
 	userName:{
 		type:String, 
-		unique:true,required:true
+		unique:true,
+		required:true
 	},
 	password:{
 		type:String,
