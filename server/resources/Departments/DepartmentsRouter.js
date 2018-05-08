@@ -3,11 +3,12 @@ var DepartmentController=require('./DepartmentsController');
 
 DepartmentRouter.route('/')
 .get(function(req,res){
-	res.json('departments')
+	DepartmentController.retriveDepts(req,res);
 })
 .post(function(req,res){
 	DepartmentController.createDept(req,res)
 })
+
 
 
 module.exports=DepartmentRouter;

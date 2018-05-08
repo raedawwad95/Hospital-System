@@ -14,3 +14,12 @@ exports.createDept=function(req,res){
 	})
 
 }
+
+exports.retriveDepts=function(req,res){
+	Departments.find(function(err,data){
+		if(err){
+			return handleError(err)
+		}
+		res.send(data)
+	})
+}
