@@ -5,10 +5,12 @@ var LabsResultSchema = mongoose.Schema({
 		type:Number
 	},
 	labTechnicianId:{
-		type:Number
+		type:mongoose.Schema.Types.ObjectId,
+		ref:'LabsTechncians'
 	},
 	medicalExaminationTime:{
-		type:Date
+		type:Date,
+		default: Date.now
 	},
 	resultEntryTime:{
 		type:Date,
