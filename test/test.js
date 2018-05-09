@@ -1,7 +1,7 @@
 var Department = require('../server/resources/Departments/Departments');
 var Doctors = require('../server/resources/Doctor/Doctor');
 var ItDepartment = require('../server/resources/ItDepartment/ItDepartment');
-
+var LabsResult = require('../server/resources/LabsResult/LabsResult');
 
 var mongoose = require('mongoose');
 var expect = require('chai').expect;
@@ -150,17 +150,62 @@ describe('ItDepartment Model', function(){
     it('should have a `userName` property', function(){
         expect(ItDepartment.schema.paths.userName).to.exist;
     });
-    it('should have a `password` property', function(){
-
-        expect(ItDepartment.schema.paths.password).to.exist;
-    });
     it('should have a `userName` property that is a string', function(){
         expect(ItDepartment.schema.paths.userName.options.type.name).to.equal('String');
-    });
-    it('should have a `password` property that is a string', function(){
-        expect(ItDepartment.schema.paths.password.options.type.name).to.equal('String');
     });
     it('should have a `userName` property that is a unique', function(){
         expect(ItDepartment.schema.paths.userName.options.unique).to.be.true;
     });
+    it('should have a `password` property', function(){
+
+        expect(ItDepartment.schema.paths.password).to.exist;
+    });
+    it('should have a `password` property that is a string', function(){
+        expect(ItDepartment.schema.paths.password.options.type.name).to.equal('String');
+    });
+    
 });
+
+
+//test for LabsResult Model
+
+describe('LabsResult Model', function(){
+    it('should a mongoose Model', function(){
+        expect(new LabsResult()).to.be.instanceOf(mongoose.Model);
+    });
+    it('should have a Schema', function(){
+        expect(LabsResult.schema).to.exist;
+    });
+    it('should have a `patientId` property', function(){
+        expect(LabsResult.schema.paths.patientId).to.exist;
+    });
+    it('should have a `patientId` property that is a number', function(){
+        expect(LabsResult.schema.paths.patientId.options.type.name).to.equal('Number');
+    });
+     it('should have a `labTechnicianId` property', function(){
+        expect(LabsResult.schema.paths.labTechnicianId).to.exist;
+    });
+    it('should have a `labTechnicianId` property that is a ObjectId', function(){
+        expect(LabsResult.schema.paths.labTechnicianId.options.type.name).to.equal('ObjectId');
+    });
+    it('should have a `medicalExaminationTime` property', function(){
+        expect(LabsResult.schema.paths.medicalExaminationTime).to.exist;
+    });
+    it('should have a `medicalExaminationTime` property that is a date', function(){
+        expect(LabsResult.schema.paths.medicalExaminationTime.options.type.name).to.equal('Date');
+    });
+     it('should have a `resultEntryTime` property', function(){
+        expect(LabsResult.schema.paths.resultEntryTime).to.exist;
+    });
+    it('should have a `resultEntryTime` property that is a date', function(){
+        expect(LabsResult.schema.paths.resultEntryTime.options.type.name).to.equal('Date');
+    });
+    it('should have a `imageOfResult` property', function(){
+        expect(LabsResult.schema.paths.imageOfResult).to.exist;
+    });
+    it('should have a `imageOfResult` property that is a string', function(){
+        expect(LabsResult.schema.paths.imageOfResult.options.type.name).to.equal('String');
+    });
+
+
+})
