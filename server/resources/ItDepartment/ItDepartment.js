@@ -13,6 +13,7 @@ var ITSchema =mongoose.Schema({
 	}
 
 });
+
 ITSchema.pre('save', function (next) {
   var itUser = this;
   bcrypt.hash(itUser.password, 10, function (err, hash){
@@ -23,6 +24,7 @@ ITSchema.pre('save', function (next) {
     next();
   })
 });
+
 ITSchema.methods.comparePassword = function(password, fun) {
     bcrypt.compare(password, this.password, function(err, isMatch) {
         if (err) {
