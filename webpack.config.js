@@ -10,8 +10,14 @@ var path = require('path');
 
 // Build directory is where the bundle file will be placed
 var BUILD_DIR = path.resolve(__dirname, 'react-client/dist');
+var BUILD_ADMIN_DIR = path.resolve(__dirname, 'react-Admin/dist');
+var BUILD_DOCTORS_DIR = path.resolve(__dirname, 'react-Doctors/dist');
+var BUILD_LABS_DIR = path.resolve(__dirname, 'react-Labs/dist');
 // App directory is where all of your raw JSX files will be placed
 var APP_DIR = path.resolve(__dirname, 'react-client/src');
+var ADMIN_DIR = path.resolve(__dirname, 'react-Admin/src');
+var DOCTORS_DIR = path.resolve(__dirname, 'react-Doctors/src');
+var LABS_DIR = path.resolve(__dirname, 'react-Labs/src');
 
 // The files in the app directory will get transpiled and packaged into one
 // file, bundle.js, which will get saved in the BUILD_DIR. 
@@ -40,4 +46,64 @@ var config = {
   }
 };
 
-module.exports = config;
+var configAdmin = {
+  entry: ADMIN_DIR + '/index.jsx',
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?/,
+        include: ADMIN_DIR,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ]
+  },
+  output: {
+    path: BUILD_ADMIN_DIR,
+    filename: 'bundle.js'
+  }
+};
+
+var configDoctors = {
+  entry: DOCTORS_DIR + '/index.jsx',
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?/,
+        include: DOCTORS_DIR,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ]
+  },
+  output: {
+    path: BUILD_DOCTORS_DIR,
+    filename: 'bundle.js'
+  }
+};
+
+var configLabs = {
+  entry: LABS_DIR + '/index.jsx',
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?/,
+        include: LABS_DIR,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ]
+  },
+  output: {
+    path: BUILD_LABS_DIR,
+    filename: 'bundle.js'
+  }
+};
+
+module.exports = [config, configAdmin, configLabs, configDoctors];

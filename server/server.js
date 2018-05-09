@@ -25,6 +25,9 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/../react-client/dist'));
+app.use('/admin', express.static(__dirname + '/../react-Admin/dist'));
+app.use('/doctors', express.static(__dirname + '/../react-Doctors/dist'));
+app.use('/labs', express.static(__dirname + '/../react-Labs/dist'));
 app.use('/dept',DepartmentsRouter);
 //app.use('/',userRouter);
 

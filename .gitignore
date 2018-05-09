@@ -1,6 +1,12 @@
 node_modules
 react-client/dist/bundle.js
 react-client/dist/bundle.js.map 
+react-Admin/dist/bundle.js
+react-Admin/dist/bundle.js.map 
+react-Doctors/dist/bundle.js
+react-Doctors/dist/bundle.js.map 
+react-Labs/dist/bundle.js
+react-Labs/dist/bundle.js.map 
 # Logs
 logs
 *.log
