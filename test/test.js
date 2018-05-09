@@ -1,5 +1,7 @@
 var Department = require('../server/resources/Departments/Departments');
 var Doctors = require('../server/resources/Doctor/Doctor');
+var ItDepartment = require('../server/resources/ItDepartment/ItDepartment');
+
 
 var mongoose = require('mongoose');
 var expect = require('chai').expect;
@@ -134,3 +136,31 @@ describe('Doctors Model',function(){
     expect(Doctors.schema.paths.hoursOfWork.options.type.name).to.equal('Number');
     });
 })
+
+
+//test for ItDepartment Model
+
+describe('ItDepartment Model', function(){
+    it('should a mongoose model', function(){
+        expect(new ItDepartment()).to.be.instanceOf(mongoose.Model)
+    });
+    it('should have a schema', function(){
+        expect(ItDepartment.schema).to.exist;
+    });
+    it('should have a `userName` property', function(){
+        expect(ItDepartment.schema.paths.userName).to.exist;
+    });
+    it('should have a `password` property', function(){
+
+        expect(ItDepartment.schema.paths.password).to.exist;
+    });
+    it('should have a `userName` property that is a string', function(){
+        expect(ItDepartment.schema.paths.userName.options.type.name).to.equal('String');
+    });
+    it('should have a `password` property that is a string', function(){
+        expect(ItDepartment.schema.paths.password.options.type.name).to.equal('String');
+    });
+    it('should have a `userName` property that is a unique', function(){
+        expect(ItDepartment.schema.paths.userName.options.unique).to.be.true;
+    });
+});
