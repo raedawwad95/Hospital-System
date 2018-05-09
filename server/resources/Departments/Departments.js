@@ -2,9 +2,23 @@ var mongoose = require('mongoose');
 var db = require('../../db');
 
 var DepartmentSchema=mongoose.Schema({
-	nameOfDept:{type:String,index:{unique:true}},
-	idOfDept:{type:Number,required:true , index: {unique: true}},
-	doctorsId:[Number]
+	nameOfDept:{
+		type:String,
+		index:{
+			unique:true
+		}
+	},
+	idOfDept:{
+		type:Number,
+		required:true, 
+		index: {
+			unique: true
+		}
+	},
+	doctorsId:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref : 'Doctors'
+	}
 })
 
 
