@@ -7,18 +7,28 @@ exports.Create = function (req, res) {
 		if (err){
 			return console.error(err);
 		}
-		res.json("lab result recived ")
+		res.json(data)
 	});
 };
 
  exports.Retrive=function(req,res){
- 	LabsResult.find(function(err,data){
-			if(err){
-			return console.error(err);
-		}
+ 	LabsResult.find()
+ 	.populate('labTechnicianId')
+ 	.exec(function(err,data){
+ 		if(err){
+ 			return handleError(err);
+ 		}
+ 		res.json(data)
+ 	})
 
-		res.json(data)
- 	});
+
+ 	// LabsResult.find(function(err,data){
+		// 	if(err){
+		// 	return console.error(err);
+		// }
+
+		// res.json(data)
+ 	// });
  };
 
 

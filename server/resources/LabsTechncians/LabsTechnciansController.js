@@ -7,7 +7,7 @@ exports.Create = function (req, res) {
 		if (err){
 			return console.error(err);
 		}
-		res.json("lab Techncians recived ")
+		res.json(data)
 	});
 };
 
