@@ -2,6 +2,7 @@ var Department = require('../server/resources/Departments/Departments');
 var Doctors = require('../server/resources/Doctor/Doctor');
 var ItDepartment = require('../server/resources/ItDepartment/ItDepartment');
 var LabsResult = require('../server/resources/LabsResult/LabsResult');
+var LabsTechncians = require('../server/resources/LabsTechncians/LabsTechncians')
 
 var mongoose = require('mongoose');
 var expect = require('chai').expect;
@@ -208,4 +209,63 @@ describe('LabsResult Model', function(){
     });
 
 
-})
+});
+
+
+
+//test for LabsTechncians Model
+    
+describe('LabsTechncians Model', function(){
+    it('should a mongoose Model', function(){
+        expect(new LabsTechncians()).to.be.instanceOf(mongoose.Model);
+    });
+    it('should have a schema', function(){
+        expect(LabsTechncians.schema).to.exist;
+    });
+    it('should have a `userName` property', function(){
+        expect(LabsTechncians.schema.paths.userName).to.exist;
+    });
+    it('should have a `userName` property that is a string', function(){
+        expect(LabsTechncians.schema.paths.userName.options.type.name).to.equal('String');
+    });
+    it('should have a `userName` property that is a unique', function(){
+        expect(LabsTechncians.schema.paths.userName.options.unique).to.true;
+    });
+    it('should have a `password` property', function(){
+        expect(LabsTechncians.schema.paths.password).to.exist;
+    });
+    it('should have a `password` property that is a string', function(){
+        expect(LabsTechncians.schema.paths.password.options.type.name).to.equal('String');
+    });
+    it('should have a `fullName` property', function(){
+        expect(LabsTechncians.schema.paths.fullName).to.exist;
+    });
+    it('should have a `fullName` property that is a string', function(){
+        expect(LabsTechncians.schema.paths.fullName.options.type.name).to.equal('String');
+    });
+    it('should have a `id` property', function(){
+        expect(LabsTechncians.schema.paths.id).to.exist;
+    });
+    it('should have a `id` property that is a number', function(){
+        expect(LabsTechncians.schema.paths.id.options.type.name).to.equal('Number');
+    });
+    it('should have a `imageOfId` property', function(){
+        expect(LabsTechncians.schema.paths.imageOfId).to.exist;
+    });
+    it('should have a `imageOfId` property that is a string', function(){
+        expect(LabsTechncians.schema.paths.imageOfId.options.type.name).to.equal('String');
+    });
+    it('should have a `techncianImage` property', function(){
+        expect(LabsTechncians.schema.paths.techncianImage).to.exist;
+    });
+    it('should have a `techncianImage` property that is a string', function(){
+        expect(LabsTechncians.schema.paths.techncianImage.options.type.name).to.equal('String');
+    });
+    it('should have a `workHour` property', function(){
+        expect(LabsTechncians.schema.paths.workHour).to.exist;
+    });
+    it('should have a `workHour` property that is a number', function(){
+        expect(LabsTechncians.schema.paths.workHour.options.type.name).to.equal('Number');
+    });
+
+});
