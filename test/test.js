@@ -3,6 +3,7 @@ var Doctors = require('../server/resources/Doctor/Doctor');
 var ItDepartment = require('../server/resources/ItDepartment/ItDepartment');
 var LabsResult = require('../server/resources/LabsResult/LabsResult');
 var LabsTechncians = require('../server/resources/LabsTechncians/LabsTechncians')
+var Medical = require('../server/resources/MedicalRecorde/Medical')
 
 var mongoose = require('mongoose');
 var expect = require('chai').expect;
@@ -268,4 +269,40 @@ describe('LabsTechncians Model', function(){
         expect(LabsTechncians.schema.paths.workHour.options.type.name).to.equal('Number');
     });
 
+});
+
+
+//test for Medical Model
+
+describe('Medical Model', function(){
+    it('should a mongoose Model', function(){
+        expect(new Medical()).to.be.instanceOf(mongoose.Model);
+    });
+    it('should have a schema', function(){
+        expect(Medical.schema).to.exist;
+    });
+    it('should have a `patientId` property', function(){
+        expect(Medical.schema.paths.patientId).to.exist;
+    });
+    it('should have a `patientId` property that is a number', function(){
+        expect(Medical.schema.paths.patientId.options.type.name).to.equal('Number');
+    });
+    it('should have a `doctorId` property', function(){
+        expect(Medical.schema.paths.doctorId).to.exist;
+    });
+    it('should have a `doctorId` property that is a number', function(){
+        expect(Medical.schema.paths.doctorId.options.type.name).to.equal('Number');
+    });
+    it('should have a `created_at` property', function(){
+        expect(Medical.schema.paths.created_at).to.exist;
+    });
+    it('should have a `created_at` property that is a date', function(){
+        expect(Medical.schema.paths.created_at.options.type.name).to.equal('Date');
+    });
+    it('should have a `description` property', function(){
+        expect(Medical.schema.paths.description).to.exist;
+    });
+    it('should have a `description` property that is a string', function(){
+        expect(Medical.schema.paths.description.options.type.name).to.equal('String');
+    });
 });
