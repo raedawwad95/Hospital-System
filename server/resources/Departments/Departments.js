@@ -15,10 +15,8 @@ var DepartmentSchema=mongoose.Schema({
 			unique: true
 		}
 	},
-	doctorsId:{
-		type: mongoose.Schema.Types.ObjectId,
-		ref : 'Doctors'
-	}
+	doctorsId:[{type: mongoose.Schema.Types.ObjectId, ref: 'Doctors'}]
+	
 })
 
 
