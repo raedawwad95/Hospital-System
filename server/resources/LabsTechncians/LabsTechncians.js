@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var LabsTechnciansSchema = mongoose.Schema({
 	userName:{
@@ -22,10 +23,7 @@ var LabsTechnciansSchema = mongoose.Schema({
 		type:String,
 		required:true
 	},
-	techncianImage:{
-		type:String,
-		required:true
-	},
+	
 	workHour:{
 		type:Number,
 		required:true
