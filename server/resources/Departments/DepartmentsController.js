@@ -2,47 +2,41 @@ var Departments=require ('./Departments');
 exports.createDept=function(req,res){
 	var Dept=new Departments({
 		nameOfDept:req.body.nameOfDept,
-		idOfDept:req.body.idOfDept,
-		doctorsId:req.body.doctorsId
+		idOfDept:req.body.idOfDept
 	})
 
 	Dept.save(function(err,data){
 		if(err){
 			return err;
 		}
-		Departments.find({})
-		.populate('doctorsId')
-		.exec(function(err,dep){
-			res.json(dep)
-		})
+		res.json("Department added");
 	})
 
 }
 
 exports.retriveDepts=function(req,res){
-	Departments.find(function(err,data){
+	Departments.find({}).
+	populate('doctorsId').
+	exec(function(err,data){
 		if(err){
-			return err;
+			res.json('error')
 		}
 		res.json(data)
 	})
-	// Departments.find({}).populate('doctorsId')
-	// 	.exec(function(err,dep){
-	// 		res.json(dep)
-	// 	})
+	
 }
 
 exports.addDoctor=function(req,res){
 	var query={idOfDept:req.body.idOfDept};
 	console.log(req.body.docId)
-		Departments.update(query,{$push:{'doctorsId':req.body.docId}},function(err,data){
-
+		Departments.update(query,{$push:{'doctorsId':req.body.docId}}).
+		populate('doctorsId').
+		exec(function(err,data){
 			if(err){
-				console.log('asaas',data)
-				res.send(err);
+				res.send(err)
 			}
 			res.json(data)
 		})
-
 	
 }
+
