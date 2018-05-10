@@ -25,5 +25,8 @@ userRouter.route('/test')
 		var ses = req.session
 		res.json(ses);
 	})
-
+userRouter.route('/:username')
+	.get(function(req, res) {
+		userController.retrive(req, res);
+	})
 module.exports = userRouter;

@@ -48,3 +48,18 @@ exports.logout = function (req, res) {
 	})
 }
 
+exports.retrive = function (req, res) {
+	Users.find({})
+		.populate('medicalRecords')
+		.populate('labResults')
+		.exec(function (err, user) {
+			if (err) {
+				console.error(err);
+			}
+			if (!user) {
+				res.json('no user');
+			} else {
+				res.json(user);
+			}
+		})
+}

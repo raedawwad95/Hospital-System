@@ -11,4 +11,9 @@ MedicalRouter.route('/search')
 		MedicalController.search(req, res);
 	})
 
+MedicalRouter.route('/addRecorde')
+	.post(function (req, res) {
+		MedicalController.addRecord(req, res);
+	})
+
 module.exports = MedicalRouter;
