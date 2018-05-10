@@ -1,4 +1,5 @@
 var Doctor = require('./Doctor.js');
+var User = require('../User/Users')
 
 //retrieve .. find and retrieve data
 exports.retrieve=function(req,res){
@@ -78,6 +79,17 @@ exports.logout=function(req,res){
 			return console.log(err)
 		}
 		res.json("logged out")
+	});
+}
+exports.retrievePatient=function(req,res){
+	var userName=req.params.userNamePatient;
+	console.log(userName)
+	User.findOne({"username":userName},function(err,data){
+		console.log(data)
+		if(err){
+			console.log(err);
+		}
+		res.json(data)
 	});
 }
 
