@@ -46,7 +46,11 @@ var doctorSchema = mongoose.Schema({
 	gender: {
 		type: String,
 		required:true
-	}
+	},
+	doctorType: {
+		type: String,
+		 default: "d"
+		},
 
 });
 //before save in DataBase

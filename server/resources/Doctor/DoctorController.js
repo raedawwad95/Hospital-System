@@ -34,10 +34,50 @@ exports.update=function(req,res){
 
 	}
 	//update doctor information 
-	Doctor.update({'userName':"raedawwwwad"},
+	Doctor.update({"userName":req.body.userName},
 		{$set:updDoc},
 		function(err,data){
 		res.json(data);
+	});
+}
+
+//function for login
+
+exports.login = function(req,res){
+	Doctor.findOne({userName:req.body.userName}).exec(function (err,doctor){
+		if(err){
+			console.log(err);
+		}
+		if(!doctor){//Not found user
+			res.json("No doctor found");
+		}else{ //found user check password  by comparePassword method
+			doctor.comparePassword(req.body.password,function(err,isMatch){
+				if(err){
+					console.log(err);
+				}
+				if(!isMatch){//not match
+					res.json("Wrong password");
+				}else{ 
+					return req.session.regenerate(function(err){
+						if(err){ //if match generate seassion
+							return console.log(err)
+						}
+						req.session.userName = doctor.userName;
+					    req.session.doctorType = doctor.doctorType;
+					    res.json(doctor);
+					});
+				}
+			});
+		}
+	});
+}
+
+exports.logout=function(req,res){
+	req.session.destroy(function(err){
+		if(err){
+			return console.log(err)
+		}
+		res.json("logged out")
 	});
 }
 
