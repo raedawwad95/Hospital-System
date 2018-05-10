@@ -11,8 +11,10 @@ var UsersSchema = mongoose.Schema({
 	email : {type: String, index: {unique: true} },
 	personalImgUrl : {type: String },
 	userType: {type: String, default: "P"},
-	gender: {type: String, required: true}
-});
+	gender: {type: String, required: true},
+	medicalRecords: [{type: mongoose.Schema.Types.ObjectId, ref: 'Medical'}],
+	labResults: [{type: mongoose.Schema.Types.ObjectId, ref: 'LabsResult'}]
+}, { usePushEach: true });
 
 // before save make these changes
 UsersSchema.pre('save', function (next) {
