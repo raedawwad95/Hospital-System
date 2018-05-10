@@ -10,5 +10,17 @@ labsTechnciansRouter.route('/')
 		LabsTechnciansController.Create(req, res);
 	})
 
+	//techncian login .
+	labsTechnciansRouter.route('/login')
+	.post(function(req,res){
+		LabsTechnciansController.login(req,res)
+	})
+
+	// techncian logout
+	labsTechnciansRouter.route('/logout')
+	.delete(function (req, res) {
+		LabsTechnciansController.logout(req, res);
+	})
+
 
 module.exports = labsTechnciansRouter;
