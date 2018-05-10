@@ -18,6 +18,9 @@ var LabsResultSchema = mongoose.Schema({
 	},
 	imageOfResult:{
 		type:String
+	},
+	description:{
+		type:String
 	}
 
 
