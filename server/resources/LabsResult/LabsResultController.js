@@ -14,21 +14,19 @@ exports.Create = function (req, res) {
  exports.Retrive=function(req,res){
  	LabsResult.find()
  	.populate('labTechnicianId')
+ 	.populate('patientId')
  	.exec(function(err,data){
  		if(err){
- 			return handleError(err);
+ 			console.error(err);
  		}
- 		res.json(data)
- 	})
+ 		if(!data){
+ 			res.json("there is no data")
+ 		}else{
+ 			res.json(data)
+ 		}
+ 	});
 
 
- 	// LabsResult.find(function(err,data){
-		// 	if(err){
-		// 	return console.error(err);
-		// }
-
-		// res.json(data)
- 	// });
  };
 
 

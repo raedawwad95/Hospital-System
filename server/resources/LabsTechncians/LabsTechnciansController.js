@@ -1,4 +1,5 @@
 var LabsTechncians = require('./LabsTechncians');
+var LabsResult=require('../LabsResult/LabsResult')
 
 exports.Create = function (req, res) {
  
@@ -21,7 +22,21 @@ exports.Create = function (req, res) {
  	});
  };
 
-
+//Update Techncians information 
+exports.update=function(req,res){
+	var updateTechncians ={
+	userName:req.body.userName,
+	password:req.body.password,
+	fullName:req.body.fullName,
+	personalImgUrl: req.body.personalImgUrl
+	}
+	//update Techncians information 
+	LabsTechncians.update({"userName":req.body.userName},
+		{$set:updateTechncians},
+		function(err,data){
+		res.json(data);
+	});
+}
 
 exports.login = function (req, res) {
 	LabsTechncians.findOne({userName: req.body.userName}).exec(function (err, tech) {
@@ -58,6 +73,16 @@ exports.logout = function (req, res) {
 			return console.log(err);
 		}
 		res.json("logged out")
-	})
+	});
 };
 
+
+exports.PatientResult=function(req,res){
+	var patientId=req.params.patientId
+	LabsResult.findOne({"patientId":patientId},function(err,data){
+		if(err){
+			console.error(err)
+		}
+		res.json(data)
+	})
+}
