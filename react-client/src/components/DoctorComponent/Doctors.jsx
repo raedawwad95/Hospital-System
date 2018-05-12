@@ -17,3 +17,7 @@ class Doctors extends React.Component{
 	}
 }
 
+
+
+
+export default Doctors;
