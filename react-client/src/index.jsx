@@ -7,7 +7,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import Home from './components/Home.jsx'
+import AddDoctor from './componentsAdmin/AddDoctor.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,7 @@ class App extends React.Component {
           <Navbar.Collapse>
             <Nav>
               <NavItem eventKey={1} href="/">
-                Home
+                AddDoctor
               </NavItem>
               <NavItem eventKey={2} >
                 <Link to="/test">test</Link>
@@ -44,7 +44,7 @@ class App extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Route exact path="/" render={()=><Home />}/>
+        <AddDoctor/>
       </div>
     </Router>
     )
