@@ -1,7 +1,6 @@
 var LabsResult = require('./LabsResult');
 
 exports.Create = function (req, res) {
-
 	var newLabRes= new LabsResult(req.body);
 	newLabRes.save(function(err,data){
 		if (err){

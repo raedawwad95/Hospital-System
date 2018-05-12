@@ -88,6 +88,19 @@ exports.logout = function (req, res) {
 };
 
 
+exports.addPatient=function(req,res){
+	var query={tech:req.body.id};
+	
+	LabsTechncians.update(query,{$push:{'patientId':req.body.patientId}})
+	.populate('patientId')
+	.exec(function(err,data){
+		if(err){
+			console.error(err)
+		}
+		res.json(data)
+	})
+}
+
 exports.PatientResult=function(req,res){
 	var patientId=req.params.patientId
 	LabsResult.findOne({"patientId":patientId},function(err,data){

@@ -9,6 +9,9 @@ labsTechnciansRouter.route('/')
 	.post(function (req, res) {
 		LabsTechnciansController.Create(req, res);
 	})
+	.put(function(req,res){
+	LabsTechnciansController.addPatient(req,res);
+})
 	// techncian update 
 	labsTechnciansRouter.route('/update')
 	.put(function(req,res){
