@@ -12,6 +12,7 @@
   "private": false,
   "license": "UNLICENSED",
   "dependencies": {
+    "@material-ui/icons": "latest",
     "bcrypt": "^2.0.1",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.1",
@@ -20,6 +21,7 @@
     "express": "^4.14.0",
     "express-session": "^1.15.6",
     "jquery": "^3.1.1",
+    "material-ui": "next",
     "mongoose": "^4.5.7",
     "morgan": "^1.7.0",
     "path": "^0.12.7",

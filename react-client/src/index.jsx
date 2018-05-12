@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import {Nav, Navbar, NavItem, MenuItem, NavDropdown, browserHistory} from 'react-bootstrap';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
-import AddLabTechncians from './adminComponents/AddLabTechncians.jsx';
+import {browserHistory, Route, BrowserRouter as Router} from 'react-router-dom';
+import Admin from './components/adminComponents/adminMain.jsx'
+import AddLabTechncians from './components/adminComponents/AddLabTechncians.jsx'
+import addDept from './components/adminComponents/addDept.jsx'
+import Home from './components/Home.jsx'
+import Home2 from './components/Home2.jsx'
+import Navabar from './components/Navabar.jsx'
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,36 +18,14 @@ class App extends React.Component {
     return (
     <Router history={browserHistory}>
       <div className="container-fluid">
-        <Navbar bsStyle='inverse' collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              Hospital Logo
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav>
-              <NavItem eventKey={1} href="/">
-                AddDoctor
-              </NavItem>
-              <NavItem eventKey={2} >
-                <Link to="/test">test</Link>
-              </NavItem>
-            </Nav>
-            <Nav pullRight>
-              <NavDropdown eventKey={3} title="DropList" id="dropdown">
-                <MenuItem eventKey={3.1}><Link to="/test">test1</Link></MenuItem>
-                <MenuItem eventKey={3.2}><Link to="/test">test2</Link></MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={3.3} href="/test">withLine</MenuItem>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <AddLabTechncians/>
+
+      <Route exact path="/" render={()=><Home />}/>
+      <Route path="/test" render={()=><Home2 />}/>
+      <Route path="/admin" component={Admin}/>
       </div>
     </Router>
     )
   }
 }
 ReactDOM.render(<App />, document.getElementById('app'));
+

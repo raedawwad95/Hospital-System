@@ -1,4 +1,5 @@
 import React from 'react';
+import Navabar from './Navabar.jsx'
 
 
 class Home extends React.Component {
@@ -11,8 +12,10 @@ class Home extends React.Component {
   render(){
     return(
       <div>
-       <h1> Still nothing here yet!!</h1>       
-      
+        <Navabar />
+        <div>
+          <h1> User Home Components</h1> 
+        </div>
       </div>
 
     )
