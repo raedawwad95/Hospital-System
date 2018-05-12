@@ -38,7 +38,6 @@ class AddDocToComponent extends React.Component{
     add(){
     	var that=this;
     	var idOfDept=$('select[name=selector]').val();
-    	console.log(idOfDept)
     	var obj={
     		idOfDept:idOfDept,
     		docId:that.state.docId
@@ -57,17 +56,17 @@ class AddDocToComponent extends React.Component{
 	render(){
 
 		return(
-			<div>
+		<div>
 			<select name='selector'>
-			{this.state.depts.map(function(item){
-				return(
-					<option value={item.idOfDept}>{item.nameOfDept}</option>
+				{this.state.depts.map(function(item){
+					return(
+						<option value={item.idOfDept}>{item.nameOfDept}</option>
 					)
-			})}			
+				})}			
 			</select>
 			<input type='text' value={this.state.docId} onChange={this.handleChange} placeholder='add doctor'/>
 			<Button onClick={this.add}> Add Doc</Button>
-			</div>
+		</div>
 			)
 	}
 

@@ -16,7 +16,6 @@ class AddDepartment extends React.Component{
 		this.setState({
 			 [e.target.name]: e.target.value 
 		})
-
 	}
 
 	add(){
@@ -34,12 +33,9 @@ class AddDepartment extends React.Component{
 				console.log('good')
 			},
 			failure: function(errMsg) {
-            alert(errMsg);
+            console.log('error');
             }
-
 		})
-
-
 	}
 
 	render(){
@@ -52,7 +48,6 @@ class AddDepartment extends React.Component{
 			</div>
 			)
 	}
-
 }
 
 export default AddDepartment;
