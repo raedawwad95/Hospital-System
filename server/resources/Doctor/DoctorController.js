@@ -13,11 +13,22 @@ exports.retrieve=function(req,res){
 
 // create new Doctor 
 exports.create=function(req,res){
+	var doctorObj={
+		userName:req.body.username,
+		password:req.body.password,
+		fullName:req.body.fullName,
+		imageOfDoctor:req.body.imageOfDoctor,
+	    imageOfId:req.body.imageOfId,
+		nationalId:req.body.nationalId,
+		hospitalId:req.body.hospitalId,
+		department:req.body.department,
+		spicilityStatus:req.body.spicilityStatus,
+		hoursOfWork:req.body.hoursOfWork,
+		gender:req.body.gender
+	}
 
-	var doctor =new Doctor(req.body);
-	console.log(doctor)
+	var doctor =new Doctor(doctorObj);
 	doctor.save(function(err,data){
-		console.log(data)
 		res.json(data)
 	});
 }
@@ -85,7 +96,6 @@ exports.retrievePatient=function(req,res){
 	var userName=req.params.userNamePatient;
 	console.log(userName)
 	User.findOne({"username":userName},function(err,data){
-		console.log(data)
 		if(err){
 			console.log(err);
 		}
