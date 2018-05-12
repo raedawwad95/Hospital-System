@@ -1,5 +1,6 @@
 var LabsTechncians = require('./LabsTechncians');
 var LabsResult=require('../LabsResult/LabsResult')
+var User=require('../User/Users')
 
 exports.Create = function (req, res) {
  
