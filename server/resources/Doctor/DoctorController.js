@@ -37,19 +37,13 @@ exports.create=function(req,res){
 exports.update=function(req,res){
 	var updDoc ={
 	password: req.body.password,
-	fullName: req.body.fullName,
-	imageOfDoctor: req.body.imageOfDoctor,
-	imageOfId: req.body.imageOfId,
-	nationalId: req.body.nationalId,
-	hospitalId: req.body.hospitalId,
-	spicilityStatus: req.body.spicilityStatus,
-
+	imageOfDoctor: req.body.imageOfDoctor
 	}
 	//update doctor information 
 	Doctor.update({"userName":req.body.userName},
 		{$set:updDoc},
 		function(err,data){
-		res.json(data);
+		res.send(data);
 	});
 }
 
