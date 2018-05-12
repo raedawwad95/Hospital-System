@@ -34,7 +34,7 @@ const styles = theme => ({
   icon: {},
 });
 
-class Navabar extends React.Component {
+class AdminNavbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,18 +68,18 @@ class Navabar extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Hospital Logo
+              Admin Control Panel
             </Typography>
             <Button color="inherit">
-              <NavLink to = "/" activeClassName = "is-active" exact = {true}>Home</NavLink>
+              <NavLink to = "/admin" activeClassName = "is-active" exact = {true}>Home</NavLink>
             </Button>
             {auth && (
               <div>
                 <Button color="inherit">
-                  <NavLink to = "/test" activeClassName = "is-active">test1</NavLink>
+                  <NavLink to = "/admin/AddLabTechncians" activeClassName = "is-active">add lab tech</NavLink>
                 </Button>
                 <Button color="inherit">
-                  <NavLink to = "/admin" activeClassName = "is-active">admin</NavLink>
+                  <NavLink to = "/admin/addDept" activeClassName = "is-active">add new Department</NavLink>
                 </Button>
                 <Button color="inherit">test3</Button>
                 <IconButton
@@ -134,8 +134,8 @@ class Navabar extends React.Component {
   }
 }
 
-Navabar.propTypes = {
+AdminNavbar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Navabar);
+export default withStyles(styles)(AdminNavbar);
