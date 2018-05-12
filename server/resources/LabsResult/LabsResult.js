@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var LabsResultSchema = mongoose.Schema({
 	patientId:{
-		type:Number
+		type:mongoose.Schema.Types.ObjectId,
+		ref:'User'
 	},
 	labTechnicianId:{
 		type:mongoose.Schema.Types.ObjectId,
@@ -17,6 +18,9 @@ var LabsResultSchema = mongoose.Schema({
 		default: Date.now
 	},
 	imageOfResult:{
+		type:String
+	},
+	description:{
 		type:String
 	}
 

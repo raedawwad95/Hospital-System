@@ -9,6 +9,29 @@ labsTechnciansRouter.route('/')
 	.post(function (req, res) {
 		LabsTechnciansController.Create(req, res);
 	})
+	// techncian update 
+	labsTechnciansRouter.route('/update')
+	.put(function(req,res){
+	 LabsTechnciansController.update(req,res);
+	})
+
+	//techncian login .
+	labsTechnciansRouter.route('/login')
+	.post(function(req,res){
+		LabsTechnciansController.login(req,res)
+	})
+
+	// techncian logout
+	labsTechnciansRouter.route('/logout')
+	.delete(function (req, res) {
+		LabsTechnciansController.logout(req, res);
+	})
+
+	//get patient result by patintId
+	labsTechnciansRouter.route('/:patintId')
+	.get(function(req,res){
+		LabsTechnciansController.PatientResult(req,res);
+	})
 
 
 module.exports = labsTechnciansRouter;
