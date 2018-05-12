@@ -7,7 +7,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import AddDoctor from './componentsAdmin/AddDoctor.jsx';
+import AddLabTechncians from './adminComponents/AddLabTechncians.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -44,7 +44,7 @@ class App extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <AddDoctor/>
+        <AddLabTechncians/>
       </div>
     </Router>
     )

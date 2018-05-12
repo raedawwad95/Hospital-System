@@ -3,13 +3,23 @@ var LabsResult=require('../LabsResult/LabsResult')
 var User=require('../User/Users')
 
 exports.Create = function (req, res) {
- 
-	var newLabTech= new LabsTechncians(req.body);
+  var labObj={
+		userName:req.body.username,
+		password:req.body.password,
+		fullName:req.body.fullName,
+		id:req.body.id,
+	    imageOfId:req.body.imageOfId,
+		workHour:req.body.workHour,
+		personalImgUrl:req.body.personalImgUrl,
+		gender:req.body.gender
+	}
+	console.log(labObj)
+	var newLabTech= new LabsTechncians(labObj);
 	newLabTech.save(function(err,data){
 		if (err){
 			 console.error(err);
 		}
-		res.redirect('/login');
+		res.send(data)
 	});
 };
 
