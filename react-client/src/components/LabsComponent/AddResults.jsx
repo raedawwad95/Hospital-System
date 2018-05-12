@@ -4,7 +4,7 @@ import $ from 'jquery';
 export class AddResult extends Component {
 	constructor(props){
 		super(props);
-		this.satate={
+		this.state={
 			patientId:'',
 			labTechnicianId:'',
 			medicalExaminationTime:'',
@@ -14,7 +14,7 @@ export class AddResult extends Component {
 
 	
 		}
-		this.addResult=this.addItem.bind(this);
+		this.addResult=this.addResult.bind(this);
 		this.handleChange=this.handleChange.bind(this);
 	}
 
@@ -35,20 +35,13 @@ export class AddResult extends Component {
 
 			}
 				$.ajax({
-					url:'/LabsResult/create',
-					method:'POST',
+					url:'/labRes',
+					type:'POST',
 					data:obj,
 				
 					success: (data) => {
 					
-					this.setState({
-						patientId:'',
-						labTechnicianId:'',
-						medicalExaminationTime:'',
-						resultEntryTime:'',
-						imageOfResult:'',
-						description:''
-					})
+					console.log(data)
 
 					},
 					error: (err) => {
@@ -66,9 +59,9 @@ export class AddResult extends Component {
                 <br/><br/>
                 <h2>labTechnicianId : <input placeholder="labTechnicianId" name="labTechnicianId" onChange={this.handleChange}/></h2>
                 <br/><br/>
-                <h2>medicalExaminationTime : <input placeholder="medicalExaminationTime" name="medicalExaminationTime" onChange={this.handleChange}/></h2>
+                <h2>medicalExaminationTime : <input type='date' placeholder="medicalExaminationTime" name="medicalExaminationTime" onChange={this.handleChange}/></h2>
                  <br/><br/>
-                <h2>resultEntryTime : <input placeholder="resultEntryTime" name="resultEntryTime" onChange={this.handleChange}/></h2>
+                <h2>resultEntryTime : <input type='date' placeholder="resultEntryTime" name="resultEntryTime" onChange={this.handleChange}/></h2>
                  <br/><br/>
                 <h2>imageOfResult : <input placeholder="imageOfResult" name="imageOfResult" onChange={this.handleChange}/></h2>
                 <br/><br/>
