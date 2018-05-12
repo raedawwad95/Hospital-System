@@ -9,7 +9,7 @@ class Home extends React.Component {
   render(){
     return(
       <div>
-        <h1> Still nothing here yet!!</h1>
+        <h1> Still nothing here yet!!</h1>       
       </div>
     )
   }
