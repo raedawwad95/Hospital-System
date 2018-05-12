@@ -5,7 +5,7 @@ class AddDoctor extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			username:'',
+			userName:'',
 			password:'',
 			fullName:'',
 			imageOfDoctor:'',
@@ -48,7 +48,7 @@ class AddDoctor extends React.Component{
 	render(){
 		return(
 			<div>
-			    <h2>UserName : <input placeholder="username" name="username" onChange={this.onChange}/></h2>
+			    <h2>UserName : <input placeholder="userName" name="userName" onChange={this.onChange}/></h2>
 				<br/><br/>
 				<h2>password: <input placeholder="password" name="password" onChange={this.onChange}/></h2>
 				

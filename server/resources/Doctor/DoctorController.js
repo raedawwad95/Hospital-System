@@ -14,7 +14,7 @@ exports.retrieve=function(req,res){
 // create new Doctor 
 exports.create=function(req,res){
 	var doctorObj={
-		userName:req.body.username,
+		userName:req.body.userName,
 		password:req.body.password,
 		fullName:req.body.fullName,
 		imageOfDoctor:req.body.imageOfDoctor,
