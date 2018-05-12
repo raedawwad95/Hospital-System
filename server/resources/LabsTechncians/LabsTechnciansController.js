@@ -36,17 +36,18 @@ exports.Create = function (req, res) {
 //Update Techncians information 
 exports.update=function(req,res){
 	var updateTechncians ={
-	userName:req.body.userName,
-	password:req.body.password,
-	fullName:req.body.fullName,
-	personalImgUrl: req.body.personalImgUrl
+	"password":req.body.password,
+	"fullName":req.body.fullName,
+	"personalImgUrl": req.body.personalImgUrl
 	}
+	console.log(updateTechncians)
 	//update Techncians information 
 	LabsTechncians.update({"userName":req.body.userName},
 		{$set:updateTechncians},
 		function(err,data){
 		res.json(data);
 	});
+
 }
 
 exports.login = function (req, res) {
