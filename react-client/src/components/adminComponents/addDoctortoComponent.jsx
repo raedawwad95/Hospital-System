@@ -1,15 +1,16 @@
 import React from 'react';
 import $ from 'jquery';
-
+import {Button} from 'react-bootstrap';
 
 class AddDocToComponent extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
 			depts:[],
-			doc:''
+			docId:''
 		}
 		this.handleChange=this.handleChange.bind(this);
+		this.add=this.add.bind(this)
 	}
 
 	componentDidMount() {
@@ -29,7 +30,26 @@ class AddDocToComponent extends React.Component{
 
     handleChange(e){
     	this.setState({
-    		doc:e.target.value
+    		docId:e.target.value
+    	})
+    	
+    }
+
+    add(){
+    	var that=this;
+    	var idOfDept=$('select[name=selector]').val();
+    	console.log(idOfDept)
+    	var obj={
+    		idOfDept:idOfDept,
+    		docId:that.state.docId
+    	}
+    	$.ajax({
+    		type:'PUT',
+    		url:'/dept',
+    		data:obj,
+    		success:function(date){
+    			console.log('done');
+    		}
     	})
     	
     }
@@ -38,15 +58,15 @@ class AddDocToComponent extends React.Component{
 
 		return(
 			<div>
-			<select>
+			<select name='selector'>
 			{this.state.depts.map(function(item){
 				return(
-					<option value="{item.nameOfDept}">{item.nameOfDept}</option>
+					<option value={item.idOfDept}>{item.nameOfDept}</option>
 					)
 			})}			
 			</select>
-			<input type='text' value={this.state.doc} onChange={this.handleChange}/>
-			<
+			<input type='text' value={this.state.docId} onChange={this.handleChange} placeholder='add doctor'/>
+			<Button onClick={this.add}> Add Doc</Button>
 			</div>
 			)
 	}
