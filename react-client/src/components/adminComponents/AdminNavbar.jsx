@@ -81,7 +81,9 @@ class AdminNavbar extends React.Component {
                 <Button color="inherit">
                   <NavLink to = "/admin/addDept" activeClassName = "is-active">add new Department</NavLink>
                 </Button>
-                <Button color="inherit">test3</Button>
+                <Button color="inherit">
+                  <NavLink to = "/admin/addDoctorToDepartment" activeClassName = "is-active">Doctor to Department</NavLink>
+                </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
