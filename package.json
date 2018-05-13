@@ -22,6 +22,7 @@
     "express-session": "^1.15.6",
     "jquery": "^3.1.1",
     "material-ui": "next",
+    "material-ui-upload": "^1.2.1",
     "mongoose": "^4.5.7",
     "morgan": "^1.7.0",
     "path": "^0.12.7",
