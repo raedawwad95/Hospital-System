@@ -43,12 +43,14 @@ class AdminNavbar extends React.Component {
       anchorEl: null,
       openDep: false,
       openLab: false,
+      openDoc: false,
     }; 
     this.handleChange = this.handleChange.bind(this);
     this.handleMenu = this.handleMenu.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleClickDep = this.handleClickDep.bind(this);
     this.handleClickLab = this.handleClickLab.bind(this);
+    this.handleClickDoc = this.handleClickDoc.bind(this);
   }
 
   handleChange(event, checked)  {
@@ -71,6 +73,11 @@ class AdminNavbar extends React.Component {
     this.setState({ openLab: !this.state.openLab });
   };
 
+  handleClickDoc() {
+    this.setState({ openDoc: !this.state.openDoc });
+  };
+
+
   render() {
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
@@ -90,12 +97,6 @@ class AdminNavbar extends React.Component {
               <div>
                 <Button color="inherit">
                   <NavLink to = "/admin/AddLabTechncians" activeClassName = "is-active" className = "navItem">add lab tech</NavLink>
-                </Button>
-                <Button color="inherit">
-                  <NavLink to = "/admin/addDept" activeClassName = "is-active" className = "navItem">add new Department</NavLink>
-                </Button>
-                <Button color="inherit">
-                  <NavLink to = "/admin/addDoctorToDepartment" activeClassName = "is-active" className = "navItem">Doctor to Department</NavLink>
                 </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -158,6 +159,24 @@ class AdminNavbar extends React.Component {
                           </ListItem>
                         </List>
                       </Collapse>
+
+                      <Divider />
+
+                      <ListItem button onClick={this.handleClickDoc}>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        Doctors
+                        {this.state.openDoc ? <ExpandLess /> : <ExpandMore />}
+                      </ListItem>
+                      <Collapse in={this.state.openDoc} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem button className={classes.nested}>
+                            <NavLink to = "/admin/AddDoctor" className = "navListItem">New Doctor</NavLink>
+                          </ListItem>
+                        </List>
+                      </Collapse>
+
                     </List>
                   </div>
                 </Menu>

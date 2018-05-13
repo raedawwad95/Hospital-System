@@ -15,7 +15,10 @@ class AddDoctor extends React.Component{
 			department:'',
 			spicilityStatus:'',
 			hoursOfWork:'',
-			gender:''
+			gender:'',
+			showPassword: false,
+			loading: false,
+    		success: false,
 		
 		}
 		this.onChange =this.onChange.bind(this);

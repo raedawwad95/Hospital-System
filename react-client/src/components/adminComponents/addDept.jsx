@@ -116,7 +116,7 @@ class AddDepartment extends React.Component{
 					</CardContent>
 				</Card>
 			</div>
-			)
+		)
 	}
 }
 
