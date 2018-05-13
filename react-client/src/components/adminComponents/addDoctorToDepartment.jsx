@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import {Button} from 'react-bootstrap';
 
-class AddDocToComponent extends React.Component{
+class addDoctorToDepartment extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
@@ -72,4 +72,4 @@ class AddDocToComponent extends React.Component{
 
 }
 
-export default AddDocToComponent;
+export default addDoctorToDepartment;
