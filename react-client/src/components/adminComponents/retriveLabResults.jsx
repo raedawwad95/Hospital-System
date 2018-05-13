@@ -24,18 +24,13 @@ class retriveLabResults extends React.Component{
 		});
     }
 render(){
-	
-	
-	
-	description:{
-		type:String
-	}
-
 	return(
 		<div>
+		<div className='card'>
 		 <table className="table table-bordered">
-		    <thead>
+		    <thead style={{textAlign:'center'}}>
 		      <tr>
+		      	<th width='25%'>Id </th>
 		        <th>Patient Id</th>
 		        <th>Lab Technician Id</th>
 		        <th>Medical Examination Time</th>
@@ -43,7 +38,7 @@ render(){
 		        <th>Description</th>
 		      </tr>
 		    </thead>
-		    <tbody>
+		    <tbody style={{textAlign:'center'}}>
 		    {this.state.labResults.map(function(item){
 		    	return(
 
@@ -58,6 +53,7 @@ render(){
             })}
 		    </tbody>
          </table>
+	    </div>
 	    </div>
 		)
 	}

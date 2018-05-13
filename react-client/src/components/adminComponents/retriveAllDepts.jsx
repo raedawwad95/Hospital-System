@@ -28,16 +28,17 @@ class retriveAllDepts extends React.Component{
 render(){
 	return(
 		<div>
+		<div className="card">
 		 <table className="table table-bordered">
-		    <thead>
+		    <thead style={{textAlign:'center'}}>
 		      <tr>
-		        <th>Id</th>
+		        <th width="25%">Id</th>
 		        <th>Name Of Dept</th>
 		        <th>Id Of Dept</th>
 		        <th>Doctors Id</th>
 		      </tr>
 		    </thead>
-		    <tbody>
+		    <tbody style={{textAlign:'center'}}>
 		    {this.state.depts.map(function(item){
 		    	return(
 
@@ -51,6 +52,7 @@ render(){
             })}
 		    </tbody>
          </table>
+	    </div>
 	    </div>
 		)
 	}

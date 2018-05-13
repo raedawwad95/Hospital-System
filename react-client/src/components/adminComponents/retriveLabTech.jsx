@@ -25,13 +25,14 @@ class retriveLabTech extends React.Component{
 
     }
 
-	render(){	
-		return(
-		<div>
-	    <table className="table table-bordered">
-    <thead>
+render(){	
+	return(
+	<div>
+	<div className='card'>
+	<table className="table table-bordered">
+    <thead style={{textAlign:'center'}}>
       <tr>
-      	<th>Id</th>
+      	<th width='25%'>Id</th>
         <th>User Name</th>
         <th>Full Name</th>
         <th>idNone</th>
@@ -40,7 +41,7 @@ class retriveLabTech extends React.Component{
         <th>Gender</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style={{textAlign:'center'}}>
     { this.state.labTechs.map(function(item){
 		return(
 			<tr>
@@ -52,11 +53,11 @@ class retriveLabTech extends React.Component{
 		        <td>{item.techncianType}</td>
 		        <td>{item.gender}</td>
 	        </tr>
-
 			)
         })}
     </tbody>
-  </table>
+    </table>
+	    </div>
 	    </div>
 			)
 	}

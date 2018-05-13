@@ -49,7 +49,7 @@ exports.logout = function (req, res) {
 }
 
 exports.retrive = function (req, res) {
-	Users.find({})
+	Users.find({username:req.params.username})
 		.populate('medicalRecords')
 		.populate('labResults')
 		.exec(function (err, user) {

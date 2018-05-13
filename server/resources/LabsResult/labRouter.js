@@ -7,7 +7,7 @@ labRouter.route('/')
 	})
 
 	.post(function (req, res) {
-		labController.Create(req, res);
+		labController.createResutl(req, res);
 	})
 
 
