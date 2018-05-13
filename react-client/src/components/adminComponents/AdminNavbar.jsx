@@ -3,35 +3,36 @@ import PropTypes from 'prop-types';
 import { withStyles, AppBar, Toolbar,
          Typography, IconButton, Switch, 
          FormControlLabel, FormGroup, Menu, MenuItem, Button,
-         ListItemIcon, ListItemText, Paper } from 'material-ui';
+         ListItemIcon, ListItemText, Paper, Divider,
+         List, ListItem, ListSubheader } from 'material-ui';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import {NavLink} from 'react-router-dom';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import Collapse from 'material-ui/transitions/Collapse';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
   },
+  root2: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
   flex: {
     flex: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  menuItem: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& $primary, & $icon': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
   primary: {},
   icon: {},
+  nested: {
+    paddingLeft: theme.spacing.unit * 4,
+  },
 });
 
 class AdminNavbar extends React.Component {
@@ -40,10 +41,14 @@ class AdminNavbar extends React.Component {
     this.state = {
       auth: true,
       anchorEl: null,
+      openDep: false,
+      openLab: false,
     }; 
     this.handleChange = this.handleChange.bind(this);
     this.handleMenu = this.handleMenu.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleClickDep = this.handleClickDep.bind(this);
+    this.handleClickLab = this.handleClickLab.bind(this);
   }
 
   handleChange(event, checked)  {
@@ -56,6 +61,14 @@ class AdminNavbar extends React.Component {
 
   handleClose() {
     this.setState({ anchorEl: null });
+  };
+
+  handleClickDep() {
+    this.setState({ openDep: !this.state.openDep });
+  };
+
+  handleClickLab() {
+    this.setState({ openLab: !this.state.openLab });
   };
 
   render() {
@@ -71,18 +84,18 @@ class AdminNavbar extends React.Component {
               Admin Control Panel
             </Typography>
             <Button color="inherit">
-              <NavLink to = "/admin" activeClassName = "is-active" exact = {true}>Home</NavLink>
+              <NavLink to = "/admin" activeClassName = "is-active" exact = {true} className = "navItem">Home</NavLink>
             </Button>
             {auth && (
               <div>
                 <Button color="inherit">
-                  <NavLink to = "/admin/AddLabTechncians" activeClassName = "is-active">add lab tech</NavLink>
+                  <NavLink to = "/admin/AddLabTechncians" activeClassName = "is-active" className = "navItem">add lab tech</NavLink>
                 </Button>
                 <Button color="inherit">
-                  <NavLink to = "/admin/addDept" activeClassName = "is-active">add new Department</NavLink>
+                  <NavLink to = "/admin/addDept" activeClassName = "is-active" className = "navItem">add new Department</NavLink>
                 </Button>
                 <Button color="inherit">
-                  <NavLink to = "/admin/addDoctorToDepartment" activeClassName = "is-active">Doctor to Department</NavLink>
+                  <NavLink to = "/admin/addDoctorToDepartment" activeClassName = "is-active" className = "navItem">Doctor to Department</NavLink>
                 </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -106,26 +119,47 @@ class AdminNavbar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                  <MenuItem className={classes.menuItem}>
-                  <ListItemIcon className={classes.icon}>
-                    <SendIcon />
-                  </ListItemIcon>
-                  <ListItemText classes={{ primary: classes.primary }} inset primary="Sent mail" />
-                </MenuItem>
-                <MenuItem className={classes.menuItem}>
-                  <ListItemIcon className={classes.icon}>
-                    <DraftsIcon />
-                  </ListItemIcon>
-                  <ListItemText classes={{ primary: classes.primary }} inset primary="Drafts" />
-                </MenuItem>
-                <MenuItem className={classes.menuItem}>
-                  <ListItemIcon className={classes.icon}>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText classes={{ primary: classes.primary }} inset primary="Inbox" />
-                </MenuItem>
+                  <div className={classes.root2}>
+                    <List
+                      component="nav"
+                      subheader={<ListSubheader component="div">Controller Menu</ListSubheader>}
+                    >
+                      <ListItem button onClick={this.handleClickDep}>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        Department
+                        {this.state.openDep ? <ExpandLess /> : <ExpandMore />}
+                      </ListItem>
+                      <Collapse in={this.state.openDep} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem button className={classes.nested}>
+                            <NavLink to = "/admin/addDoctorToDepartment" className= "navListItem">Add Doctor to Department</NavLink>
+                          </ListItem>
+                          <ListItem button className={classes.nested}>
+                            <NavLink to = "/admin/addDept" className = "navListItem">Add new Department</NavLink>
+                          </ListItem>
+                        </List>
+                      </Collapse>
+
+                      <Divider />
+
+                      <ListItem button onClick={this.handleClickLab}>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        Labs
+                        {this.state.openLab ? <ExpandLess /> : <ExpandMore />}
+                      </ListItem>
+                      <Collapse in={this.state.openLab} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem button className={classes.nested}>
+                            <NavLink to = "/admin/AddLabTechncians" className = "navListItem">New Lab Tech</NavLink>
+                          </ListItem>
+                        </List>
+                      </Collapse>
+                    </List>
+                  </div>
                 </Menu>
               </div>
             )}
