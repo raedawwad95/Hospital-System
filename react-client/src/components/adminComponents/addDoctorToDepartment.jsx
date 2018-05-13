@@ -64,7 +64,6 @@ class addDoctorToDepartment extends React.Component{
  			})
  		}
 		});
-
     }
 
     handleChange(e){
@@ -106,7 +105,7 @@ class addDoctorToDepartment extends React.Component{
 								<FormControl className={classes.formControl}>
 						          <InputLabel htmlFor="add-Department">Department</InputLabel>
 						          <Select
-						            value={this.state.selected}
+						            value={this.state.department}
 						            onChange={this.handleChange}
 						            input={<Input name="selected" id="add-Department" />}
 						          >
@@ -119,7 +118,7 @@ class addDoctorToDepartment extends React.Component{
 										)
 									})}	
 						          </Select>
-						          <FormHelperText>please select your gender</FormHelperText>
+						          <FormHelperText>Select Department</FormHelperText>
 						        </FormControl>
 							</Grid> 
 							<Grid item xs={6} sm={3}>
