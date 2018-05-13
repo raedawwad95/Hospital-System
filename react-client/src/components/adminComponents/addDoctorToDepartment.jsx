@@ -105,7 +105,7 @@ class addDoctorToDepartment extends React.Component{
 								<FormControl className={classes.formControl}>
 						          <InputLabel htmlFor="add-Department">Department</InputLabel>
 						          <Select
-						            value={this.state.department}
+						            value={this.state.selected}
 						            onChange={this.handleChange}
 						            input={<Input name="selected" id="add-Department" />}
 						          >
