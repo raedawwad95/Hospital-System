@@ -6,7 +6,7 @@ var Dept      = require('../server/resources/Departments/Departments');
 var Doc       = require('../server/resources/Doctor/Doctor');
 var Dep       = require('../server/resources/ItDepartment/ItDepartment');
 var lRes      = require('../server/resources/LabsResult/LabsResult');
-
+var lTech     = require('../server/resources/LabsTechncians/LabsTechncians')
 
 
 //test for get data from Departments
@@ -130,8 +130,48 @@ describe('test the get request from LabResult', function(){
 
 
 
-    it('should get the admin information', function(done){
+    it('should get the LabsResult', function(done){
         var url = 'http://localhost:3000/itDep/retrieve';
+        request.get(url, (error, response, body) => {
+            if (error) done(error)
+            expect(response).to.be.an('Object');
+            done();
+        });
+    });
+});
+
+
+// test for retrive data from labs technitions
+
+
+describe('test the get request from  labs technitions', function(){
+
+    before('connect', function(){
+        return mongoose.createConnection('mongodb://localhost/labTech')
+    })
+
+    beforeEach(function(){
+        return lTech.remove({})
+    })
+
+    beforeEach(function(){
+        var newlTech = new lTech();
+            newlTech.userName='monther'
+            newlTech.password='1234'
+            newlTech.fullName='Monther Amer'
+            newlTech.id='1'
+            newlTech.imageOfId='asdasd'
+            newlTech.workHour='8'
+            newlTech.techncianType='T'
+            newlTech.gender='Male'
+            newlTech.personalImgUrl='asdasd'
+        return newlTech.save();
+    });
+
+
+
+    it('should list all Doctors', function(done){
+        var url = 'http://localhost:3000/Doctor/retrieve';
         request.get(url, (error, response, body) => {
             if (error) done(error)
             expect(response).to.be.an('Object');
