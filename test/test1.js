@@ -4,6 +4,8 @@ var request   = require('request');
 var mongoose  = require('mongoose');
 var Dept      = require('../server/resources/Departments/Departments');
 var Doc       = require('../server/resources/Doctor/Doctor');
+var Dep       = require('../server/resources/ItDepartment/ItDepartment');
+//test for get data from Departments
 
 describe('test the get request from Departments', function(){
 
@@ -32,7 +34,7 @@ describe('test the get request from Departments', function(){
     });
 });
 
-
+//test for get data from Doctors
 describe('test the get request from Doctors', function(){
 
     before('connect', function(){
@@ -60,6 +62,8 @@ describe('test the get request from Doctors', function(){
         return newDoc.save();
     });
 
+
+
     it('should list all Doctors', function(done){
         var url = 'http://localhost:3000/Doctor/retrieve';
         request.get(url, (error, response, body) => {
@@ -70,4 +74,33 @@ describe('test the get request from Doctors', function(){
     });
 });
 
+//test for get data from itDepartments
 
+describe('test the get request from itDepartments', function(){
+
+    before('connect', function(){
+        return mongoose.createConnection('mongodb://localhost/itDep')
+    })
+
+    beforeEach(function(){
+        return Dep.remove({})
+    })
+
+    beforeEach(function(){
+        var newitDep = new Dep();
+            newitDep.userName='monther'
+            newitDep.password='1234'
+        return newitDep.save();
+    });
+
+
+
+    it('should get the admin information', function(done){
+        var url = 'http://localhost:3000/itDep/retrieve';
+        request.get(url, (error, response, body) => {
+            if (error) done(error)
+            expect(response).to.be.an('Object');
+            done();
+        });
+    });
+});
