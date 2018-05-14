@@ -7,8 +7,8 @@ var Doc       = require('../server/resources/Doctor/Doctor');
 var Dep       = require('../server/resources/ItDepartment/ItDepartment');
 var lRes      = require('../server/resources/LabsResult/LabsResult');
 var lTech     = require('../server/resources/LabsTechncians/LabsTechncians')
-
-
+var mRec      = require('../server/resources/MedicalRecorde/Medical')
+var user      = require('../server/resources/User/Users')
 //test for get data from Departments
 
 describe('test the get request from Departments', function(){
@@ -171,7 +171,7 @@ describe('test the get request from  labs technitions', function(){
 
 
     it('should list all Doctors', function(done){
-        var url = 'http://localhost:3000/Doctor/retrieve';
+        var url = 'http://localhost:3000/labTech/retrieve';
         request.get(url, (error, response, body) => {
             if (error) done(error)
             expect(response).to.be.an('Object');
@@ -179,3 +179,80 @@ describe('test the get request from  labs technitions', function(){
         });
     });
 });
+
+
+
+// test for get from medical 
+
+// describe('test the get request from medical records ', function(){
+
+//     before('connect', function(){
+//         return mongoose.createConnection('mongodb://localhost/api/medical')
+//     })
+
+//     beforeEach(function(){
+//         return mRec.remove({})
+//     })
+
+//     beforeEach(function(){
+//         var newmRec = new mRec();
+//             newmRec.patientId='5af85bb90443504275b2fb9f'
+//             newmRec.doctorId='5af85bb90443503275b2fb9f'
+//             newmRec.description='asdcrjaksd'
+//             newmRec.image='asdasd'
+//         return newmRec.save();
+//     });
+
+
+
+//     it('should list all medical records', function(done){
+//         var url = 'http://localhost:3000/labTech/retrieve';
+//         request.get(url, (error, response, body) => {
+//             if (error) done(error)
+//             expect(response).to.be.an('Object');
+//             done();
+//         });
+//     });
+// });
+
+//test for get user
+
+describe('test the get request from  user', function(){
+
+    before('connect', function(){
+        return mongoose.createConnection('mongodb://localhost/api/userController')
+    })
+
+    beforeEach(function(){
+        return user.remove({})
+    })
+
+    beforeEach(function(){
+        var newuser = new user();
+            newuser.userName='monther'
+            newuser.password='1234'
+            newuser.FullName='Monther Amer'
+            newuser.idCardNumber='123423423'
+            newuser.idCardImageUrl='asdasd'
+            newuser.phone='80654215512'
+            newuser.email='kasjdkasdjk'
+            newuser.personalImgUrl='asdasd'
+            newuser.userType='P'
+            newuser.gender='Male'
+            // newuser.medicalRecords=''
+            // newuser.labResults
+        return newuser.save();
+    });
+
+
+
+    it('should list all Doctors', function(done){
+        var url = 'http://localhost:3000/api/userController/test';
+        request.get(url, (error, response, body) => {
+            if (error) done(error)
+            expect(response).to.be.an('Object');
+            done();
+        });
+    });
+});
+
