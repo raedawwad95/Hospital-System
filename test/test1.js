@@ -5,6 +5,10 @@ var mongoose  = require('mongoose');
 var Dept      = require('../server/resources/Departments/Departments');
 var Doc       = require('../server/resources/Doctor/Doctor');
 var Dep       = require('../server/resources/ItDepartment/ItDepartment');
+var lRes      = require('../server/resources/LabsResult/LabsResult');
+
+
+
 //test for get data from Departments
 
 describe('test the get request from Departments', function(){
@@ -91,6 +95,37 @@ describe('test the get request from itDepartments', function(){
             newitDep.userName='monther'
             newitDep.password='1234'
         return newitDep.save();
+    });
+
+
+
+    it('should get the admin information', function(done){
+        var url = 'http://localhost:3000/itDep/retrieve';
+        request.get(url, (error, response, body) => {
+            if (error) done(error)
+            expect(response).to.be.an('Object');
+            done();
+        });
+    });
+});
+
+//test for the lab results 
+describe('test the get request from LabResult', function(){
+
+    before('connect', function(){
+        return mongoose.createConnection('mongodb://localhost/labRes')
+    })
+
+    beforeEach(function(){
+        return lRes.remove({})
+    })
+
+    beforeEach(function(){
+        var newlRes = new lRes();
+            newlRes.patientId='5af85bb90493504275b2fb9f'
+            newlRes.labTechnicianId='5af85bb90443504275b2fb9f'
+            newlRes.description='asddsfasd'
+        return newlRes.save();
     });
 
 
