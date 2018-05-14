@@ -181,8 +181,8 @@ describe('LabsResult Model', function(){
     it('should have a `patientId` property', function(){
         expect(LabsResult.schema.paths.patientId).to.exist;
     });
-    it('should have a `patientId` property that is a number', function(){
-        expect(LabsResult.schema.paths.patientId.options.type.name).to.equal('Number');
+    it('should have a `patientId` property that is a objectid', function(){
+        expect(LabsResult.schema.paths.patientId.options.type.name).to.equal('ObjectId');
     });
      it('should have a `labTechnicianId` property', function(){
         expect(LabsResult.schema.paths.labTechnicianId).to.exist;
@@ -256,12 +256,7 @@ describe('LabsTechncians Model', function(){
     it('should have a `imageOfId` property that is a string', function(){
         expect(LabsTechncians.schema.paths.imageOfId.options.type.name).to.equal('String');
     });
-    it('should have a `techncianImage` property', function(){
-        expect(LabsTechncians.schema.paths.techncianImage).to.exist;
-    });
-    it('should have a `techncianImage` property that is a string', function(){
-        expect(LabsTechncians.schema.paths.techncianImage.options.type.name).to.equal('String');
-    });
+    
     it('should have a `workHour` property', function(){
         expect(LabsTechncians.schema.paths.workHour).to.exist;
     });
@@ -284,21 +279,16 @@ describe('Medical Model', function(){
     it('should have a `patientId` property', function(){
         expect(Medical.schema.paths.patientId).to.exist;
     });
-    it('should have a `patientId` property that is a number', function(){
-        expect(Medical.schema.paths.patientId.options.type.name).to.equal('Number');
+    it('should have a `patientId` property that is a objectid', function(){
+        expect(Medical.schema.paths.patientId.options.type.name).to.equal('ObjectId');
     });
     it('should have a `doctorId` property', function(){
         expect(Medical.schema.paths.doctorId).to.exist;
     });
-    it('should have a `doctorId` property that is a number', function(){
-        expect(Medical.schema.paths.doctorId.options.type.name).to.equal('Number');
+    it('should have a `doctorId` property that is a objectid', function(){
+        expect(Medical.schema.paths.doctorId.options.type.name).to.equal('ObjectId');
     });
-    it('should have a `created_at` property', function(){
-        expect(Medical.schema.paths.created_at).to.exist;
-    });
-    it('should have a `created_at` property that is a date', function(){
-        expect(Medical.schema.paths.created_at.options.type.name).to.equal('Date');
-    });
+    
     it('should have a `description` property', function(){
         expect(Medical.schema.paths.description).to.exist;
     });
@@ -306,3 +296,6 @@ describe('Medical Model', function(){
         expect(Medical.schema.paths.description.options.type.name).to.equal('String');
     });
 });
+
+
+
