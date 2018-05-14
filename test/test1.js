@@ -229,7 +229,7 @@ describe('test the get request from  user', function(){
 
     beforeEach(function(){
         var newuser = new user();
-            newuser.userName='monther'
+            newuser.username='monther'
             newuser.password='1234'
             newuser.FullName='Monther Amer'
             newuser.idCardNumber='123423423'
