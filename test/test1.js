@@ -54,11 +54,11 @@ describe('test the get request from Doctors', function(){
             newDoc.userName='monther'
             newDoc.password='1234'
             newDoc.fullName='Monther Amer'
-            newDoc.imageOfDoctor='kjasjdkjask'
-            newDoc.imageOfId='asdasd'
-            newDoc.nationalId='123'
+            newDoc.imageOfDoctor='image of Doctor'
+            newDoc.imageOfId='image of id'
+            newDoc.nationalId='12345678'
             newDoc.hospitalId='1234'
-            newDoc.spicilityStatus='m'
+            newDoc.spicilityStatus='spicilityStatus'
             newDoc.hoursOfWork='8'
             newDoc.gender='Male'
             newDoc.doctorType='D'
@@ -124,7 +124,7 @@ describe('test the get request from LabResult', function(){
         var newlRes = new lRes();
             newlRes.patientId='5af85bb90493504275b2fb9f'
             newlRes.labTechnicianId='5af85bb90443504275b2fb9f'
-            newlRes.description='asddsfasd'
+            newlRes.description='description'
         return newlRes.save();
     });
 
@@ -160,11 +160,11 @@ describe('test the get request from  labs technitions', function(){
             newlTech.password='1234'
             newlTech.fullName='Monther Amer'
             newlTech.id='1'
-            newlTech.imageOfId='asdasd'
+            newlTech.imageOfId='imageOfId'
             newlTech.workHour='8'
             newlTech.techncianType='T'
             newlTech.gender='Male'
-            newlTech.personalImgUrl='asdasd'
+            newlTech.personalImgUrl='personalImgUrl'
         return newlTech.save();
     });
 
@@ -233,14 +233,12 @@ describe('test the get request from  user', function(){
             newuser.password='1234'
             newuser.FullName='Monther Amer'
             newuser.idCardNumber='123423423'
-            newuser.idCardImageUrl='asdasd'
+            newuser.idCardImageUrl='idCardImageUrl'
             newuser.phone='80654215512'
-            newuser.email='kasjdkasdjk'
+            newuser.email='monther@amer.com'
             newuser.personalImgUrl='asdasd'
             newuser.userType='P'
             newuser.gender='Male'
-            // newuser.medicalRecords=''
-            // newuser.labResults
         return newuser.save();
     });
 
