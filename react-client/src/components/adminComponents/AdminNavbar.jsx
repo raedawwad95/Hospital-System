@@ -98,7 +98,7 @@ class AdminNavbar extends React.Component {
             {auth && (
               <div>
                 <Button color="inherit">
-                  <NavLink to = "/admin/retriveLabResults" activeClassName = "is-active" className = "navItem">test</NavLink>
+                  <NavLink to = "/admin/retriveLabTech" activeClassName = "is-active" className = "navItem">test</NavLink>
                 </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -167,7 +167,12 @@ class AdminNavbar extends React.Component {
                         <List component="div" disablePadding>
                           <NavLink to = "/admin/AddLabTechncians" className = "navListItem">
                             <ListItem button className={classes.nested}>
-                              New Lab Tech
+                              New Lab technicians
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/retriveLabTech" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              All lab technicians
                             </ListItem>
                           </NavLink>
                           <NavLink to = "/admin/retriveLabResults" className = "navListItem">
