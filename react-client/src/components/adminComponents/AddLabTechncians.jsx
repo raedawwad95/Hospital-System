@@ -104,7 +104,6 @@ class AddLabTechncians extends React.Component{
     };
 
 	AddLabTechnciansClick(){
-		console.log(this.state)
 		var that =this;
 		$.ajax({
 			type:'POST',

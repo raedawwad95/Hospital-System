@@ -10,7 +10,6 @@ class retriveLabTech extends React.Component{
 	}
 
 	componentDidMount() {
-		console.log('ho')
     	var that=this;
     	$.ajax({
     	type:'GET',
@@ -44,9 +43,9 @@ render(){
 		      </tr>
 		    </thead>
 		    <tbody style={{textAlign:'center'}}>
-		    { this.state.labTechs.map(function(item){
+		    { this.state.labTechs.map(function(item, index){
 				return(
-					<tr>
+					<tr key={index}>
 					    <td>{item._id}</td>
 				        <td>{item.userName}</td>
 				        <td>{item.fullName}</td>

@@ -10,7 +10,6 @@ class retriveAllDepts extends React.Component{
 	}
 
 	componentDidMount() {
-		console.log('ho')
     	var that=this;
     	$.ajax({
     	type:'GET',

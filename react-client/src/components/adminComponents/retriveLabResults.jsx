@@ -10,7 +10,6 @@ class retriveLabResults extends React.Component{
 	}
 
 	componentDidMount() {
-		console.log('ho')
     	var that=this;
     	$.ajax({
     	type:'GET',
@@ -41,10 +40,10 @@ render(){
 				      </tr>
 				    </thead>
 				    <tbody style={{textAlign:'center'}}>
-				    {this.state.labResults.map(function(item){
+				    {this.state.labResults.map(function(item, index){
 				    	return(
 
-		        	     <tr>
+		        	     <tr key={index}>
 					        <td>{item._id}</td>
 					        <td>{item.labTechnicianId}</td>
 					        <td>{item.medicalExaminationTime}</td>

@@ -129,7 +129,6 @@ class AdminNavbar extends React.Component {
       userName: this.state.userName,
       password: this.state.password
     }
-    console.log(obj);
     $.ajax({
       url:'/itDep/login',
       type:'POST',
@@ -138,7 +137,6 @@ class AdminNavbar extends React.Component {
         that.setState({
           auth: true
         })
-        console.log(data);
       },
       error:function(err){
         console.log(err);

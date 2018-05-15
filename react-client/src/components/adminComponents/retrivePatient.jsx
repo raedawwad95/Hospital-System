@@ -28,12 +28,10 @@ class retrivePatient extends React.Component{
  			that.setState({
  				userData:data
  			});
- 			console.log(that.state.userData[0].labResults)
  		}
 		});
     }
 render(){
-	console.log()
 	if(this.state.userData.length>0){
 
 
@@ -73,9 +71,9 @@ render(){
 		      </tr>
 		    </thead>		    
 		    <tbody>
-		    {this.state.userData.map(function(item){
+		    {this.state.userData.map(function(item, index){
 		    	return(
-        	     <tr>
+        	     <tr key={index}>
 			        <td>{item._id}</td>
 			        <td>{item.username}</td>
 			        <td>{item.FullName}</td>
@@ -106,9 +104,9 @@ render(){
 		      </tr>
 		    </thead>		    
 		    <tbody style={{textAlign:'center'}}>
-		    {this.state.userData[0].labResults.map(function(item){
+		    {this.state.userData[0].labResults.map(function(item, index){
 		    	return(
-        	     <tr>
+        	     <tr key= {index}>
 			        <td>{item._id}</td>
 			        <td>{item.labTechnicianId}</td>
 			        <td>{item.medicalExaminationTime}</td>
@@ -134,9 +132,9 @@ render(){
 		      </tr>
 		    </thead>		    
 		    <tbody style={{textAlign:'center'}}>
-		    {this.state.userData[0].medicalRecords.map(function(item){
+		    {this.state.userData[0].medicalRecords.map(function(item, index){
 		    	return(
-        	     <tr>
+        	     <tr key={index}>
 			        <td>{item._id}</td>
 			        <td>{item.doctorId}</td>
 			        <td>{item.description}</td>
