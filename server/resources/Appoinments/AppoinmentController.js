@@ -1,7 +1,7 @@
 var Appoinment =require('./Appoinments');
 
 
-export.add=function(req,res){
+exports.add=function(req,res){
 
 	var Appoint=new Appoinment({
 		day:req.body.day,
