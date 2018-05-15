@@ -98,7 +98,7 @@ class AdminNavbar extends React.Component {
             {auth && (
               <div>
                 <Button color="inherit">
-                  <NavLink to = "/admin/retriveAllDoctor" activeClassName = "is-active" className = "navItem">test</NavLink>
+                  <NavLink to = "/admin/retriveLabResults" activeClassName = "is-active" className = "navItem">test</NavLink>
                 </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -136,15 +136,21 @@ class AdminNavbar extends React.Component {
                       </ListItem>
                       <Collapse in={this.state.openDep} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                          <ListItem button className={classes.nested}>
-                            <NavLink to = "/admin/addDoctorToDepartment" className= "navListItem">Add Doctor to Department</NavLink>
-                          </ListItem>
-                          <ListItem button className={classes.nested}>
-                            <NavLink to = "/admin/addDept" className = "navListItem">Add new Department</NavLink>
-                          </ListItem>
-                          <ListItem button className={classes.nested}>
-                            <NavLink to = "/admin/retriveAllDepts" className= "navListItem">All Departments</NavLink>
-                          </ListItem>
+                          <NavLink to = "/admin/addDoctorToDepartment" className= "navListItem">
+                            <ListItem button className={classes.nested}>
+                              Add Doctor to Department
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/addDept" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              New Department
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/retriveAllDepts" className= "navListItem">
+                            <ListItem button className={classes.nested}>
+                              All Departments
+                            </ListItem>
+                          </NavLink>
                         </List>
                       </Collapse>
 
@@ -159,9 +165,16 @@ class AdminNavbar extends React.Component {
                       </ListItem>
                       <Collapse in={this.state.openLab} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                          <ListItem button className={classes.nested}>
-                            <NavLink to = "/admin/AddLabTechncians" className = "navListItem">New Lab Tech</NavLink>
-                          </ListItem>
+                          <NavLink to = "/admin/AddLabTechncians" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              New Lab Tech
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/retriveLabResults" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              All labs results
+                            </ListItem>
+                          </NavLink>
                         </List>
                       </Collapse>
 
@@ -176,12 +189,16 @@ class AdminNavbar extends React.Component {
                       </ListItem>
                       <Collapse in={this.state.openDoc} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                          <ListItem button className={classes.nested}>
-                            <NavLink to = "/admin/AddDoctor" className = "navListItem">New Doctor</NavLink>
-                          </ListItem>
-                          <ListItem button className={classes.nested}>
-                            <NavLink to = "/admin/retriveAllDoctor" className = "navListItem">All Doctors</NavLink>
-                          </ListItem>
+                          <NavLink to = "/admin/AddDoctor" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              New Doctor
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/retriveAllDoctor" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              All Doctors
+                            </ListItem>
+                          </NavLink>
                         </List>
                       </Collapse>
 
