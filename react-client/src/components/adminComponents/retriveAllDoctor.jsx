@@ -10,7 +10,6 @@ class retriveAllDoctor extends React.Component{
 	}
 
 	componentDidMount() {
-		console.log('ho')
     	var that=this;
     	$.ajax({
     	type:'GET',
@@ -50,9 +49,9 @@ render(){
 	</thead>
 
 	<tbody style={{textAlign:'center'}}>
-	{ this.state.doctors.map(function(item){
+	{ this.state.doctors.map(function(item, index){
 	return(
-		<tr>
+		<tr key={index}>
 		    <td>{item._id}</td>
 	        <td>{item.userName}</td>
 	        <td>{item.fullName}</td>

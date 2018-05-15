@@ -104,7 +104,6 @@ class AddLabTechncians extends React.Component{
     };
 
 	AddLabTechnciansClick(){
-		console.log(this.state)
 		var that =this;
 		$.ajax({
 			type:'POST',
@@ -206,7 +205,6 @@ class AddLabTechncians extends React.Component{
 			          id="username"
 			          label="UserName"
 			          placeholder="UserName"
-			          defaultValue="Enter userName"
 			          className={classes.textField}
 			          margin="normal"
 			          value={this.state.username}
@@ -243,7 +241,6 @@ class AddLabTechncians extends React.Component{
 			          id="fullName"
 			          label="fullName"
 			          placeholder="fullName"
-			          defaultValue="Full name"
 			          className={classes.textField}
 			          margin="normal"
 			          value={this.state.fullName}
@@ -257,7 +254,6 @@ class AddLabTechncians extends React.Component{
 			          id="id"
 			          label="id"
 			          placeholder="ID"
-			          defaultValue="ID"
 			          className={classes.textField}
 			          margin="normal"
 			          value={this.state.id}

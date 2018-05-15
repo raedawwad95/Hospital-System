@@ -10,7 +10,6 @@ class retriveAllDepts extends React.Component{
 	}
 
 	componentDidMount() {
-		console.log('ho')
     	var that=this;
     	$.ajax({
     	type:'GET',
@@ -41,10 +40,10 @@ render(){
 		      </tr>
 		    </thead>
 		    <tbody style={{textAlign:'center'}}>
-		    {this.state.depts.map(function(item){
+		    {this.state.depts.map(function(item, index){
 		    	return(
 
-        	     <tr>
+        	     <tr key={index}>
 			        <td>{item._id}</td>
 			        <td>{item.nameOfDept}</td>
 			        <td>{item.idOfDept}</td>
