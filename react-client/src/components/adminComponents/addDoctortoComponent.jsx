@@ -57,7 +57,6 @@ class AddDocToComponent extends React.Component{
 
 		return(
 		<div>
-			<h1>pick</h1>
 			<select name='selector'>
 				{this.state.depts.map(function(item){
 					return(
