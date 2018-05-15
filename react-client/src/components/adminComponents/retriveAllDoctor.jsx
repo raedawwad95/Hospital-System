@@ -30,13 +30,15 @@ render(){
 	return(
 	<div>
 	<div className='card'>
+	<div> <h2> All Doctors </h2> <br /> </div> 
+	<div className='container-fluid'>
 	<table className="table table-bordered">
 
 	<thead style={{textAlign:'center'}}>
 	  <tr>
-	  	<th width="25%">Id</th>
+	  	<th width="15%">Id</th>
 	    <th>User Name</th>
-	    <th>Full Name</th>
+	    <th width="25%">Full Name</th>
 	    <th>National Id</th>
 	    <th>Hospital Id</th>
 	    <th>Department</th>
@@ -67,6 +69,7 @@ render(){
 	})}
 	</tbody>
 	</table>
+	</div>
 	</div>
 	</div>
 		)

@@ -114,12 +114,27 @@ class AddDoctor extends React.Component{
 
 	AddDoctorClick(){
 		var that =this;
+		var obj = {
+			userName:this.state.userName,
+			password:this.state.password,
+			fullName:this.state.fullName,
+			imageOfDoctor:this.state.imageOfDoctor,
+			imageOfId:this.state.imageOfId,
+			nationalId:this.state.nationalId,
+			hospitalId:this.state.hospitalId,
+			department:this.state.department,
+			spicilityStatus:this.state.spicilityStatus,
+			hoursOfWork:this.state.hoursOfWork,
+			gender:this.state.gender,
+		}
+		console.log(obj);
 		$.ajax({
 			type:'POST',
 			url:'/Doctor/create',
-			data:that.state,
+			data:obj,
 			success:function(data){
-				console.log(data)
+				console.log(data);
+				alert("success");
 			},
 			error:function(err){
 				console.log(err)
@@ -155,7 +170,7 @@ class AddDoctor extends React.Component{
         })
         .done (function (data) {
           that.setState({
-            nationalId: data.data.link,
+            imageOfId: data.data.link,
             loading: false,
             success: true,
           });
@@ -289,11 +304,11 @@ class AddDoctor extends React.Component{
 					              	required
 							        accept="image/*"
 							        className={classes.input}
-							        id="nationalId"
+							        id="imageOfId"
 							        type="file"
 							        onChange={this.onImageChangeID.bind(this)}
 							      />
-				                <label htmlFor="nationalId">
+				                <label htmlFor="imageOfId">
 							        <Button variant="raised" component="span" className={buttonIDImg} disabled={loading} onClick={this.handleButtonClick.bind(this)} >
 							          Upload Doctor National ID Image
 							        </Button>
