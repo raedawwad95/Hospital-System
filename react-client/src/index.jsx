@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import {browserHistory, Route, BrowserRouter as Router} from 'react-router-dom';
 import Admin from './components/adminComponents/adminMain.jsx'
-import AddLabTechncians from './components/adminComponents/AddLabTechncians.jsx'
-import addDept from './components/adminComponents/addDept.jsx'
 import Home from './components/Home.jsx'
 import Home2 from './components/Home2.jsx'
 import Navabar from './components/Navabar.jsx'

@@ -29,6 +29,8 @@ render(){
 	return(
 		<div>
 		<div className="card">
+			<div> <h2>All Departments</h2> <br /> </div>
+			<div className="container">
 		 <table className="table table-bordered">
 		    <thead style={{textAlign:'center'}}>
 		      <tr>
@@ -52,6 +54,7 @@ render(){
             })}
 		    </tbody>
          </table>
+         </div>
 	    </div>
 	    </div>
 		)
