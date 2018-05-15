@@ -112,9 +112,9 @@ class addDoctorToDepartment extends React.Component{
 						            <MenuItem value="">
 						              <em>None</em>
 						            </MenuItem>
-						            {this.state.depts.map(function(item){
+						            {this.state.depts.map(function(item, index){
 										return(
-											<MenuItem value={item.idOfDept}>{item.nameOfDept}</MenuItem>
+											<MenuItem value={item.idOfDept} key={index}>{item.nameOfDept}</MenuItem>
 										)
 									})}	
 						          </Select>

@@ -40,6 +40,8 @@ render(){
 	return(
 		<div>
 		<div className="card">
+		<div> <h2> Patient data </h2> <br /> </div> 
+		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField
 	          required
@@ -88,7 +90,10 @@ render(){
 		    </tbody>
          </table>
          </div>
+         </div>
+         <br />
          <div className="card">
+         <div className='container-fluid'>
           <h1 style={{textAlign:'center'}}>User Lab Result</h1>      	
 		 <table className="table table-bordered">
 		    <thead style={{textAlign:'center'}}>
@@ -114,8 +119,11 @@ render(){
             })}
 		    </tbody>
          </table>
+         </div>
 	    </div>
+	    <br />
 	    <div className="card">
+	    <div className='container-fluid'>
           <h1 style={{textAlign:'center'}}>User Medical Records</h1>      	
 		 <table className="table table-bordered">
 		    <thead style={{textAlign:'center'}}>
@@ -139,11 +147,16 @@ render(){
          </table>
 	    </div>
 	    </div>
+	    <br />
+	    </div>
+	    
 		)
 	}else{
 			return(
 		<div>
 		<div className="card">
+		<div> <h2> Patient data </h2> <br /> </div> 
+		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField
 	          required
@@ -160,6 +173,7 @@ render(){
 	        	Retrive Data
 	      	</Button>
 		</CardActions>	
+		</div>
 		</div>
 	    </div>
 	    )
