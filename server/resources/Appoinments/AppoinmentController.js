@@ -18,3 +18,9 @@ exports.add=function(req,res){
 	})
 	
 }
+
+
+// exports.retrive=function(req,res){
+
+// 	Appoinment.find({})
+// }
