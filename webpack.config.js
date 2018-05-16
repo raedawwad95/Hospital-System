@@ -27,21 +27,16 @@ var config = {
       {
         test: /\.jsx?/,
         include: APP_DIR,
-        loader: 'babel-loader',
+        loader: 'babel',
         query: {
-          presets: ['es2015', 'react','stage-0']
-        }stage
+          presets: ['es2015', 'react']
+        }
       }
     ]
   },
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
-  },
-  "test1":{
-    "presets":{
-      ["env",{"targets":{"node":"current"}}]
-    }
   }
 };
 
