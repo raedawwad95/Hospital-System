@@ -4,9 +4,9 @@ var ItDepartment = require('../server/resources/ItDepartment/ItDepartment');
 var LabsResult = require('../server/resources/LabsResult/LabsResult');
 var LabsTechncians = require('../server/resources/LabsTechncians/LabsTechncians')
 var Medical = require('../server/resources/MedicalRecorde/Medical')
-
 var mongoose = require('mongoose');
-var expect = require('chai').expect;
+
+
 
 //test for Department Model
 
@@ -297,5 +297,9 @@ describe('Medical Model', function(){
     });
 });
 
+<<<<<<< dbdbcd2171a3f2db18a72f5bd36169d8f255fa85
 
+=======
+ 
+>>>>>>> adding test file
 
