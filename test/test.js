@@ -296,3 +296,4 @@ describe('Medical Model', function(){
         expect(Medical.schema.paths.description.options.type.name).to.equal('String');
     });
 });
+
