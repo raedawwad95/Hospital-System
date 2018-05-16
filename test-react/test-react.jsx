@@ -12,9 +12,6 @@ var App = require('../react-client/src/components/Home.jsx')
  import Adapter from 'enzyme-adapter-react-15';
  configure({ adapter: new Adapter() });
 
-
-
-
  describe('Home', function() {
 it('should be class component ',function(){
 	expect(React.Component.isPrototypeOf(Home)).to.be.true;

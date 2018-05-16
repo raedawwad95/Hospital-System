@@ -10,8 +10,8 @@ var ITSchema =mongoose.Schema({
 	password:{
 		type:String,
 		required:true
-	}
-
+	},
+  userType: {type: String, default: "A"},
 });
 //before save data
 ITSchema.pre('save', function (next) {

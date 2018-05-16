@@ -21,4 +21,9 @@ ItDepartmentRouter.route('/')
 .post(function(req,res){
 	ItDepartmentController.logout(req,res);
 })
+//check if login is admin ?
+ItDepartmentRouter.route('/isLogin')
+	.get(function (req, res) {
+		ItDepartmentController.isLogin(req, res);
+	})
 module.exports = ItDepartmentRouter;
