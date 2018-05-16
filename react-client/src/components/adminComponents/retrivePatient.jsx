@@ -127,7 +127,7 @@ render(){
 		    <thead style={{textAlign:'center'}}>
 		      <tr>
 		        <th width='20%'>Id </th>
-		        <th>Doctor Id</th>
+		        <th>Doctor Name</th>
 		        <th>Description</th>
 		      </tr>
 		    </thead>		    
@@ -136,7 +136,7 @@ render(){
 		    	return(
         	     <tr key={index}>
 			        <td>{item._id}</td>
-			        <td>{item.doctorId}</td>
+			        <td>{item.doctorId.fullName}</td>
 			        <td>{item.description}</td>
 		         </tr>
 		         )

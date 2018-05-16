@@ -2,12 +2,12 @@ import React from 'react';
 import DoctorNavbar from './DoctorNavbar.jsx';
 import DoctorHome from './DoctorHome.jsx';
 import PatientDataAddRecord from './PatientDataAddRecord.jsx';
+
 import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 class Doctor extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <div>
@@ -20,4 +20,4 @@ class Doctor extends React.Component {
     )
   }
 }
-export default Doctor;  
+export default Doctor;      
