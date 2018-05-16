@@ -24,23 +24,24 @@ exports.retrieve= function(req,res){
 exports.login=function(req,res){
 	ItDepartment.findOne({userName:req.body.userName}).exec(function(err,ItDep){
 		if(err){//err
-			console.log(err);
+			console.error(err);
 		}
 		if(!ItDep){//not found Itdep
-			res.json('No ItDepartment found')
+			console.error('No ItDepartment found')
 		}else{//found Itdep and check the password by comparePassword method
 			ItDep.comparePassword(req.body.password,function(err,isMatch){
 				if(err){//err
-					console.log(err);
+					console.error(err);
 				}
 				if(!isMatch){//not match password
-					res.json('not match password');
+					console.error('not match password');
 				}else{//if match password make session regenerate
 					return req.session.regenerate(function(err){
 						if(err){
 							return console.log(err);
 						}
 						req.session.userName = ItDep.userName;
+						req.session.adminType = ItDep.userType;
 						res.json(ItDep);
 					});
 				}
@@ -56,4 +57,14 @@ exports.logout = function(req,res){
 		}
 		    res.json("logged out")
 	});
+}
+
+exports.isLogin = function(req, res) {
+	if (req.session.adminType === "A") {
+		res.json(true);
+	} else {
+		console.error("not Admin");
+		res.status(500)
+ 		res.json('error')
+	}
 }

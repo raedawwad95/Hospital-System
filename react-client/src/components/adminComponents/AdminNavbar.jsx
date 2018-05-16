@@ -144,6 +144,22 @@ class AdminNavbar extends React.Component {
     });
   }
 
+  componentDidMount() {
+    var that = this
+    $.ajax({
+      url:'/itDep/isLogin',
+      type:'GET',
+      success:function(data){
+        that.setState({
+          auth: true
+        })
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+  }
+
   render() {
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
