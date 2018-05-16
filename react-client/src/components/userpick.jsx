@@ -8,14 +8,13 @@ class Appoinment extends React.Component{
 			doctors:[],
 			u:[],
 			doct:[],
-			selectedOption:'',
 			from:'',
 			to:'',
-			day:'',
-			obj:{}
+			day:''
 		}
 		this.handleChange=this.handleChange.bind(this);
 		this.send=this.send.bind(this);
+
 	//	this.handleOptionChange=this.handleOptionChange.bind(this);
 		this.textHandleChange=this.textHandleChange.bind(this)
 	}
@@ -70,32 +69,18 @@ class Appoinment extends React.Component{
 	}
 
 	send(){
-		var that=this;
-		this.setState({
-			obj:{
-				day:8,
-				from:4,
-				to:8,
+		
+		var	obj={
+				day:this.state.day,
+				from:this.state.from,
+				to:this.state.to,
 				doctorId:'5afaf38261bfa40dae63743e',
 				userId:'5afaf38261bfa40dae637442'
 			}
-		})
-		// var from1=this.state.from;
-		// var to=this.state.to;
-		// var obj:{
-		// 	day:5,
-		// 	from:5,
-		// 	to:9,
-		// 	doctorId:'5afaf38261bfa40dae63743e',
-		// 	userId:'5afaf38261bfa40dae637442'
-
-		// }
-		console.log(this.state.obj)
 		$.ajax({
 			type:'POST',
 			url:'/app',
-			data:that.state.obj,
-			dataType: 'json',
+			data:obj,
 			success:function(data){
 				console.log('data ',data)
 			},
@@ -106,6 +91,7 @@ class Appoinment extends React.Component{
 		})
 	}
 
+	
 	// handleOptionChange(changeEvent) {
  //  		this.setState({
  //    		selectedOption: changeEvent.target.value

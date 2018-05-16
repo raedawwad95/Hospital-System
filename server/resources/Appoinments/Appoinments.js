@@ -3,7 +3,7 @@ var db=require('../../db');
 
 var AppoinmetSchema =mongoose.Schema({
 	day:{
-		type:Date,
+		type:Number,
 		index:{
 			unique:true
 		}
