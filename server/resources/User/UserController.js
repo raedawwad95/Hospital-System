@@ -47,7 +47,14 @@ exports.logout = function (req, res) {
 		res.json("logged out")
 	})
 }
-
+exports.retriveAllPatient = function (req, res) {
+	Users.find({},function(err,users){
+		if(err){
+			console.error(err);
+		}
+		res.json(users);
+	})
+		}
 exports.retrive = function (req, res) {
 	Users.find({username:req.params.username})
 		.populate({

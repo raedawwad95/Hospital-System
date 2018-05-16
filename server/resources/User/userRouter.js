@@ -29,4 +29,8 @@ userRouter.route('/:username')
 	.get(function(req, res) {
 		userController.retrive(req, res);
 	})
+	userRouter.route('/retrive/allPatient')
+	.get(function(req, res) {
+		userController.retriveAllPatient(req, res);
+	})
 module.exports = userRouter;
