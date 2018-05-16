@@ -1,18 +1,66 @@
 import React from 'react';
 import $ from 'jquery';
 import { TextField, Grid,
-		Button,CardActions} from 'material-ui';
+		Button,CardActions,withStyles,CircularProgress } from 'material-ui';
+import Modal from 'react-modal';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import green from 'material-ui/colors/green';
 
-class retrivePatient extends React.Component{
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : '10%',
+    bottom                : '10%',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+	const styles = theme => ({
+  	  input: {
+	    display: 'none',
+	  },
+	   buttonSuccess: {
+	    backgroundColor: green[500],
+	    '&:hover': {
+	      backgroundColor: green[700],
+	    },
+	    buttonProgress: {
+	    color: green[500],
+	    position: 'absolute',
+	    top: '50%',
+	    left: '50%',
+	    marginTop: -12,
+	    marginLeft: -12,
+	  },
+	  },
+	  
+	});
+class PatientDataAddRecord extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
 			userData:[],
 			username:'',
-		}
+			description:'',
+			image: '',
+            modalIsOpen: false,
+            loading: false,
+    		success: false,
+         };
+
+	 
+	    this.openModal = this.openModal.bind(this);
+	    this.closeModal = this.closeModal.bind(this);
 		this.onChange=this.onChange.bind(this);
 		this.retriveData=this.retriveData.bind(this);
+		this.handleChange=this.handleChange.bind(this);
+		this.addMedicalRecords=this.addMedicalRecords.bind(this);
+	
 	}
+
 	onChange(e){
 		this.setState({
 			username:e.target.value
@@ -32,7 +80,81 @@ class retrivePatient extends React.Component{
  		}
 		});
     }
+	handleChange(e){
+		this.setState({
+		[e.target.name]:e.target.value
+		})
+	}
+	addMedicalRecords(){
+		 var obj1={
+			username:this.state.username, 
+			description:this.state.description,
+			image: this.state.image
+		}
+		$.ajax({
+			url:'/api/medical',
+			type:"POST",
+			data:obj1,
+			success:(data)=>{
+				console.log(data)
+			},
+			error:(err)=>{
+				console.log(err)
+			}
+		});
+	}
+	 closeModal() {
+	    this.setState({modalIsOpen: false});
+	  }
+	 openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+    onChangeImageRecord(e){
+      var imgReader = new FileReader();
+      var img = e.target.files[0];
+      var that = this;
+      var imgCode = ''
+      // var target = e.target.name;
+      imgReader.onload = function(upload) {
+        imgCode = upload.target.result
+        imgCode = imgCode.slice(22)
+        $.ajax({
+          url: `https://api.imgur.com/3/image`,
+          method: 'POST',
+          headers: {"Authorization": "Client-ID bb8a64e82b834b5"},
+          data:imgCode
+        })
+        .done (function (data) {
+          that.setState({
+            image: data.data.link,
+            loading: false,
+            success: true,
+          });
+        })
+        .fail(function( jqXHR, textStatus ) {
+          alert("item not found, textStatus");
+        });
+      };
+      imgReader.readAsDataURL(img)
+    }
+   handleButtonClick() {
+    if (!this.state.loading) {
+      this.setState(
+        {
+          success: false,
+          loading: true
+        }
+      );
+    }
+}
+ 
 render(){
+	const { classes } = this.props;
+		const { loading, success } = this.state;
+		const imageRecord = classNames({
+	      [classes.buttonSuccess]: success,
+	    });	
 	console.log()
 	if(this.state.userData.length>0){
 
@@ -40,6 +162,7 @@ render(){
 	return(
 		<div>
 		<div className="card">
+		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField
 	          required
@@ -55,7 +178,64 @@ render(){
 		    <Button variant="raised" color="primary" onClick={this.retriveData} >
 	        	Retrive Data
 	      	</Button>
-		</CardActions>	
+		</CardActions>
+		<CardActions>
+		    <Button variant="raised" color="primary" onClick={this.openModal} >
+	        	Add Record
+	      	</Button>
+		</CardActions>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          contentLabel="Add New Record"
+          style={customStyles}
+        >
+ 		<div className="card">
+		<div className='container-fluid'>
+		<h2 style={{textAlign:'center'}}>Add New Record</h2>
+	    <Grid container spacing={24}>
+		<Grid item xs={18} sm={9}>
+			<TextField
+	          required
+	          id="description"
+	          label="Description"
+	          placeholder="Description"
+	          name="description"
+	          width="200"
+	          margin="normal"
+	          fullWidth
+      		  onChange={this.onChange}
+	        />
+		</Grid>
+		<Grid item xs={6} sm={3}>
+			 <input
+              	required
+		        accept="image/*"
+		        className={classes.input}
+		        id="raised-button-file"
+		        type="file"
+		        onChange={this.onChangeImageRecord.bind(this)}
+		      />
+            <label htmlFor="raised-button-file">
+		        <Button variant="raised" component="span" className={imageRecord} disabled={loading} onClick={this.handleButtonClick.bind(this)} >
+		          Upload Record Image
+		        </Button>
+		      	{loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+		    </label>
+		</Grid>
+		<CardActions>
+		    <Button variant="raised" color="primary" onClick={this.addMedicalRecords} >
+	        	Add Medical Records
+	      	</Button>
+		</CardActions>
+		<CardActions>
+		    <Button variant="raised" color="primary" onClick={this.closeModal} >
+	        	Close
+	      	</Button>
+		</CardActions>
+		</Grid>
+		</div>
+		</div>
+        </Modal>	
 	    <h1 style={{textAlign:'center'}}>User Data</h1>      	
 		 <table className="table table-bordered">
 		    <thead style={{textAlign:'center'}}>
@@ -88,7 +268,10 @@ render(){
 		    </tbody>
          </table>
          </div>
+         </div>
+         <br/>
          <div className="card">
+         <div className='container-fluid'>
           <h1 style={{textAlign:'center'}}>User Lab Result</h1>      	
 		 <table className="table table-bordered">
 		    <thead style={{textAlign:'center'}}>
@@ -115,35 +298,15 @@ render(){
 		    </tbody>
          </table>
 	    </div>
-	    <div className="card">
-          <h1 style={{textAlign:'center'}}>User Medical Records</h1>      	
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th width='20%'>Id </th>
-		        <th>Doctor Id</th>
-		        <th>Description</th>
-		      </tr>
-		    </thead>		    
-		    <tbody style={{textAlign:'center'}}>
-		    {this.state.userData[0].medicalRecords.map(function(item){
-		    	return(
-        	     <tr>
-			        <td>{item._id}</td>
-			        <td>{item.doctorId}</td>
-			        <td>{item.description}</td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
 	    </div>
+	    <br/>
 	    </div>
 		)
 	}else{
 			return(
 		<div>
 		<div className="card">
+		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField
 	          required
@@ -161,6 +324,7 @@ render(){
 	      	</Button>
 		</CardActions>	
 		</div>
+		</div>
 	    </div>
 	    )
 	
@@ -168,4 +332,9 @@ render(){
 
 }
 }
-export default retrivePatient;
+
+PatientDataAddRecord.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(PatientDataAddRecord);

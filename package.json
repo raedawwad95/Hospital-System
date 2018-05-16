@@ -35,10 +35,14 @@
     "react-addons-test-utils": "^15.6.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.3.2",
+    "react-modal": "^3.4.4",
     "react-native": "0.55.3",
     "react-router-dom": "^4.2.2",
     "react-test-utils": "0.0.1",
-    "render-shallow": "^1.1.0"
+    "render-shallow": "^1.1.0",
+    "reactjs-popup": "^1.1.1",
+    "request": "^2.85.0",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
