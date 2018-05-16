@@ -120,7 +120,7 @@ class AdminNavbar extends React.Component {
   };
 
     handleClickPat() {
-    this.setState({ openPat: !this.state.openDoc });
+    this.setState({ openPat: !this.state.openPat });
   };
 
   loginAdmin(){
@@ -296,6 +296,11 @@ class AdminNavbar extends React.Component {
                           <NavLink to = "/admin/retrivePatient" className = "navListItem">
                             <ListItem button className={classes.nested}>
                               Search Patient
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/RetriveAllPatient" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              All Patient
                             </ListItem>
                           </NavLink>
                         </List>
