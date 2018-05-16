@@ -16,4 +16,4 @@ var App = require('../react-client/src/components/Home.jsx')
 it('should be class component ',function(){
 	expect(React.Component.isPrototypeOf(Home)).to.be.true;
 })
-})
+});
