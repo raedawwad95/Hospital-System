@@ -52,24 +52,27 @@ exports.update=function(req,res){
 exports.login = function(req,res){
 	Doctor.findOne({userName:req.body.userName}).exec(function (err,doctor){
 		if(err){
-			console.log(err);
+			console.error(err);
 		}
 		if(!doctor){//Not found user
-			res.json("No doctor found");
+			console.error("No doctor found");
 		}else{ //found user check password  by comparePassword method
 			doctor.comparePassword(req.body.password,function(err,isMatch){
 				if(err){
-					console.log(err);
+					console.error(err);
 				}
 				if(!isMatch){//not match
-					res.json("Wrong password");
+					console.error("Wrong password");
 				}else{ 
 					return req.session.regenerate(function(err){
 						if(err){ //if match generate seassion
-							return console.log(err)
+							return console.error(err)
 						}
 						req.session.userName = doctor.userName;
 					    req.session.doctorType = doctor.doctorType;
+					    req.session.ID = doctor._id;
+					    console.log(doctor)
+					    console.log(req.session)
 					    res.json(doctor);
 					});
 				}

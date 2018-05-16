@@ -29,13 +29,13 @@ exports.addRecord = function (req, res) {
 		if (err) {
 			console.error(err);
 		} else if (!user) {
-			res.json("No user found, please check username");
+			console.error("No user found, please check username");
 		} else {
 			var obj = {
 				description: req.body.description,
 				image: req.body.image,
 				patientId: user._id,
-				doctorId: req.body.doctorId
+				doctorId: req.session.ID
 			}
 			var mid = new Medical(obj);
 			mid.save();
