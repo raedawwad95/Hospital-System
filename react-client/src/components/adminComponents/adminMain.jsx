@@ -21,7 +21,7 @@ class Admin extends React.Component {
       <AdminNavbar/>
       <br/>
         <Route exact path="/admin" component={AdminHome} />
-        <Route path="/admin/AddLabTechncians" component={AddLabTechncians} />
+        <Route path="/admin/AddLabTechncians" component={MedicalRecords} />
         <Route path="/admin/addDept" component={addDept} />  
         <Route path="/admin/addDoctorToDepartment" component={addDoctorToDepartment} />  
         <Route path="/admin/AddDoctor" component={AddDoctor} />

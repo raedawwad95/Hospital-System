@@ -300,6 +300,32 @@ render(){
 	    </div>
 	    </div>
 	    <br/>
+	    <div className="card">
+	    <div className='container-fluid'>
+          <h1 style={{textAlign:'center'}}>User Medical Records</h1>      	
+		 <table className="table table-bordered">
+		    <thead style={{textAlign:'center'}}>
+		      <tr>
+		        <th width='20%'>Id </th>
+		        <th>Doctor Id</th>
+		        <th>Description</th>
+		      </tr>
+		    </thead>		    
+		    <tbody style={{textAlign:'center'}}>
+		    {this.state.userData[0].medicalRecords.map(function(item, index){
+		    	return(
+        	     <tr key={index}>
+			        <td>{item._id}</td>
+			        <td>{item.doctorId}</td>
+			        <td>{item.description}</td>
+		         </tr>
+		         )
+            })}
+		    </tbody>
+         </table>
+	    </div>
+	    </div>
+	    <br />
 	    </div>
 		)
 	}else{
