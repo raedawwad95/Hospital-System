@@ -14,8 +14,6 @@ class Appoinment extends React.Component{
 		}
 		this.handleChange=this.handleChange.bind(this);
 		this.send=this.send.bind(this);
-
-	//	this.handleOptionChange=this.handleOptionChange.bind(this);
 		this.textHandleChange=this.textHandleChange.bind(this)
 	}
 
@@ -91,13 +89,6 @@ class Appoinment extends React.Component{
 		})
 	}
 
-	
-	// handleOptionChange(changeEvent) {
- //  		this.setState({
- //    		selectedOption: changeEvent.target.value
- //  		});
- //  		console.log(this.state.selectedOption)
-	// }
 	render(){
 		return(
 			<div>
@@ -120,12 +111,9 @@ class Appoinment extends React.Component{
 			)
 	}
 
-
-
 }
 
 export default Appoinment;
-
 
 				// <form>
 				// {this.state.doct.map(function(item){
