@@ -50,7 +50,13 @@ exports.logout = function (req, res) {
 
 exports.retrive = function (req, res) {
 	Users.find({username:req.params.username})
-		.populate('medicalRecords')
+		.populate({
+			path:'medicalRecords',
+			populate: {
+				path: "doctorId",
+				select: "fullName"
+			}
+		})
 		.populate('labResults')
 		.exec(function (err, user) {
 			if (err) {
@@ -63,3 +69,14 @@ exports.retrive = function (req, res) {
 			}
 		})
 }
+/*
+Project.find(query)
+  .populate({ 
+     path: 'pages',
+     populate: {
+       path: 'components',
+       model: 'Component'
+     } 
+  })
+  .exec(function(err, docs) {});
+  */
