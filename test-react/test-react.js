@@ -107,3 +107,78 @@ describe("PatientDataAddRecord",function(){
 		expect(React.Component.isPrototypeOf(PatientDataAddRecord)).to.be.true;
 	})
 });
+
+
+
+
+describe("AddDepartment",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(AddDepartment)).to.be.true;
+	})
+});
+
+
+describe("AddDoctor",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(AddDoctor)).to.be.true;
+	})
+});
+
+
+describe("AddDocToComponent",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(AddDocToComponent)).to.be.true;
+	})
+});
+
+describe("addDoctorToDepartment",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(addDoctorToDepartment)).to.be.true;
+	})
+});
+describe("AddLabTechncians",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(AddLabTechncians)).to.be.true;
+	})
+});
+describe("AdminHome",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(AdminHome)).to.be.true;
+	})
+});
+describe("Admin",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(Admin)).to.be.true;
+	})
+});
+describe("AdminNavbar",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(AdminNavbar)).to.be.true;
+	})
+});
+describe("retriveAllDepts",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(retriveAllDepts)).to.be.true;
+	})
+});
+describe("retriveAllDoctor",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(retriveAllDoctor)).to.be.true;
+	})
+});
+describe("retriveLabResults",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(retriveLabResults)).to.be.true;
+	})
+});
+describe("retriveLabTech",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(retriveLabTech)).to.be.true;
+	})
+});
+describe("retrivePatient",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(retrivePatient)).to.be.true;
+	})
+});
+
