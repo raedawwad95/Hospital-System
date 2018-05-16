@@ -296,10 +296,3 @@ describe('Medical Model', function(){
         expect(Medical.schema.paths.description.options.type.name).to.equal('String');
     });
 });
-
-<<<<<<< dbdbcd2171a3f2db18a72f5bd36169d8f255fa85
-
-=======
- 
->>>>>>> adding test file
-

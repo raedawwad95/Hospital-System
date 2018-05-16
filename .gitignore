@@ -1,6 +1,7 @@
 node_modules
 react-client/dist/bundle.js
 react-client/dist/bundle.js.map 
+package-lock.json
 # Logs
 logs
 *.log
