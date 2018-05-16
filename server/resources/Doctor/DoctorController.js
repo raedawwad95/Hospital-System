@@ -26,7 +26,7 @@ exports.create=function(req,res){
 		hoursOfWork:req.body.hoursOfWork,
 		gender:req.body.gender
 	}
-	console.log(doctorObj)
+
 	var doctor =new Doctor(doctorObj);
 	doctor.save(function(err,data){
 		res.json(data)
