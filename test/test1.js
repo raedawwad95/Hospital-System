@@ -36,6 +36,9 @@ describe('test the get request from Departments', function(){
             done();
         });
     });
+
+    
+
 });
 
 //test for get data from Doctors
