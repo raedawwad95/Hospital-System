@@ -72,13 +72,13 @@ exports.login = function(req,res){
 					    req.session.doctorType = doctor.doctorType;
 					    req.session.ID = doctor._id;
 					    console.log(doctor)
-					    console.log(req.session)
 					    res.json(doctor);
 					});
 				}
 			});
 		}
 	});
+
 }
 
 exports.logout=function(req,res){
@@ -100,4 +100,12 @@ exports.retrievePatient=function(req,res){
 	});
 }
 
-
+exports.isLogin = function(req, res) {
+	if (req.session.doctorType === "d") {
+		res.json(true);
+	} else {
+		console.error("not a doctor");
+		res.status(500)
+ 		res.json('error')
+	}
+}
