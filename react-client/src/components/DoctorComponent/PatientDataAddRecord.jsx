@@ -76,7 +76,6 @@ class PatientDataAddRecord extends React.Component{
  			that.setState({
  				userData:data
  			});
- 			console.log(that.state.userData[0].labResults)
  		}
 		});
     }
@@ -92,7 +91,7 @@ class PatientDataAddRecord extends React.Component{
 			image: this.state.image
 		}
 		$.ajax({
-			url:'/api/medical',
+			url:'/api/medical/addRecorde',
 			type:"POST",
 			data:obj1,
 			success:(data)=>{
@@ -307,7 +306,7 @@ render(){
 		    <thead style={{textAlign:'center'}}>
 		      <tr>
 		        <th width='20%'>Id </th>
-		        <th>Doctor Id</th>
+		        <th>Doctor Name</th>
 		        <th>Description</th>
 		      </tr>
 		    </thead>		    
@@ -316,7 +315,7 @@ render(){
 		    	return(
         	     <tr key={index}>
 			        <td>{item._id}</td>
-			        <td>{item.doctorId}</td>
+			        <td>{item.doctorId.fullName}</td>
 			        <td>{item.description}</td>
 		         </tr>
 		         )

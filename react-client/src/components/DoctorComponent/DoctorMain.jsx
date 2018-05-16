@@ -20,4 +20,4 @@ class Doctor extends React.Component {
     )
   }
 }
-export default Doctor;  
+export default Doctor;      
