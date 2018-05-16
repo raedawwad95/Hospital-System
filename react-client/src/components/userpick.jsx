@@ -7,9 +7,17 @@ class Appoinment extends React.Component{
 		this.state={
 			doctors:[],
 			u:[],
-			doct:[]
+			doct:[],
+			selectedOption:'',
+			from:'',
+			to:'',
+			day:'',
+			obj:{}
 		}
-		this.handleChange=this.handleChange.bind(this)
+		this.handleChange=this.handleChange.bind(this);
+		this.send=this.send.bind(this);
+	//	this.handleOptionChange=this.handleOptionChange.bind(this);
+		this.textHandleChange=this.textHandleChange.bind(this)
 	}
 
 	componentDidMount(){
@@ -55,6 +63,55 @@ class Appoinment extends React.Component{
 		})
 	}
 
+	textHandleChange(e){
+		this.setState({
+			[e.target.name]:e.target.value
+		});
+	}
+
+	send(){
+		var that=this;
+		this.setState({
+			obj:{
+				day:8,
+				from:4,
+				to:8,
+				doctorId:'5afaf38261bfa40dae63743e',
+				userId:'5afaf38261bfa40dae637442'
+			}
+		})
+		// var from1=this.state.from;
+		// var to=this.state.to;
+		// var obj:{
+		// 	day:5,
+		// 	from:5,
+		// 	to:9,
+		// 	doctorId:'5afaf38261bfa40dae63743e',
+		// 	userId:'5afaf38261bfa40dae637442'
+
+		// }
+		console.log(this.state.obj)
+		$.ajax({
+			type:'POST',
+			url:'/app',
+			data:that.state.obj,
+			dataType: 'json',
+			success:function(data){
+				console.log('data ',data)
+			},
+			error:function(err){
+				console.log('error ',err)
+			}
+
+		})
+	}
+
+	// handleOptionChange(changeEvent) {
+ //  		this.setState({
+ //    		selectedOption: changeEvent.target.value
+ //  		});
+ //  		console.log(this.state.selectedOption)
+	// }
 	render(){
 		return(
 			<div>
@@ -66,16 +123,12 @@ class Appoinment extends React.Component{
 							)
 					})}
 				</select>
-				<form>
-				{this.state.doct.map(function(item){
-					return(
-						<h4>
-						<input type="radio" name="s" value={item} />
-						{item}
-						</h4>
-						)
-				})}
-				</form>
+				<input type='text' name='from' value={this.state.from} placeholder='from' onChange={this.textHandleChange}/>
+				<input type='text' name='to' value={this.state.to} placeholder='to' onChange={this.textHandleChange}/>
+				<input type='text' name='day' value={this.state.day} placeholder='day' onChange={this.textHandleChange}/>
+				<button onClick={this.send}>save</button>
+
+
 				<h1>{this.state.u}</h1>
 			</div>
 			)
@@ -86,3 +139,17 @@ class Appoinment extends React.Component{
 }
 
 export default Appoinment;
+
+
+				// <form>
+				// {this.state.doct.map(function(item){
+				// 	var that=this;
+				// 	return(
+				// 		<h4>
+				// 		<input type="radio" name="s" value={item} />
+				// 		{item}
+				// 		</h4>
+				// 		)
+				// })}
+				// <button name='send' onClick={this.handleOptionChange} >send</button>
+				// </form>
