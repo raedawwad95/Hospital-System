@@ -12,7 +12,7 @@
   import DoctorHome from '../react-client/src/components/DoctorComponent/DoctorHome';
   import Doctor from '../react-client/src/components/DoctorComponent/DoctorMain';
   import DoctorNavbar from '../react-client/src/components/DoctorComponent/DoctorNavbar';
-  import LoginDoctor from '../react-client/src/components/DoctorComponent/LoginDoctor';
+  import UpdateDoctor from '../react-client/src/components/DoctorComponent/UpdateDoctor';
   import PatientDataAddRecord from '../react-client/src/components/DoctorComponent/PatientDataAddRecord';
   import AddDepartment from '../react-client/src/components/adminComponents/addDept';
   import AddDoctor from '../react-client/src/components/adminComponents/AddDoctor';
@@ -143,16 +143,16 @@ describe("DoctorNavbar",function(){
 
 
 
-describe("LoginDoctor",function(){
+describe("UpdateDoctor",function(){
 	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(LoginDoctor)).to.be.true;
+		expect(React.Component.isPrototypeOf(UpdateDoctor)).to.be.true;
 	})
-	it('should render two <div /> components', () => {
-    const wrapper = shallow(<LoginDoctor/>);
-    expect(wrapper.find('div').length).to.equal(2);
-    })
+// 	it('should render two <div /> components', () => {
+//     const wrapper = shallow(<LoginDoctor/>);
+//     expect(wrapper.find('div').length).to.equal(2);
+//     })
     
-});
+ });
 
 
 
@@ -227,7 +227,7 @@ describe("Admin",function(){
     })
     it('should render ten <Route /> components', () => {
     const wrapper = shallow(<Admin/>);
-    expect(wrapper.find('Route').length).to.equal(10);
+    expect(wrapper.find('Route').length).to.equal(11);
     })
 
 });
