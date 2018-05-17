@@ -44,10 +44,7 @@ class AddLabResult extends React.Component{
 		this.state={
 			userData:[],
 			username:'',
-			patientId:'',
-			labTechnicianId:'',
 			medicalExaminationTime:'',
-			resultEntryTime:'',
 			imageOfResult:'',
 			description:'',
             modalIsOpen: false,
@@ -58,7 +55,6 @@ class AddLabResult extends React.Component{
 	 
 	    this.openModal = this.openModal.bind(this);
 	    this.closeModal = this.closeModal.bind(this);
-		this.onChange=this.onChange.bind(this);
 		this.retriveData=this.retriveData.bind(this);
 		this.handleChange=this.handleChange.bind(this);
 		this.addLabResult=this.addLabResult.bind(this);
@@ -83,22 +79,28 @@ class AddLabResult extends React.Component{
 		})
 	}
 	addLabResult(){
-		 var obj1={
-			username:this.state.username, 
-			description:this.state.description,
-			image: this.state.image
-		}
-		$.ajax({
-			url:'/api/medical/addRecorde',
-			type:"POST",
-			data:obj1,
-			success:(data)=>{
-				console.log(data)
-			},
-			error:(err)=>{
-				console.log(err)
+		var that=this;
+			var obj={
+				username:this.state.username,
+				medicalExaminationTime:this.state.medicalExaminationTime,
+				imageOfResult:this.state.imageOfResult,
+				description:this.state.description
+
 			}
-		});
+				$.ajax({
+					url:'/labRes',
+					type:'POST',
+					data:obj,
+				
+					success: (data) => {
+					
+					console.log(data)
+
+					},
+					error: (err) => {
+					console.log('err', err);
+					}
+				});
 	}
 	 closeModal() {
 	    this.setState({modalIsOpen: false});
@@ -124,7 +126,7 @@ class AddLabResult extends React.Component{
         })
         .done (function (data) {
           that.setState({
-            image: data.data.link,
+            imageOfResult: data.data.link,
             loading: false,
             success: true,
           });
@@ -167,7 +169,8 @@ render(){
 	          placeholder="UserName"
 	          width="200"
 	          margin="normal"
-      		  onChange={this.onChange}
+	          name='username'
+      		  onChange={this.handleChange}
 	        />
 		</Grid>
 		<CardActions>
@@ -177,18 +180,32 @@ render(){
 		</CardActions>
 		<CardActions>
 		    <Button variant="raised" color="primary" onClick={this.openModal} >
-	        	Add Record
+	        	Add Result
 	      	</Button>
 		</CardActions>
         <Modal
           isOpen={this.state.modalIsOpen}
-          contentLabel="Add New Record"
+          contentLabel="Add New Result"
           style={customStyles}
         >
  		<div className="card">
 		<div className='container-fluid'>
 		<h2 style={{textAlign:'center'}}>Add New Lab Result</h2>
 	    <Grid container spacing={24}>
+	    <Grid item xs={6} sm={3}>
+			<TextField
+	          required
+	          type='date'
+	          id="medicalExaminationTime"
+	          label="MedicalExaminationTime"
+	          placeholder="MedicalExaminationTime"
+	          name="medicalExaminationTime"
+	          width="200"
+	          margin="normal"
+	          fullWidth
+      		  onChange={this.handleChange}
+	        />
+		</Grid>
 		<Grid item xs={18} sm={9}>
 			<TextField
 	          required
@@ -199,7 +216,7 @@ render(){
 	          width="200"
 	          margin="normal"
 	          fullWidth
-      		  onChange={this.onChange}
+      		  onChange={this.handleChange}
 	        />
 		</Grid>
 		<Grid item xs={6} sm={3}>
@@ -220,7 +237,7 @@ render(){
 		</Grid>
 		<CardActions>
 		    <Button variant="raised" color="primary" onClick={this.addLabResult} >
-	        	Add Lab Result
+	        	Add Result
 	      	</Button>
 		</CardActions>
 		<CardActions>
@@ -295,6 +312,7 @@ render(){
          </table>
 	    </div>
 	    </div>
+	    <br/>
 	    </div>
 		)
 	}else{
@@ -310,7 +328,8 @@ render(){
 	          placeholder="UserName"
 	          width="200"
 	          margin="normal"
-      		  onChange={this.onChange}
+	          name='username'
+      		  onChange={this.handleChange}
 	        />
 		</Grid>
 		<CardActions>
@@ -320,6 +339,7 @@ render(){
 		</CardActions>	
 		</div>
 		</div>
+		<br/>
 	    </div>
 	    )
 	
