@@ -20,7 +20,6 @@ class retrivePatient extends React.Component{
  			that.setState({
  				userData:data
  			});
- 			console.log(data)
  		}
 		});
     }

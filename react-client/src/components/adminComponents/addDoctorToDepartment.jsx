@@ -84,7 +84,7 @@ class addDoctorToDepartment extends React.Component{
     		url:'/dept',
     		data:obj,
     		success:function(date){
-    			console.log('done');
+    			alert("success");
     		}
     	})
     	

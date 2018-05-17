@@ -36,7 +36,7 @@ class AddDepartment extends React.Component{
 		super(props);
 		this.state={
 			deptName:'',
-			deptId:''
+			deptId:'',
 		}
 		this.handelChange=this.handelChange.bind(this);
 		this.add=this.add.bind(this);
@@ -60,7 +60,7 @@ class AddDepartment extends React.Component{
 			data:obj,
 			dataType: "json",
 			success:function(data){
-				console.log('good')
+				alert("success");
 			},
 			failure: function(errMsg) {
             console.log('error');

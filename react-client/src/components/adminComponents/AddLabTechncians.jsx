@@ -110,7 +110,7 @@ class AddLabTechncians extends React.Component{
 			url:'/labTech',
 			data:that.state,
 			success:function(data){
-				console.log(data)
+				alert("success");
 			},
 			error:function(err){
 				console.log(err)

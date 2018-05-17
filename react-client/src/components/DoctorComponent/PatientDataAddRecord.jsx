@@ -71,6 +71,7 @@ class PatientDataAddRecord extends React.Component{
  			that.setState({
  				userData:data
  			});
+
  		}
 		});
     }
@@ -85,6 +86,7 @@ class PatientDataAddRecord extends React.Component{
 			description:this.state.description,
 			image: this.state.image
 		}
+		var that=this;
 		console.log(obj1)
 		$.ajax({
 			url:'/api/medical/addRecorde',
@@ -92,6 +94,7 @@ class PatientDataAddRecord extends React.Component{
 			data:obj1,
 			success:(data)=>{
 				console.log(data)
+				alert("success");
 			},
 			error:(err)=>{
 				console.log(err)
@@ -225,7 +228,7 @@ render(){
 		    <Button variant="raised" color="primary" onClick={this.closeModal} >
 	        	Close
 	      	</Button>
-		</CardActions>
+		</CardActions>	
 		</Grid>
 		</div>
 		</div>
@@ -271,7 +274,7 @@ render(){
 		    <thead style={{textAlign:'center'}}>
 		      <tr>
 		        <th width='20%'>Id </th>
-		        <th>Lab Technician Id</th>
+		        <th>Lab Technician Name</th>
 		        <th>Medical Examination Time</th>
 		        <th>Result Entry Time</th>
 		        <th>Description</th>
@@ -282,7 +285,7 @@ render(){
 		    	return(
         	     <tr>
 			        <td>{item._id}</td>
-			        <td>{item.labTechnicianId}</td>
+			        <td>{item.labTechnicianId.fullName}</td>
 			        <td>{item.medicalExaminationTime}</td>
 			        <td>{item.resultEntryTime}</td>
 			        <td>{item.description}</td>
