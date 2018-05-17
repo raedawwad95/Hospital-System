@@ -178,8 +178,9 @@ class LabsNavbar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >                    
-                  <MenuItem onClick={this.handleClose} component={Link} to="/labs/update">Change password</MenuItem>
+                  <MenuItem onClick={this.handleClose} component={Link} to="/labs/AddLabResult">Add Lab result</MenuItem>
                   <Divider />
+                  <MenuItem onClick={this.handleClose} component={Link} to="/labs/update">Change password</MenuItem>
                 </Menu>
               </div>
             )}
