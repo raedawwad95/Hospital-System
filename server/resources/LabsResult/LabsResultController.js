@@ -20,7 +20,7 @@ exports.createResutl=function(req,res){
 		}else{
 			var obj={
 			patientId:user._id,
-			labTechnicianId:req.body.labTechnicianId,
+			labTechnicianId:req.session.ID,
 			medicalExaminationTime:req.body.medicalExaminationTime,
 			resultEntryTime:req.body.resultEntryTime,
 			imageOfResult:req.body.imageOfResult,

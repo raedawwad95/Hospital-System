@@ -71,6 +71,8 @@ exports.login = function (req, res) {
 		        		}
 		        		req.session.userName = tech.userName;
 		        		req.session.techncianType = tech.techncianType;
+		        	    req.session.ID = tech._id;
+
 		        		res.json(tech);
 					});
 				}
