@@ -35,10 +35,6 @@ exports.create=function(req,res){
 
 //Update doctor information 
 exports.update=function(req,res){
-	var updDoc ={
-		password: req.body.password,
-	}
-	//update doctor information 
 	Doctor.findOne({userName:req.session.userName}).exec(function (err,doctor){
 		if(err){
 			console.error(err);
@@ -48,14 +44,9 @@ exports.update=function(req,res){
 		} else {
 			doctor.password = req.body.password;
 			doctor.save;
-			res.send(doctor);
+			res.json(Updated);
 		}
 	})
-	// Doctor.update({"userName":req.session.userName},
-	// 	{$set:updDoc},
-	// 	function(err,data){
-	// 	res.send(data);
-	// });
 }
 
 //function for login

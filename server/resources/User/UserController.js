@@ -64,7 +64,13 @@ exports.retrive = function (req, res) {
 				select: "fullName"
 			}
 		})
-		.populate('labResults')
+		.populate({
+			path:'labResults',
+			populate: {
+				path: "labTechnicianId",
+				select: "fullName"
+			}
+		})
 		.exec(function (err, user) {
 			if (err) {
 				console.error(err);

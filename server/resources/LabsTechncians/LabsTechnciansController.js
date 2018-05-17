@@ -81,6 +81,16 @@ exports.login = function (req, res) {
 	});
 };
 
+exports.isLogin = function(req, res) {
+	if (req.session.doctorType === "T") {
+		res.json(true);
+	} else {
+		console.error("not a tech");
+		res.status(404)
+ 		res.json('error')
+	}
+}
+
 exports.logout = function (req, res) {
 	req.session.destroy(function(err) {
 		if (err) {
