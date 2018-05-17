@@ -147,11 +147,10 @@ describe("UpdateDoctor",function(){
 	it('should be class component',function(){
 		expect(React.Component.isPrototypeOf(UpdateDoctor)).to.be.true;
 	})
-// 	it('should render two <div /> components', () => {
-//     const wrapper = shallow(<LoginDoctor/>);
-//     expect(wrapper.find('div').length).to.equal(2);
-//     })
-    
+ 	it('rendered the title', function() {
+    	const wrapper = render(<Foo title="unique" />);
+    	expect(wrapper.text()).to.contain('unique');
+  	});
  });
 
 
