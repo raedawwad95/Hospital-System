@@ -12,8 +12,8 @@ class Labs extends React.Component {
       <div>
       <LabsNavbar/>
       <br/>
-        <Route exact path="/Lab" component={LabHome} />
-        <Route path="/Lab/update" component={LabHome} />
+        <Route exact path="/labs" component={LabHome} />
+        <Route path="/labs/update" component={LabHome} />
       </div>
     )
   }

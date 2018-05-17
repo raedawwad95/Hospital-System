@@ -109,7 +109,7 @@ class LabsNavbar extends React.Component {
       password: this.state.password
     }
     $.ajax({
-      url:'/Doctor/login',
+      url:'/labTech/login',
       type:'POST',
       data:obj,
       success:function(data){
@@ -126,7 +126,7 @@ class LabsNavbar extends React.Component {
   componentDidMount() {
     var that = this
     $.ajax({
-      url:'/Doctor/isLogin',
+      url:'/labTech/isLogin',
       type:'GET',
       success:function(data){
         that.setState({
@@ -149,11 +149,11 @@ class LabsNavbar extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Doctor Panel
+              Labs Panel
             </Typography>
             {auth && (
               <div>
-                <Button component={Link} to="/doctor" className={classes.button2}>
+                <Button component={Link} to="/labs" className={classes.button2}>
                   Home
                 </Button>
                 <IconButton
@@ -178,8 +178,7 @@ class LabsNavbar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >                    
-                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/patient">Patents</MenuItem>
-                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">My account</MenuItem>
+                  <MenuItem onClick={this.handleClose} component={Link} to="/labs/update">Change password</MenuItem>
                   <Divider />
                 </Menu>
               </div>
