@@ -6,7 +6,7 @@ exports.add=function(req,res){
 	var Appoint=new Appoinment({
 		day:req.body.day,
 		from:req.body.from,
-		to:req.body.to,
+		//to:req.body.to,
 		doctorId:req.body.doctorId,
 		userId:req.body.userId,
 	});
@@ -19,6 +19,17 @@ exports.add=function(req,res){
 	
 }
 
+exports.retrive=function(req,res){
+	Appoinment.find({})
+	.populate('doctorId')
+	.populate('userId')
+	.exec(function(err,data){
+		if(err){
+			res.json(err)
+		}
+		res.json(data)
+	})
+}
 
 // exports.retrive=function(req,res){
 

@@ -27,11 +27,21 @@ class DoctorAppoinment extends React.Component{
 
 
 	render(){
-		console.log(this.state.appoint)
+		console.log('this.state.appoint ',this.state.appoint)
 		return (
 			<div>
+
 			<h1>doctor appoinment component</h1>
 			
+				{this.state.appoint.map(function(item){
+					return(
+						<h1>{item.day}</h1>
+						)
+					
+				})}				
+
+			
+
 		
 			</div>
 			)

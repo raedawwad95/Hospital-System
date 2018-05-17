@@ -3,23 +3,17 @@ var db=require('../../db');
 
 var AppoinmetSchema =mongoose.Schema({
 	day:{
-		type:Number,
-		index:{
-			unique:true
-		}
+		type:Date,
+		required: true
 	},
 	from:{
 		type:Number,
-		index:{
-			unique:true
-		}
+		required: true
 	},
-	to:{
-		type:Number,
-		index:{
-			unique:true
-		}
-	},
+	// to:{
+	// 	type:Number,
+	// 	required: true
+	// },
 	doctorId:{
 		type: mongoose.Schema.Types.ObjectId, 
 		ref: 'Doctors'
