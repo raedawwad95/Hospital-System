@@ -30,6 +30,11 @@ labsTechnciansRouter.route('/')
 		LabsTechnciansController.logout(req, res);
 	})
 
+	labsTechnciansRouter.route('/isLogin')
+		.get(function(req , res) {
+			LabsTechnciansController.isLogin(req , res);
+		})
+
 	//get patient result by patintId
 	labsTechnciansRouter.route('/:patintId')
 	.get(function(req,res){
