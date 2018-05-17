@@ -54,18 +54,13 @@ class PatientDataAddRecord extends React.Component{
 	 
 	    this.openModal = this.openModal.bind(this);
 	    this.closeModal = this.closeModal.bind(this);
-		this.onChange=this.onChange.bind(this);
 		this.retriveData=this.retriveData.bind(this);
 		this.handleChange=this.handleChange.bind(this);
 		this.addMedicalRecords=this.addMedicalRecords.bind(this);
 	
 	}
 
-	onChange(e){
-		this.setState({
-			username:e.target.value
-		})
-	}
+
 	retriveData() {
     	var that=this;
     	$.ajax({
@@ -81,7 +76,7 @@ class PatientDataAddRecord extends React.Component{
     }
 	handleChange(e){
 		this.setState({
-		[e.target.name]:e.target.value
+			[e.target.name]:e.target.value
 		})
 	}
 	addMedicalRecords(){
@@ -90,6 +85,7 @@ class PatientDataAddRecord extends React.Component{
 			description:this.state.description,
 			image: this.state.image
 		}
+		console.log(obj1)
 		$.ajax({
 			url:'/api/medical/addRecorde',
 			type:"POST",
@@ -154,23 +150,22 @@ render(){
 		const imageRecord = classNames({
 	      [classes.buttonSuccess]: success,
 	    });	
-	console.log()
 	if(this.state.userData.length>0){
-
 
 	return(
 		<div>
 		<div className="card">
 		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
-			<TextField
+	        <TextField
 	          required
-	          id="username"
-	          label="UserName"
-	          placeholder="UserName"
-	          width="200"
+	          id="userName"
+	          label="Username"
+	          placeholder="Enter Username"
 	          margin="normal"
-      		  onChange={this.onChange}
+	          value={this.state.userName}
+	          name="username"
+      		  onChange={this.handleChange}
 	        />
 		</Grid>
 		<CardActions>
@@ -202,7 +197,7 @@ render(){
 	          width="200"
 	          margin="normal"
 	          fullWidth
-      		  onChange={this.onChange}
+      		  onChange={this.handleChange}
 	        />
 		</Grid>
 		<Grid item xs={6} sm={3}>
@@ -340,7 +335,8 @@ render(){
 	          placeholder="UserName"
 	          width="200"
 	          margin="normal"
-      		  onChange={this.onChange}
+	          name="username"
+      		  onChange={this.handleChange}
 	        />
 		</Grid>
 		<CardActions>

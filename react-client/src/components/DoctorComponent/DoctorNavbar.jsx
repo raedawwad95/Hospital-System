@@ -179,7 +179,7 @@ class DoctorNavbar extends React.Component {
                   onClose={this.handleClose}
                 >                    
                   <MenuItem onClick={this.handleClose} component={Link} to="/doctor/patient">Patents</MenuItem>
-                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/records">My account</MenuItem>
+                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">My account</MenuItem>
                   <Divider />
                 </Menu>
               </div>
