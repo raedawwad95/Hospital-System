@@ -21,13 +21,19 @@ doctorRouter.route('/login')
 	DoctorController.login(req,res);
 })
 //logout 
-doctorRouter.route('/')
-.delete(function (req, res) {
+doctorRouter.route('/logout')
+.get(function (req, res) {
 	DoctorController.logout(req, res);
 })
+//check if doctor login
 doctorRouter.route('/isLogin')
 	.get(function (req, res) {
 		DoctorController.isLogin(req, res);
+	})
+//get login doctor data
+doctorRouter.route('/getOne')
+	.get(function (req, res) {
+		DoctorController.retrieveOne(req, res);
 	})
 doctorRouter.route('/test')
 	.get(function (req, res) {

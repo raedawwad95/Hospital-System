@@ -36,15 +36,26 @@ exports.create=function(req,res){
 //Update doctor information 
 exports.update=function(req,res){
 	var updDoc ={
-	password: req.body.password,
-	imageOfDoctor: req.body.imageOfDoctor
+		password: req.body.password,
 	}
 	//update doctor information 
-	Doctor.update({"userName":req.body.userName},
-		{$set:updDoc},
-		function(err,data){
-		res.send(data);
-	});
+	Doctor.findOne({userName:req.session.userName}).exec(function (err,doctor){
+		if(err){
+			console.error(err);
+		}
+		if(!doctor){//doctor not found
+			console.error("No doctor found");
+		} else {
+			doctor.password = req.body.password;
+			doctor.save;
+			res.send(doctor);
+		}
+	})
+	// Doctor.update({"userName":req.session.userName},
+	// 	{$set:updDoc},
+	// 	function(err,data){
+	// 	res.send(data);
+	// });
 }
 
 //function for login
@@ -108,4 +119,13 @@ exports.isLogin = function(req, res) {
 		res.status(500)
  		res.json('error')
 	}
+}
+
+exports.retrieveOne=function(req,res){
+	Doctor.findOne({userName : req.session.userName},function(err,data){
+		if(err){
+			res.send(err);
+		}
+		res.json(data);
+	});
 }
