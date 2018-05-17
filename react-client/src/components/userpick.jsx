@@ -101,12 +101,15 @@ class Appoinment extends React.Component{
 		new_appoint.setMonth(this.state.month);
 		new_appoint.setDate(this.state.day);
 		new_appoint.setHours(this.state.hour);
+		if(new_appoint-today>0){
+
+
 		var	obj={
 				day:new_appoint,
 				from:this.state.hour,
 				//to:this.state.to,
-				doctorId:'5afd30b69e19c14af1658b57',
-				userId:'5afc3d7c4d66890dc617b908'
+				doctorId:'5afda34c8cd8f1090c6c4e12',
+				userId:'5afda34d8cd8f1090c6c4e16'
 			}
 			console.log(obj)
 		$.ajax({
@@ -115,12 +118,16 @@ class Appoinment extends React.Component{
 			data:obj,
 			success:function(data){
 				console.log('data ',data)
+				
 			},
 			error:function(err){
 				console.log('error ',err)
 			}
 
 		})
+		}else{
+			alert('pick a valid date')
+		}
 	}
 
 	render(){

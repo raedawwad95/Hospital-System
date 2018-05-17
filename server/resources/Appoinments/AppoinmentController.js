@@ -2,7 +2,7 @@ var Appoinment =require('./Appoinments');
 
 
 exports.add=function(req,res){
-
+console.log("appoinment controller")
 	var Appoint=new Appoinment({
 		day:req.body.day,
 		from:req.body.from,
@@ -12,6 +12,7 @@ exports.add=function(req,res){
 	});
 	Appoint.save(function(err,data){
 		if(err){
+			console.log('errrrrrrrrrrrrrrrrrrrrrrror')
 			return err
 		}
 		res.json(data);
