@@ -39,4 +39,18 @@ exports.addDoctor=function(req,res){
 		})
 	
 }
+exports.retriveOneDept = function (req, res) {
+	Departments.find({nameOfDept:req.params.nameOfDep})
+		.populate('doctorsId')
+		.exec(function (err, doctor) {
+			if (err) {
+				console.error(err);
+			}
+			if (!doctor) {
+				res.json('no doctor');
+			} else {
+				res.json(doctor);
+			}
+		})
+}
 

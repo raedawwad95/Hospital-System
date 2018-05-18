@@ -11,6 +11,9 @@ DepartmentRouter.route('/')
 .put(function(req,res){
 	DepartmentController.addDoctor(req,res);
 })
-
+DepartmentRouter.route('/:nameOfDep')
+.get(function(req, res) {
+	DepartmentController.retriveOneDept(req, res);
+	})
 
 module.exports=DepartmentRouter;
