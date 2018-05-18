@@ -1,7 +1,10 @@
 import React from 'react';
 import $ from 'jquery';
 import {FormControl} from 'react-bootstrap'
-
+import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
+// var moment = require('moment');
 class Appoinment extends React.Component{
 	constructor(props){
 		super(props);
@@ -13,7 +16,7 @@ class Appoinment extends React.Component{
 			month:'',
 			day:'',
 			d:'',
-			hour:''
+			hour:'',
 		}
 		this.handleChange=this.handleChange.bind(this);
 		this.send=this.send.bind(this);
@@ -62,9 +65,8 @@ class Appoinment extends React.Component{
 				for(var i=y;i<y+8;i++){
 					x.push(i);
 				}
-				that.setState({
-					doct:x
-				})
+				
+				console.log('new doct',that.state.doct)
 			}
 		})
 	}
@@ -75,32 +77,31 @@ class Appoinment extends React.Component{
 		});
 	}
 
-	// show(){
-	// 	var today=new Date;
-	// 	var new_appoint=new Date;
-	// 	new_appoint.setMonth(this.state.month);
-	// 	new_appoint.setDate(this.state.day);
-	// 	new_appoint.setHours(this.state.hour)
-	// 	console.log(new_appoint);
-	// 	console.log(today);
-	// 	console.log(this.state)
-	// 	var	obj={
-	// 			day:new_appoint,
-	// 			from:this.state.from,
-	// 			to:this.state.to,
-	// 			doctorId:'5afc3d7c4d66890dc617b904',
-	// 			userId:'5afc3d7c4d66890dc617b908'
-	// 		}
 
-
-	// }
+	
 
 	send(){
+		console.log('doctors data 0000',this.state.doct)
+		var m31=[1,3,5,8,10];
+		console.log("this.state.hour ",this.state.hour)
+		if(this.state.hour<0 || this.state.hour>35){
+			alert('invalid hour ')
+		}
+		console.log("this.state.month",typeof(this.state.day))
+		if( this.state.month===8){
+			console.log('asdasdasdksjadklasdaskdj;aslkdj;')
+			if(this.state.day<1 || this.state.day>30){
+				alert('wrong date');
+			}
+		}
 		var today=new Date;
 		var new_appoint=new Date;
 		new_appoint.setMonth(this.state.month);
 		new_appoint.setDate(this.state.day);
 		new_appoint.setHours(this.state.hour);
+
+		var h = new_appoint.getHours()
+
 		if(new_appoint-today>0){
 
 
@@ -108,7 +109,7 @@ class Appoinment extends React.Component{
 				day:new_appoint,
 				from:this.state.hour,
 				//to:this.state.to,
-				doctorId:'5afda34c8cd8f1090c6c4e12',
+				doctorId:this.state.doct,
 				userId:'5afda34d8cd8f1090c6c4e16'
 			}
 			console.log(obj)
@@ -155,7 +156,11 @@ class Appoinment extends React.Component{
 			</select>
 			<input type='text' name='day' value={this.state.day} onChange={this.handleTextChange} placeholder='day' width='10'/>
 			<input type='text' name='hour' value={this.state.hour} onChange={this.handleTextChange} placeholder='hour'/>			
+			{}
 			<button onClick={this.send}> send </button>
+
+
+
 			</div>
 			)
 	}
