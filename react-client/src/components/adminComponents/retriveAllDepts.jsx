@@ -36,7 +36,6 @@ render(){
 		        <th width="25%">Id</th>
 		        <th>Name Of Dept</th>
 		        <th>Id Of Dept</th>
-		        <th>Doctors Id</th>
 		      </tr>
 		    </thead>
 		    <tbody style={{textAlign:'center'}}>
@@ -47,7 +46,6 @@ render(){
 			        <td>{item._id}</td>
 			        <td>{item.nameOfDept}</td>
 			        <td>{item.idOfDept}</td>
-			        <td>{item.doctorsId}</td>
 		         </tr>
 		         )
             })}
