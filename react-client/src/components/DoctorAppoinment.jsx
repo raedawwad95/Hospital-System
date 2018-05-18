@@ -23,15 +23,32 @@ class DoctorAppoinment extends React.Component{
 				})
 			}
 		})
+
+		console.log(this.state.appoint)
 	}
 
 	show(){
+
+		var that=this;
+		$.ajax({
+			type:'get',
+			url:'/app',
+			datatype:'json',
+			success:function(data){
+				that.setState({
+					appoint:data
+				})
+			}
+		})
+
+		console.log('asdasdasdasd ',this.state.appoint)
+
 		var today=new Date;
 		var arr=[];
-		 console.log('this.state.appoint ',this.state.appoint)
 		for(var i=0;i<this.state.appoint.length;i++){
 			var x=new Date(this.state.appoint[i].day)
-			console.log(x)
+			console.log('today ',today)
+			console.log('this.state.appoint[i].day ',this.state.appoint[i])
 			if(today<x){
 				this.state.docApp.push(x)
 
@@ -42,21 +59,20 @@ class DoctorAppoinment extends React.Component{
 		})
 
 
-		console.log('here ',this.state.docApp)
 	}
 
 
 
 
 	render(){
-		console.log('this.state.appoint ',this.state.appoint)
+		console.log('this.state.docApp ',this.state.docApp)
 		return (
 			<div>
 
 			<h1>doctor appoinment component</h1>
 			
 			<button onClick={this.show}> SHOW </button>
-				{this.state.appoint.map(function(item){
+				{this.state.docApp.map(function(item){
 					return(
 						<h1>{item.day}</h1>
 						)

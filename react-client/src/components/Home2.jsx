@@ -1,5 +1,4 @@
 import React from 'react';
-import Example from './try.jsx';
 import DoctorAppoinment from './DoctorAppoinment.jsx'
 
 class Home2 extends React.Component {
