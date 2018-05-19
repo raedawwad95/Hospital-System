@@ -151,7 +151,7 @@ render(){
 			        <td>{item.medicalExaminationTime}</td>
 			        <td>{item.resultEntryTime}</td>
 			        <td>{item.description}</td>
-			       <td><button value ={item.imageOfResult} onClick={that.openModalImageResult}>{item.imageOfResult}</button></td>
+			       <td><button style={{'background-color': 'white'}} value ={item.imageOfResult} onClick={that.openModalImageResult}>{item.imageOfResult}</button></td>
 		         </tr>
 		         )
             })}
@@ -200,7 +200,7 @@ render(){
 			        <td>{item._id}</td>
 			        <td>{item.doctorId.fullName}</td>
 			        <td>{item.description}</td>
-			        <td value ={item.image}><button value ={item.image} onClick={that.openModalImageMedical}>{item.image}</button></td>
+			        <td value ={item.image}><button style={{'background-color': 'white'}} value ={item.image} onClick={that.openModalImageMedical}>{item.image}</button></td>
 		         </tr>
 		         )
             })}
