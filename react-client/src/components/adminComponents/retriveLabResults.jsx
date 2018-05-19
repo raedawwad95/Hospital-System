@@ -19,7 +19,6 @@ class retriveLabResults extends React.Component{
  			that.setState({
  				labResults:data
  			});
- 			console.log(that.state.labResults)
  		}
 		});
     }
