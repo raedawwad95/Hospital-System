@@ -2,24 +2,22 @@ var mongoose =require('mongoose');
 var db=require('../../db');
 
 var AppoinmetSchema =mongoose.Schema({
+	month:{
+		type:Number,
+		required:true
+	},
 	day:{
-		type:Date,
-		index:{
-			unique:true
-		}
-	},
-	from:{
 		type:Number,
-		index:{
-			unique:true
-		}
+		required: true
 	},
-	to:{
+	hour:{
 		type:Number,
-		index:{
-			unique:true
-		}
+		required: true
 	},
+	// to:{
+	// 	type:Number,
+	// 	required: true
+	// },
 	doctorId:{
 		type: mongoose.Schema.Types.ObjectId, 
 		ref: 'Doctors'
