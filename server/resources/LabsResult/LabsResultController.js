@@ -50,6 +50,7 @@ exports.createResutl=function(req,res){
  exports.Retrive=function(req,res){
  	LabsResult.find({})
  	.populate('patientId','FullName')
+ 	.populate('labTechnicianId','fullName')
  	.exec(function(err,data){
  		if(err){
  			console.error(err);
