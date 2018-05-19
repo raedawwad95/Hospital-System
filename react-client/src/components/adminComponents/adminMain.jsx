@@ -10,7 +10,8 @@ import retriveAllDoctor from './retriveAllDoctor.jsx';
 import retriveLabResults from './retriveLabResults.jsx';
 import retriveLabTech from './retriveLabTech.jsx';
 import RetriveAllPatient from './RetriveAllPatient.jsx';
-import retrivePatient from './retrivePatient.jsx'
+import retrivePatient from './retrivePatient.jsx';
+import RetriveDoctorInDepartment from './RetriveDoctorInDepartment.jsx';
 import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 class Admin extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Admin extends React.Component {
         <Route path="/admin/retriveLabTech" component={retriveLabTech} />
         <Route path='/admin/retrivePatient' component={retrivePatient} />
         <Route path='/admin/RetriveAllPatient' component={RetriveAllPatient} />
+        <Route path='/admin/RetriveDoctorInDepartment' component={RetriveDoctorInDepartment} />
       </div>
     )
   }

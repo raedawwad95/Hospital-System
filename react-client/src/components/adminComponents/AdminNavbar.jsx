@@ -211,11 +211,6 @@ class AdminNavbar extends React.Component {
                       </ListItem>
                       <Collapse in={this.state.openDep} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                          <NavLink to = "/admin/addDoctorToDepartment" className= "navListItem">
-                            <ListItem button className={classes.nested}>
-                              Add Doctor to Department
-                            </ListItem>
-                          </NavLink>
                           <NavLink to = "/admin/addDept" className = "navListItem">
                             <ListItem button className={classes.nested}>
                               New Department
@@ -224,6 +219,16 @@ class AdminNavbar extends React.Component {
                           <NavLink to = "/admin/retriveAllDepts" className= "navListItem">
                             <ListItem button className={classes.nested}>
                               All Departments
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/addDoctorToDepartment" className= "navListItem">
+                            <ListItem button className={classes.nested}>
+                              Add Doctor to Department
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/RetriveDoctorInDepartment" className= "navListItem">
+                            <ListItem button className={classes.nested}>
+                              Show doctors in department
                             </ListItem>
                           </NavLink>
                         </List>
