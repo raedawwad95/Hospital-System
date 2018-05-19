@@ -85,17 +85,14 @@ class AddLabResult extends React.Component{
 				medicalExaminationTime:this.state.medicalExaminationTime,
 				imageOfResult:this.state.imageOfResult,
 				description:this.state.description
-
 			}
 				$.ajax({
 					url:'/labRes',
 					type:'POST',
-					data:obj,
-				
+					data:obj,			
 					success: (data) => {
-					
 					console.log(data)
-
+					alert("success");
 					},
 					error: (err) => {
 					console.log('err', err);
@@ -290,7 +287,7 @@ render(){
 		    <thead style={{textAlign:'center'}}>
 		      <tr>
 		        <th width='20%'>Id </th>
-		        <th>Lab Technician Id</th>
+		        <th>Lab Technician Name</th>
 		        <th>Medical Examination Time</th>
 		        <th>Result Entry Time</th>
 		        <th>Description</th>
@@ -301,7 +298,7 @@ render(){
 		    	return(
         	     <tr>
 			        <td>{item._id}</td>
-			        <td>{item.labTechnicianId}</td>
+			        <td>{item.labTechnicianId.fullName}</td>
 			        <td>{item.medicalExaminationTime}</td>
 			        <td>{item.resultEntryTime}</td>
 			        <td>{item.description}</td>

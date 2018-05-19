@@ -48,9 +48,8 @@ exports.createResutl=function(req,res){
 
 }
  exports.Retrive=function(req,res){
- 	LabsResult.find()
- 	.populate('labTechnicianId')
- 	.populate('patientId')
+ 	LabsResult.find({})
+ 	.populate('patientId','FullName')
  	.exec(function(err,data){
  		if(err){
  			console.error(err);
@@ -61,8 +60,6 @@ exports.createResutl=function(req,res){
  			res.json(data)
  		}
  	});
-
-
  };
 
 

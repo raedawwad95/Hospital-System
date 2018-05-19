@@ -97,7 +97,7 @@ render(){
 		    <thead style={{textAlign:'center'}}>
 		      <tr>
 		        <th width='20%'>Id </th>
-		        <th>Lab Technician Id</th>
+		        <th>Lab Technician Name</th>
 		        <th>Medical Examination Time</th>
 		        <th>Result Entry Time</th>
 		        <th>Description</th>
@@ -108,7 +108,7 @@ render(){
 		    	return(
         	     <tr key= {index}>
 			        <td>{item._id}</td>
-			        <td>{item.labTechnicianId}</td>
+			        <td>{item.labTechnicianId.fullName}</td>
 			        <td>{item.medicalExaminationTime}</td>
 			        <td>{item.resultEntryTime}</td>
 			        <td>{item.description}</td>

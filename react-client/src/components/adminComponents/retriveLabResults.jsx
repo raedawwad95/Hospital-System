@@ -19,6 +19,7 @@ class retriveLabResults extends React.Component{
  			that.setState({
  				labResults:data
  			});
+ 			console.log(that.state.labResults)
  		}
 		});
     }
@@ -32,8 +33,8 @@ render(){
 				    <thead style={{textAlign:'center'}}>
 				      <tr>
 				      	<th width='25%'>Id </th>
-				        <th>Patient Id</th>
-				        <th>Lab Technician Id</th>
+				        <th>Patient Name</th>
+				        <th>Lab Technician Name</th>
 				        <th>Medical Examination Time</th>
 				        <th>Result Entry Time</th>
 				        <th>Description</th>
@@ -45,7 +46,8 @@ render(){
 
 		        	     <tr key={index}>
 					        <td>{item._id}</td>
-					        <td>{item.labTechnicianId}</td>
+					        <td>{item.patientId.FullName}</td>
+					        <td>{item.labTechnicianId.fullName}</td>
 					        <td>{item.medicalExaminationTime}</td>
 					        <td>{item.resultEntryTime}</td>
 					        <td>{item.description}</td>
@@ -56,6 +58,7 @@ render(){
 		        </table>
          	</div>
 	    </div>
+	    <br/>
 	    </div>
 		)
 	}

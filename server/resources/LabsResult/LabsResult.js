@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var LabsResultSchema = mongoose.Schema({
 	patientId:{
 		type:mongoose.Schema.Types.ObjectId,
-		ref:'User'
+		ref:'Users'
 	},
 	labTechnicianId:{
 		type:mongoose.Schema.Types.ObjectId,
