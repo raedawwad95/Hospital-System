@@ -1,5 +1,4 @@
 import React from 'react';
-import DoctorAppoinment from './DoctorAppoinment.jsx'
 
 class Home2 extends React.Component {
   constructor(props) {
@@ -12,7 +11,6 @@ class Home2 extends React.Component {
     return(
       <div>
         <h1> Test routing </h1>
-          <DoctorAppoinment />
 
       </div>
     )
