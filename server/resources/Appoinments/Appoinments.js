@@ -2,11 +2,15 @@ var mongoose =require('mongoose');
 var db=require('../../db');
 
 var AppoinmetSchema =mongoose.Schema({
+	month:{
+		type:Number,
+		required:true
+	},
 	day:{
-		type:Date,
+		type:Number,
 		required: true
 	},
-	from:{
+	hour:{
 		type:Number,
 		required: true
 	},

@@ -5,8 +5,8 @@ exports.add=function(req,res){
 console.log("appoinment controller")
 	var Appoint=new Appoinment({
 		day:req.body.day,
-		from:req.body.from,
-		//to:req.body.to,
+		month:req.body.month,
+		hour:req.body.hour,
 		doctorId:req.body.doctorId,
 		userId:req.body.userId,
 	});
