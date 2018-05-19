@@ -44,7 +44,7 @@ exports.update=function(req,res){
 		} else {
 			doctor.password = req.body.password;
 			doctor.save;
-			res.json(Updated);
+			res.json("Updated");
 		}
 	})
 }

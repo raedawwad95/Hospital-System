@@ -45,7 +45,7 @@ class addDoctorToDepartment extends React.Component{
 		super(props);
 		this.state={
 			depts:[],
-			docId:'',
+			docName:'',
 			selected:''
 		}
 		this.handleChange=this.handleChange.bind(this);
@@ -74,10 +74,9 @@ class addDoctorToDepartment extends React.Component{
 
     add(){
     	var that=this;
-    	var idOfDept=$('select[name=selector]').val();
     	var obj={
     		idOfDept:that.state.selected,
-    		docId:that.state.docId
+    		docName:that.state.docName
     	}
     	$.ajax({
     		type:'PUT',
@@ -129,8 +128,8 @@ class addDoctorToDepartment extends React.Component{
 						          placeholder="Add Doctor"
 						          className={classes.textField}
 						          margin="normal"
-						          value={this.state.docId}
-						          name="docId"
+						          value={this.state.docName}
+						          name="docName"
 				          		  onChange={this.handleChange}
 						        />
 							</Grid> 
