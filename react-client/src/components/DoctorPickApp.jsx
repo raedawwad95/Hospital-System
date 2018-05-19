@@ -7,11 +7,14 @@ class DoctorAppointments extends React.Component{
 		this.state={
 			docId:[],
 			doctorId:'',
-			appointment:[]
+			appointment:[],
+			thisMonthApp:[],
+			todayApp:[]
 
 		}
 		this.handleDoctorChange=this.handleDoctorChange.bind(this);
 		this.getTheApp=this.getTheApp.bind(this)
+		this.show=this.show.bind(this);
 
 	}
 
@@ -64,11 +67,41 @@ class DoctorAppointments extends React.Component{
 
 	}
 
+	show(){
+		var arr=this.state.appointment;
+		var today=new Date();
+		var curentHour=today.getHours()
+		var curentMonth=today.getMonth()+1
+		var curentDay=today.getDate();
+		var arrd=[];
+		var app=this.state.appointment;
+		for(var i=0;i<app.length;i++){
+			if(curentMonth===app[i].month){
+				if(curentDay===app[i]){
+				arrd.push(app[i])
+				}else{
+				arr.push(app[i])
+				}
+
+			}
+
+		}
+		this.setState({
+			thisMonthApp:arr,
+			todayApp:arrd
+		})
+
+
+
+	}
 
 
 	render(){
 		console.log(this.state.doctorId)
 		console.log('hhhhhhhhhhh ',this.state.appointment)
+		console.log('mmmmmmmmmmmmmmm ', this.state.thisMonthApp)
+		console.log('ddddddddddd ', this.state.todayApp)
+
 		return(<div>
 			<select name='doctor' onChange={this.handleDoctorChange}>
 			<option value=''>chose a doctor</option>
@@ -77,9 +110,9 @@ class DoctorAppointments extends React.Component{
 				<option value={doc._id}>{doc.fullName}</option>
 						)
 			})}
-
-
 			</select>
+			<button onClick={this.show}>show</button>
+			{}
 			</div>
 			)
 	}
