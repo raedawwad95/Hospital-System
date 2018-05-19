@@ -9,8 +9,8 @@ class DoctorAppointments extends React.Component{
 			doctorId:'',
 			appointment:[],
 			thisMonthApp:[],
-			todayApp:[]
-
+			todayApp:[],
+			show:true
 		}
 		this.handleDoctorChange=this.handleDoctorChange.bind(this);
 		this.getTheApp=this.getTheApp.bind(this)
@@ -91,7 +91,7 @@ class DoctorAppointments extends React.Component{
 			todayApp:arrd
 		})
 
-
+		//alert(this.state.thisMonthApp)
 
 	}
 
@@ -112,7 +112,16 @@ class DoctorAppointments extends React.Component{
 			})}
 			</select>
 			<button onClick={this.show}>show</button>
-			{}
+			{this.state.show&&(<div>
+				{this.state.thisMonthApp.map(function(app){
+					return(
+						<h4>{app.month}/{app.day} at {app.hour} </h4>
+
+						)
+					console.log('lllllllllllllllllllll ',app)
+				})}
+				</div>
+				)}
 			</div>
 			)
 	}

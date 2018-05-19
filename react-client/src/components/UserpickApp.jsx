@@ -23,6 +23,7 @@ class UserAppoinment extends React.Component{
 		this.monthHandelChange=this.monthHandelChange.bind(this);
 		this.daysHandleChange=this.daysHandleChange.bind(this);
 		this.send=this.send.bind(this);
+		this.hourHandleChange=this.hourHandleChange.bind(this);
 	}
 
 	componentDidMount(){
@@ -70,11 +71,18 @@ class UserAppoinment extends React.Component{
 
 	}
 
+	hourHandleChange(e){
+		this.setState({
+			hour:e.target.value
+		})
+	}
+
 	daysHandleChange(e){
 		this.setState({
 			day:e.target.value
 		})
 	}
+
 
 	monthHandelChange(e){
 		this.setState({
@@ -122,8 +130,8 @@ class UserAppoinment extends React.Component{
 				url:'/app',
 				data:obj,
 				success:function(data){
-					alert('data saved')
-				},
+					console.log(data)
+						},
 				error:function(err){
 					console.log(err)
 				}
