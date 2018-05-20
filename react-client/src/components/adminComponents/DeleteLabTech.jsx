@@ -7,11 +7,12 @@ import $ from "jquery";
  		this.state={
  			username:""
  		}
- 		this.onChange=this.onChange.bind(this)
+ 		this.onChange=this.onChange.bind(this);
+ 		this.DeleteLabTechClick=this.DeleteLabTechClick.bind(this);
  	}
  	onChange(e){
  		this.setState({
- 			[e.target.name]:e.target.value;
+ 			[e.target.name]:e.target.value
  		})
  	}
 
@@ -33,7 +34,11 @@ import $ from "jquery";
 
 	render() {
 		return (
-			<div></div>
+			<div>
+				<h1>username:<input placeholder='username' name="username" onChange={this.onChange}/></h1>
+				<br/><br/>
+				<div><button onClick ={this.DeleteLabTechClick} > DELETE </button></div>	
+			</div>
 		);
 	}
 }

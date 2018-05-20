@@ -2,7 +2,7 @@ import React from 'react';
 import Navabar from './Navabar.jsx'
 import UserAppoinment from './UserpickApp.jsx'
 import DoctorAppointments from './DoctorPickApp.jsx'
-import DeleteDoctor from './adminComponents/DeleteDoctor.jsx'
+import DeleteLabTech from './adminComponents/DeleteLabTech.jsx'
 
 class Home extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Home extends React.Component {
           <br />
           <br />
           <UserAppoinment />
-          <DeleteDoctor/>
+          <DeleteLabTech/>
         </div>
       </div>
 
