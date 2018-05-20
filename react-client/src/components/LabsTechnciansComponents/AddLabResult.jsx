@@ -17,6 +17,16 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
+const customStyles1 = {
+  content : {
+    top                   : '40%',
+    left                  : '50%',
+    right                 : '10%',
+    bottom                : '10%',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 	const styles = theme => ({
   	  input: {
@@ -50,6 +60,9 @@ class AddLabResult extends React.Component{
             modalIsOpen: false,
             loading: false,
     		success: false,
+    		imageResult:'',
+    		modalIsOpenImageResult:false,
+
          };
 
 	 
@@ -58,6 +71,8 @@ class AddLabResult extends React.Component{
 		this.retriveData=this.retriveData.bind(this);
 		this.handleChange=this.handleChange.bind(this);
 		this.addLabResult=this.addLabResult.bind(this);
+		this.openModalImageResult = this.openModalImageResult.bind(this);
+	    this.closeModalImageResult = this.closeModalImageResult.bind(this);
 	
 	}
 	retriveData() {
@@ -101,11 +116,19 @@ class AddLabResult extends React.Component{
 	}
 	 closeModal() {
 	    this.setState({modalIsOpen: false});
-	  }
+	 }
 	 openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
+        this.setState({modalIsOpen: true});
+     }
+     closeModalImageResult(){
+    	this.setState({modalIsOpenImageResult: false});
+     }
+     openModalImageResult(e) {
+        this.setState({
+        	modalIsOpenImageResult: true,
+    	    imageResult:e.target.value
+        	});	
+     }
     onChangeImageLabResult(e){
       var imgReader = new FileReader();
       var img = e.target.files[0];
@@ -146,6 +169,7 @@ class AddLabResult extends React.Component{
 }
  
 render(){
+	var that = this;
 	const { classes } = this.props;
 		const { loading, success } = this.state;
 		const imageResult = classNames({
@@ -291,6 +315,7 @@ render(){
 		        <th>Medical Examination Time</th>
 		        <th>Result Entry Time</th>
 		        <th>Description</th>
+		        <th>Image Result</th>
 		      </tr>
 		    </thead>		    
 		    <tbody style={{textAlign:'center'}}>
@@ -302,6 +327,7 @@ render(){
 			        <td>{item.medicalExaminationTime}</td>
 			        <td>{item.resultEntryTime}</td>
 			        <td>{item.description}</td>
+			        <td><button style={{'background-color': 'white'}} value ={item.imageOfResult} onClick={that.openModalImageResult}>{item.imageOfResult}</button></td>
 		         </tr>
 		         )
             })}
@@ -309,6 +335,27 @@ render(){
          </table>
 	    </div>
 	    </div>
+	      <Modal
+          isOpen={this.state.modalIsOpenImageResult}
+          contentLabel="Add New Record"
+          style={customStyles1}
+        >
+ 		<div className="card">
+		<div className='container-fluid'>
+	
+	    <Grid container spacing={24}>
+	    <Grid item xs={24} sm={12}>
+	        <img  style={{textAlign:'center'}} src ={this.state.imageResult}></img>
+		<CardActions>
+		    <Button variant="raised" color="primary" onClick={this.closeModalImageResult} >
+	        	Close
+	      	</Button>
+		</CardActions>	
+		</Grid>
+		</Grid>
+		</div>
+		</div>
+        </Modal>
 	    <br/>
 	    </div>
 		)
