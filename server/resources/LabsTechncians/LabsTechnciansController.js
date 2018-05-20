@@ -124,7 +124,7 @@ exports.PatientResult=function(req,res){
 	})
 }
 exports.deleteOne=function(req,res){
-	var userName=req.params.userName;
+	var userName=req.params.userNameLabTech;
 	LabsTechncians.findOneAndRemove({userName:userName},function(err,deleted){
 		if(err){
 			console.log(error)
