@@ -123,7 +123,7 @@ exports.retrieveOne=function(req,res){
 
 //Delete doctor 
 exports.deleteOne=function(req,res){
-	var userName=req.params.userName;
+	var userName=req.params.userNameDoctor;
 	Doctor.findOneAndRemove({userName:userName},function(err,deleted){
 		if(err){
 			console.log("error");
