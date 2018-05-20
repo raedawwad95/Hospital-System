@@ -123,3 +123,12 @@ exports.PatientResult=function(req,res){
 		res.json(data)
 	})
 }
+exports.deleteOne=function(req,res){
+	var userName=req.params.userName;
+	LabsTechncians.findOneAndRemove({userName:userName},function(err,deleted){
+		if(err){
+			console.log(error)
+		}
+		res.send(deleted)
+	})
+}
