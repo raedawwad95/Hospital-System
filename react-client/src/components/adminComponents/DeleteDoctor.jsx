@@ -25,7 +25,7 @@ import $ from "jquery";
 		$.ajax({
 			type:'DELETE',
 			url:'Doctor/'+that.state.userName,
-			succsess:function(data){
+			success:function(data){
 				console.log(data)
 
 
