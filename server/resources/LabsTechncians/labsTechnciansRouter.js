@@ -41,5 +41,10 @@ labsTechnciansRouter.route('/')
 		LabsTechnciansController.PatientResult(req,res);
 	})
 
+	labsTechnciansRouter.route('/:userNameLabTech')
+	.delete(function(req,res){
+		LabsTechnciansController.deleteOne(req,res)
+	})
+
 
 module.exports = labsTechnciansRouter;
