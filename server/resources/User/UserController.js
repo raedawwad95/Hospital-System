@@ -11,6 +11,7 @@ exports.create = function (req, res) {
 };
 
 exports.login = function (req, res) {
+	console.log(req.body)
 	Users.findOne({username: req.body.username}).exec(function (err, user) {
 		if (err) {
 			console.error(err);
@@ -32,6 +33,34 @@ exports.login = function (req, res) {
 		        		req.session.username = user.username;
 		        		req.session.userType = user.userType;
 		        		res.json(user);
+					});
+				}
+			});
+		}
+	});
+};
+
+exports.loginNative = function (req, res) {
+	console.log(req.body)
+	Users.findOne({username: req.body.username}).exec(function (err, user) {
+		if (err) {
+			console.error(err);
+		} 
+		if (!user) { // if user not found response
+			res.send({success: false, message: 'User Not found'})
+		} else { // when find user check password by calling method comparePassword
+			user.comparePassword(req.body.password, function(err, isMatch) {
+				if (err) {
+					console.error(err);
+				}
+				if (!isMatch) { // password not match case
+					res.send({success: false, message: 'Password Wrong'})
+				} else { // if match, go and generate seassion
+					return req.session.regenerate(function(err) {
+		        		if (err) {
+		        			return console.error(err);
+		        		}
+		        		res.send({success: true, username: user.username})
 					});
 				}
 			});
