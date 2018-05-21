@@ -44,6 +44,11 @@ doctorRouter.route('/:userNamePatient')
 .get(function(req,res){
 	DoctorController.retrievePatient(req,res);
 })
+//Delete Doctor based on his username 
+doctorRouter.route('/:userNameDoctor')
+.delete(function(req,res){
+	DoctorController.deleteOne(req,res);
+})
 
 
 

@@ -120,3 +120,14 @@ exports.retrieveOne=function(req,res){
 		res.json(data);
 	});
 }
+
+//Delete doctor 
+exports.deleteOne=function(req,res){
+	var userName=req.params.userNameDoctor;
+	Doctor.findOneAndRemove({userName:userName},function(err,deleted){
+		if(err){
+			console.log("error");
+		}
+		res.send(deleted)
+	})
+}
