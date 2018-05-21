@@ -10,6 +10,7 @@ NewsRouter.route('/')
 .get(function(req,res){
 	NewsController.Retrive(req,res)
 })
+NewsRouter.route('/:id')
 .delete(function(req,res){
 	NewsController.Delete(req,res)
 })

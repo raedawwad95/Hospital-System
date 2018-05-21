@@ -25,8 +25,9 @@ exports.Retrive=function(req,res){
 }
 
 exports.Delete=function(req,res){
+	var id=req.params.id;
 
-	News.deleteMany({}, function (err) {
+	News.findByIdAndRemove({ _id: id }, function (err) {
 		if (err) {
 			console.log(err);
 		}

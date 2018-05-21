@@ -10,5 +10,5 @@ var NewsSchema=mongoose.Schema({
 		default:Date.now
 	}
 })
-var News=mongoose.model('Newa',NewsSchema)
+var News=mongoose.model('News',NewsSchema)
 module.exports=News
