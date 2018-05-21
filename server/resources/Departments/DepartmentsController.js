@@ -62,3 +62,25 @@ exports.retriveOneDept = function (req, res) {
 		})
 }
 
+//to be continued ....
+exports.DeleteDocFromDep=function(req,res){
+	var query={idOfDept:req.body.idOfDept};
+	Doctor.findOne({userName: req.body.docName}).exec(function (err, doctor) {
+		if (err) {
+			console.error(err);
+		}
+		if (!doctor) {
+			console.error("no doctor with this username");
+		} else {
+			Departments.update(query,{$pull:{'doctorsId':doctor._id}})
+			// .populate('doctorsId')
+			.exec(function(err,data){
+				if(err){
+					console.error(err)
+				}
+				res.json(data)
+			})
+		}
+	})
+}
+
