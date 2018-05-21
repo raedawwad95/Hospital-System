@@ -9,7 +9,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import ChooseDate from './ChoseDate.jsx'
 const styles = theme => ({
   root: {
     width: '90%',
@@ -41,19 +41,19 @@ class Try extends React.Component{
 		this.getStepContent=this.getStepContent.bind(this);
 		this.handleBack=this.handleBack.bind(this);
 		this.handleReset=this.handleReset.bind(this);
-		
+
 	}
 
 	getSteps(){
-		return ['step1','step2','step3'];
+		return ['step1','ChooseDate','step3'];
 	}
 
 	getStepContent(step){
 		switch(step){
 			case 0:
-			return 'step1step1step1step1';
+			return 'here should be the doctors';
 			case 1:
-			return 'step2step2step2';
+			return <ChooseDate />;
 			case 3:
 			return 'step3step3step3';
 			default:
