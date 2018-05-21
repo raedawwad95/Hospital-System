@@ -10,5 +10,8 @@ NewsRouter.route('/')
 .get(function(req,res){
 	NewsController.Retrive(req,res)
 })
+.delete(function(req,res){
+	NewsController.Delete(req,res)
+})
 
 module.exports=NewsRouter;

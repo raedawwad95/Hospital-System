@@ -25,6 +25,13 @@ exports.Retrive=function(req,res){
 }
 
 exports.Delete=function(req,res){
-	
 
-}
+	News.deleteMany({}, function (err) {
+		if (err) {
+			console.log(err);
+		}
+	});
+	res.json('Deleted');
+};
+
+
