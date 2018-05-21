@@ -13,6 +13,7 @@
   "private": false,
   "license": "UNLICENSED",
   "dependencies": {
+    "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "latest",
     "babel": "^6.23.0",
     "bcrypt": "^2.0.1",
@@ -21,14 +22,22 @@
     "body-parser": "^1.15.2",
     "chai-enzyme": "^0.8.0",
     "chai-http": "^4.0.0",
-    "enzyme-adapter-react-16": "^1.1.1",
     "env-install": "^0.2.1",
+    "enzyme-adapter-react-16": "^1.1.1",
     "expect": "^22.4.3",
     "express": "^4.14.0",
     "express-session": "^1.15.6",
     "jquery": "^3.1.1",
     "lodash": "^4.17.10",
+<<<<<<< 4066c7996a91a1e1d8efeab69d89b5572df34b30
     "material-ui": "next",
+=======
+    "material-ui": "^1.0.0-beta.47",
+    "material-ui-custom-datepicker": "^1.0.29",
+    "material-ui-datetimepicker": "^1.0.7",
+    "material-ui-next-datepicker": "^1.0.15",
+    "material-ui-time-picker": "^1.0.0",
+>>>>>>> make the steps for the appoinment
     "material-ui-upload": "^1.2.1",
     "moment": "^2.22.1",
     "moment-range": "^4.0.1",
