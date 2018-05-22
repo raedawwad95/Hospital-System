@@ -37,12 +37,23 @@ userRouter.route('/test')
 		var ses = req.session
 		res.json(ses);
 	})
+
+//retrive all users
+userRouter.route('/retrive/allPatient')
+.get(function(req, res) {
+	userController.retriveAllPatient(req, res);
+})
+
+// retrive one user by its username
 userRouter.route('/:username')
 	.get(function(req, res) {
 		userController.retrive(req, res);
 	})
-	userRouter.route('/retrive/allPatient')
-	.get(function(req, res) {
-		userController.retriveAllPatient(req, res);
+
+// Logout
+userRouter.route('/Logout')
+	.get(function (req, res) {
+		userController.logout(req, res);
 	})
+
 module.exports = userRouter;
