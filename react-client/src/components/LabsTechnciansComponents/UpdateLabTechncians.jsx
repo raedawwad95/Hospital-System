@@ -1,14 +1,13 @@
 import React from 'react';
 import $ from 'jquery';
-
+import {  TextField, Grid,
+		Button, CardActions } from 'material-ui'
 class UpdateLabTechncians extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
 			userName:'',
 	        password:'',
-	        fullName:'',
-	        personalImgUrl:''
 		}
 		this.updateLabTechnciansClick = this.updateLabTechnciansClick.bind(this);
 		this.onChange =this.onChange.bind(this);
@@ -18,6 +17,23 @@ class UpdateLabTechncians extends React.Component{
 			[e.target.name]:e.target.value
 		})
 	}
+	componentDidMount() {
+		var that =this;
+		$.ajax({
+			url:'/labTech/getOne/tech',
+			type:'GET',
+			success:function(data){
+
+				console.log(data)	
+				that.setState({
+					userName: data.userName
+				})
+			},
+			error:function(err){
+				console.log(err);
+			}
+		});
+	}
 	updateLabTechnciansClick(){
 		var that =this;
 		$.ajax({
@@ -25,7 +41,7 @@ class UpdateLabTechncians extends React.Component{
 			type:'PUT',
 			data:that.state,
 			success:function(data){
-				console.log(data);
+				alert('Updated');
 			},
 			error:function(err){
 				console.log(err);
@@ -33,20 +49,47 @@ class UpdateLabTechncians extends React.Component{
 		})
 	}
 	render(){
-		return(
-			<div>
-				<h1>UserName :<input placeholder='userName' name="userName" onChange={this.onChange} /></h1>
-				<br/><br/>
-				<h1>password :<input placeholder='password' name="password" onChange={this.onChange} /></h1>
-				<br/><br/>
-				<h1>fullName :<input placeholder='fullName' name="fullName" onChange={this.onChange} /></h1>
-				<br/><br/>
-				<h1>personalImgUrl :<input placeholder='personalImgUrl' name="personalImgUrl" onChange={this.onChange} /></h1>
-				<br/><br/>
-				<div><button onClick ={this.updateLabTechnciansClick} > UpdateLabTechncians</button></div>	
+	return(
+		<div>
+			<div className="card">
+			<div className='container-fluid'>
+			<Grid item xs={6} sm={3}>
+				<TextField
+		          required
+		          id="userName"
+		          placeholder="UserName"
+		          width="200"
+		          margin="normal"
+		          name='userName'
+		          value={this.state.userName}
+	      		  onChange={this.onChange}
+	      		  disabled
+		        />
+			</Grid>
+			<Grid item xs={6} sm={3}>
+				<TextField
+		          required
+		          id="password"
+		          type="password"
+		          label="Password"
+		          placeholder="Password"
+		          width="200"
+		          margin="normal"
+		          name='password'
+	      		  onChange={this.onChange}
+		        />
+			</Grid>
+			<CardActions>
+				<Button variant="raised" color="primary" onClick={this.updateLabTechnciansClick} >
+		        	Update Lab Techncians
+		      	</Button>
+			</CardActions>
 			</div>
-			)
+			</div>
+			<br/>	
+		</div>
+				)
+		}
 	}
-}
 
 export default UpdateLabTechncians;

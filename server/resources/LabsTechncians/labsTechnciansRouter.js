@@ -29,7 +29,6 @@ labsTechnciansRouter.route('/')
 	.delete(function (req, res) {
 		LabsTechnciansController.logout(req, res);
 	})
-
 	labsTechnciansRouter.route('/isLogin')
 		.get(function(req , res) {
 			LabsTechnciansController.isLogin(req , res);
@@ -40,11 +39,12 @@ labsTechnciansRouter.route('/')
 	.get(function(req,res){
 		LabsTechnciansController.PatientResult(req,res);
 	})
-
 	labsTechnciansRouter.route('/:userNameLabTech')
 	.delete(function(req,res){
 		LabsTechnciansController.deleteOne(req,res)
 	})
-
-
+    labsTechnciansRouter.route('/getOne/tech')
+	.get(function (req, res) {
+		LabsTechnciansController.retrieveOne(req, res);
+	})
 module.exports = labsTechnciansRouter;
