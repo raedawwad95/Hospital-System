@@ -82,9 +82,7 @@ class DoctorAppointments extends React.Component{
 				}else{
 				arr.push(app[i])
 				}
-
 			}
-
 		}
 		this.setState({
 			thisMonthApp:arr,

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,9 +10,14 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ChooseDate from './ChoseDate.jsx'
-import ChooseTime from './ChoseTime.jsx'
-import ChooseDoctor from './ChooseDoctor.jsx'
+import ChooseDoctor from './ChooseDoctor.jsx';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+
+
+
 const styles = theme => ({
   root: {
     width: '90%',
@@ -35,12 +41,17 @@ class Try extends React.Component{
 		super(props);
 		this.state={
 		date: null,
-    	time: null,
+    	time:"",
     	activeStep:0,
     	appDate:[],
-    	todayDate:[]
+    	todayDate:[],
+    	doctors:[],
+    	age:5,
+    	today: '',
+		dataToMain:'',
+		doc:'',
+		move:false
 		}
-		console.log('ksladjlkaslkd ',this.props)
 
 		this.handleNext=this.handleNext.bind(this);
 		this.getSteps=this.getSteps.bind(this);
@@ -48,30 +59,161 @@ class Try extends React.Component{
 		this.handleBack=this.handleBack.bind(this);
 		this.handleReset=this.handleReset.bind(this);
 		this.chooseDateData=this.chooseDateData.bind(this)
+		this.handleChange=this.handleChange.bind(this)
+		this.ChooseDate = this.ChooseDate.bind(this)
+		this.handleDate = this.handleDate.bind(this)
+		this.formatDate = this.formatDate.bind(this)
+		this.test = this.test.bind(this)
+		this.ChooseTime=this.ChooseTime.bind(this)
+		this.handleTime=this.handleTime.bind(this)
+		this.handleDoctor=this.handleDoctor.bind(this)
+		this.handleComplete=this.handleComplete.bind(this)
+	}
+componentDidMount(){
+		var arr=[];
+		var that=this;
+		$.ajax({
+			type:'get',
+			url:'/Doctor/retrieve',
+			success:function(data){
+				for(var i=0;i<data.length;i++){
+					arr.push(data[i])
+				}
+				that.setState({
+					doctors:arr
+				})
+			}
+		})
 
+
+		var today=this.formatDate(new Date);
+		this.setState({
+			today:today
+		})
+	}
+
+	ChooseTime(){
+		const classes=this.props
+		return(
+			<TextField
+        type="time"
+        value={this.state.time}
+        onChange={this.handleTime}
+        format={"HH:mm"}
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{
+          step: 1800, // 30 min
+        }}
+      />
+			)	
+	}
+
+	handleTime(e){
+	console.log('e.target.value ',e.target.value)
+	this.setState({
+		time: e.target.value,
+	})
 	}
 
 	getSteps(){
 		return ['Choose Doctor','Choose Date','Choose Time','final step'];
 	}
 
+	handleChange(e){
+		this.setState({
+			age:e.target.value
+		})
+	}
+
 	getStepContent(step){
 		switch(step){
 			case 0:
-			return <ChooseDoctor />;
+			return this.ChooseDoctor()
 			case 1:
-			return <ChooseDate cb={this.chooseDateData}/>;
+			return this.ChooseDate()
 			case 2:
-			return <ChooseTime />;
+			return this.ChooseTime()
 			case 3:
-			return 'sadas';
+			return 'sadas'
 
 		}
 	}
-		
 
+	ChooseDoctor(){
+		const classes =this.props;
+		return(
+			<div>
+			<select name="Doctor" onChange={this.handleDoctor}>
+			<option value=''>chose a doctor</option>
+			{this.state.doctors.map(function(item){
+				return(
+				<option value={item._id}>{item.fullName}</option>
+					)
+			})}
+			</select>
+			</div>
+			)
+	}
+
+	handleDoctor(e){
+		console.log(e.target.value)
+		this.setState({
+			doc:e.target.value,
+			move:!this.state.move
+		})
+
+	}
+
+	formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+	}
+
+	handleDate(e){
+		console.log(' tal ',e.target.value)
+	// var	date1= Date(date)
+	// var	date2= Date.parse(date1)
+	var test=this.formatDate(date.value)
+	console.log('data tal ',test)
+	this.setState({
+		dataToMain: e.target.value,
+	})
+	console.log('chose date ',this.state)
+	}
+		
+	ChooseDate() {
+		const classes=this.props
+		return (
+			
+			<div>
+			 <TextField
+			  id="date"
+		      label='chose the date'
+		      type='date'
+		      className={classes.textField}
+		      dateFormat="LLL"
+		      value={this.state.dataToMain}
+		      name="dateC"
+		      onChange={this.handleDate}
+		      inputLabelProps={{
+		      	shrink:true
+		      }}
+		      />
+      </div>
+			
+		)
+	}
 	handleNext(){
-		console.log('this state next',this.state)
 		this.setState({
 			activeStep:this.state.activeStep +1
 		})
@@ -93,7 +235,6 @@ class Try extends React.Component{
 
 	chooseDateData(data){
 
-		console.log('datadatadatadatadata ',this.state)
 		var year=data.dataToMain.slice(0,4);
 		var month=data.dataToMain.slice(5,7);
 		var day=data.dataToMain.slice(8,10);
@@ -107,38 +248,40 @@ class Try extends React.Component{
 		tYear =parseInt(tYear)
 		tMonth =parseInt(tMonth)
 		tDay =parseInt(tDay)
-		console.log('tdaytday ',typeof(tDay))
 		this.setState({ 
 			appDate:[year,month,day],
 			todayDate:[tYear,tMonth,tDay]
 		});
 
-		
+		console.log(this.state)
 	}
 
-	// x(year,month,day,tYear,tMonth,tDay){
-	// 	console.log('year ',year)
-	// 	console.log('month ',month)	
-	// 	console.log('day ',day)	
-	// 	console.log('tYear ',tYear)	
-	// 	console.log('tMonth ',tMonth)	
-	// 	console.log('tDay ',tDay)	
-	// 	this.setState({
-	// 		appDate:[year,month,day],
+	test() {
+		console.log(this.state)
+	}
 
-	// 	})
-	// 	// console.log('uuuuuuuuuuuuuuuuuuuu ',this.state)
-	// }
-
-	// addToState(year,month,day,tYear,tMonth,tDay){
-	// 	this.setState({
-	// 		appDate:[year,month,day],
-	// 		todayDate:[tYear,tMonth,tDay]
-	// 	})
-	// }
+	handleComplete(){
+		console.log('this.state handleComplete ',this.state)
+		var obj={
+			month:5,
+			day:5,
+			hour:5,
+			year:2018,
+			doctorId:'5afdccc96586d3161e1299de',
+			userId:'5afdccc96586d3161e1299e2'
+		}
+		$.ajax({
+			url:'/app',
+			type:'post',
+			data:obj,
+			success:function(data){
+				console.log('done')
+			}
+		})
+	}
 
 	render(){
-		console.log('this.state ',this.state)
+		// console.log(this.state)
 		var that=this;
 		const classes = this.props;
 		const steps=this.getSteps();
@@ -162,15 +305,22 @@ class Try extends React.Component{
 						>
 						BACK
 						</Button>
+						{that.state.show&&(
+							<div>
 						<Button
 						variant="raised"
 						color="primary"
 						onClick={that.handleNext}
 						className={classes.button}
 						>
+						
 						{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
 						</Button>
+							</div>
+							)}
+
 						</div>
+						<button onClick={that.test}>test</button>
 						</div>
 						</StepContent>
 						</Step>
@@ -183,11 +333,16 @@ class Try extends React.Component{
 					<Button onClick={this.handleReset} className={classes.button}>
 					reset
 					</Button>
+					<Button onClick={this.handleComplete} className={classes.button}>
+					SEND
+					</Button>
 					</Paper>
 				)}
       	</div>
 
-     
+     <div>
+						<Button onClick={that.test}>TEST</Button>
+						</div>
 
  
       	</div>
@@ -199,7 +354,5 @@ class Try extends React.Component{
 Try.propTypes = {
   classes: PropTypes.object,
 };
-
-        // <DatePicker onChange={this.handleDate} value ={this.state.date} hintText="Date to be completed by" />
 
 export default withStyles(styles)(Try);

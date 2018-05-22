@@ -26,10 +26,11 @@ class ChooseTime extends React.Component{
 	}
 	
 	handleChange(e){
-		console.log('asdasdsadasdasdsadasdkljasdlksajlkasdjl',this.state.time)
 		this.setState({
 			time:e.target.value
 		})
+    console.log('ChooseTime state ',this.state.time);
+    
 	}
 
 	render(){

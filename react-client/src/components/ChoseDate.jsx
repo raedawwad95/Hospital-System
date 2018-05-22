@@ -18,12 +18,13 @@ class ChooseDate extends React.Component{
 	constructor(props){
 		super(props)
 		this.state={
-			   date: moment(this.props.value, 'LLL'),
+			   // date: moment(Date.now(), 'LLL'),
 			   today: '',
 			   dataToMain:''
 		}
 		this.handleChange=this.handleChange.bind(this)
 		this.formatDate=this.formatDate.bind(this)
+		this.test1=this.test1.bind(this)
 	}
 
 	componentDidMount(){
@@ -46,20 +47,27 @@ class ChooseDate extends React.Component{
 	}
 
 	handleChange(){
-	var	date1= Date(date)
-	var	date2= Date.parse(date1)
+		console.log('data tal ',date.value)
+	// var	date1= Date(date)
+	// var	date2= Date.parse(date1)
+	var test=this.formatDate(date.value)
+	console.log('data tal ',test)
 	this.setState({
-		dataToMain:date.value
+		dataToMain:test
 	})
+	console.log('chose date ',this.state)
 	this.props.cb(this.state)		
 	}
 
-	
+	test1(){
+		console.log(this.state)
+		this.props.cb(this.state)
+	}	
 	
 
 	render(){
 		const classes=this.props
-		//this.props.cb(this.state)
+		// this.props.cb(this.state)
 
 		return(
 			<div>
@@ -75,6 +83,8 @@ class ChooseDate extends React.Component{
 		      	shrink:true
 		      }}
 		      />
+
+		      <button onClick={this.test1}>test1</button>
       </div>
 			)
 	}

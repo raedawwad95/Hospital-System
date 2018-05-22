@@ -1,5 +1,6 @@
 import React from 'react';
 import DoctorApp from './DoctorsAppointments.jsx'
+import Appoinment from './LastTry.jsx'
 class Home2 extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,7 @@ class Home2 extends React.Component {
     return(
       <div>
         <h1> Test routing </h1>
-        <DoctorApp />
+        <Appoinment />
       </div>
     )
   }
