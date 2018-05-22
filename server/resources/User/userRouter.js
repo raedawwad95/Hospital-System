@@ -13,9 +13,16 @@ userRouter.route('/login')
 		userController.login(req, res);
 	})
 
+// login for mobile users
 userRouter.route('/loginMobile')
 	.post(function (req, res) {
 		userController.loginNative(req, res);
+	})
+
+// check if online or not when user open page
+userRouter.route('/isLogin')
+	.get(function (req, res) {
+		userController.isLogin(req, res);
 	})
 
 // for create new user accout
@@ -30,12 +37,30 @@ userRouter.route('/test')
 		var ses = req.session
 		res.json(ses);
 	})
+
+//retrive all users
+userRouter.route('/retrive/allPatient')
+.get(function(req, res) {
+	userController.retriveAllPatient(req, res);
+})
+
+// Logout
+userRouter.route('/Logout')
+	.get(function (req, res) {
+		userController.logout(req, res);
+	})
+
+userRouter.route('/getLogin')
+	.get(function (req, res) {
+		userController.getLoginData(req , res);
+	})
+
+// retrive one user by its username
 userRouter.route('/:username')
 	.get(function(req, res) {
 		userController.retrive(req, res);
 	})
-	userRouter.route('/retrive/allPatient')
-	.get(function(req, res) {
-		userController.retriveAllPatient(req, res);
-	})
+
+
+
 module.exports = userRouter;

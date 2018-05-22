@@ -67,7 +67,7 @@ const styles = theme => ({
   },
 });
 
-class Navabar extends React.Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -148,6 +148,7 @@ class Navabar extends React.Component {
         that.setState({
           auth: true
         })
+        that.getUserData();
       },
       error:function(err){
         console.log(err);
@@ -219,6 +220,9 @@ class Navabar extends React.Component {
             )}
             {!auth && (
               <div>
+              <Button component={Link} to="/user/create" className={classes.button2}>
+                  Create Account
+                </Button>
                 <TextField
                   required
                   id="username"
@@ -263,8 +267,8 @@ class Navabar extends React.Component {
   }
 }
 
-Navabar.propTypes = {
+Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Navabar);
+export default withStyles(styles)(Navbar);

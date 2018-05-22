@@ -97,10 +97,6 @@ class DoctorAppointments extends React.Component{
 
 
 	render(){
-		console.log(this.state.doctorId)
-		console.log('hhhhhhhhhhh ',this.state.appointment)
-		console.log('mmmmmmmmmmmmmmm ', this.state.thisMonthApp)
-		console.log('ddddddddddd ', this.state.todayApp)
 
 		return(<div>
 			<select name='doctor' onChange={this.handleDoctorChange}>
