@@ -13,9 +13,16 @@ userRouter.route('/login')
 		userController.login(req, res);
 	})
 
+// login for mobile users
 userRouter.route('/loginMobile')
 	.post(function (req, res) {
 		userController.loginNative(req, res);
+	})
+
+// check if online or not when user open page
+userRouter.route('/isLogin')
+	.get(function (req, res) {
+		userController.isLogin(req, res);
 	})
 
 // for create new user accout

@@ -102,7 +102,7 @@ class Navabar extends React.Component {
   componentDidMount() {
     var that = this
     $.ajax({
-      url:'/itDep/isLogin',
+      url:'/api/userController/isLogin',
       type:'GET',
       success:function(data){
         that.setState({
