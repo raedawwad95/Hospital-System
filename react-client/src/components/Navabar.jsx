@@ -17,6 +17,10 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
   },
+  row: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   root2: {
     width: '100%',
     maxWidth: 360,
@@ -158,7 +162,9 @@ class Navabar extends React.Component {
       url:'/api/userController/getLogin',
       type:'GET',
       success:function(data){
-        console.log(data)
+        that.setState({
+          user: data
+        })
       },
       error:function(err){
         console.log(err);
@@ -179,18 +185,18 @@ class Navabar extends React.Component {
               Hospital-System
             </Typography>
             {auth && (
-              <div>
+              <div className={classes.row}>
                 <Button component={Link} to="/" className={classes.button2}>
                   Home
                 </Button>
-                <IconButton
+                <Avatar
+                  alt="Adelle Charles"
+                  src={this.state.user.personalImgUrl}
+                  className={classNames(classes.avatar, classes.bigAvatar)}
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
+                />
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
