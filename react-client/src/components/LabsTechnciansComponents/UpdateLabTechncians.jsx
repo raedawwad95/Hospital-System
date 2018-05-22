@@ -70,6 +70,7 @@ class UpdateLabTechncians extends React.Component{
 				<TextField
 		          required
 		          id="password"
+		          type="password"
 		          label="Password"
 		          placeholder="Password"
 		          width="200"
