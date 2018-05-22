@@ -58,7 +58,6 @@ class UserAppoinment extends React.Component{
 		var arr2=[];
 		var x=this.state.doctorsId.indexOf(e.target.value);
 		var xx=this.state.doctorsHour[x]
-		console.log('this.state.doctorsHour[x]',xx)
 		for(var i=xx;i<xx+8;i++){
 		
 			arr2.push(i)
@@ -140,17 +139,6 @@ class UserAppoinment extends React.Component{
 	}
 
 	render(){
-		console.log('doctors ',this.state.doctors)
-		console.log('doctorsId ',this.state.doctorsId)
-		console.log('doctorsHour ',this.state.doctorsHour)
-		console.log('doctor ',this.state.doctor)
-		console.log('doctorHour ',this.state.doctorHour)
-		console.log('month ',this.state.month)
-		console.log('days ',this.state.days)
-		console.log('day ',this.state.day)
-		console.log('hour ',this.state.hour)
-
-
 		var i=0;
 
 		return (

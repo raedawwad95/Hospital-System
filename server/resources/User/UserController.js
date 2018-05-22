@@ -119,3 +119,16 @@ exports.isLogin = function(req, res) {
  		res.json('error')
 	}
 }
+
+exports.getLoginData = function(req, res) {
+	Users.findOne({username: req.session.username}).exec(function(err, user) {
+		if (err) {
+			console.error(err);
+		}
+		if (!user) {
+			console.error("no user found");
+		} else {
+			res.json(user);
+		}
+	})
+}

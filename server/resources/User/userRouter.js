@@ -44,16 +44,23 @@ userRouter.route('/retrive/allPatient')
 	userController.retriveAllPatient(req, res);
 })
 
+// Logout
+userRouter.route('/Logout')
+	.get(function (req, res) {
+		userController.logout(req, res);
+	})
+
+userRouter.route('/getLogin')
+	.get(function (req, res) {
+		userController.getLoginData(req , res);
+	})
+
 // retrive one user by its username
 userRouter.route('/:username')
 	.get(function(req, res) {
 		userController.retrive(req, res);
 	})
 
-// Logout
-userRouter.route('/Logout')
-	.get(function (req, res) {
-		userController.logout(req, res);
-	})
+
 
 module.exports = userRouter;

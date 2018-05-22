@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, AppBar, Toolbar,
-         Typography, IconButton, Switch, 
+         Typography, IconButton, Switch, Avatar,
          FormControlLabel, FormGroup, Menu, MenuItem, Button,
          ListItemIcon, ListItemText, Paper, Divider, Grid, InputAdornment,
          List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from 'material-ui';
@@ -11,10 +11,16 @@ import SendIcon from '@material-ui/icons/Send';
 import {NavLink, Link} from 'react-router-dom';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import classNames from 'classnames';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
+  },
+  root2: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
   },
   flex: {
     flex: 1,
@@ -31,8 +37,31 @@ const styles = theme => ({
       },
     },
   },
-  primary: {},
-  icon: {},
+  textField: {
+    width: 185,
+    color: theme.palette.common.white,
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+    color: theme.palette.common.white,
+  },
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  button2: {
+    color: "white",
+  },
+  avatar: {
+    margin: 10,
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60,
+  },
 });
 
 class Navabar extends React.Component {
@@ -41,9 +70,10 @@ class Navabar extends React.Component {
     this.state = {
       auth: false,
       anchorEl: null,
-      userName: "",
+      username: "",
       password: "",
       showPassword: false,
+      user: [],
     }; 
     this.handleChange = this.handleChange.bind(this);
     this.handleMenu = this.handleMenu.bind(this);
@@ -51,6 +81,8 @@ class Navabar extends React.Component {
     this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
     this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.login = this.login.bind(this);
+    this.getUserData = this.getUserData.bind(this);
   }
 
   handleChange(event, checked)  {
@@ -84,7 +116,7 @@ class Navabar extends React.Component {
   login(){
     var that = this
     var obj = {
-      username: this.state.userName,
+      username: this.state.username,
       password: this.state.password
     }
     $.ajax({
@@ -93,6 +125,10 @@ class Navabar extends React.Component {
       data:obj,
       success:function(data){
         alert("Login sucess");
+        that.setState({
+          auth: true
+        })
+        that.getUserData();
       },
       error:function(err){
         console.log(err);
@@ -116,6 +152,20 @@ class Navabar extends React.Component {
     });
   }
 
+  getUserData() {
+    var that = this
+    $.ajax({
+      url:'/api/userController/getLogin',
+      type:'GET',
+      success:function(data){
+        console.log(data)
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+  }
+
   render() {
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
@@ -130,7 +180,9 @@ class Navabar extends React.Component {
             </Typography>
             {auth && (
               <div>
-
+                <Button component={Link} to="/" className={classes.button2}>
+                  Home
+                </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
@@ -152,123 +204,11 @@ class Navabar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}
-                >
-                  <div className={classes.root2}>
-                    <List
-                      component="nav"
-                      subheader={<ListSubheader component="div">Controller Menu</ListSubheader>}
-                    >
-                      <ListItem button onClick={this.handleClickDep}>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        Department
-                        {this.state.openDep ? <ExpandLess /> : <ExpandMore />}
-                      </ListItem>
-                      <Collapse in={this.state.openDep} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <NavLink to = "/admin/addDept" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              New Department
-                            </ListItem>
-                          </NavLink>
-                          <NavLink to = "/admin/retriveAllDepts" className= "navListItem">
-                            <ListItem button className={classes.nested}>
-                              All Departments
-                            </ListItem>
-                          </NavLink>
-                          <NavLink to = "/admin/addDoctorToDepartment" className= "navListItem">
-                            <ListItem button className={classes.nested}>
-                              Add Doctor to Department
-                            </ListItem>
-                          </NavLink>
-                          <NavLink to = "/admin/RetriveDoctorInDepartment" className= "navListItem">
-                            <ListItem button className={classes.nested}>
-                              Show doctors in department
-                            </ListItem>
-                          </NavLink>
-                        </List>
-                      </Collapse>
-
-                      <Divider />
-
-                      <ListItem button onClick={this.handleClickLab}>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        Labs
-                        {this.state.openLab ? <ExpandLess /> : <ExpandMore />}
-                      </ListItem>
-                      <Collapse in={this.state.openLab} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <NavLink to = "/admin/AddLabTechncians" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              New Lab technician
-                            </ListItem>
-                          </NavLink>
-                          <NavLink to = "/admin/retriveLabTech" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              All lab technicians
-                            </ListItem>
-                          </NavLink>
-                          <NavLink to = "/admin/retriveLabResults" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              All labs results
-                            </ListItem>
-                          </NavLink>
-                        </List>
-                      </Collapse>
-
-                      <Divider />
-
-                      <ListItem button onClick={this.handleClickDoc}>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        Doctors
-                        {this.state.openDoc ? <ExpandLess /> : <ExpandMore />}
-                      </ListItem>
-                      <Collapse in={this.state.openDoc} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <NavLink to = "/admin/AddDoctor" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              New Doctor
-                            </ListItem>
-                          </NavLink>
-                          <NavLink to = "/admin/retriveAllDoctor" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              All Doctors
-                            </ListItem>
-                          </NavLink>
-                        </List>
-                      </Collapse>
-
-                      <Divider />
-
-                      <ListItem button onClick={this.handleClickPat}>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        Patients
-                        {this.state.openPat ? <ExpandLess /> : <ExpandMore />}
-                      </ListItem>
-                      <Collapse in={this.state.openPat} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <NavLink to = "/admin/retrivePatient" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              Search Patient
-                            </ListItem>
-                          </NavLink>
-                          <NavLink to = "/admin/RetriveAllPatient" className = "navListItem">
-                            <ListItem button className={classes.nested}>
-                              All Patient
-                            </ListItem>
-                          </NavLink>
-                        </List>
-                      </Collapse>
-
-                    </List>
-                  </div>
+                >                    
+                  <MenuItem onClick={this.handleClose} component={Link} to="/user/getAppointment">Get appointment</MenuItem>
+                  <Divider />
+                  <MenuItem onClick={this.handleClose} component={Link} to="/user/update">Change password</MenuItem>
+                  <MenuItem onClick={this.handleClose} component={Link} to="/api/userController/logout">Logout</MenuItem>
                 </Menu>
               </div>
             )}
@@ -282,7 +222,7 @@ class Navabar extends React.Component {
                   className={classes.textField}
                   margin="normal"
                   value={this.state.username}
-                  name="userName"
+                  name="username"
                   onChange={this.onChange}
                 />
                 <FormControl className={classNames(classes.margin, classes.textField)}>
