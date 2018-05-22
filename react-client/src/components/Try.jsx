@@ -41,7 +41,7 @@ class Try extends React.Component{
 		super(props);
 		this.state={
 		date: null,
-    	time:"",
+    	hour:"",
     	activeStep:0,
     	appDate:[],
     	todayDate:[],
@@ -97,7 +97,7 @@ componentDidMount(){
 		return(
 			<TextField
         type="time"
-        value={this.state.time}
+        value={this.state.hour}
         onChange={this.handleTime}
         format={"HH:mm"}
         className={classes.textField}
@@ -114,7 +114,7 @@ componentDidMount(){
 	handleTime(e){
 	console.log('e.target.value ',e.target.value)
 	this.setState({
-		time: e.target.value,
+		hour: e.target.value,
 	})
 	}
 
@@ -214,9 +214,42 @@ componentDidMount(){
 		)
 	}
 	handleNext(){
-		this.setState({
+		if(this.state.activeStep===0){
+			if(this.state.doc){
+				this.setState({
 			activeStep:this.state.activeStep +1
 		})
+			}else{
+				alert('please select doctor')
+			}
+		}
+		if(this.state.activeStep===1){
+			if(this.state.today<=this.state.dataToMain){
+				this.setState({
+			activeStep:this.state.activeStep +1
+				})
+			}else{
+				alert('please select date')
+			}
+		}
+		if(this.state.activeStep===2){
+			if(this.state.hour){
+				this.setState({
+			activeStep:this.state.activeStep +1
+				})
+			}else{
+				alert('please select time')
+			}
+		}
+		if(this.state.activeStep===3){
+							this.setState({
+			activeStep:this.state.activeStep +1
+				})
+		}
+
+		// this.setState({
+		// 	activeStep:this.state.activeStep +1
+		// })
 	}
 
 	handleBack(){
@@ -262,12 +295,11 @@ componentDidMount(){
 
 	handleComplete(){
 		console.log('this.state handleComplete ',this.state)
+		console.log('handle complete ',this.state.hour)
 		var obj={
-			month:5,
-			day:5,
-			hour:5,
-			year:2018,
-			doctorId:'5afdccc96586d3161e1299de',
+			date:this.state.dataToMain,
+			hour:this.state.hour,
+			doctorId:this.state.doc,
 			userId:'5afdccc96586d3161e1299e2'
 		}
 		$.ajax({
@@ -305,19 +337,14 @@ componentDidMount(){
 						>
 						BACK
 						</Button>
-						{that.state.show&&(
-							<div>
 						<Button
 						variant="raised"
 						color="primary"
 						onClick={that.handleNext}
 						className={classes.button}
 						>
-						
 						{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
 						</Button>
-							</div>
-							)}
 
 						</div>
 						<button onClick={that.test}>test</button>

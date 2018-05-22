@@ -2,12 +2,10 @@ var Appoinment =require('./Appoinments');
 
 
 exports.add=function(req,res){
-console.log("appoinment controller")
+console.log('req body ',req.body)
 	var Appoint=new Appoinment({
-		day:req.body.day,
-		month:req.body.month,
+		date:req.body.date,
 		hour:req.body.hour,
-		year:req.body.year,
 		doctorId:req.body.doctorId,
 		userId:req.body.userId,
 	});
