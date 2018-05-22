@@ -15,7 +15,8 @@ class Main extends React.Component {
       <Navbar/>
       <br/>
         <Route exact path="/" component={Home} />
-        <Route path='/create' component={Create} />
+        <Route path="/user/create" component={Create} />
+
       </div>
     )
   }

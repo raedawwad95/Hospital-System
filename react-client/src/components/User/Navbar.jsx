@@ -148,6 +148,7 @@ class Navbar extends React.Component {
         that.setState({
           auth: true
         })
+        that.getUserData();
       },
       error:function(err){
         console.log(err);
@@ -219,7 +220,7 @@ class Navbar extends React.Component {
             )}
             {!auth && (
               <div>
-              <Button component={Link} to="/Create" className={classes.button2}>
+              <Button component={Link} to="/user/create" className={classes.button2}>
                   Create Account
                 </Button>
                 <TextField

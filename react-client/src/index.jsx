@@ -18,8 +18,8 @@ class App extends React.Component {
     <Router history={browserHistory}>
       <div className="container-fluid">
 
-      <Route exact path="/" render={()=><Main />}/>
-      <Route path="/test" render={()=><Home2 />}/>
+      <Route exact path="/" component={Main}/>
+      <Route path="/user" render={()=><Main />}/>
       <Route path="/admin" component={Admin}/>
       <Route path="/doctor" component={Doctor}/>
       <Route path="/labs" component={Labs}/>
