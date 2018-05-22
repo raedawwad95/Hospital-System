@@ -58,6 +58,7 @@
     "react-modal": "^3.4.4",
     "react-native": "0.55.3",
     "react-router-dom": "^4.2.2",
+    "react-select": "^1.2.1",
     "react-test-utils": "0.0.1",
     "reactjs-popup": "^1.1.1",
     "render-shallow": "^1.1.0",

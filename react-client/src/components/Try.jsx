@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ChooseDate from './ChoseDate.jsx'
+import ChooseTime from './ChoseTime.jsx'
+import ChooseDoctor from './ChooseDoctor.jsx'
 const styles = theme => ({
   root: {
     width: '90%',
@@ -28,41 +30,48 @@ const styles = theme => ({
 
 
 class Try extends React.Component{
-	constructor(){
-		super();
+	constructor(props){
+
+		super(props);
 		this.state={
 		date: null,
     	time: null,
-    	activeStep:0
+    	activeStep:0,
+    	appDate:[],
+    	todayDate:[]
 		}
+		console.log('ksladjlkaslkd ',this.props)
 
 		this.handleNext=this.handleNext.bind(this);
 		this.getSteps=this.getSteps.bind(this);
 		this.getStepContent=this.getStepContent.bind(this);
 		this.handleBack=this.handleBack.bind(this);
 		this.handleReset=this.handleReset.bind(this);
+		this.chooseDateData=this.chooseDateData.bind(this)
 
 	}
 
 	getSteps(){
-		return ['step1','ChooseDate','step3'];
+		return ['Choose Doctor','Choose Date','Choose Time','final step'];
 	}
 
 	getStepContent(step){
 		switch(step){
 			case 0:
-			return 'here should be the doctors';
+			return <ChooseDoctor />;
 			case 1:
-			return <ChooseDate />;
+			return <ChooseDate cb={this.chooseDateData}/>;
+			case 2:
+			return <ChooseTime />;
 			case 3:
-			return 'step3step3step3';
-			default:
-			return 'unknown step';
+			return 'sadas';
 
 		}
 	}
-	
+		
+
 	handleNext(){
+		console.log('this state next',this.state)
 		this.setState({
 			activeStep:this.state.activeStep +1
 		})
@@ -80,7 +89,57 @@ class Try extends React.Component{
 		})
 	}
 
+
+
+	chooseDateData(data){
+
+		console.log('datadatadatadatadata ',this.state)
+		var year=data.dataToMain.slice(0,4);
+		var month=data.dataToMain.slice(5,7);
+		var day=data.dataToMain.slice(8,10);
+		year =parseInt(year)
+		month =parseInt(month)
+		day =parseInt(day)
+
+		var tYear=data.today.slice(0,4);
+		var tMonth=data.today.slice(5,7);
+		var tDay=data.today.slice(8,10);
+		tYear =parseInt(tYear)
+		tMonth =parseInt(tMonth)
+		tDay =parseInt(tDay)
+		console.log('tdaytday ',typeof(tDay))
+		this.setState({ 
+			appDate:[year,month,day],
+			todayDate:[tYear,tMonth,tDay]
+		});
+
+		console.log('tday  ________ ',this.state)
+		
+	}
+
+	// x(year,month,day,tYear,tMonth,tDay){
+	// 	console.log('year ',year)
+	// 	console.log('month ',month)	
+	// 	console.log('day ',day)	
+	// 	console.log('tYear ',tYear)	
+	// 	console.log('tMonth ',tMonth)	
+	// 	console.log('tDay ',tDay)	
+	// 	this.setState({
+	// 		appDate:[year,month,day],
+
+	// 	})
+	// 	// console.log('uuuuuuuuuuuuuuuuuuuu ',this.state)
+	// }
+
+	// addToState(year,month,day,tYear,tMonth,tDay){
+	// 	this.setState({
+	// 		appDate:[year,month,day],
+	// 		todayDate:[tYear,tMonth,tDay]
+	// 	})
+	// }
+
 	render(){
+		console.log('this.state ',this.state)
 		var that=this;
 		const classes = this.props;
 		const steps=this.getSteps();
@@ -129,14 +188,7 @@ class Try extends React.Component{
 				)}
       	</div>
 
-      <TextField
-      label='fofa'
-      type='date'
-      defaultValue='2018-05-20'
-      inputLabelProps={{
-      	shrink:true
-      }}
-      />
+     
 
  
       	</div>

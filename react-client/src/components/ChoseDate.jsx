@@ -19,7 +19,8 @@ class ChooseDate extends React.Component{
 		super(props)
 		this.state={
 			   date: moment(this.props.value, 'LLL'),
-			   today: moment( Date(),'LLL')
+			   today: '',
+			   dataToMain:''
 		}
 		this.handleChange=this.handleChange.bind(this)
 		this.formatDate=this.formatDate.bind(this)
@@ -45,27 +46,36 @@ class ChooseDate extends React.Component{
 	}
 
 	handleChange(){
-		 console.log('date value ',date.value)
-		 console.log('date value ',typeof(date.value))
-
+	var	date1= Date(date)
+	var	date2= Date.parse(date1)
+	this.setState({
+		dataToMain:date.value
+	})
+	this.props.cb(this.state)
+		
 	}
+
+	
+	
 
 	render(){
 		const classes=this.props
+		//this.props.cb(this.state)
+
 		return(
 			<div>
 			 <TextField
-			 id="date"
-      label='chose the date'
-      type='date'
-      defaultValue="2017-05-24"
-      className={classes.textField}
-      dateFormat="LLL"
-      onChange={this.handleChange}
-      inputLabelProps={{
-      	shrink:true
-      }}
-      />
+			  id="date"
+		      label='chose the date'
+		      type='date'
+		      defaultValue="2018-05-24"
+		      className={classes.textField}
+		      dateFormat="LLL"
+		      onChange={this.handleChange}
+		      inputLabelProps={{
+		      	shrink:true
+		      }}
+		      />
       </div>
 			)
 	}
