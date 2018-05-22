@@ -40,11 +40,18 @@ labsTechnciansRouter.route('/')
 	.get(function(req,res){
 		LabsTechnciansController.PatientResult(req,res);
 	})
+<<<<<<< HEAD
 
 	labsTechnciansRouter.route('/:userNameLabTech')
 	.delete(function(req,res){
 		LabsTechnciansController.deleteOne(req,res)
 	})
 
+=======
+    labsTechnciansRouter.route('/getOne/tech')
+	.get(function (req, res) {
+		LabsTechnciansController.retrieveOne(req, res);
+	})
+>>>>>>> updateTech
 
 module.exports = labsTechnciansRouter;

@@ -43,7 +43,7 @@ exports.update=function(req,res){
 			console.error("No doctor found");
 		} else {
 			doctor.password = req.body.password;
-			doctor.save;
+			doctor.save();
 			res.json("Updated");
 		}
 	})

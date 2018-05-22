@@ -35,18 +35,18 @@ exports.Create = function (req, res) {
 
 //Update Techncians information 
 exports.update=function(req,res){
-	var updateTechncians ={
-	"password":req.body.password,
-	"fullName":req.body.fullName,
-	"personalImgUrl": req.body.personalImgUrl
-	}
-	console.log(updateTechncians)
-	//update Techncians information 
-	LabsTechncians.update({"userName":req.body.userName},
-		{$set:updateTechncians},
-		function(err,data){
-		res.json(data);
-	});
+	LabsTechncians.findOne({userName:req.session.userName}).exec(function (err,tech){
+		if(err){
+			console.error(err);
+		}
+		if(!tech){//doctor not found
+			console.error("No tech found");
+		} else {
+			tech.password = req.body.password;
+			tech.save();
+			res.json("Updated");
+		}
+	})
 
 }
 
@@ -131,3 +131,11 @@ exports.deleteOne=function(req,res){
 		res.send(deleted)
 	})
 }
+exports.retrieveOne=function(req,res){
+	LabsTechncians.findOne({userName : req.session.userName},function(err,data){
+		if(err){
+			res.send(err);
+		}
+		res.json(data);
+	});
+} 
