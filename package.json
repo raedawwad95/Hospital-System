@@ -28,7 +28,7 @@
     "express-session": "^1.15.6",
     "jquery": "^3.1.1",
     "lodash": "^4.17.10",
-    "material-ui": "^1.0.0-beta.47",
+    "material-ui": "next",
     "material-ui-upload": "^1.2.1",
     "moment": "^2.22.1",
     "moment-range": "^4.0.1",

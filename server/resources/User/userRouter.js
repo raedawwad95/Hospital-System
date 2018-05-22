@@ -13,6 +13,11 @@ userRouter.route('/login')
 		userController.login(req, res);
 	})
 
+userRouter.route('/loginMobile')
+	.post(function (req, res) {
+		userController.loginNative(req, res);
+	})
+
 // for create new user accout
 userRouter.route('/create')
 	.post(function (req, res) {
