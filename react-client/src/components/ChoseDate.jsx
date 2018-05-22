@@ -51,8 +51,7 @@ class ChooseDate extends React.Component{
 	this.setState({
 		dataToMain:date.value
 	})
-	this.props.cb(this.state)
-		
+	this.props.cb(this.state)		
 	}
 
 	

@@ -7,6 +7,7 @@ console.log("appoinment controller")
 		day:req.body.day,
 		month:req.body.month,
 		hour:req.body.hour,
+		year:req.body.year,
 		doctorId:req.body.doctorId,
 		userId:req.body.userId,
 	});

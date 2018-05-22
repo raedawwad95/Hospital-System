@@ -113,7 +113,6 @@ class Try extends React.Component{
 			todayDate:[tYear,tMonth,tDay]
 		});
 
-		console.log('tday  ________ ',this.state)
 		
 	}
 
