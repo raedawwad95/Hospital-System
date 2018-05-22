@@ -40,10 +40,16 @@ class Navabar extends React.Component {
     this.state = {
       auth: true,
       anchorEl: null,
+      userName: "",
+      password: "",
+      showPassword: false,
     }; 
     this.handleChange = this.handleChange.bind(this);
     this.handleMenu = this.handleMenu.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
+    this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   handleChange(event, checked)  {
@@ -57,6 +63,57 @@ class Navabar extends React.Component {
   handleClose() {
     this.setState({ anchorEl: null });
   };
+
+  onChange(e){
+    this.setState({
+      [e.target.name]:e.target.value
+    });
+  }
+
+  handleMouseDownPassword(event) {
+    event.preventDefault();
+  };
+
+  handleClickShowPassword() {
+    this.setState({ 
+      showPassword: !this.state.showPassword 
+    });
+  };
+
+  login(){
+    var that = this
+    var obj = {
+      username: this.state.userName,
+      password: this.state.password
+    }
+    $.ajax({
+      url:'/api/userController/login',
+      type:'POST',
+      data:obj,
+      success:function(data){
+        alert("Login sucess");
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+  }
+
+  componentDidMount() {
+    var that = this
+    $.ajax({
+      url:'/itDep/isLogin',
+      type:'GET',
+      success:function(data){
+        that.setState({
+          auth: true
+        })
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+  }
 
   render() {
     const { classes } = this.props;

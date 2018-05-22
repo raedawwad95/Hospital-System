@@ -11,7 +11,6 @@ exports.create = function (req, res) {
 };
 
 exports.login = function (req, res) {
-	console.log(req.body)
 	Users.findOne({username: req.body.username}).exec(function (err, user) {
 		if (err) {
 			console.error(err);
@@ -41,7 +40,6 @@ exports.login = function (req, res) {
 };
 
 exports.loginNative = function (req, res) {
-	console.log(req.body)
 	Users.findOne({username: req.body.username}).exec(function (err, user) {
 		if (err) {
 			console.error(err);
@@ -111,14 +109,13 @@ exports.retrive = function (req, res) {
 			}
 		})
 }
-/*
-Project.find(query)
-  .populate({ 
-     path: 'pages',
-     populate: {
-       path: 'components',
-       model: 'Component'
-     } 
-  })
-  .exec(function(err, docs) {});
-  */
+
+exports.isLogin = function(req, res) {
+	if (req.session.userType === "P") {
+		res.json(true);
+	} else {
+		console.error("not Login");
+		res.status(500)
+ 		res.json('error')
+	}
+}
