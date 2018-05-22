@@ -56,14 +56,14 @@ exports.login = function (req, res) {
 			console.error(err);
 		} 
 		if (!tech) { // if tech not found response
-			res.json("No user found");
+			console.error("No user found");
 		} else { // check the password   comparePassword function 
 			tech.comparePassword(req.body.password, function(err, isMatch) {
 				if (err) {
 					console.error(err);
 				}
 				if (!isMatch) { // password not match case
-					res.json("Wrong password");
+					console.error("Wrong password");
 				} else { // if true generate  a seassion
 					return req.session.regenerate(function(err) {
 		        		if (err) {
@@ -72,7 +72,6 @@ exports.login = function (req, res) {
 		        		req.session.userName = tech.userName;
 		        		req.session.techncianType = tech.techncianType;
 		        	    req.session.ID = tech._id;
-
 		        		res.json(tech);
 					});
 				}
