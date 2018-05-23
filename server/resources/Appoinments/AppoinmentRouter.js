@@ -7,6 +7,7 @@ AppoinmentRouter.route('/')
 	AppoinmentController.add(req,res);
 })
 .get(function(req,res){
+	console.log('get router appoinment')
 	AppoinmentController.retrive(req,res);
 })
 

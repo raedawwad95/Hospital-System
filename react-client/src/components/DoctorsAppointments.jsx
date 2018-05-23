@@ -17,48 +17,19 @@ class DoctorApp extends React.Component{
 			doctors:[],
 			app:[],
 			doc:'5afdccc96586d3161e1299de',
-			todayYear:0,
-			todayMonth:0,
-			todayDay:0
+			
 		}
-		this.formatDate=this.formatDate.bind(this)
-
-	}
-
-	formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
+		this.sort=this.sort.bind(this)
 	}
 	
 	componentDidMount(){
-		var today=this.formatDate(new Date);
-
-		var year=today.slice(0,4);
-		var month=today.slice(5,7);
-		var day=today.slice(8,10);
-		year =parseInt(year)
-		month =parseInt(month)
-		day =parseInt(day)
-				this.setState({
-			todayYear:year,
-			todayMonth:month,
-			todayDay:day
-		})
 		var that=this;
 		var doctorIdArr=[];
-		var appArr=[];
 		$.ajax({
 			type:'get',
 			url:'/Doctor/retrieve',
 			success:function(data){
-				console.log('yes')
+				console.log(data)
 				for(var i=0;i<data.length;i++){
 					doctorIdArr.push(data[i])
 				}
@@ -67,52 +38,47 @@ class DoctorApp extends React.Component{
 			})
 			}
 		})
-				
+		console.log('that state',this.state)
+		var appArr=[];		
 		$.ajax({
 			type:'get',
 			url:'/app',
-			success:function(data){
-				console.log('data[i] ',data)
-				for(var i=0;i<data.length;i++){
-					console.log('that.state.year',that.state.year)
-					console.log('data[i].year',data[i].year)
-					if(that.state.todayYear<=data[i].year){
-						if(that.state.todayMonth<=data[i].month){
-							if(that.state.todayMonth===data[i].month){
-								if(that.state.todayDay<=data[i].day){
-									appArr.push(data[i])									
-								}
-							}else {
-								appArr.push(data[i])
-							}
-						}
-					}
-
+			success:function(data1){
+				console.log(data1)
+				for(var j=0;j<data1.length;j++){
+					appArr.push(data1[j])
 				}
-				that.setState({
+				that.setState({		
 				app:appArr
-				})
-
+			})
 			}
 		})
 	}
 
+	sort(){
+
+		
+
+	}
 
 	render(){
-		console.log('aaaaaaaaaa',this.state)
 		const classes=this.props
+		var that=this
 		return(
 			<div>
-				{this.state.app.map(function(app){
+
+			<Button onClick={that.sort}>sort</Button>
+				{this.state.doctors.map(function(item){
 					return(
-   						<SnackbarContent className={classes.snackbar}
-					 message={app.day}  />
+						<h1>{item.fullName}</h1>
 						)
-					
 				})}
-
-
-
+				----------------------------------------------
+				{this.state.app.map(function(item){
+					return(
+						<h1>{item._id}</h1>
+						)
+				})}
 			</div>
 			)
 	}
@@ -121,8 +87,3 @@ class DoctorApp extends React.Component{
 export default DoctorApp;
 
 
-	// {this.state.app.map(function(item){
-	// 	return(
-	// 		<h4>{item.day}</h4>
-	// 		)
-	// })}

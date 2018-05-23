@@ -96,7 +96,8 @@ class DoctorAppointments extends React.Component{
 
 	render(){
 
-		return(<div>
+		return(
+			<div>
 			<select name='doctor' onChange={this.handleDoctorChange}>
 			<option value=''>chose a doctor</option>
 			{this.state.docId.map(function(doc){

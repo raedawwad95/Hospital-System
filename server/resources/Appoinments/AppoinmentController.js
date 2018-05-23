@@ -20,15 +20,22 @@ console.log('req body ',req.body)
 }
 
 exports.retrive=function(req,res){
+	console.log('git appointment controller')
 	Appoinment.find({})
 	.populate('doctorId')
 	.populate('userId')
 	.exec(function(err,data){
 		if(err){
-			res.json(err)
+			console.log('there is an err')
 		}
+		if(!data){
+			res.send('there is no data')
+		}else{
 		res.json(data)
-	})
+		console.log('yyyyyyyyyyyyys',data)
+
+		}
+	});
 }
 
 // exports.retrive=function(req,res){
