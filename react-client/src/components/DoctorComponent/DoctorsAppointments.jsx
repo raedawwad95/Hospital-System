@@ -1,15 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { withStyles, Button, Paper, Table, SnackbarContent,
+		 TableBody, TableCell, TableHead, TableRow } from 'material-ui';
+
 const styles = theme => ({
   		snackbar: {
     	margin: theme.spacing.unit,
@@ -72,9 +66,6 @@ class DoctorApp extends React.Component{
 		this.setState({
 			today:today
 		})
-
-
-
 	}
 
 	formatDate(date) {
@@ -97,8 +88,6 @@ class DoctorApp extends React.Component{
 
 	sort(){
 		var thisDay=this.state.today;
-
-
 		var that=this;
 		var app=this.state.app;
 		var docApp=[];

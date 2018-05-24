@@ -179,8 +179,9 @@ class DoctorNavbar extends React.Component {
                   onClose={this.handleClose}
                 >                    
                   <MenuItem onClick={this.handleClose} component={Link} to="/doctor/patient">Patents</MenuItem>
-                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">My account</MenuItem>
+                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/apppointment">Appointments</MenuItem>
                   <Divider />
+                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">Chnage Password</MenuItem>
                 </Menu>
               </div>
             )}

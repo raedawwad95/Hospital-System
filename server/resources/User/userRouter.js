@@ -50,6 +50,7 @@ userRouter.route('/Logout')
 		userController.logout(req, res);
 	})
 
+// get the data of login user
 userRouter.route('/getLogin')
 	.get(function (req, res) {
 		userController.getLoginData(req , res);
