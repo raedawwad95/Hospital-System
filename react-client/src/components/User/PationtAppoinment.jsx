@@ -1,21 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-
-
+import { withStyles, MenuItem, TextField, Step, InputLabel, Stepper,
+		FormControl, StepLabel, StepContent, Paper,
+		Button, Select, Typography } from 'material-ui';
 
 const styles = theme => ({
   root: {
@@ -49,7 +37,8 @@ class Pationt extends React.Component{
     	today: '',
 		dataToMain:'',
 		doc:'',
-		move:false
+		move:false,
+		user:[]
 		}
 
 		this.handleNext=this.handleNext.bind(this);
@@ -66,6 +55,7 @@ class Pationt extends React.Component{
 		this.handleTime=this.handleTime.bind(this)
 		this.handleDoctor=this.handleDoctor.bind(this)
 		this.handleComplete=this.handleComplete.bind(this)
+		this.getUserData = this.getUserData.bind(this);
 	}
 componentDidMount(){
 		var arr=[];
@@ -82,12 +72,27 @@ componentDidMount(){
 				})
 			}
 		})
-
-
 		var today=this.formatDate(new Date);
 		this.setState({
 			today:today
 		})
+		this.getUserData();
+	}
+
+	getUserData() {
+	    var that = this
+	    $.ajax({
+	      url:'/api/userController/getLogin',
+	      type:'GET',
+	      success:function(data){
+	        that.setState({
+	          user: data
+	        })
+	      },
+	      error:function(err){
+	        console.log(err);
+	      }
+	    });
 	}
 
 	ChooseTime(){
@@ -288,7 +293,7 @@ componentDidMount(){
 			date:this.state.dataToMain,
 			hour:this.state.hour,
 			doctorId:this.state.doc,
-			userId:'5afdccc96586d3161e1299e2'
+			userId:this.state.user._id
 		}
 		$.ajax({
 			url:'/app',

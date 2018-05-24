@@ -3,7 +3,9 @@ import DoctorNavbar from './DoctorNavbar.jsx';
 import DoctorHome from './DoctorHome.jsx';
 import PatientDataAddRecord from './PatientDataAddRecord.jsx';
 import UpdateDoctor from './UpdateDoctor.jsx';
+import Appointment from './DoctorsAppointments.jsx';
 import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-router-dom';
+
 class Doctor extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class Doctor extends React.Component {
         <Route exact path="/doctor" component={DoctorHome} />
         <Route path="/doctor/patient" component={PatientDataAddRecord} />
         <Route path="/doctor/update" component={UpdateDoctor} />
+        <Route path="/doctor/apppointment" component={Appointment} />
       </div>
     )
   }
