@@ -1,6 +1,5 @@
 import React from 'react';
 import Navabar from './Navabar.jsx'
-
 class Home extends React.Component {
   constructor(props) {
     super(props);

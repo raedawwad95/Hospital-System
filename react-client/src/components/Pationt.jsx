@@ -10,7 +10,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ChooseDoctor from './ChooseDoctor.jsx';
+// import ChooseDoctor from './ChooseDoctor.jsx';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -35,7 +35,7 @@ const styles = theme => ({
 });
 
 
-class Try extends React.Component{
+class Pationt extends React.Component{
 	constructor(props){
 
 		super(props);
@@ -63,7 +63,6 @@ class Try extends React.Component{
 		this.ChooseDate = this.ChooseDate.bind(this)
 		this.handleDate = this.handleDate.bind(this)
 		this.formatDate = this.formatDate.bind(this)
-		this.test = this.test.bind(this)
 		this.ChooseTime=this.ChooseTime.bind(this)
 		this.handleTime=this.handleTime.bind(this)
 		this.handleDoctor=this.handleDoctor.bind(this)
@@ -112,7 +111,6 @@ componentDidMount(){
 	}
 
 	handleTime(e){
-	console.log('e.target.value ',e.target.value)
 	this.setState({
 		hour: e.target.value,
 	})
@@ -159,7 +157,6 @@ componentDidMount(){
 	}
 
 	handleDoctor(e){
-		console.log(e.target.value)
 		this.setState({
 			doc:e.target.value,
 			move:!this.state.move
@@ -180,15 +177,12 @@ componentDidMount(){
 	}
 
 	handleDate(e){
-		console.log(' tal ',e.target.value)
 	// var	date1= Date(date)
 	// var	date2= Date.parse(date1)
 	var test=this.formatDate(date.value)
-	console.log('data tal ',test)
 	this.setState({
 		dataToMain: e.target.value,
 	})
-	console.log('chose date ',this.state)
 	}
 		
 	ChooseDate() {
@@ -286,16 +280,11 @@ componentDidMount(){
 			todayDate:[tYear,tMonth,tDay]
 		});
 
-		console.log(this.state)
 	}
 
-	test() {
-		console.log(this.state)
-	}
+	
 
 	handleComplete(){
-		console.log('this.state handleComplete ',this.state)
-		console.log('handle complete ',this.state.hour)
 		var obj={
 			date:this.state.dataToMain,
 			hour:this.state.hour,
@@ -307,13 +296,11 @@ componentDidMount(){
 			type:'post',
 			data:obj,
 			success:function(data){
-				console.log('done')
 			}
 		})
 	}
 
 	render(){
-		// console.log(this.state)
 		var that=this;
 		const classes = this.props;
 		const steps=this.getSteps();
@@ -347,7 +334,6 @@ componentDidMount(){
 						</Button>
 
 						</div>
-						<button onClick={that.test}>test</button>
 						</div>
 						</StepContent>
 						</Step>
@@ -368,7 +354,6 @@ componentDidMount(){
       	</div>
 
      <div>
-						<Button onClick={that.test}>TEST</Button>
 						</div>
 
  
@@ -378,8 +363,9 @@ componentDidMount(){
 
 
 }
-Try.propTypes = {
+
+Pationt.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(Try);
+export default withStyles(styles)(Pationt);
