@@ -1,4 +1,5 @@
 import React from 'react';
+import News from './News.jsx'
 
 class Home extends React.Component {
   constructor(props) {
@@ -10,7 +11,9 @@ class Home extends React.Component {
   render(){
     return(
       <div>
-        <h1> HomePage for Website </h1>
+        <h1> Last NEWS about hospital </h1>
+        <br />
+        <News/>
       </div>
 
     )
