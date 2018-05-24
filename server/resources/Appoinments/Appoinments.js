@@ -26,11 +26,3 @@ var Appoinment =mongoose.model('Appoinment',AppoinmetSchema);
 module.exports=Appoinment;
 
 
-// {
-//     "day" : "23",
-//     "month" : "5",
-//     "year":"2018",
-//     "hour" : "11",
-//     "doctorId" : "5aff2b34c1629c5397f1fc35",
-//     "userId" : "5afda34d8cd8f1090c6c4e16"
-// }

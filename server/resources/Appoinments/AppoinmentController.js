@@ -11,7 +11,6 @@ console.log('req body ',req.body)
 	});
 	Appoint.save(function(err,data){
 		if(err){
-			console.log('errrrrrrrrrrrrrrrrrrrrrrror')
 			return err
 		}
 		res.json(data);
@@ -20,7 +19,6 @@ console.log('req body ',req.body)
 }
 
 exports.retrive=function(req,res){
-	console.log('git appointment controller')
 	Appoinment.find({})
 	.populate('doctorId')
 	.populate('userId')
@@ -32,13 +30,7 @@ exports.retrive=function(req,res){
 			res.send('there is no data')
 		}else{
 		res.json(data)
-		console.log('yyyyyyyyyyyyys',data)
-
 		}
 	});
 }
 
-// exports.retrive=function(req,res){
-
-// 	Appoinment.find({})
-// }
