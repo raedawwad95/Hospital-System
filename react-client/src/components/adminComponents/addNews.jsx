@@ -1,14 +1,14 @@
 import React from 'react';
 import $ from 'jquery';
-// import { withStyles, MenuItem, TextField, Input, InputLabel, InputAdornment,
-// 		FormControl, Paper, Grid, CardHeader, FormHelperText,
-// 		Button, Select, Card, CardActions, CardContent } from 'material-ui';
+import { withStyles, MenuItem, TextField, Input, InputLabel, InputAdornment,
+		FormControl, Paper, Grid, CardHeader, FormHelperText,
+		Button, Select, Card, CardActions, CardContent } from 'material-ui';
 
-// const styles=theme =>({
+const styles=theme =>({
 
-// })
+})
 
-export class addNews extends Component {
+ class addNews extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={
@@ -18,7 +18,7 @@ export class addNews extends Component {
 			
 		}
 		this.addNewsClick=this.addNewsClick.bind(this);
-
+		this.onChange = this.onChange.bind(this);
 	}
 	onChange(e){
 		this.setState({
@@ -47,8 +47,11 @@ addNewsClick(){
 
 
 	render() {
+		const { classes } = this.props;
+		
 		return (
 			<div>
+			
 				<h1>newsSubject: <input placeholder="enter the subject" name="newsSubject" onChange={this.onChange}/></h1>
 				<h1>newsText: <input placeholder="enter the news" name="newsText" onChange={this.onChange}/></h1>
 				<h1>Image: <input placeholder="enter the Image" name="Image" onChange={this.onChange}/></h1>
@@ -57,3 +60,6 @@ addNewsClick(){
 		);
 	}
 }
+
+
+export default addNews;
