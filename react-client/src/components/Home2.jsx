@@ -1,5 +1,4 @@
 import React from 'react';
-
 class Home2 extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +10,6 @@ class Home2 extends React.Component {
     return(
       <div>
         <h1> Test routing </h1>
-
       </div>
     )
   }
