@@ -16,10 +16,13 @@ class DoctorApp extends React.Component{
 		this.state={
 			doctors:[],
 			app:[],
-			doc:'5afdccc96586d3161e1299de',
+			doc:'',
+			app1:[],
+			show:false
 			
 		}
-		this.sort=this.sort.bind(this)
+		this.sort=this.sort.bind(this);
+		this.handleDoctor=this.handleDoctor.bind(this);
 	}
 	
 	componentDidMount(){
@@ -55,10 +58,39 @@ class DoctorApp extends React.Component{
 		})
 	}
 
+	handleDoctor(e){
+		this.setState({
+			doc:e.target.value
+		})
+	}
+
 	sort(){
-
-		
-
+		var that=this;
+		var app=this.state.app;
+		var docApp=[];
+		var min=app[0];
+		var j=0;
+		while(app[j]){
+			for(var i=0;i<app.length;i++){
+				if(app[j].date<app[i].date){
+					min=app[j];
+					app[j]=app[i];
+					app[i]=min;
+				}
+			}
+			j++
+		}
+		for(var i=0;i<app.length;i++){
+			if(app[i].doctorId._id==this.state.doc){
+				docApp.push(app[i])
+			}
+			console.log('fffff ',docApp)
+		}
+		var s =this.state.show;
+		this.setState({
+			app:docApp,
+			show:!s
+		})
 	}
 
 	render(){
@@ -68,17 +100,26 @@ class DoctorApp extends React.Component{
 			<div>
 
 			<Button onClick={that.sort}>sort</Button>
+			<select name="doctor" onChange={this.handleDoctor}>
+			<option value="">choose doctor</option>
 				{this.state.doctors.map(function(item){
 					return(
-						<h1>{item.fullName}</h1>
+						<option value={item._id} >{item.fullName}</option>
 						)
 				})}
+
+				</select>
 				----------------------------------------------
-				{this.state.app.map(function(item){
+				{this.state.show&&(
+					<div>
+					 {this.state.app.map(function(item){
 					return(
-						<h1>{item._id}</h1>
+						<h1>{item.date}</h1>
 						)
 				})}
+
+					</div>
+					)}
 			</div>
 			)
 	}
@@ -87,3 +128,8 @@ class DoctorApp extends React.Component{
 export default DoctorApp;
 
 
+// {this.state.app.map(function(item){
+// 					return(
+// 						<h1>{item._id}</h1>
+// 						)
+// 				})}
