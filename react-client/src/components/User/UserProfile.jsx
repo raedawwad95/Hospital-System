@@ -68,22 +68,21 @@ render(){
   var that =this;
 if(this.state.userInfo.length>0){
 return(
-  
   <div>
+  <div> <h2 style={{textAlign:'center'}}>  My Profile </h2> <br /> </div> 
   <div className="row " >
-  <div className="col-md-3 "  >
-  <div> <h2>  My Profile </h2> <br /> </div> 
+  <div className="col-md-3 ">
   <div className='container-fluid'>     
   {this.state.userInfo.map(function(item, index){
     return(
       <div>
-      <img  src={item.personalImgUrl}/>
+      <img  src={item.personalImgUrl} className="img-fluid" alt="Responsive image"/>
       <h2 >Name:</h2>
-      <p > {item.FullName}</p>
+      <p style={{fontSize:'160%'}}> {item.FullName}</p>
       <h2 >email:</h2>
-      <p > {item.email}</p>
+      <p style={{fontSize:'160%'}}> {item.email}</p>
       <h2>phoneNumber:</h2> 
-      <p>{item.phone}</p>
+      <p style={{fontSize:'160%'}}>{item.phone}</p>
       </div>
          )
         })}
