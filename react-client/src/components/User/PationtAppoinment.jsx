@@ -39,7 +39,7 @@ class Pationt extends React.Component{
 		doc:'',
 		move:false,
 		user:[],
-		oneDocApp:[]
+		oneDocApp:[],
 		}
 
 		this.handleNext=this.handleNext.bind(this);
@@ -47,7 +47,6 @@ class Pationt extends React.Component{
 		this.getStepContent=this.getStepContent.bind(this);
 		this.handleBack=this.handleBack.bind(this);
 		this.handleReset=this.handleReset.bind(this);
-		//this.chooseDateData=this.chooseDateData.bind(this)
 		this.handleChange=this.handleChange.bind(this)
 		this.ChooseDate = this.ChooseDate.bind(this)
 		this.handleDate = this.handleDate.bind(this)
@@ -116,9 +115,42 @@ componentDidMount(){
 	}
 
 	handleTime(e){
-	this.setState({
-		hour: e.target.value,
-	})
+		var time=e.target.value;
+
+		console.log(time);
+		console.log(e.target.value);
+		console.log('type',typeof(e.target.value))
+		var aHour='';
+		var date='';
+		var counter=true;
+		var startWork=this.state.appData[0].doctorId.hoursOfWork;
+		var startWork=startWork+8+'';
+		startWork=startWork+':00'
+		console.log('startWork ',startWork)
+		console.log('time ',time)
+		console.log()
+		if(time>startWork){
+			counter=false;
+		}
+		console.log('counter ',counter)
+		for(var i=0;i<this.state.appData.length;i++){
+			aHour=this.state.appData[i].hour;
+			date=this.state.appData[i].date;
+			if(time===aHour&&this.state.dataToMain===date){
+				console.log("please select avaliable time")
+				counter=false;
+			}
+		}
+
+		if(counter===true){
+			console.log('yessss')
+			this.setState({
+				hour: e.target.value,
+			})			
+		}else{
+			alert('choose avaliable time')
+		}
+
 	}
 
 	getSteps(){
@@ -197,8 +229,6 @@ componentDidMount(){
 	}
 
 	handleDate(e){
-	// var	date1= Date(date)
-	// var	date2= Date.parse(date1)
 	var appdata=[];
 	var appstate=this.state.appData;
 	for(var i=0;i<appstate.length;i++){
@@ -206,6 +236,7 @@ componentDidMount(){
 			appdata.push(appstate[i]);
 		}
 	}
+	
 	this.setState({
 		appData:appdata
 	})
