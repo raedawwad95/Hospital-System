@@ -31,6 +31,7 @@ const styles=theme =>({
 	    left: '50%',
 	    marginTop: -12,
 	    marginLeft: -12,
+	    padding:50,
 	  },
 
 })
@@ -128,7 +129,7 @@ onImageChange(e){
 			
 			<Card className={classes.card}>
 				<CardContent>
-			<Grid container spacing={10}>
+			<Grid container spacing={30}>
 				<Grid item xs={6} sm={3}>
 					<TextField
 			          required
