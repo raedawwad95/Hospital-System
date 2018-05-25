@@ -30,7 +30,7 @@ class Pationt extends React.Component{
 		date: null,
     	hour:"",
     	activeStep:0,
-    	appDate:[],
+    	appData:[],
     	todayDate:[],
     	doctors:[],
     	age:5,
@@ -38,7 +38,8 @@ class Pationt extends React.Component{
 		dataToMain:'',
 		doc:'',
 		move:false,
-		user:[]
+		user:[],
+		oneDocApp:[]
 		}
 
 		this.handleNext=this.handleNext.bind(this);
@@ -46,7 +47,7 @@ class Pationt extends React.Component{
 		this.getStepContent=this.getStepContent.bind(this);
 		this.handleBack=this.handleBack.bind(this);
 		this.handleReset=this.handleReset.bind(this);
-		this.chooseDateData=this.chooseDateData.bind(this)
+		//this.chooseDateData=this.chooseDateData.bind(this)
 		this.handleChange=this.handleChange.bind(this)
 		this.ChooseDate = this.ChooseDate.bind(this)
 		this.handleDate = this.handleDate.bind(this)
@@ -161,9 +162,24 @@ componentDidMount(){
 	}
 
 	handleDoctor(e){
+		var that=this;
 		this.setState({
 			doc:e.target.value,
 			move:!this.state.move
+		})
+		var that=this;
+		var appArr=[];
+		$.ajax({
+			type:'get',
+			url:'/app',
+			success:function(appdata){
+				for(var i=0;i<appdata.length;i++){
+					appArr.push(appdata[i]);
+				}
+				that.setState({
+					appData:appdata
+				})
+			}
 		})
 
 	}
@@ -183,6 +199,16 @@ componentDidMount(){
 	handleDate(e){
 	// var	date1= Date(date)
 	// var	date2= Date.parse(date1)
+	var appdata=[];
+	var appstate=this.state.appData;
+	for(var i=0;i<appstate.length;i++){
+		if(appstate[i].doctorId._id===this.state.doc){
+			appdata.push(appstate[i]);
+		}
+	}
+	this.setState({
+		appData:appdata
+	})
 	var test=this.formatDate(date.value)
 	this.setState({
 		dataToMain: e.target.value,
@@ -212,6 +238,8 @@ componentDidMount(){
 		)
 	}
 	handleNext(){
+			console.log('stats ',this.state)
+
 		if(this.state.activeStep===0){
 			if(this.state.doc){
 				this.setState({
@@ -264,27 +292,27 @@ componentDidMount(){
 
 
 
-	chooseDateData(data){
+	// chooseDateData(data){
 
-		var year=data.dataToMain.slice(0,4);
-		var month=data.dataToMain.slice(5,7);
-		var day=data.dataToMain.slice(8,10);
-		year =parseInt(year)
-		month =parseInt(month)
-		day =parseInt(day)
+	// 	var year=data.dataToMain.slice(0,4);
+	// 	var month=data.dataToMain.slice(5,7);
+	// 	var day=data.dataToMain.slice(8,10);
+	// 	year =parseInt(year)
+	// 	month =parseInt(month)
+	// 	day =parseInt(day)
 
-		var tYear=data.today.slice(0,4);
-		var tMonth=data.today.slice(5,7);
-		var tDay=data.today.slice(8,10);
-		tYear =parseInt(tYear)
-		tMonth =parseInt(tMonth)
-		tDay =parseInt(tDay)
-		this.setState({ 
-			appDate:[year,month,day],
-			todayDate:[tYear,tMonth,tDay]
-		});
+	// 	var tYear=data.today.slice(0,4);
+	// 	var tMonth=data.today.slice(5,7);
+	// 	var tDay=data.today.slice(8,10);
+	// 	tYear =parseInt(tYear)
+	// 	tMonth =parseInt(tMonth)
+	// 	tDay =parseInt(tDay)
+	// 	this.setState({ 
+	// 		appDate:[year,month,day],
+	// 		todayDate:[tYear,tMonth,tDay]
+	// 	});
 
-	}
+	// }
 
 	
 

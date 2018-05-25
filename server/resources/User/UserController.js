@@ -113,6 +113,7 @@ exports.retrive = function (req, res) {
 exports.isLogin = function(req, res) {
 	if (req.session.userType === "P") {
 		res.json(true);
+
 	} else {
 		console.error("not Login");
 		res.status(500)
@@ -128,6 +129,7 @@ exports.getLoginData = function(req, res) {
 		if (!user) {
 			console.error("no user found");
 		} else {
+			console.log('welcome')
 			res.json(user);
 		}
 	})
