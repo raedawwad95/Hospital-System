@@ -61,7 +61,11 @@ userRouter.route('/:username')
 	.get(function(req, res) {
 		userController.retrive(req, res);
 	})
-
+//retrive one User by session (Login)
+userRouter.route('/retrive/user')
+	.get(function(req, res) {
+		userController.retriveUser(req, res);
+	})
 
 
 module.exports = userRouter;
