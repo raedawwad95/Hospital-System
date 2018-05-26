@@ -3,6 +3,7 @@ import $ from 'jquery'
 import PropTypes from 'prop-types';
 import { Typography, Grid, Card, TextField,CardActions, CardContent, CardMedia,
 		Button,withStyles,CircularProgress } from 'material-ui';
+import moment from 'moment';
 
 const styles = {
   card: {
@@ -68,7 +69,7 @@ export class News extends Component {
 		          <Typography  value={elem.newsText}>{elem.newsText}
 		          </Typography>
 		         
-		          <Typography value ={elem.createdAt}>{elem.createdAt}
+		          <Typography value ={elem.createdAt}>{moment(elem.createdAt).fromNow()}
 		          </Typography>
 
 

@@ -15,7 +15,9 @@ exports.create=function(req,res){
 
 
 exports.Retrive=function(req,res){
-	News.find(function(err,data){
+	News.find({})
+		.sort('-createdAt')
+		.exec(function(err,data){
 		if(err){
 			console.log(err)
 		}
