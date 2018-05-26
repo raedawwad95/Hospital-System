@@ -27,11 +27,13 @@ class DoctorApp extends React.Component{
 			show:false,			//show or hide the app to screen
 			today:'',          // today date
 			todayApp:[],       // store the appoinment of this day
+			user:[]
 			
 		}
 		this.sort=this.sort.bind(this);
 		this.handleDoctor=this.handleDoctor.bind(this);
 		this.formatDate=this.formatDate.bind(this);
+		this.getDoctorData=this.getDoctorData.bind(this);
 	}
 	
 	componentDidMount(){
@@ -66,6 +68,23 @@ class DoctorApp extends React.Component{
 		this.setState({
 			today:today
 		})
+		this.getDoctorData();
+	}
+
+	getDoctorData() {
+	    var that = this
+	    $.ajax({
+	      url:'/api/userController/getLogin',
+	      type:'GET',
+	      success:function(data){
+	        that.setState({
+	          user: data
+	        })
+	      },
+	      error:function(err){
+	        console.log(err);
+	      }
+	    });
 	}
 
 	formatDate(date) {
@@ -87,6 +106,7 @@ class DoctorApp extends React.Component{
 	}
 
 	sort(){
+		console.log('abcdefg ',this.state)
 		var thisDay=this.state.today;
 		var that=this;
 		var app=this.state.app;

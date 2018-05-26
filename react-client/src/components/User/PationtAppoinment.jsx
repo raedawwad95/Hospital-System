@@ -27,19 +27,18 @@ class Pationt extends React.Component{
 
 		super(props);
 		this.state={
-		date: null,
     	hour:"",
     	activeStep:0,
     	appData:[],
     	todayDate:[],
     	doctors:[],
-    	age:5,
     	today: '',
-		dataToMain:'',
+		dataToMain:' ',
 		doc:'',
 		move:false,
 		user:[],
 		oneDocApp:[],
+		doctorName:''
 		}
 
 		this.handleNext=this.handleNext.bind(this);
@@ -56,6 +55,7 @@ class Pationt extends React.Component{
 		this.handleDoctor=this.handleDoctor.bind(this)
 		this.handleComplete=this.handleComplete.bind(this)
 		this.getUserData = this.getUserData.bind(this);
+		this.final=this.final.bind(this)
 	}
 componentDidMount(){
 		var arr=[];
@@ -172,9 +172,22 @@ componentDidMount(){
 			case 2:
 			return this.ChooseTime()
 			case 3:
-			return 'sadas'
+			return this.final();
 
 		}
+	}
+
+	final(){
+		return(
+			<div>
+			<p>
+			You pick an appoinment with Doctor <b> {this.state.doctorName} 
+			</b>
+			<br /> 
+			on <b>{this.state.dataToMain}</b> at <b>{this.state.hour}</b>
+			</p>
+			</div>
+			)
 	}
 
 	ChooseDoctor(){
@@ -209,7 +222,7 @@ componentDidMount(){
 					appArr.push(appdata[i]);
 				}
 				that.setState({
-					appData:appdata
+					appData:appdata,
 				})
 			}
 		})
@@ -230,15 +243,18 @@ componentDidMount(){
 
 	handleDate(e){
 	var appdata=[];
+	var doctorName;
 	var appstate=this.state.appData;
 	for(var i=0;i<appstate.length;i++){
 		if(appstate[i].doctorId._id===this.state.doc){
 			appdata.push(appstate[i]);
+			doctorName=appstate[i].doctorId.fullName
 		}
 	}
 	
 	this.setState({
-		appData:appdata
+		appData:appdata,
+		doctorName:doctorName
 	})
 	var test=this.formatDate(date.value)
 	this.setState({
@@ -251,6 +267,7 @@ componentDidMount(){
 		return (
 			
 			<div>
+
 			 <TextField
 			  id="date"
 		      label='chose the date'
@@ -299,9 +316,10 @@ componentDidMount(){
 			}
 		}
 		if(this.state.activeStep===3){
-							this.setState({
-			activeStep:this.state.activeStep +1
-				})
+			this.setState({
+				activeStep:this.state.activeStep +1
+			})
+			this.handleComplete();
 		}
 
 		// this.setState({
@@ -361,6 +379,23 @@ componentDidMount(){
 			success:function(data){
 			}
 		})
+
+		this.setState({
+		hour:"",
+    	activeStep:0,
+    	appData:[],
+    	todayDate:[],
+    	doctors:[],
+    	today: '',
+		dataToMain:' ',
+		doc:'',
+		move:false,
+		user:[],
+		oneDocApp:[],
+		doctorName:''
+		})
+		this.componentDidMount()
+
 	}
 
 	render(){
@@ -408,9 +443,6 @@ componentDidMount(){
 					<Typography>All steps completed</Typography>
 					<Button onClick={this.handleReset} className={classes.button}>
 					reset
-					</Button>
-					<Button onClick={this.handleComplete} className={classes.button}>
-					SEND
 					</Button>
 					</Paper>
 				)}
