@@ -74,6 +74,7 @@ exports.logout = function (req, res) {
 		res.json("logged out")
 	})
 }
+// retrive All Patient 
 exports.retriveAllPatient = function (req, res) {
 	Users.find({},function(err,users){
 		if(err){
@@ -82,8 +83,37 @@ exports.retriveAllPatient = function (req, res) {
 		res.json(users);
 	})
 		}
+// retrive one user by its username
 exports.retrive = function (req, res) {
 	Users.find({username:req.params.username})
+		.populate({
+			path:'medicalRecords',
+			populate: {
+				path: "doctorId",
+				select: "fullName"
+			}
+		})
+		.populate({
+			path:'labResults',
+			populate: {
+				path: "labTechnicianId",
+				select: "fullName"
+			}
+		})
+		.exec(function (err, user) {
+			if (err) {
+				console.error(err);
+			}
+			if (!user) {
+				res.json('no user');
+			} else {
+				res.json(user);
+			}
+		})
+}
+//retrive one User by session (Login) (retrive user information)
+exports.retriveUser = function (req, res) {
+	Users.find({username:req.session.username})
 		.populate({
 			path:'medicalRecords',
 			populate: {

@@ -210,7 +210,9 @@ class Navbar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}
-                >                    
+                > 
+                  <MenuItem onClick={this.handleClose} component={Link} to="/user/profile">View your profile</MenuItem>
+                  <Divider />                   
                   <MenuItem onClick={this.handleClose} component={Link} to="/user/appointment">Get appointment</MenuItem>
                   <Divider />
                   <MenuItem onClick={this.handleClose} component={Link} to="/user/update">Change password</MenuItem>
