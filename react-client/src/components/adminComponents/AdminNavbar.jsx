@@ -311,6 +311,30 @@ class AdminNavbar extends React.Component {
                         </List>
                       </Collapse>
 
+                      <Divider />
+
+                      <ListItem button onClick={this.handleClickPat}>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        News
+                        {this.state.openPat ? <ExpandLess /> : <ExpandMore />}
+                      </ListItem>
+                      <Collapse in={this.state.openPat} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <NavLink to = "/admin/addNews" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              New News
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/DeleteNews" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              All News
+                            </ListItem>
+                          </NavLink>
+                        </List>
+                      </Collapse>
+
                     </List>
                   </div>
                 </Menu>

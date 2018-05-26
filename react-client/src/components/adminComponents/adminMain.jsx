@@ -1,4 +1,5 @@
 import React from 'react';
+import AddLabTechncians from './AddLabTechncians.jsx';
 import addDept from './addDept.jsx';
 import AdminNavbar from './AdminNavbar.jsx';
 import AdminHome from './AdminHome.jsx';
@@ -11,6 +12,8 @@ import retriveLabTech from './retriveLabTech.jsx';
 import RetriveAllPatient from './RetriveAllPatient.jsx';
 import retrivePatient from './retrivePatient.jsx';
 import RetriveDoctorInDepartment from './RetriveDoctorInDepartment.jsx';
+import addNews from './addNews.jsx';
+import DeleteNews from './DeleteNews.jsx';
 import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 class Admin extends React.Component {
   constructor(props) {
@@ -22,6 +25,7 @@ class Admin extends React.Component {
       <AdminNavbar/>
       <br/>
         <Route exact path="/admin" component={AdminHome} />
+        <Route path="/admin/AddLabTechncians" component={AddLabTechncians} />
         <Route path="/admin/addDept" component={addDept} />  
         <Route path="/admin/addDoctorToDepartment" component={addDoctorToDepartment} />  
         <Route path="/admin/AddDoctor" component={AddDoctor} />
@@ -32,6 +36,8 @@ class Admin extends React.Component {
         <Route path='/admin/retrivePatient' component={retrivePatient} />
         <Route path='/admin/RetriveAllPatient' component={RetriveAllPatient} />
         <Route path='/admin/RetriveDoctorInDepartment' component={RetriveDoctorInDepartment} />
+        <Route path='/admin/addNews' component={addNews} />
+        <Route path='/admin/DeleteNews' component={DeleteNews} />
       </div>
     )
   }

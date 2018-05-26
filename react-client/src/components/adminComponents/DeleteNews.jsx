@@ -62,9 +62,8 @@ import $ from 'jquery';
 				<table className="table table-bordered">
 				<thead style={{textAlign:'center'}}>
 					  <tr>
-					  	<th width="15%">Id</th>
 					    <th>newsSubject</th>
-					   	<th>newsText</th>
+					   	<th style={{width:'50%'}}>newsText</th>
 					   	<th>Delete</th>
 					  </tr>
 				</thead>
@@ -72,7 +71,6 @@ import $ from 'jquery';
 				{ this.state.News.map(function(item, index){
 					return(
 						<tr key={index}>
-						    <td>{item._id}</td>
 					        <td>{item.newsSubject}</td>
 					        <td>{item.newsText}</td>
 					        <td> <button onClick={that.deleteNewsClick} value={item._id}>delete</button> </td>

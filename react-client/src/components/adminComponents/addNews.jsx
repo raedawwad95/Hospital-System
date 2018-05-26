@@ -3,7 +3,7 @@ import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, MenuItem, TextField, Input, InputLabel, InputAdornment,
 		FormControl, Paper, Grid, CardHeader, FormHelperText,
-		Button, Select, Card, CardActions, CardContent } from 'material-ui';
+		Button, Select, Card, CardActions, CardContent, CircularProgress } from 'material-ui';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import classNames from 'classnames';
@@ -32,6 +32,19 @@ const styles=theme =>({
 	    marginTop: -12,
 	    marginLeft: -12,
 	    padding:50,
+	  },
+	  buttonSuccess: {
+	    backgroundColor: green[500],
+	    '&:hover': {
+	      backgroundColor: green[700],
+	    },
+	  },
+	  fabProgress: {
+	    color: green[500],
+	    position: 'absolute',
+	    top: -6,
+	    left: -6,
+	    zIndex: 1,
 	  },
 
 })
@@ -129,7 +142,7 @@ onImageChange(e){
 			
 			<Card className={classes.card}>
 				<CardContent>
-			<Grid container spacing={30}>
+			<Grid container spacing={24}>
 				<Grid item xs={6} sm={3}>
 					<TextField
 			          required
@@ -156,7 +169,7 @@ onImageChange(e){
 	          		  onChange={this.onChange}
 			        />
 			        </Grid>
-			        <Grid item xs={9} sm={5}>
+			        <Grid item xs={9} sm={3}>
 		              <input
 		              	required
 				        accept="image/*"
@@ -174,8 +187,7 @@ onImageChange(e){
 				    </label>
 				    </Grid>
 			        <CardActions>
-					<Grid item xs={9} sm={5}> </Grid>
-		       		 <Grid item xs={5} sm={2}>
+		       		 <Grid item xs={5} sm={3}>
 					<Button variant="raised" color="primary"  onClick={this.addNewsClick} >
 			        	Submit
 			      	</Button>
