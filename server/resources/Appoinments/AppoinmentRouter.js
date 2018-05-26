@@ -8,5 +8,8 @@ AppoinmentRouter.route('/')
 .get(function(req,res){
 	AppoinmentController.retrive(req,res);
 })
+.put(function(req,res){
+	AppoinmentController.update(req,res);
+})
 
 module.exports = AppoinmentRouter;

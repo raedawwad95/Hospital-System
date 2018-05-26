@@ -34,3 +34,36 @@ exports.retrive=function(req,res){
 	});
 }
 
+exports.update=function(req,res){
+	Appoinment.find({}).exce(function(err,appoinment){	
+		if(err){
+			console.error(err);
+		}
+		if(!appoinment){
+			console.error("No appoinment found");
+		} else {
+			appoinment.read = true;
+			appoinment.save();
+			res.json("Updated");
+		}
+	})
+}
+// exports.retriveByDoctorId=function(req,res){
+// 	//console.log('Appoinment Controller')
+// 	//console.log("req.body",req.param)
+// 	Appoinment.find({doctorId:"5b06c172f2b8881462db88ec"})//to be change
+// 	.populate('doctorId')
+// 	.populate('userId')
+// 	.exec(function(err,data){
+// 		if(err){
+// 			console.log('there is an err')
+// 		}
+// 		if(!data){
+// 			res.send('there is no data')
+// 		}else{
+// 		console.log('controller send the data')
+// 		res.json(data)
+// 		}
+// 	});
+
+// }

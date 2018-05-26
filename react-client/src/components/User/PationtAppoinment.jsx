@@ -27,18 +27,18 @@ class Pationt extends React.Component{
 
 		super(props);
 		this.state={
-		date: null,
     	hour:"",
     	activeStep:0,
-    	appDate:[],
+    	appData:[],
     	todayDate:[],
     	doctors:[],
-    	age:5,
     	today: '',
-		dataToMain:'',
+		dataToMain:' ',
 		doc:'',
 		move:false,
-		user:[]
+		user:[],
+		oneDocApp:[],
+		doctorName:''
 		}
 
 		this.handleNext=this.handleNext.bind(this);
@@ -46,7 +46,6 @@ class Pationt extends React.Component{
 		this.getStepContent=this.getStepContent.bind(this);
 		this.handleBack=this.handleBack.bind(this);
 		this.handleReset=this.handleReset.bind(this);
-		this.chooseDateData=this.chooseDateData.bind(this)
 		this.handleChange=this.handleChange.bind(this)
 		this.ChooseDate = this.ChooseDate.bind(this)
 		this.handleDate = this.handleDate.bind(this)
@@ -56,6 +55,7 @@ class Pationt extends React.Component{
 		this.handleDoctor=this.handleDoctor.bind(this)
 		this.handleComplete=this.handleComplete.bind(this)
 		this.getUserData = this.getUserData.bind(this);
+		this.final=this.final.bind(this)
 	}
 componentDidMount(){
 		var arr=[];
@@ -115,9 +115,32 @@ componentDidMount(){
 	}
 
 	handleTime(e){
-	this.setState({
-		hour: e.target.value,
-	})
+		var time=e.target.value;
+		var aHour='';
+		var date='';
+		var counter=true;
+		var startWork=this.state.appData[0].doctorId.hoursOfWork;
+		var startWork=startWork+8+'';
+		startWork=startWork+':00'
+		if(time>startWork){
+			counter=false;
+		}
+		for(var i=0;i<this.state.appData.length;i++){
+			aHour=this.state.appData[i].hour;
+			date=this.state.appData[i].date;
+			if(time===aHour&&this.state.dataToMain===date){
+				counter=false;
+			}
+		}
+
+		if(counter===true){
+			this.setState({
+				hour: e.target.value,
+			})			
+		}else{
+			alert('choose avaliable time')
+		}
+
 	}
 
 	getSteps(){
@@ -139,9 +162,22 @@ componentDidMount(){
 			case 2:
 			return this.ChooseTime()
 			case 3:
-			return 'sadas'
+			return this.final();
 
 		}
+	}
+
+	final(){
+		return(
+			<div>
+			<p>
+			You pick an appoinment with Doctor <b> {this.state.doctorName} 
+			</b>
+			<br /> 
+			on <b>{this.state.dataToMain}</b> at <b>{this.state.hour}</b>
+			</p>
+			</div>
+			)
 	}
 
 	ChooseDoctor(){
@@ -161,9 +197,24 @@ componentDidMount(){
 	}
 
 	handleDoctor(e){
+		var that=this;
 		this.setState({
 			doc:e.target.value,
 			move:!this.state.move
+		})
+		var that=this;
+		var appArr=[];
+		$.ajax({
+			type:'get',
+			url:'/app',
+			success:function(appdata){
+				for(var i=0;i<appdata.length;i++){
+					appArr.push(appdata[i]);
+				}
+				that.setState({
+					appData:appdata,
+				})
+			}
 		})
 
 	}
@@ -181,8 +232,20 @@ componentDidMount(){
 	}
 
 	handleDate(e){
-	// var	date1= Date(date)
-	// var	date2= Date.parse(date1)
+	var appdata=[];
+	var doctorName;
+	var appstate=this.state.appData;
+	for(var i=0;i<appstate.length;i++){
+		if(appstate[i].doctorId._id===this.state.doc){
+			appdata.push(appstate[i]);
+			doctorName=appstate[i].doctorId.fullName
+		}
+	}
+	
+	this.setState({
+		appData:appdata,
+		doctorName:doctorName
+	})
 	var test=this.formatDate(date.value)
 	this.setState({
 		dataToMain: e.target.value,
@@ -194,6 +257,7 @@ componentDidMount(){
 		return (
 			
 			<div>
+
 			 <TextField
 			  id="date"
 		      label='chose the date'
@@ -240,14 +304,12 @@ componentDidMount(){
 			}
 		}
 		if(this.state.activeStep===3){
-							this.setState({
-			activeStep:this.state.activeStep +1
-				})
+			this.setState({
+				activeStep:this.state.activeStep +1
+			})
+			this.handleComplete();
 		}
 
-		// this.setState({
-		// 	activeStep:this.state.activeStep +1
-		// })
 	}
 
 	handleBack(){
@@ -261,32 +323,6 @@ componentDidMount(){
 			activeStep:0
 		})
 	}
-
-
-
-	chooseDateData(data){
-
-		var year=data.dataToMain.slice(0,4);
-		var month=data.dataToMain.slice(5,7);
-		var day=data.dataToMain.slice(8,10);
-		year =parseInt(year)
-		month =parseInt(month)
-		day =parseInt(day)
-
-		var tYear=data.today.slice(0,4);
-		var tMonth=data.today.slice(5,7);
-		var tDay=data.today.slice(8,10);
-		tYear =parseInt(tYear)
-		tMonth =parseInt(tMonth)
-		tDay =parseInt(tDay)
-		this.setState({ 
-			appDate:[year,month,day],
-			todayDate:[tYear,tMonth,tDay]
-		});
-
-	}
-
-	
 
 	handleComplete(){
 		var obj={
@@ -302,6 +338,23 @@ componentDidMount(){
 			success:function(data){
 			}
 		})
+
+		this.setState({
+		hour:"",
+    	activeStep:0,
+    	appData:[],
+    	todayDate:[],
+    	doctors:[],
+    	today: '',
+		dataToMain:' ',
+		doc:'',
+		move:false,
+		user:[],
+		oneDocApp:[],
+		doctorName:''
+		})
+		this.componentDidMount()
+
 	}
 
 	render(){
@@ -349,9 +402,6 @@ componentDidMount(){
 					<Typography>All steps completed</Typography>
 					<Button onClick={this.handleReset} className={classes.button}>
 					reset
-					</Button>
-					<Button onClick={this.handleComplete} className={classes.button}>
-					SEND
 					</Button>
 					</Paper>
 				)}

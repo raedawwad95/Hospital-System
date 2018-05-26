@@ -5,50 +5,40 @@ import { withStyles, Button, Paper, Table, SnackbarContent,
 		 TableBody, TableCell, TableHead, TableRow } from 'material-ui';
 
 const styles = theme => ({
-  		snackbar: {
+  	snackbar: {
     	margin: theme.spacing.unit,
-  		},
-  		root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
+  	},
+  	root: {
+	    width: '100%',
+	    marginTop: theme.spacing.unit * 3,
+	    overflowX: 'auto',
+    },
+    table: {
+    	minWidth: 700,
+    }
 	});
 class DoctorApp extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			doctors:[],			//all doctors
 			app:[],				// store all appoinment
 			doc:'',            //store the doctor id
 			show:false,			//show or hide the app to screen
 			today:'',          // today date
 			todayApp:[],       // store the appoinment of this day
+			doctor:[],
+			unReadMsg:0
 			
 		}
 		this.sort=this.sort.bind(this);
-		this.handleDoctor=this.handleDoctor.bind(this);
 		this.formatDate=this.formatDate.bind(this);
+		this.getDoctorData=this.getDoctorData.bind(this);
 	}
 	
 	componentDidMount(){
 		var that=this;
-		var doctorIdArr=[];
-		$.ajax({
-			type:'get',
-			url:'/Doctor/retrieve',
-			success:function(data){
-				for(var i=0;i<data.length;i++){
-					doctorIdArr.push(data[i])
-				}
-				that.setState({		
-				doctors:doctorIdArr
-			})
-			}
-		})
+		var c=0;
+		this.getDoctorData();
 		var appArr=[];		
 		$.ajax({
 			type:'get',
@@ -56,9 +46,13 @@ class DoctorApp extends React.Component{
 			success:function(data1){
 				for(var j=0;j<data1.length;j++){
 					appArr.push(data1[j])
+					if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
+						c++
+					}
 				}
 				that.setState({		
-				app:appArr
+				app:appArr,
+				unReadMsg:c
 			})
 			}
 		})
@@ -66,6 +60,22 @@ class DoctorApp extends React.Component{
 		this.setState({
 			today:today
 		})
+	}
+
+	getDoctorData() {
+	    var that = this
+	    $.ajax({
+	      url:'/Doctor/getOne',
+	      type:'GET',
+	      success:function(doct){
+	        that.setState({
+	          doctor: doct
+	        })
+	      },
+	      error:function(err){
+	        console.log(err);
+	      }
+	    });
 	}
 
 	formatDate(date) {
@@ -79,13 +89,6 @@ class DoctorApp extends React.Component{
 
     return [year, month, day].join('-');
 	}
-
-	handleDoctor(e){
-		this.setState({
-			doc:e.target.value
-		})
-	}
-
 	sort(){
 		var thisDay=this.state.today;
 		var that=this;
@@ -105,7 +108,7 @@ class DoctorApp extends React.Component{
 			j++
 		}
 		for(var i=0;i<app.length;i++){
-			if(app[i].doctorId._id==this.state.doc){
+			if(app[i].doctorId._id==this.state.doctor._id){
 				docApp.push(app[i])
 			}
 		}
@@ -133,16 +136,7 @@ class DoctorApp extends React.Component{
 			<div>
 
 			<Button onClick={that.sort}>SHOW</Button>
-			<select name="doctor" onChange={this.handleDoctor}>
-			<option value="">choose doctor</option>
-				{this.state.doctors.map(function(item){
-					return(
-						<option value={item._id} >{item.fullName}</option>
-						)
-				})}
 
-				</select>
-				----------------------------------------------
 				{this.state.show&&(
 					<Paper className={classes.root}>
 					      <Table className={classes.table}>
@@ -157,8 +151,7 @@ class DoctorApp extends React.Component{
 					          {this.state.app.map(function(item){
 					            return (
 					              <TableRow>
-					                <TableCell>{item.userId.FullName
-}</TableCell>
+					                <TableCell>{item.userId.FullName}</TableCell>
 					                <TableCell>{item.date}</TableCell>
 					                <TableCell>{item.hour}</TableCell>
 					              </TableRow>
@@ -175,12 +168,3 @@ class DoctorApp extends React.Component{
 
 export default DoctorApp;
 
-
-// <div>
-// 					 {this.state.app.map(function(item){
-// 					return(
-// 						<h1>{item.date}</h1>
-// 						)
-// 				})}
-
-// 					</div>
