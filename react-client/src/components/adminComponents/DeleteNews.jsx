@@ -59,12 +59,12 @@ import $ from 'jquery';
 			<div className='card'>
 			<div> <h2> All News </h2> <br /> </div> 
 			<div className='container-fluid'>
-				<table className="table table-bordered">
+				<table className="table table-bordered"  style={{tableLayout:"fixed"}}>
 				<thead style={{textAlign:'center'}}>
 					  <tr>
-					    <th>newsSubject</th>
-					   	<th style={{width:'50%'}}>newsText</th>
-					   	<th>Delete</th>
+					    <th style={{width:'15%'}}>newsSubject</th>
+					   	<th style={{width:'70%'}}>newsText</th>
+					   	<th style={{width:'15%'}}>Delete</th>
 					  </tr>
 				</thead>
 				<tbody style={{textAlign:'center'}}>
