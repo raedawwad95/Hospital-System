@@ -1,5 +1,4 @@
 import React from 'react';
-import addNews from './addNews.jsx';
 import addDept from './addDept.jsx';
 import AdminNavbar from './AdminNavbar.jsx';
 import AdminHome from './AdminHome.jsx';
@@ -23,7 +22,6 @@ class Admin extends React.Component {
       <AdminNavbar/>
       <br/>
         <Route exact path="/admin" component={AdminHome} />
-        <Route path="/admin/AddLabTechncians" component={addNews} />
         <Route path="/admin/addDept" component={addDept} />  
         <Route path="/admin/addDoctorToDepartment" component={addDoctorToDepartment} />  
         <Route path="/admin/AddDoctor" component={AddDoctor} />
