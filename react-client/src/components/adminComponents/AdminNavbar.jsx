@@ -63,6 +63,7 @@ class AdminNavbar extends React.Component {
       openLab: false,
       openDoc: false,
       openPat: false,
+      openNews: false,
       userName: "",
       password: "",
       showPassword: false,
@@ -74,6 +75,7 @@ class AdminNavbar extends React.Component {
     this.handleClickLab = this.handleClickLab.bind(this);
     this.handleClickDoc = this.handleClickDoc.bind(this);
     this.handleClickPat = this.handleClickPat.bind(this);
+    this.handleClickNews= this.handleClickNews.bind(this);
     this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
     this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -119,9 +121,13 @@ class AdminNavbar extends React.Component {
     this.setState({ openDoc: !this.state.openDoc });
   };
 
-    handleClickPat() {
+  handleClickPat() {
     this.setState({ openPat: !this.state.openPat });
   };
+
+  handleClickNews() {
+    this.setState({ openNews: !this.state.openNews });
+  }
 
   loginAdmin(){
     var that = this
@@ -306,6 +312,30 @@ class AdminNavbar extends React.Component {
                           <NavLink to = "/admin/RetriveAllPatient" className = "navListItem">
                             <ListItem button className={classes.nested}>
                               All Patient
+                            </ListItem>
+                          </NavLink>
+                        </List>
+                      </Collapse>
+
+                      <Divider />
+
+                      <ListItem button onClick={this.handleClickNews}>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        News
+                        {this.state.openNews ? <ExpandLess /> : <ExpandMore />}
+                      </ListItem>
+                      <Collapse in={this.state.openNews} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <NavLink to = "/admin/addNews" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              New News
+                            </ListItem>
+                          </NavLink>
+                          <NavLink to = "/admin/DeleteNews" className = "navListItem">
+                            <ListItem button className={classes.nested}>
+                              All News
                             </ListItem>
                           </NavLink>
                         </List>

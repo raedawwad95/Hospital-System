@@ -59,20 +59,18 @@ import $ from 'jquery';
 			<div className='card'>
 			<div> <h2> All News </h2> <br /> </div> 
 			<div className='container-fluid'>
-				<table className="table table-bordered">
+				<table className="table table-bordered"  style={{tableLayout:"fixed"}}>
 				<thead style={{textAlign:'center'}}>
 					  <tr>
-					  	<th width="15%">Id</th>
-					    <th>newsSubject</th>
-					   	<th>newsText</th>
-					   	<th>Delete</th>
+					    <th style={{width:'15%'}}>newsSubject</th>
+					   	<th style={{width:'70%'}}>newsText</th>
+					   	<th style={{width:'15%'}}>Delete</th>
 					  </tr>
 				</thead>
 				<tbody style={{textAlign:'center'}}>
 				{ this.state.News.map(function(item, index){
 					return(
 						<tr key={index}>
-						    <td>{item._id}</td>
 					        <td>{item.newsSubject}</td>
 					        <td>{item.newsText}</td>
 					        <td> <button onClick={that.deleteNewsClick} value={item._id}>delete</button> </td>
