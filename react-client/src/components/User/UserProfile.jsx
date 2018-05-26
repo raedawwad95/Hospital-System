@@ -149,7 +149,6 @@ return(
    <table className="table table-bordered">
       <thead style={{textAlign:'center'}}>
         <tr>
-          <th width='20%'>Id </th>
           <th>Doctor Name</th>
           <th>Description</th>
           <th>Image Medical</th>
@@ -159,7 +158,6 @@ return(
       {this.state.userInfo[0].medicalRecords.map(function(item, index){
         return(
              <tr key={index}>
-            <td>{item._id}</td>
             <td>{item.doctorId.fullName}</td>
             <td>{item.description}</td>
             <td value ={item.image}><button style={{'background-color': 'white'}} value ={item.image} onClick={that.openModalImageMedical}>{item.image}</button></td>
