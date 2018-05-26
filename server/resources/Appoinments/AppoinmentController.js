@@ -34,6 +34,20 @@ exports.retrive=function(req,res){
 	});
 }
 
+exports.update=function(req,res){
+	Appoinment.find({}).exce(function(err,appoinment){	
+		if(err){
+			console.error(err);
+		}
+		if(!appoinment){
+			console.error("No appoinment found");
+		} else {
+			appoinment.read = true;
+			appoinment.save();
+			res.json("Updated");
+		}
+	})
+}
 // exports.retriveByDoctorId=function(req,res){
 // 	//console.log('Appoinment Controller')
 // 	//console.log("req.body",req.param)

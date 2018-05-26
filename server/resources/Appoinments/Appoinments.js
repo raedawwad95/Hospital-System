@@ -17,6 +17,10 @@ var AppoinmetSchema =mongoose.Schema({
     userId:{
     	type:mongoose.Schema.Types.ObjectId,
     	ref: 'Users'
+    },
+    read:{
+    	type:Boolean,
+    	default: false
     }
 })
 

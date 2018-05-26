@@ -131,3 +131,4 @@ exports.deleteOne=function(req,res){
 		res.send(deleted)
 	})
 }
+

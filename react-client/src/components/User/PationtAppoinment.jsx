@@ -116,34 +116,24 @@ componentDidMount(){
 
 	handleTime(e){
 		var time=e.target.value;
-
-		console.log(time);
-		console.log(e.target.value);
-		console.log('type',typeof(e.target.value))
 		var aHour='';
 		var date='';
 		var counter=true;
 		var startWork=this.state.appData[0].doctorId.hoursOfWork;
 		var startWork=startWork+8+'';
 		startWork=startWork+':00'
-		console.log('startWork ',startWork)
-		console.log('time ',time)
-		console.log()
 		if(time>startWork){
 			counter=false;
 		}
-		console.log('counter ',counter)
 		for(var i=0;i<this.state.appData.length;i++){
 			aHour=this.state.appData[i].hour;
 			date=this.state.appData[i].date;
 			if(time===aHour&&this.state.dataToMain===date){
-				console.log("please select avaliable time")
 				counter=false;
 			}
 		}
 
 		if(counter===true){
-			console.log('yessss')
 			this.setState({
 				hour: e.target.value,
 			})			
@@ -286,8 +276,6 @@ componentDidMount(){
 		)
 	}
 	handleNext(){
-			console.log('stats ',this.state)
-
 		if(this.state.activeStep===0){
 			if(this.state.doc){
 				this.setState({
@@ -322,9 +310,6 @@ componentDidMount(){
 			this.handleComplete();
 		}
 
-		// this.setState({
-		// 	activeStep:this.state.activeStep +1
-		// })
 	}
 
 	handleBack(){
@@ -338,32 +323,6 @@ componentDidMount(){
 			activeStep:0
 		})
 	}
-
-
-
-	// chooseDateData(data){
-
-	// 	var year=data.dataToMain.slice(0,4);
-	// 	var month=data.dataToMain.slice(5,7);
-	// 	var day=data.dataToMain.slice(8,10);
-	// 	year =parseInt(year)
-	// 	month =parseInt(month)
-	// 	day =parseInt(day)
-
-	// 	var tYear=data.today.slice(0,4);
-	// 	var tMonth=data.today.slice(5,7);
-	// 	var tDay=data.today.slice(8,10);
-	// 	tYear =parseInt(tYear)
-	// 	tMonth =parseInt(tMonth)
-	// 	tDay =parseInt(tDay)
-	// 	this.setState({ 
-	// 		appDate:[year,month,day],
-	// 		todayDate:[tYear,tMonth,tDay]
-	// 	});
-
-	// }
-
-	
 
 	handleComplete(){
 		var obj={
