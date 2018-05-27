@@ -38,7 +38,8 @@ class Pationt extends React.Component{
 		move:false,
 		user:[],
 		oneDocApp:[],
-		doctorName:''
+		doctorName:'',
+
 		}
 
 		this.handleNext=this.handleNext.bind(this);
@@ -119,7 +120,7 @@ componentDidMount(){
 		var aHour='';
 		var date='';
 		var counter=true;
-		var startWork=this.state.appData[0].doctorId.hoursOfWork;
+		var startWork=this.state.doc.hoursOfWork;
 		var startWork=startWork+8+'';
 		startWork=startWork+':00'
 		if(time>startWork){
@@ -199,7 +200,6 @@ componentDidMount(){
 	handleDoctor(e){
 		var that=this;
 		this.setState({
-			doc:e.target.value,
 			move:!this.state.move
 		})
 		var that=this;
@@ -216,6 +216,22 @@ componentDidMount(){
 				})
 			}
 		})
+//edit
+			var doctorId=e.target.value
+
+		$.ajax({
+			type:'get',
+			url:'/Doctor/t/'+doctorId,
+			success:function(doctorData){
+				that.setState({
+					doc:doctorData
+				})
+				
+			}
+		})
+
+
+
 
 	}
 
@@ -235,13 +251,13 @@ componentDidMount(){
 	var appdata=[];
 	var doctorName;
 	var appstate=this.state.appData;
-	for(var i=0;i<appstate.length;i++){
-		if(appstate[i].doctorId._id===this.state.doc){
+		for(var i=0;i<appstate.length;i++){
+			if(appstate[i]._id===this.state.doc){
 			appdata.push(appstate[i]);
 			doctorName=appstate[i].doctorId.fullName
 		}
 	}
-	
+
 	this.setState({
 		appData:appdata,
 		doctorName:doctorName
