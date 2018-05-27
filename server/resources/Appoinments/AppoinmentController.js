@@ -1,8 +1,7 @@
 var Appoinment =require('./Appoinments');
 
-
+// create an appointment 
 exports.add=function(req,res){
-console.log('req body ',req.body)
 	var Appoint=new Appoinment({
 		date:req.body.date,
 		hour:req.body.hour,
@@ -17,7 +16,7 @@ console.log('req body ',req.body)
 	})
 	
 }
-
+// retrive appointments 
 exports.retrive=function(req,res){
 	Appoinment.find({})
 	.populate('doctorId')
@@ -33,9 +32,10 @@ exports.retrive=function(req,res){
 		}
 	});
 }
-
+//update the appointment 
 exports.update=function(req,res){
-	Appoinment.find({}).exce(function(err,appoinment){	
+	Appoinment.find({})
+	.exce(function(err,appoinment){	
 		if(err){
 			console.error(err);
 		}

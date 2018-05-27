@@ -1,7 +1,7 @@
 var News =require ('./News')
 
 
-
+// Create News
 exports.create=function(req,res){
 	var newNews=new News(req.body)
 	
@@ -13,7 +13,7 @@ exports.create=function(req,res){
 	})
 }
 
-
+//Retrive All News sorted from the newest news
 exports.Retrive=function(req,res){
 	News.find({})
 		.sort('-createdAt')
@@ -25,7 +25,7 @@ exports.Retrive=function(req,res){
 	})
 
 }
-
+// Delet news based on id 
 exports.Delete=function(req,res){
 	var id=req.params.id;
 

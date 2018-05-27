@@ -82,7 +82,7 @@ exports.login = function(req,res){
 	});
 
 }
-
+// Logout function 
 exports.logout=function(req,res){
 	req.session.destroy(function(err){
 		if(err){
@@ -91,9 +91,10 @@ exports.logout=function(req,res){
 		res.json("logged out")
 	});
 }
+//retrive patient from user 
 exports.retrievePatient=function(req,res){
 	var userName=req.params.userNamePatient;
-	console.log(userName)
+	
 	User.findOne({"username":userName},function(err,data){
 		if(err){
 			console.log(err);
@@ -101,7 +102,7 @@ exports.retrievePatient=function(req,res){
 		res.json(data)
 	});
 }
-
+// check the type of logedin user 
 exports.isLogin = function(req, res) {
 	if (req.session.doctorType === "d") {
 		res.json(true);
@@ -111,7 +112,7 @@ exports.isLogin = function(req, res) {
  		res.json('error')
 	}
 }
-
+// Retrive one Doctor by user name 
 exports.retrieveOne=function(req,res){
 	Doctor.findOne({userName : req.session.userName},function(err,data){
 		if(err){

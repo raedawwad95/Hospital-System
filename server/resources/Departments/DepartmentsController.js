@@ -1,5 +1,6 @@
 var Departments=require ('./Departments');
 var Doctor = require ('../Doctor/Doctor');
+//Create departemnts 
 exports.createDept=function(req,res){
 	var Dept=new Departments({
 		nameOfDept:req.body.nameOfDept,
@@ -14,7 +15,7 @@ exports.createDept=function(req,res){
 	})
 
 }
-
+//retrive departments 
 exports.retriveDepts=function(req,res){
 	Departments.find({}).
 	populate('doctorsId').
@@ -26,10 +27,11 @@ exports.retriveDepts=function(req,res){
 	})
 	
 }
-
+// add a doctor to the department 
 exports.addDoctor=function(req,res){
 	var query={idOfDept:req.body.idOfDept};
-	Doctor.findOne({userName: req.body.docName}).exec(function (err, doctor) {
+	Doctor.findOne({userName: req.body.docName})
+	.exec(function (err, doctor) {
 		if (err) {
 			console.error(err);
 		}
@@ -37,7 +39,7 @@ exports.addDoctor=function(req,res){
 			console.error("no doctor with this username");
 		} else {
 			Departments.update(query,{$push:{'doctorsId':doctor._id}})
-			// .populate('doctorsId')
+			
 			.exec(function(err,data){
 				if(err){
 					console.error(err)
@@ -47,6 +49,7 @@ exports.addDoctor=function(req,res){
 		}
 	})
 }
+//retrive One Department 
 exports.retriveOneDept = function (req, res) {
 	Departments.find({nameOfDept:req.params.nameOfDep})
 		.populate('doctorsId')

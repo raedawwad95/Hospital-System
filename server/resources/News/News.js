@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 
-
+//News Schema 
 var NewsSchema=mongoose.Schema({
 	newsSubject:{type:String},
 	newsText:{type:String},

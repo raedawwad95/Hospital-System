@@ -1,6 +1,6 @@
 var mongoose =require('mongoose');
 var db=require('../../db');
-
+//appointment schema 
 var AppoinmetSchema =mongoose.Schema({
 	date:{
 		type:String,

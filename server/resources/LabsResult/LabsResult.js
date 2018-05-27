@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+//lab Result Schema 
 var LabsResultSchema = mongoose.Schema({
 	patientId:{
 		type:mongoose.Schema.Types.ObjectId,
