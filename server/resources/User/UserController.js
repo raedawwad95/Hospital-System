@@ -1,5 +1,6 @@
 var Users = require('./Users');
 
+//Creat function to creat User 
 exports.create = function (req, res) {
 	var user = new Users(req.body);
 	user.save(function(err, user) {
@@ -9,9 +10,10 @@ exports.create = function (req, res) {
 		res.redirect('/login');
 	})
 };
-
+// Login function for Reactjs
 exports.login = function (req, res) {
-	Users.findOne({username: req.body.username}).exec(function (err, user) {
+	Users.findOne({username: req.body.username})
+	.exec(function (err, user) {
 		if (err) {
 			console.error(err);
 		} 
@@ -38,7 +40,7 @@ exports.login = function (req, res) {
 		}
 	});
 };
-
+//Login function for the react-native 
 exports.loginNative = function (req, res) {
 	Users.findOne({username: req.body.username}).exec(function (err, user) {
 		if (err) {
@@ -65,7 +67,7 @@ exports.loginNative = function (req, res) {
 		}
 	});
 };
-
+// Logout function 
 exports.logout = function (req, res) {
 	req.session.destroy(function(err) {
 		if (err) {
@@ -139,7 +141,7 @@ exports.retriveUser = function (req, res) {
 			}
 		})
 }
-
+//check if the logged in usertype is p (patiant)
 exports.isLogin = function(req, res) {
 	if (req.session.userType === "P") {
 		res.json(true);
@@ -150,7 +152,7 @@ exports.isLogin = function(req, res) {
  		res.json('error')
 	}
 }
-
+//to take the user information once logeddin 
 exports.getLoginData = function(req, res) {
 	Users.findOne({username: req.session.username}).exec(function(err, user) {
 		if (err) {

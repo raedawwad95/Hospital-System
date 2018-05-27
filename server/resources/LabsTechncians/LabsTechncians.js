@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
-
+// Lab Techncians Schema 
 var LabsTechnciansSchema = mongoose.Schema({
 	userName:{
 		type:String, 

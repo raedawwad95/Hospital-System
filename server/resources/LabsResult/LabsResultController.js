@@ -1,6 +1,7 @@
 var LabsResult = require('./LabsResult');
 var Users = require('../User/Users');
 
+//Create function to create a lab result panel 
 exports.Create = function (req, res) {
 	var newLabRes= new LabsResult(req.body);
 	newLabRes.save(function(err,data){
@@ -10,8 +11,10 @@ exports.Create = function (req, res) {
 		res.json(data)
 	});
 };
+//create lab reult for each user 
 exports.createResutl=function(req,res){
-	Users.findOne({username:req.body.username}).exec(function(err,user){
+	Users.findOne({username:req.body.username})
+	.exec(function(err,user){
 		if(err){
 			res.json(err);
 		}
@@ -47,6 +50,7 @@ exports.createResutl=function(req,res){
 	});
 
 }
+//retrive all lab result 
  exports.Retrive=function(req,res){
  	LabsResult.find({})
  	.populate('patientId','FullName')
@@ -62,19 +66,3 @@ exports.createResutl=function(req,res){
  		}
  	});
  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

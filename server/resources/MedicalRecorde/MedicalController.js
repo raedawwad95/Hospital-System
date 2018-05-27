@@ -1,6 +1,6 @@
 var Medical = require('./Medical');
 var Users = require('../User/Users');
-
+// creat medical records 
 exports.create = function (req, res) {
 	var mid = new Medical(req.body);
 	mid.save(function (err, user) {
@@ -10,9 +10,8 @@ exports.create = function (req, res) {
 	    res.json('Record saved');
 	});
 };
-
+// search by patientId
 exports.search = function (req, res) {
-	// search by patientId ?? still need to check it later
 	Medical.findOne({patientId: req.body.patientId}).exec(function (err, data) {
 		if (err) {
 			console.error(err);
@@ -23,9 +22,10 @@ exports.search = function (req, res) {
 		}
 	});
 };
-
+//add medical record for the patint 
 exports.addRecord = function (req, res) {
-	Users.findOne({username: req.body.username}).exec(function (err, user) {
+	Users.findOne({username: req.body.username})
+	.exec(function (err, user) {
 		if (err) {
 			console.error(err);
 		} else if (!user) {

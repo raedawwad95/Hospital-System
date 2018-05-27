@@ -58,7 +58,7 @@ exports.logout = function(req,res){
 		    res.json("logged out")
 	});
 }
-
+//check the user type that logged in 
 exports.isLogin = function(req, res) {
 	if (req.session.adminType === "A") {
 		res.json(true);

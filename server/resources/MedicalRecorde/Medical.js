@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+//Medical Records schema 
 var MedicalSchema = mongoose.Schema({
 	patientId : {type: mongoose.Schema.Types.ObjectId, ref: 'Users'}, 
 	doctorId : {type: mongoose.Schema.Types.ObjectId, ref: 'Doctors'},

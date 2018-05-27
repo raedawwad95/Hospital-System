@@ -2,6 +2,7 @@ var LabsTechncians = require('./LabsTechncians');
 var LabsResult=require('../LabsResult/LabsResult')
 var User=require('../User/Users')
 
+//create function to creat lab Techncians panel
 exports.Create = function (req, res) {
   var labObj={
 		userName:req.body.username,
@@ -13,7 +14,7 @@ exports.Create = function (req, res) {
 		personalImgUrl:req.body.personalImgUrl,
 		gender:req.body.gender
 	}
-	console.log(labObj)
+	
 	var newLabTech= new LabsTechncians(labObj);
 	newLabTech.save(function(err,data){
 		if (err){
@@ -22,7 +23,7 @@ exports.Create = function (req, res) {
 		res.send(data)
 	});
 };
-
+//Retrive all lab Techncian 
  exports.Retrive=function(req,res){
  	LabsTechncians.find(function(err,data){
 			if(err){
@@ -49,7 +50,7 @@ exports.update=function(req,res){
 	})
 
 }
-
+// login function for the Techncians 
 exports.login = function (req, res) {
 	LabsTechncians.findOne({userName: req.body.userName}).exec(function (err, tech) {
 		if (err) {
@@ -79,7 +80,7 @@ exports.login = function (req, res) {
 		}
 	});
 };
-
+//Check if the logeddin is a Techncians 
 exports.isLogin = function(req, res) {
 	if (req.session.doctorType === "T") {
 		res.json(true);
@@ -89,7 +90,7 @@ exports.isLogin = function(req, res) {
  		res.json('error')
 	}
 }
-
+// logout from the session 
 exports.logout = function (req, res) {
 	req.session.destroy(function(err) {
 		if (err) {
@@ -99,7 +100,7 @@ exports.logout = function (req, res) {
 	});
 };
 
-
+// add a patient using populate 
 exports.addPatient=function(req,res){
 	var query={tech:req.body.id};
 	
@@ -113,6 +114,7 @@ exports.addPatient=function(req,res){
 	})
 }
 
+//add patient result by the lab Techncian
 exports.PatientResult=function(req,res){
 	var patientId=req.params.patientId
 	LabsResult.findOne({"patientId":patientId},function(err,data){
@@ -122,6 +124,7 @@ exports.PatientResult=function(req,res){
 		res.json(data)
 	})
 }
+//delete lab techncian 
 exports.deleteOne=function(req,res){
 	var userName=req.params.userNameLabTech;
 	LabsTechncians.findOneAndRemove({userName:userName},function(err,deleted){
@@ -131,6 +134,7 @@ exports.deleteOne=function(req,res){
 		res.send(deleted)
 	})
 }
+//retrive one lab techncian 
 exports.retrieveOne=function(req,res){
 	LabsTechncians.findOne({userName : req.session.userName},function(err,data){
 		if(err){
