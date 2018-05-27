@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var db = require('../../db');
-
+// Departments Schema 
 var DepartmentSchema=mongoose.Schema({
 	nameOfDept:{
 		type:String,
