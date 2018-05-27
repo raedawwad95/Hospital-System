@@ -1,12 +1,12 @@
-#Readme File
+# Readme File
 
-#Hospital-System
+# Hospital-System
 
-######It's an app that simplify the  hospital system that used by the hospital employee (Doctors, Techncians) ,and the more important point that it's simplify the using  for the patinet as it's not just a web app it's an mobile app as the user can pick his appoitment for the doctor that he wants through his mobile phone . 
+It's an app that simplify the  hospital system that used by the hospital employee (Doctors, Techncians) ,and the more important point that it's simplify the using  for the patinet as it's not just a web app it's an mobile app as the user can pick his appoitment for the doctor that he wants through his mobile phone . 
 
 
 
-##Make sure you installed the following technologies locally:
+## Make sure you installed the following technologies locally:
 
 	*React using webpack
 	*React Native 
@@ -17,7 +17,7 @@
 
 
 
-##Getting started & Installation:
+## Getting started & Installation:
 
 * Get a copy of the repo $ git clone : https://github.com/Tartarus-RBK/Hospital-System.
 
@@ -28,17 +28,17 @@
 * Run react client `$ npm run dev-react`.
 
 
-##Running the test:
+## Running the test:
 
  to do list .
 
-##Deployment
+## Deployment
 
 You can see a demo of the app in Heroku (fill in the link )
 
 # File Hierarchy:
 
-###Hospital-system+
+## Hospital-system+
 	 ..../node_modules
 	 ..../react-client
 	 ......./dist(include static files)
@@ -154,7 +154,7 @@ You can see a demo of the app in Heroku (fill in the link )
 
 
 
-##Authors:
+## Authors:
 	* Tal Omari - Product Owner.
 	* Ahmad Al-Yaqba - Scrum master.
 	* Raed Awwad - Team member.
