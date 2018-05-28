@@ -5,6 +5,7 @@ var EmergencySchema = mongoose.Schema({
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
 	longitude : {type: Number },
 	latitude: {type: Number},
+	createdAt:{ type:Date, default:Date.now }
 });
 
 

@@ -12,7 +12,7 @@ exports.create = function (req, res) {
 };
 
 exports.retrive = function (req, res) {
-	Emergency.find({}).populate(user).exec(function (err, data) {
+	Emergency.find({}).populate('user').exec(function (err, data) {
 		if (err) {
 			console.error(err);
 		}
