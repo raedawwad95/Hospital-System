@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import { TextField, Grid,
+import { Grid,
     Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
@@ -149,7 +149,8 @@ return(
           })}
         </TableBody>
       </Table>
-    </Paper>       
+    </Paper>
+    <br/>       
     </div>
     </div>
      <Modal
@@ -201,7 +202,7 @@ return(
         </TableBody>
       </Table>
     </Paper>
-       
+    <br/>  
     </div>
     </div>
      <Modal

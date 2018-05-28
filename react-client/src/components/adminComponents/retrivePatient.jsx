@@ -3,7 +3,6 @@ import $ from 'jquery';
 import { TextField, Grid,
     Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
 import Modal from 'react-modal';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
@@ -106,7 +105,7 @@ render(){
 	return(
 		<div>
 		<div className="card">
-		<div> <h2> Patient data </h2> <br /> </div> 
+		<div> <h2 style={{textAlign:'center'}}> Patient data </h2> <br /> </div> 
 		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField
