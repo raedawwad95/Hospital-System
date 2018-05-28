@@ -43,6 +43,7 @@
     "proptypes": "^1.1.0",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.6.2",
+    "react-bar-chart": "^0.1.2",
     "react-bootstrap": "^0.32.1",
     "react-date-picker": "^6.10.1",
     "react-datepicker": "^1.4.1",

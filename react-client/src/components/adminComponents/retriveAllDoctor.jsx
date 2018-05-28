@@ -97,6 +97,7 @@ render(){
 	<br/>
 	</div>
 	</div>
+	<Statistics doctors={this.state.doctors} />
 	</div>
 		)
 	}
