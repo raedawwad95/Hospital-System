@@ -14,7 +14,9 @@ import retrivePatient from './retrivePatient.jsx';
 import RetriveDoctorInDepartment from './RetriveDoctorInDepartment.jsx';
 import addNews from './addNews.jsx';
 import DeleteNews from './DeleteNews.jsx';
+import RetriveEmergency from './RetriveEmergency.jsx';
 import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-router-dom';
+
 class Admin extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +40,7 @@ class Admin extends React.Component {
         <Route path='/admin/RetriveDoctorInDepartment' component={RetriveDoctorInDepartment} />
         <Route path='/admin/addNews' component={addNews} />
         <Route path='/admin/DeleteNews' component={DeleteNews} />
+        <Route path='/admin/RetriveEmergency' component={RetriveEmergency} />
       </div>
     )
   }

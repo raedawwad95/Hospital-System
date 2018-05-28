@@ -13,6 +13,7 @@ var labsTechnciansRouter=require('./resources/LabsTechncians/labsTechnciansRoute
 var ItDepartmentRouter = require('./resources/ItDepartment/ItDepartmentRouter');
 var AppoinmentRouter = require('./resources/Appoinments/AppoinmentRouter');
 var NewsRouter=require('./resources/News/NewsRouter');
+var EmergencyRouter=require('./resources/Emergency/EmergencyRouter');
 
 var session = require('express-session');
 var bcrypt = require('bcrypt-nodejs');
@@ -33,7 +34,8 @@ app.use('/labRes',labRouter);
 app.use('/labTech',labsTechnciansRouter);
 app.use('/itDep',ItDepartmentRouter);
 app.use('/app',AppoinmentRouter);
-app.use('/news',NewsRouter)
+app.use('/news',NewsRouter);
+app.use('/emergency',EmergencyRouter);
 app.get('*', function (req, res){
     res.sendFile(path.resolve(__dirname, '../react-client/dist', 'index.html'));
 })
