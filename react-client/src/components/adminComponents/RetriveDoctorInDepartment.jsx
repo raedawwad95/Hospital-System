@@ -1,8 +1,45 @@
 import React from 'react';
 import $ from 'jquery';
-import { TextField, Grid,
-		Button,CardActions,FormControl,InputLabel,Select,MenuItem,Input,FormHelperText} from 'material-ui';
+import { Grid,Button,CardActions,FormControl,FormHelperText,InputLabel,
+    Select,Table,MenuItem,Input,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
+import PropTypes from 'prop-types';
 
+//this for Table
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+});
+const customStyles1 = {
+  content : {
+    top                   : '40%',
+    left                  : '50%',
+    right                 : '10%',
+    bottom                : '10%',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 class RetriveDoctorInDepartment extends React.Component{
 	constructor(props){
 		super(props);
@@ -46,11 +83,12 @@ class RetriveDoctorInDepartment extends React.Component{
 		});
     }
 render(){
+	const { classes } = this.props;
 	if(this.state.departmentData.length>0){
 	return(
 		<div>
 		<div className="card">
-		<div> <h2> Doctors In The Department</h2> <br /> </div> 
+		<div> <h2 style={{textAlign:'center'}}> Doctors In The Department</h2> <br /> </div> 
 		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<FormControl >
@@ -77,68 +115,74 @@ render(){
 	        	Retrive Data
 	      	</Button>
 		</CardActions>	
-	    <h1 style={{textAlign:'center'}}>Department Data</h1>      	
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th width="25%">Id</th>
-		        <th>Name Of Dept</th>
-		        <th>Id Of Dept</th>
-		      </tr>
-		    </thead>		    
-		    <tbody style={{textAlign:'center'}}>
-		    {this.state.departmentData.map(function(item, index){
-		    	return(
-        	      <tr key={index}>
-			        <td>{item._id}</td>
-			        <td>{item.nameOfDept}</td>
-			        <td>{item.idOfDept}</td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
+	    <h1 style={{textAlign:'center'}}>Department Data</h1>
+	    <Paper className={classes.root}>
+         <Table className={classes.table}>
+          <TableHead>
+          <TableRow>
+            <CustomTableCell>Name Of Dept</CustomTableCell>
+            <CustomTableCell numeric>Id Of Dept</CustomTableCell>
+          </TableRow>
+         </TableHead>
+         <TableBody>
+          {this.state.departmentData.map((item, index) =>{
+            return (
+              <TableRow className={classes.row} key={index}>
+                <CustomTableCell component="th" scope="row">
+                  {item.nameOfDept}
+                </CustomTableCell>
+                <CustomTableCell numeric>{item.idOfDept}</CustomTableCell>
+              </TableRow>
+            );
+          })}
+	        </TableBody>
+	     </Table>
+	     </Paper>
+	      <br/> 
          </div>
          </div>
          <br />
          <div className="card">
          <div className='container-fluid'>
-          <h1 style={{textAlign:'center'}}>Doctors in the Department</h1>      	
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th width='20%'>Id </th>
-		        <th>User Name</th>
-		        <th>Full Name</th>
-		        <th>Hours Of Work</th>
-		        <th>Spicility Status</th>
-		      </tr>
-		    </thead>		    
-		    <tbody style={{textAlign:'center'}}>
-		    {this.state.departmentData[0].doctorsId.map(function(item, index){
-		    	return(
-        	     <tr key= {index}>
-			        <td>{item._id}</td>
-			        <td>{item.userName}</td>
-			        <td>{item.fullName}</td>
-			        <td>{item.hoursOfWork}</td>
-			        <td>{item.spicilityStatus}</td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
+         <h1 style={{textAlign:'center'}}>Doctors in the Department</h1>
+         <Paper className={classes.root}>
+         <Table className={classes.table}>
+          <TableHead>
+          <TableRow>
+            <CustomTableCell>User Name</CustomTableCell>
+            <CustomTableCell>Full Name</CustomTableCell>
+            <CustomTableCell numeric>Hours Of Work</CustomTableCell>
+            <CustomTableCell>Spicility Status</CustomTableCell>
+          </TableRow>
+         </TableHead>
+         <TableBody>
+          {this.state.departmentData[0].doctorsId.map((item, index) =>{
+            return (
+              <TableRow className={classes.row} key={index}>
+                <CustomTableCell component="th" scope="row">
+                  {item.userName}
+                </CustomTableCell>
+                <CustomTableCell>{item.fullName}</CustomTableCell>
+                <CustomTableCell numeric>{item.hoursOfWork}</CustomTableCell>
+                <CustomTableCell>{item.spicilityStatus}</CustomTableCell>
+              </TableRow>
+            );
+          })}
+	        </TableBody>
+	     </Table>
+	     </Paper>
+	      <br/>
          </div>
-	    </div>
-	    <br />
-	    </div>
+	     </div>
+	     <br />
+	     </div>
 	    
 		)
 	}else{
 			return(
 		<div>
 		<div className="card">
-		<div> <h2> Doctors In The Department </h2> <br /> </div> 
+		<div> <h2 style={{textAlign:'center'}}> Doctors In The Department </h2> <br /> </div> 
 		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<FormControl >
@@ -174,4 +218,8 @@ render(){
 
 }
 }
-export default RetriveDoctorInDepartment;
+RetriveDoctorInDepartment.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(RetriveDoctorInDepartment);

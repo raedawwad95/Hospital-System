@@ -1,7 +1,34 @@
 import React from 'react';
 import $ from 'jquery';
-import { TextField, Grid,
-		Button,CardActions} from 'material-ui';
+import { Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
+import PropTypes from 'prop-types';
+
+//this for Table
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+});
 
 class retrivePatient extends React.Component{
 	constructor(props){
@@ -24,41 +51,43 @@ class retrivePatient extends React.Component{
 		});
     }
 render(){
+	const { classes } = this.props;
 	return(
 		<div>
 		<div className="card">
 		<div className='container-fluid'>	
 	    <h1 style={{textAlign:'center'}}>Patients data</h1>      	
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th>Id</th>
-		        <th>User Name</th>
-		        <th>Full Name</th>
-		        <th>Id Card Number</th>
-		        <th>Phone</th>
-		        <th>Email</th>
-		        <th>User Type</th>
-		        <th>Gender</th>
-		      </tr>
-		    </thead>		    
-		    <tbody>
-		    {this.state.userData.map(function(item, index){
-		    	return(
-        	     <tr key={index}>
-			        <td>{item._id}</td>
-			        <td>{item.username}</td>
-			        <td>{item.FullName}</td>
-			        <td>{item.idCardNumber}</td>
-			        <td>{item.phone}</td>
-			        <td>{item.email}</td>
-			        <td>{item.userType}</td>
-			        <td>{item.gender}</td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
+		<Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+          <TableRow>
+            <CustomTableCell>User Name</CustomTableCell>
+            <CustomTableCell>Full Name</CustomTableCell>
+            <CustomTableCell numeric>Id Card Number</CustomTableCell>
+            <CustomTableCell numeric>Phone</CustomTableCell>
+            <CustomTableCell>Email</CustomTableCell>
+            <CustomTableCell>Gender</CustomTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.state.userData.map((item, index) =>{
+            return (
+              <TableRow className={classes.row} key={index}>
+                <CustomTableCell component="th" scope="row">
+                  {item.username}
+                </CustomTableCell>
+                <CustomTableCell>{item.FullName}</CustomTableCell>
+                <CustomTableCell numeric>{item.idCardNumber}</CustomTableCell>
+                <CustomTableCell numeric>{item.phone}</CustomTableCell>
+                <CustomTableCell>{item.email}</CustomTableCell>
+                <CustomTableCell>{item.gender}</CustomTableCell>
+              </TableRow>
+            );
+          })}
+	        </TableBody>
+	      </Table>
+	    </Paper>
+	    <br/>
          </div> 
          </div>   
          <br />
@@ -67,4 +96,8 @@ render(){
 
 }
 }
-export default retrivePatient;
+retrivePatient.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(retrivePatient);

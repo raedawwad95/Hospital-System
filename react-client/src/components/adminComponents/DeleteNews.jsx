@@ -1,6 +1,34 @@
 import React from 'react';
 import $ from 'jquery';
+import { Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles } from 'material-ui';
+import PropTypes from 'prop-types';
 
+//this for Table
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+});
 
 
  class DeleteNews extends React.Component {
@@ -51,42 +79,48 @@ import $ from 'jquery';
  	}
 
 
-	render() {
-		var that = this;
-		return (
-			<div>
-
-			<div className='card'>
-			<div> <h2> All News </h2> <br /> </div> 
-			<div className='container-fluid'>
-				<table className="table table-bordered"  style={{tableLayout:"fixed"}}>
-				<thead style={{textAlign:'center'}}>
-					  <tr>
-					    <th style={{width:'15%'}}>newsSubject</th>
-					   	<th style={{width:'70%'}}>newsText</th>
-					   	<th style={{width:'15%'}}>Delete</th>
-					  </tr>
-				</thead>
-				<tbody style={{textAlign:'center'}}>
-				{ this.state.News.map(function(item, index){
-					return(
-						<tr key={index}>
-					        <td>{item.newsSubject}</td>
-					        <td>{item.newsText}</td>
-					        <td> <button onClick={that.deleteNewsClick} value={item._id}>delete</button> </td>
-					    </tr>
-
-						)
-					})}
-					</tbody>
-					</table>
-					</div>
-					</div>
-				
-			</div>
-		);
-	}
+render() {
+	const { classes } = this.props;
+	var that = this;
+	return (
+		<div>
+		<div className='card'>
+		<div> <h2 style={{textAlign:'center'}}> All News </h2> <br /> </div> 
+		<div className='container-fluid'>
+		<Paper className={classes.root}>
+		    <Table className={classes.table}>
+		      <TableHead>
+		      <TableRow>
+		        <CustomTableCell>News Subject</CustomTableCell>
+		        <CustomTableCell>News Text</CustomTableCell>
+		        <CustomTableCell >Delete</CustomTableCell>
+		      </TableRow>
+		    </TableHead>
+		    <TableBody>
+		      {this.state.News.map((item, index) =>{
+		        return (
+		          <TableRow className={classes.row} key={index}>
+		            <CustomTableCell component="th" scope="row">
+		              {item.newsSubject}
+		            </CustomTableCell>
+		            <CustomTableCell>{item.newsText}</CustomTableCell>
+		            <CustomTableCell><button onClick={that.deleteNewsClick} value={item._id} className="btn btn-danger">delete</button></CustomTableCell>
+		          </TableRow>
+		        );
+		      })}
+		        </TableBody>
+		      </Table>
+		    </Paper>
+		    <br/>
+		</div>
+		</div>				
+		</div>
+	);
 }
+}
+DeleteNews.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
+export default withStyles(styles)(DeleteNews);
 
-export  default  DeleteNews

@@ -1,5 +1,34 @@
 import React from 'react';
 import $ from 'jquery';
+import { Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles } from 'material-ui';
+import PropTypes from 'prop-types';
+
+//this for Table
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+});
 
 class retriveAllDoctor extends React.Component{
 	constructor(props){
@@ -25,49 +54,47 @@ class retriveAllDoctor extends React.Component{
     }
 
 render(){
-
+	const { classes } = this.props;
 	return(
 	<div>
 	<div className='card'>
-	<div> <h2> All Doctors </h2> <br /> </div> 
+	<div> <h2 style={{textAlign:'center'}}> All Doctors </h2> <br /> </div> 
 	<div className='container-fluid'>
-	<table className="table table-bordered">
-
-	<thead style={{textAlign:'center'}}>
-	  <tr>
-	  	<th width="15%">Id</th>
-	    <th>User Name</th>
-	    <th width="25%">Full Name</th>
-	    <th>National Id</th>
-	    <th>Hospital Id</th>
-	    <th>Department</th>
-	    <th>Spicility Status</th>
-	    <th>Hours Of Work</th>
-	    <th>Gender</th>
-	    <th>Doctor Type</th>
-	  </tr>
-	</thead>
-
-	<tbody style={{textAlign:'center'}}>
-	{ this.state.doctors.map(function(item, index){
-	return(
-		<tr key={index}>
-		    <td>{item._id}</td>
-	        <td>{item.userName}</td>
-	        <td>{item.fullName}</td>
-	        <td>{item.nationalId}</td>
-	        <td>{item.hospitalId}</td>
-	        <td>{item.department}</td>
-	        <td>{item.spicilityStatus}</td>
-	        <td>{item.hoursOfWork}</td>
-	        <td>{item.gender}</td>
-	        <td>{item.doctorType}</td>
-	    </tr>
-
-		)
-	})}
-	</tbody>
-	</table>
+    <Paper className={classes.root}>
+    <Table className={classes.table}>
+      <TableHead>
+      <TableRow>
+        <CustomTableCell>User Name</CustomTableCell>
+        <CustomTableCell>Full Name</CustomTableCell>
+        <CustomTableCell numeric>National Id</CustomTableCell>
+        <CustomTableCell numeric>Hospital Id</CustomTableCell>
+        <CustomTableCell>Department</CustomTableCell>
+        <CustomTableCell>Spicility Status</CustomTableCell>
+        <CustomTableCell numeric>Hours Of Work</CustomTableCell>
+        <CustomTableCell>Gender</CustomTableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {this.state.doctors.map((item, index) =>{
+        return (
+          <TableRow className={classes.row} key={index}>
+            <CustomTableCell component="th" scope="row">
+              {item.userName}
+            </CustomTableCell>
+            <CustomTableCell>{item.fullName}</CustomTableCell>
+            <CustomTableCell numeric>{item.nationalId}</CustomTableCell>
+            <CustomTableCell numeric>{item.hospitalId}</CustomTableCell>
+            <CustomTableCell>{item.department}</CustomTableCell>
+            <CustomTableCell>{item.spicilityStatus}</CustomTableCell>
+            <CustomTableCell numeric>{item.hoursOfWork}</CustomTableCell>
+            <CustomTableCell>{item.gender}</CustomTableCell>
+          </TableRow>
+        );
+      })}
+        </TableBody>
+      </Table>
+    </Paper>
+	<br/>
 	</div>
 	</div>
 	</div>
@@ -76,4 +103,8 @@ render(){
 
 }
 
-export default retriveAllDoctor;
+retriveAllDoctor.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(retriveAllDoctor);
