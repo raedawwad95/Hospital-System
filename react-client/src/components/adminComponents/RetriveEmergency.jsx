@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, InputAdornment, Paper, Grid, CardHeader,
-		Button, Card, CardActions, CardContent,
+		Button, Card, CardActions, CardContent, 
 		Table, TableBody, TableCell, TableHead, TableRow } from 'material-ui';
 import moment from 'moment';
 
@@ -30,6 +30,9 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
+   button: {
+    margin: theme.spacing.unit,
+  },
 });
 
 class RetriveEmergency extends React.Component{
@@ -38,6 +41,7 @@ class RetriveEmergency extends React.Component{
 		this.state={
 			emergency:[]
 		}
+		this.delete = this.delete.bind(this)
 	}
 
 	componentDidMount() {
@@ -55,6 +59,26 @@ class RetriveEmergency extends React.Component{
 		});
     }
 
+    delete(id){
+ 		var that=this;
+ 		var id = id.target.value
+ 		var obj = {
+ 			_id : id
+ 		}
+ 		$.ajax({
+ 			type:"Delete",
+ 			url:'/emergency',
+ 			data:obj,
+ 			success:function(data){
+ 				alert('data deleted')
+ 				that.componentDidMount();
+ 			},
+ 			error:function(err){
+ 				console.log(err)
+ 			}
+ 		})
+ 	}
+
 render(){
 	const { classes } = this.props;
 	if (this.state.emergency.length === 0) {
@@ -71,8 +95,8 @@ render(){
 	            <CustomTableCell numeric>Phone</CustomTableCell>
 	            <CustomTableCell numeric>Long</CustomTableCell>
 	            <CustomTableCell numeric>Lat</CustomTableCell>
-	            <CustomTableCell>created At</CustomTableCell>
-	            
+	            <CustomTableCell>Created At</CustomTableCell>
+	            <CustomTableCell>Delete</CustomTableCell>
 	          </TableRow>
 	        </TableHead>
 	        <TableBody>
@@ -86,6 +110,11 @@ render(){
 	                <CustomTableCell numeric>{n.longitude}</CustomTableCell>
 	                <CustomTableCell numeric>{n.latitude}</CustomTableCell>
 	                <CustomTableCell>{moment(n.createdAt).calendar()}</CustomTableCell>
+	                <CustomTableCell>
+	                	<button value={n._id} onClick={this.delete} className='btn btn-danger'>
+				        	Delete
+				        </button>
+				    </CustomTableCell>
 	              </TableRow>
 	            );
 	          })}

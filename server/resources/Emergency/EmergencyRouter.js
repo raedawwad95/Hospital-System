@@ -9,5 +9,8 @@ EmergencyRouter.route('/')
 	.get(function (req, res) {
 		EmergencyController.retrive(req, res);
 	})
+	.delete(function (req, res) {
+		EmergencyController.delete(req, res);
+	})
 
 module.exports = EmergencyRouter;

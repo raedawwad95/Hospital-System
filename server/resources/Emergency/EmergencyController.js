@@ -23,3 +23,12 @@ exports.retrive = function (req, res) {
 		}
 	})
 };
+
+exports.delete = function (req, res) {
+	Emergency.findByIdAndRemove({_id: req.body._id}, function (err) {
+		if (err) {
+			console.error(err);
+		}
+		res.json('Deleted');
+	})
+}
