@@ -1,5 +1,38 @@
 import React from 'react';
 import $ from 'jquery';
+import { TextField, Grid,
+    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
+import Modal from 'react-modal';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import moment from 'moment';
+
+//this for Table
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+});
 
 class retriveAllDepts extends React.Component{
 	constructor(props){
@@ -25,32 +58,35 @@ class retriveAllDepts extends React.Component{
     }
 
 render(){
+	const { classes } = this.props;
 	return(
 		<div>
 		<div className="card">
-			<div> <h2>All Departments</h2> <br /> </div>
+			<div> <h2 style={{textAlign:'center'}}>All Departments</h2> <br /> </div>
 			<div className="container">
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th width="25%">Id</th>
-		        <th>Name Of Dept</th>
-		        <th>Id Of Dept</th>
-		      </tr>
-		    </thead>
-		    <tbody style={{textAlign:'center'}}>
-		    {this.state.depts.map(function(item, index){
-		    	return(
-
-        	     <tr key={index}>
-			        <td>{item._id}</td>
-			        <td>{item.nameOfDept}</td>
-			        <td>{item.idOfDept}</td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
+			<Paper className={classes.root}>
+	        <Table className={classes.table}>
+	          <TableHead>
+	          <TableRow>
+	            <CustomTableCell>Name Of Dept</CustomTableCell>
+	            <CustomTableCell>Id Of Dept</CustomTableCell>
+	          </TableRow>
+	        </TableHead>
+	        <TableBody>
+	           {this.state.depts.map(function(item, index){
+	            return (
+	              <TableRow className={classes.row} key={index}>
+	                <CustomTableCell component="th" scope="row">
+	                  {item.nameOfDept}
+	                </CustomTableCell>
+	                <CustomTableCell>{item.idOfDept}</CustomTableCell>
+	              </TableRow>
+	            );
+	          })}
+	        </TableBody>
+	      </Table>
+         </Paper>
+         <br/>
          </div>
 	    </div>
 	    </div>
@@ -59,4 +95,8 @@ render(){
 
 }
 
-export default retriveAllDepts;
+retriveAllDepts.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(retriveAllDepts);
