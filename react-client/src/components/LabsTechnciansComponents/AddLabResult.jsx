@@ -206,6 +206,7 @@ render(){
 	return(
 		<div>
 		<div className="card">
+		<div> <h2 style={{textAlign:'center'}}> Patient data (Add Result) </h2> <br /> </div>
 		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField
@@ -326,6 +327,7 @@ render(){
 	        </TableBody>
 	      </Table>
 	    </Paper>
+	    <br/>
          </div>
          </div>
          <br/>
@@ -359,7 +361,8 @@ render(){
           })}
           </TableBody>
          </Table>
-        </Paper>       
+        </Paper>
+        <br/>       
 	    </div>
 	    </div>
 	      <Modal
@@ -390,6 +393,7 @@ render(){
 			return(
 		<div>
 		<div className="card">
+		<div> <h2 style={{textAlign:'center'}}> Patient data (Add Result) </h2> <br /> </div>
 		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField
