@@ -6,5 +6,8 @@ EmergencyRouter.route('/')
 	.post(function (req, res) {
 		EmergencyController.create(req, res);
 	})
+	.get(function (req, res) {
+		EmergencyController.retrive(req, res);
+	})
 
 module.exports = EmergencyRouter;
