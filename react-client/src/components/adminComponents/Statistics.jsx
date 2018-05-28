@@ -1,5 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
+ import BarChart from 'react-bar-chart';
+ 
+
 
 class Statistics extends React.Component {
 	constructor(props){
@@ -8,11 +11,13 @@ class Statistics extends React.Component {
 			doctors:[],
 			labTechs:[],
 			userData:[],
-			depts:[]
+			depts:[],
+			width:500,
 
 		}
 	}
-	componentDidMount() {
+
+   	componentWillMount() {
     	var that=this;
     	$.ajax({
 	    	type:'GET',
@@ -59,17 +64,42 @@ class Statistics extends React.Component {
 		});
 
     }
-
-	render() {
-		return (
-			<div>
-			<h1>Doctor num :{this.state.doctors.length}</h1>
-			<h1>labTechs num :{this.state.labTechs.length}</h1>
-			<h1>userData num :{this.state.userData.length}</h1>
-			<h1>depts num :{this.state.depts.length}</h1>
-			</div>
-		);
-	}
+    componentDidMount(){
+    	window.onresize = () => {
+	     this.setState({width: this.refs.root.offsetWidth}); 
+	    };
+    }
+ 
+ 
+  render() {
+  	const data = [
+  		{text:'Doctor',value:this.state.doctors.length},
+  		{text:'labTechs',value:this.state.labTechs.length},
+  		{text:'Patient',value:this.state.userData.length},
+  		{text:'Departments',value:this.state.depts.length}
+  		]
+  	const margin = {top: 20, right: 20, bottom: 30, left: 40};
+  	    if (this.state.doctors.length === 0){
+    	return (
+			<h1> test </h1>
+    	)
+    }
+    return (
+        <div ref='root'>
+            <div style={{width: '50%'}}> 
+                <BarChart 
+                  width={this.state.width}
+                  height={500}
+              	 margin={margin}
+                 data= {data}
+               />
+            </div>
+        </div>
+    );
+  }
 }
 
+ 
+
 export default Statistics;
+
