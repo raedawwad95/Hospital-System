@@ -1,12 +1,24 @@
 import React from 'react';
 import $ from 'jquery';
 import { TextField, Grid,
-		Button,CardActions,withStyles,CircularProgress } from 'material-ui';
+    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import green from 'material-ui/colors/green';
+import moment from 'moment';
 
+//this for Table
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+//////////////////
 const customStyles = {
   content : {
     top                   : '50%',
@@ -46,7 +58,19 @@ const customStyles1 = {
 	    marginLeft: -12,
 	  },
 	  },
-	  
+	  root: {
+	  width: '100%',
+	  marginTop: theme.spacing.unit * 3,
+	  overflowX: 'auto',
+	  },
+	  table: {
+	  minWidth: 700,
+	  }, 
+	  row: {
+	 '&:nth-of-type(odd)': {
+	  backgroundColor: theme.palette.background.default,
+    },
+	}
 	});
 class PatientDataAddRecord extends React.Component{
 	constructor(props){
@@ -271,68 +295,70 @@ render(){
 		</div>
         </Modal>	
 	    <h1 style={{textAlign:'center'}}>User Data</h1>      	
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th>Id</th>
-		        <th>User Name</th>
-		        <th>Full Name</th>
-		        <th>Id Card Number</th>
-		        <th>Phone</th>
-		        <th>Email</th>
-		        <th>User Type</th>
-		        <th>Gender</th>
-		      </tr>
-		    </thead>		    
-		    <tbody>
-		    {this.state.userData.map(function(item){
-		    	return(
-        	     <tr>
-			        <td>{item._id}</td>
-			        <td>{item.username}</td>
-			        <td>{item.FullName}</td>
-			        <td>{item.idCardNumber}</td>
-			        <td>{item.phone}</td>
-			        <td>{item.email}</td>
-			        <td>{item.userType}</td>
-			        <td>{item.gender}</td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
+		 <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+          <TableRow>
+            <CustomTableCell>User Name</CustomTableCell>
+            <CustomTableCell>Full Name</CustomTableCell>
+            <CustomTableCell numeric>Id Card Number</CustomTableCell>
+            <CustomTableCell numeric>Phone</CustomTableCell>
+            <CustomTableCell>Email</CustomTableCell>
+            <CustomTableCell>Gender</CustomTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.state.userData.map((item, index) =>{
+            return (
+              <TableRow className={classes.row} key={index}>
+                <CustomTableCell component="th" scope="row">
+                  {item.username}
+                </CustomTableCell>
+                <CustomTableCell>{item.FullName}</CustomTableCell>
+                <CustomTableCell numeric>{item.idCardNumber}</CustomTableCell>
+                <CustomTableCell numeric>{item.phone}</CustomTableCell>
+                <CustomTableCell>{item.email}</CustomTableCell>
+                <CustomTableCell>{item.gender}</CustomTableCell>
+              </TableRow>
+            );
+          })}
+	        </TableBody>
+	      </Table>
+	    </Paper>
          </div>
          </div>
          <br/>
          <div className="card">
          <div className='container-fluid'>
           <h1 style={{textAlign:'center'}}>User Lab Result</h1>      	
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th width='20%'>Id </th>
-		        <th>Lab Technician Name</th>
-		        <th>Medical Examination Time</th>
-		        <th>Result Entry Time</th>
-		        <th>Description</th>
-		        <th>Image Result</th>
-		      </tr>
-		    </thead>		    
-		    <tbody style={{textAlign:'center'}}>
-		    {this.state.userData[0].labResults.map(function(item){
-		    	return(
-        	     <tr>
-			        <td>{item._id}</td>
-			        <td>{item.labTechnicianId.fullName}</td>
-			        <td>{item.medicalExaminationTime}</td>
-			        <td>{item.resultEntryTime}</td>
-			        <td>{item.description}</td>
-			        <td><button style={{'background-color': 'white'}} value ={item.imageOfResult} onClick={that.openModalImageResult}>{item.imageOfResult}</button></td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
+		 <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+          <TableRow>
+            <CustomTableCell>Lab Technician Name</CustomTableCell>
+            <CustomTableCell numeric>Medical Examination Time</CustomTableCell>
+            <CustomTableCell numeric>Result Entry Time</CustomTableCell>
+            <CustomTableCell>Description</CustomTableCell>
+            <CustomTableCell>Image Result</CustomTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.state.userData[0].labResults.map((item, index) =>{
+            return (
+              <TableRow className={classes.row} key={index}>
+                <CustomTableCell component="th" scope="row">
+                  {item.labTechnicianId.fullName}
+                </CustomTableCell>
+                <CustomTableCell numeric>{moment(item.medicalExaminationTime).fromNow()}</CustomTableCell>
+                <CustomTableCell numeric>{moment(item.resultEntryTime).fromNow()}</CustomTableCell>
+                <CustomTableCell>{item.description}</CustomTableCell>
+                <CustomTableCell><button style={{'background-color': 'white'}} value ={item.imageOfResult} onClick={that.openModalImageResult}>Show Result Image</button></CustomTableCell>
+              </TableRow>
+            );
+          })}
+          </TableBody>
+         </Table>
+        </Paper>  
 	    </div>
 	    </div>
 	    <Modal
@@ -360,28 +386,30 @@ render(){
 	    <div className="card">
 	    <div className='container-fluid'>
           <h1 style={{textAlign:'center'}}>User Medical Records</h1>      	
-		 <table className="table table-bordered">
-		    <thead style={{textAlign:'center'}}>
-		      <tr>
-		        <th width='20%'>Id </th>
-		        <th>Doctor Name</th>
-		        <th>Description</th>
-		        <th>Image Medical</th>
-		      </tr>
-		    </thead>		    
-		    <tbody style={{textAlign:'center'}}>
-		    {this.state.userData[0].medicalRecords.map(function(item, index){
-		    	return(
-        	     <tr key={index}>
-			        <td>{item._id}</td>
-			        <td>{item.doctorId.fullName}</td>
-			        <td>{item.description}</td>
-			        <td value ={item.image}><button style={{'background-color': 'white'}} value ={item.image} onClick={that.openModalImageMedical}>{item.image}</button></td>
-		         </tr>
-		         )
-            })}
-		    </tbody>
-         </table>
+		 <Paper className={classes.root}>
+	        <Table className={classes.table}>
+	          <TableHead>
+	          <TableRow>
+	            <CustomTableCell>Doctor Name</CustomTableCell>
+	            <CustomTableCell>Description</CustomTableCell>
+	            <CustomTableCell>Image Medical</CustomTableCell>
+	          </TableRow>
+	        </TableHead>
+	        <TableBody>
+	           {this.state.userData[0].medicalRecords.map(function(item, index){
+	            return (
+	              <TableRow className={classes.row} key={index}>
+	                <CustomTableCell component="th" scope="row">
+	                  {item.doctorId.fullName}
+	                </CustomTableCell>
+	                <CustomTableCell>{item.description}</CustomTableCell>
+	                <CustomTableCell><button style={{'background-color': 'white'}} value ={item.image} onClick={that.openModalImageMedical}>Show Medical Image</button></CustomTableCell>
+	              </TableRow>
+	            );
+	          })}
+	        </TableBody>
+	      </Table>
+         </Paper>
 	    </div>
 	    </div>
 	     <Modal
