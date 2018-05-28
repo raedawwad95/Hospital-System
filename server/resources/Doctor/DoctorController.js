@@ -133,3 +133,12 @@ exports.deleteOne=function(req,res){
 	})
 }
 
+exports.retrieveDoctor=function(req,res){
+	console.log(req.params.doctorId)
+	Doctor.findOne({_id : req.params.doctorId},function(err,data){
+		if(err){
+			res.send(err);
+		}
+		res.json(data);
+	});
+}

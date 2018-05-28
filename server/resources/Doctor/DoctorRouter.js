@@ -49,6 +49,11 @@ doctorRouter.route('/:userNameDoctor')
 .delete(function(req,res){
 	DoctorController.deleteOne(req,res);
 })
+doctorRouter.route('/t/:doctorId')
+.get(function(req,res){
+	DoctorController.retrieveDoctor(req,res);
+
+})
 
 
 
