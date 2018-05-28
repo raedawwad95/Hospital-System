@@ -341,10 +341,12 @@ componentDidMount(){
 	}
 
 	handleComplete(){
+		console.log('this.state.doc handlecomplete ',this.state.doc._id)
 		var obj={
+
 			date:this.state.dataToMain,
 			hour:this.state.hour,
-			doctorId:this.state.doc,
+			doctorId:this.state.doc._id,
 			userId:this.state.user._id
 		}
 		$.ajax({
