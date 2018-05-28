@@ -1,8 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
- import BarChart from 'react-bar-chart';
+import BarChart from 'react-bar-chart';
  
-
 
 class Statistics extends React.Component {
 	constructor(props){
@@ -69,8 +68,6 @@ class Statistics extends React.Component {
 	     this.setState({width: this.refs.root.offsetWidth}); 
 	    };
     }
- 
- 
   render() {
   	const data = [
   		{text:'Doctor',value:this.state.doctors.length},
@@ -98,8 +95,5 @@ class Statistics extends React.Component {
     );
   }
 }
-
- 
-
 export default Statistics;
 
