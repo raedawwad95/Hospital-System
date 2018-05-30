@@ -31,19 +31,13 @@ class AdminHome extends React.Component {
       <div>
       {auth &&(
         <div>
-          <h1>Admin Home Page</h1>
-          <h3> TODO: </h3>
-          <p> add notification here </p>
           <RetriveEmergency />
+          <Statistics/>
         </div>
         )}
       {!auth &&(
         <div>
-        <h1>Admin Home Page</h1>
-        <h3> TODO: </h3>
-        <p> add notification here </p>
-        <RetriveEmergency />
-        <Statistics/>
+        <h1>Please Login</h1>     
         </div>
         )}
       </div>
