@@ -1,9 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 import PropTypes from 'prop-types';
-import { withStyles, Button, Paper, Table, SnackbarContent,
-		 TableBody, TableCell, TableHead, TableRow } from 'material-ui';
-import Try from './try.jsx'
+import { withStyles, Paper, Table, SnackbarContent,
+		 TableBody, TableCell, TableHead, TableRow ,MailIcon,IconButton,Button,Badge} from 'material-ui';
 const styles = theme => ({
   	snackbar: {
     	margin: theme.spacing.unit,
@@ -57,6 +56,8 @@ class DoctorApp extends React.Component{
 				app:appArr,
 				unReadMsg:c
 			})
+				//declare var unReadM;
+				//unReadM=c;
 				console.log('c==',c)
 
 
@@ -141,9 +142,10 @@ class DoctorApp extends React.Component{
 		var that=this
 		return(
 			<div>
+          		<Badge color="primary" badgeContent={this.state.unReadMsg} className={classes.margin}>
+       		 		<Button variant="raised" onClick={that.sort}>show Appointment</Button>
+     			</Badge>
 
-			<Button onClick={that.sort}>SHOW</Button>
-			<Try msg={this.state.unReadMsg}/>
 				{this.state.show&&(
 					<Paper className={classes.root}>
 					      <Table className={classes.table}>
