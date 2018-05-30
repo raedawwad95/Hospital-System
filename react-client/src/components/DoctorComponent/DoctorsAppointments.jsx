@@ -3,6 +3,8 @@ import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, Paper, Table, SnackbarContent,
 		 TableBody, TableCell, TableHead, TableRow ,MailIcon,IconButton,Button,Badge} from 'material-ui';
+
+
 const styles = theme => ({
   	snackbar: {
     	margin: theme.spacing.unit,
@@ -32,6 +34,7 @@ class DoctorApp extends React.Component{
 		this.sort=this.sort.bind(this);
 		this.formatDate=this.formatDate.bind(this);
 		this.getDoctorData=this.getDoctorData.bind(this);
+		this.getStripedStyle=this.getStripedStyle.bind(this)
 	}
 	
 	componentDidMount(){
@@ -136,6 +139,10 @@ class DoctorApp extends React.Component{
 
 	}
 
+	getStripedStyle() {
+    return { background:  '#fafafa'  };
+  	}
+
 	render(){
 		console.log(this.state)
 		const classes=this.props
@@ -158,13 +165,30 @@ class DoctorApp extends React.Component{
 					        </TableHead>
 					        <TableBody>
 					          {this.state.app.map(function(item){
-					            return (
+					          	if(!item.read){
+					          	return (
 					              <TableRow>
 					                <TableCell>{item.userId.FullName}</TableCell>
 					                <TableCell>{item.date}</TableCell>
 					                <TableCell>{item.hour}</TableCell>
+					                <TableCell>
+          		<Badge color="primary" badgeContent='NEW' className={classes.margin}>
+					                </Badge>	
+					                </TableCell>
 					              </TableRow>
 					            );
+					          	}else{
+					          		return (
+					              <TableRow>
+					                <TableCell>{item.userId.FullName}</TableCell>
+					                <TableCell>{item.date}</TableCell>
+					                <TableCell>{item.hour}</TableCell>
+					                <TableCell>
+					                </TableCell>
+					              </TableRow>
+					            );	
+					          	}
+
 					          })}
 					        </TableBody>
 					      </Table>
