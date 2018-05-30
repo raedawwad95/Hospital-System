@@ -76,8 +76,8 @@ render(){
 	              {item.patientId.FullName}
 	            </CustomTableCell>
 	            <CustomTableCell>{item.labTechnicianId.fullName}</CustomTableCell>
-	            <CustomTableCell numeric>{moment(item.medicalExaminationTime).fromNow()}</CustomTableCell>
-	            <CustomTableCell numeric>{moment(item.resultEntryTime).fromNow()}</CustomTableCell>
+	            <CustomTableCell numeric>{moment(item.medicalExaminationTime).calendar()}</CustomTableCell>
+	            <CustomTableCell numeric>{moment(item.resultEntryTime).calendar()}</CustomTableCell>
 	            <CustomTableCell>{item.description}</CustomTableCell>
 	          </TableRow>
 	        );
