@@ -44,11 +44,18 @@ class DoctorApp extends React.Component{
 			type:'get',
 			url:'/app',
 			success:function(data1){
+				console.log('data1 from doctor com ',data1[0].doctorId._id)
+				console.log('state from doctor com ',that.state.doctor._id)
+
 				for(var j=0;j<data1.length;j++){
 					appArr.push(data1[j])
-					if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
+					console.log('jjj ',j)
+					console.log('data1[j].doctorId._id ',data1[j].doctorId._id)
+					console.log('that.state.doctor._id ',that.state.doctor._id)
+					// if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
+	
 						c++
-					}
+					// }
 				}
 				that.setState({		
 				app:appArr,
