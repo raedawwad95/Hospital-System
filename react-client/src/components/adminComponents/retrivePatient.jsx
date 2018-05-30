@@ -179,8 +179,8 @@ render(){
                 <CustomTableCell component="th" scope="row">
                   {item.labTechnicianId.fullName}
                 </CustomTableCell>
-                <CustomTableCell numeric>{moment(item.medicalExaminationTime).fromNow()}</CustomTableCell>
-                <CustomTableCell numeric>{moment(item.resultEntryTime).fromNow()}</CustomTableCell>
+                <CustomTableCell numeric>{moment(item.medicalExaminationTime).calendar()}</CustomTableCell>
+                <CustomTableCell numeric>{moment(item.resultEntryTime).calendar()}</CustomTableCell>
                 <CustomTableCell>{item.description}</CustomTableCell>
                 <CustomTableCell><button style={{'background-color': 'white'}} value ={item.imageOfResult} onClick={that.openModalImageResult}>Show Result Image</button></CustomTableCell>
               </TableRow>
@@ -223,6 +223,7 @@ render(){
 	          <TableRow>
 	            <CustomTableCell>Doctor Name</CustomTableCell>
 	            <CustomTableCell>Description</CustomTableCell>
+	            <CustomTableCell>Date</CustomTableCell>
 	            <CustomTableCell>Image Medical</CustomTableCell>
 	          </TableRow>
 	        </TableHead>
@@ -234,6 +235,7 @@ render(){
 	                  {item.doctorId.fullName}
 	                </CustomTableCell>
 	                <CustomTableCell>{item.description}</CustomTableCell>
+	                <CustomTableCell>{moment(item.createdAt).calendar()}</CustomTableCell>
 	                <CustomTableCell><button style={{'background-color': 'white'}} value ={item.image} onClick={that.openModalImageMedical}>Show Medical Image</button></CustomTableCell>
 	              </TableRow>
 	            );
@@ -273,7 +275,7 @@ render(){
 			return(
 		<div>
 		<div className="card">
-		<div> <h2> Patient data </h2> <br /> </div> 
+		<div> <h2 style={{textAlign:'center'}}> Patient data </h2> <br /> </div> 
 		<div className='container-fluid'>
 		<Grid item xs={6} sm={3}>
 			<TextField

@@ -352,8 +352,8 @@ render(){
                 <CustomTableCell component="th" scope="row">
                   {item.labTechnicianId.fullName}
                 </CustomTableCell>
-                <CustomTableCell numeric>{moment(item.medicalExaminationTime).fromNow()}</CustomTableCell>
-                <CustomTableCell numeric>{moment(item.resultEntryTime).fromNow()}</CustomTableCell>
+                <CustomTableCell numeric>{moment(item.medicalExaminationTime).calendar()}</CustomTableCell>
+                <CustomTableCell numeric>{moment(item.resultEntryTime).calendar()}</CustomTableCell>
                 <CustomTableCell>{item.description}</CustomTableCell>
                 <CustomTableCell><button style={{'background-color': 'white'}} value ={item.imageOfResult} onClick={that.openModalImageResult}>Show Result Image</button></CustomTableCell>
               </TableRow>

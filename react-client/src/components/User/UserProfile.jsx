@@ -140,8 +140,8 @@ return(
                 <CustomTableCell component="th" scope="row">
                   {item.labTechnicianId.fullName}
                 </CustomTableCell>
-                <CustomTableCell numeric>{moment(item.medicalExaminationTime).fromNow()}</CustomTableCell>
-                <CustomTableCell numeric>{moment(item.resultEntryTime).fromNow()}</CustomTableCell>
+                <CustomTableCell numeric>{moment(item.medicalExaminationTime).calendar()}</CustomTableCell>
+                <CustomTableCell numeric>{moment(item.resultEntryTime).calendar()}</CustomTableCell>
                 <CustomTableCell>{item.description}</CustomTableCell>
                 <CustomTableCell><button style={{'background-color': 'white'}} value ={item.imageOfResult} onClick={that.openModalImageResult}>Show Result Image</button></CustomTableCell>
               </TableRow>
@@ -184,7 +184,8 @@ return(
           <TableRow>
             <CustomTableCell>Doctor Name</CustomTableCell>
             <CustomTableCell>Description</CustomTableCell>
-            <CustomTableCell>Image Medical</CustomTableCell>
+            <CustomTableCell>Date </CustomTableCell>
+            <CustomTableCell>Image Medical</CustomTableCell>           
           </TableRow>
         </TableHead>
         <TableBody>
@@ -195,6 +196,7 @@ return(
                   {item.doctorId.fullName}
                 </CustomTableCell>
                 <CustomTableCell>{item.description}</CustomTableCell>
+                <CustomTableCell>{moment(item.createdAt).calendar()}</CustomTableCell>
                 <CustomTableCell><button style={{'background-color': 'white'}} value ={item.image} onClick={that.openModalImageMedical}>Show Medical Image</button></CustomTableCell>
               </TableRow>
             );
