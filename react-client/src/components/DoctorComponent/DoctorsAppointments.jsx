@@ -3,7 +3,7 @@ import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, Button, Paper, Table, SnackbarContent,
 		 TableBody, TableCell, TableHead, TableRow } from 'material-ui';
-
+import Try from './try.jsx'
 const styles = theme => ({
   	snackbar: {
     	margin: theme.spacing.unit,
@@ -49,18 +49,17 @@ class DoctorApp extends React.Component{
 
 				for(var j=0;j<data1.length;j++){
 					appArr.push(data1[j])
-					console.log('jjj ',j)
-					console.log('data1[j].doctorId._id ',data1[j].doctorId._id)
-					console.log('that.state.doctor._id ',that.state.doctor._id)
-					// if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
-	
+					if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
 						c++
-					// }
+					}
 				}
 				that.setState({		
 				app:appArr,
 				unReadMsg:c
 			})
+				console.log('c==',c)
+
+
 			}
 		})
 		var today=this.formatDate(new Date);
@@ -137,13 +136,14 @@ class DoctorApp extends React.Component{
 	}
 
 	render(){
+		console.log(this.state)
 		const classes=this.props
 		var that=this
 		return(
 			<div>
 
 			<Button onClick={that.sort}>SHOW</Button>
-
+			<Try msg={this.state.unReadMsg}/>
 				{this.state.show&&(
 					<Paper className={classes.root}>
 					      <Table className={classes.table}>
