@@ -136,6 +136,20 @@ class DoctorApp extends React.Component{
 			show:!s,
 			todayApp:todayApp
 		})
+		var doctorid=this.state.app[0].doctorId._id
+		console.log('doctoriddoctoriddoctoriddoctoriddoctorid ',doctorid)
+		var obj={
+			docId:doctorid
+		}
+		$.ajax({
+			url:'/app',
+			type:'PUT',
+			data:obj,
+			dataType:"json",
+			success:function(){
+				console.log('unread massege updated')
+			}
+		})
 
 	}
 
@@ -172,8 +186,8 @@ class DoctorApp extends React.Component{
 					                <TableCell>{item.date}</TableCell>
 					                <TableCell>{item.hour}</TableCell>
 					                <TableCell>
-          		<Badge color="primary" badgeContent='NEW' className={classes.margin}>
-					                </Badge>	
+          								<Badge color="primary" badgeContent='NEW' className={classes.margin}>
+					                	</Badge>	
 					                </TableCell>
 					              </TableRow>
 					            );
