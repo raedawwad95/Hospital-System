@@ -1,8 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 import PropTypes from 'prop-types';
-import { withStyles, Button, Paper, Table, SnackbarContent,
-		 TableBody, TableCell, TableHead, TableRow } from 'material-ui';
+import { withStyles, Paper, Table, SnackbarContent,
+		 TableBody, TableCell, TableHead, TableRow ,MailIcon,IconButton,Button,Badge} from 'material-ui';
+
 
 const styles = theme => ({
   	snackbar: {
@@ -33,6 +34,7 @@ class DoctorApp extends React.Component{
 		this.sort=this.sort.bind(this);
 		this.formatDate=this.formatDate.bind(this);
 		this.getDoctorData=this.getDoctorData.bind(this);
+		this.getStripedStyle=this.getStripedStyle.bind(this)
 	}
 	
 	componentDidMount(){
@@ -44,6 +46,9 @@ class DoctorApp extends React.Component{
 			type:'get',
 			url:'/app',
 			success:function(data1){
+				console.log('data1 from doctor com ',data1[0].doctorId._id)
+				console.log('state from doctor com ',that.state.doctor._id)
+
 				for(var j=0;j<data1.length;j++){
 					appArr.push(data1[j])
 					if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
@@ -54,6 +59,11 @@ class DoctorApp extends React.Component{
 				app:appArr,
 				unReadMsg:c
 			})
+				//declare var unReadM;
+				//unReadM=c;
+				console.log('c==',c)
+
+
 			}
 		})
 		var today=this.formatDate(new Date);
@@ -126,16 +136,36 @@ class DoctorApp extends React.Component{
 			show:!s,
 			todayApp:todayApp
 		})
+		var doctorid=this.state.app[0].doctorId._id
+		console.log('doctoriddoctoriddoctoriddoctoriddoctorid ',doctorid)
+		var obj={
+			docId:doctorid
+		}
+		$.ajax({
+			url:'/app',
+			type:'PUT',
+			data:obj,
+			dataType:"json",
+			success:function(){
+				console.log('unread massege updated')
+			}
+		})
 
 	}
 
+	getStripedStyle() {
+    return { background:  '#fafafa'  };
+  	}
+
 	render(){
+		console.log(this.state)
 		const classes=this.props
 		var that=this
 		return(
 			<div>
-
-			<Button onClick={that.sort}>SHOW</Button>
+          		<Badge color="primary" badgeContent={this.state.unReadMsg} className={classes.margin}>
+       		 		<Button variant="raised" onClick={that.sort}>show Appointment</Button>
+     			</Badge>
 
 				{this.state.show&&(
 					<Paper className={classes.root}>
@@ -149,13 +179,30 @@ class DoctorApp extends React.Component{
 					        </TableHead>
 					        <TableBody>
 					          {this.state.app.map(function(item){
-					            return (
+					          	if(!item.read){
+					          	return (
 					              <TableRow>
 					                <TableCell>{item.userId.FullName}</TableCell>
 					                <TableCell>{item.date}</TableCell>
 					                <TableCell>{item.hour}</TableCell>
+					                <TableCell>
+          								<Badge color="primary" badgeContent='NEW' className={classes.margin}>
+					                	</Badge>	
+					                </TableCell>
 					              </TableRow>
 					            );
+					          	}else{
+					          		return (
+					              <TableRow>
+					                <TableCell>{item.userId.FullName}</TableCell>
+					                <TableCell>{item.date}</TableCell>
+					                <TableCell>{item.hour}</TableCell>
+					                <TableCell>
+					                </TableCell>
+					              </TableRow>
+					            );	
+					          	}
+
 					          })}
 					        </TableBody>
 					      </Table>
