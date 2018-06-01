@@ -27,7 +27,7 @@ labsTechnciansRouter.route('/')
 
 	// techncian logout
 	labsTechnciansRouter.route('/logout')
-	.delete(function (req, res) {
+	.get(function (req, res) {
 		LabsTechnciansController.logout(req, res);
 	})
 	labsTechnciansRouter.route('/isLogin')
