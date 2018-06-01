@@ -5,7 +5,8 @@ var LabsResult = require('../server/resources/LabsResult/LabsResult');
 var LabsTechncians = require('../server/resources/LabsTechncians/LabsTechncians')
 var Medical = require('../server/resources/MedicalRecorde/Medical')
 var mongoose = require('mongoose');
-
+var chai = require('chai');  
+var expect = chai.expect;   
 
 
 //test for Department Model
