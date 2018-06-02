@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import { withStyles, MenuItem, TextField, Input, InputLabel, InputAdornment,
 		FormControl, Paper, Grid, CardHeader, FormHelperText,
-		Button, Select, Card, CardActions, CardContent } from 'material-ui';
+		Button, Select, Card, CardActions, CardContent } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 	const styles = theme => ({

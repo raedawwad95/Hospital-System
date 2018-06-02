@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import {  TextField, Grid,
-		Button, CardActions } from 'material-ui'
+		Button, CardActions } from '@material-ui/core';
 class UpdateLabTechncians extends React.Component{
 	constructor(props){
 		super(props);

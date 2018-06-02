@@ -4,7 +4,7 @@ import { withStyles, AppBar, Toolbar,
          Typography, IconButton, Switch, Avatar,
          FormControlLabel, FormGroup, Menu, MenuItem, Button,
          ListItemIcon, ListItemText, Paper, Divider, Grid, InputAdornment,
-         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from 'material-ui';
+         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SendIcon from '@material-ui/icons/Send';
 import {NavLink, Link} from 'react-router-dom';

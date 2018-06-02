@@ -1,11 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
 import { TextField, Grid,
-    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
+    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from '@material-ui/core';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import green from 'material-ui/colors/green';
+import green from '@material-ui/core/colors/green';
 import moment from 'moment';
 
 //this for Table

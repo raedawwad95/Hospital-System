@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles, MenuItem, TextField, Step, InputLabel, Stepper,
 		FormControl, StepLabel, StepContent, Paper,
-		Button, Select, Typography } from 'material-ui';
+		Button, Select, Typography } from '@material-ui/core';
 
 const styles = theme => ({
   root: {

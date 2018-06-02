@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery'
 import PropTypes from 'prop-types';
 import { Typography, Grid, Card, TextField,CardActions, CardContent, CardMedia,
-		Button,withStyles,CircularProgress } from 'material-ui';
+		Button,withStyles,CircularProgress } from '@material-ui/core';
 import moment from 'moment';
 
 const styles = {

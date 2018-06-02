@@ -4,19 +4,19 @@ import { withStyles, AppBar, Toolbar,
          Typography, IconButton, Switch, 
          FormControlLabel, FormGroup, Menu, MenuItem, Button,
          ListItemIcon, ListItemText, Paper, Divider, Grid, InputAdornment,
-         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from 'material-ui';
+         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Collapse from 'material-ui/transitions/Collapse';
+import Collapse from '@material-ui/core/Collapse';
 import classNames from 'classnames';
 
 
@@ -50,7 +50,9 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
-
+  button2: {
+    color: "white",
+  }
 });
 
 class AdminNavbar extends React.Component {
@@ -180,7 +182,9 @@ class AdminNavbar extends React.Component {
             </Typography>
             {auth && (
               <div>
-
+                 <Button component={Link} to="/admin" className={classes.button2}>
+                  Home
+                </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
@@ -340,6 +344,10 @@ class AdminNavbar extends React.Component {
                           </NavLink>
                         </List>
                       </Collapse>
+
+                      <Divider />
+
+                      <MenuItem onClick={this.handleClose}><a href="/itDep/logout">Logout</a></MenuItem>
 
                     </List>
                   </div>

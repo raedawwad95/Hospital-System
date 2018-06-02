@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Grid,
-    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
+    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from '@material-ui/core';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import moment from 'moment';

@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import { Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles } from 'material-ui';
+import { Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 //this for Table

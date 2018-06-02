@@ -88,7 +88,7 @@ exports.logout=function(req,res){
 		if(err){
 			return console.log(err)
 		}
-		res.json("logged out")
+		res.redirect('/Doctor');
 	});
 }
 //retrive patient from user 

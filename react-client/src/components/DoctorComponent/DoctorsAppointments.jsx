@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, Paper, Table, SnackbarContent,
-		 TableBody, TableCell, TableHead, TableRow ,MailIcon,IconButton,Button,Badge} from 'material-ui';
+		 TableBody, TableCell, TableHead, TableRow ,MailIcon,IconButton,Button,Badge} from '@material-ui/core';
 
 
 const styles = theme => ({

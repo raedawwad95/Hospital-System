@@ -4,7 +4,7 @@ import { withStyles, AppBar, Toolbar,
          Typography, IconButton, Switch, 
          FormControlLabel, FormGroup, Menu, MenuItem, Button,
          ListItemIcon, ListItemText, Paper, Divider, Grid, InputAdornment,
-         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from 'material-ui';
+         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
@@ -16,7 +16,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Collapse from 'material-ui/transitions/Collapse';
+import Collapse from '@material-ui/core/Collapse';
 import classNames from 'classnames';
 
 
@@ -182,7 +182,7 @@ class DoctorNavbar extends React.Component {
                   <MenuItem onClick={this.handleClose} component={Link} to="/doctor/apppointment">Appointments</MenuItem>
                   <Divider />
                   <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">Chnage Password</MenuItem>
-                  <MenuItem onClick={this.handleClose} component={Link} to="/Doctor/logout">Logout</MenuItem>
+                  <MenuItem onClick={this.handleClose}><a href="/Doctor/logout">Logout</a></MenuItem>
                 </Menu>
               </div>
             )}
