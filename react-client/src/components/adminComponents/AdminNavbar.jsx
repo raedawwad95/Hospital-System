@@ -150,6 +150,9 @@ class AdminNavbar extends React.Component {
         console.log(err);
       }
     });
+    setTimeout(function() {
+      that.props.refresh(true);
+    }, 2000)
   }
 
   componentDidMount() {

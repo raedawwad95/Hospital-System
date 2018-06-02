@@ -9,13 +9,21 @@ import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-rout
 class Doctor extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      refreshed: false
+    }
   }
+
+  refreshComponents(value) {
+    window.location.reload()
+  }
+
   render() {
     return (
       <div>
-      <DoctorNavbar/>
+      <DoctorNavbar refresh={this.refreshComponents.bind(this)}/>
       <br/>
-        <Route exact path="/doctor" component={DoctorHome} />
+        <Route exact path="/doctor" component={DoctorHome}/>
         <Route path="/doctor/patient" component={PatientDataAddRecord} />
         <Route path="/doctor/update" component={UpdateDoctor} />
         <Route path="/doctor/apppointment" component={Appointment} />
