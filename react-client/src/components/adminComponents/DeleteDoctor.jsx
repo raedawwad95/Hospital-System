@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from "jquery";
-import { withStyles, MenuItem, Input, Select } from 'material-ui';
+import { withStyles, MenuItem, Input, Select } from '@material-ui/core';
  class DeleteDoctor extends Component {
 	constructor(props){
 		super(props);

@@ -3,11 +3,11 @@ import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, MenuItem, TextField, Input, InputLabel, InputAdornment,
 		FormControl, Paper, Grid, CardHeader, FormHelperText,
-		Button, Select, Card, CardActions, CardContent, CircularProgress } from 'material-ui';
+		Button, Select, Card, CardActions, CardContent, CircularProgress } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import classNames from 'classnames';
-import green from 'material-ui/colors/green';
+import green from '@material-ui/core/colors/green';
 
 
 const styles=theme =>({

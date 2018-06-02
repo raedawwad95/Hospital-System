@@ -1,12 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
 import { TextField, Grid,
-    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from 'material-ui';
+    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from '@material-ui/core';
 import Modal from 'react-modal';
 import moment from 'moment';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import green from 'material-ui/colors/green';
+import green from '@material-ui/core/colors/green';
 
 //this for Table
 const CustomTableCell = withStyles(theme => ({

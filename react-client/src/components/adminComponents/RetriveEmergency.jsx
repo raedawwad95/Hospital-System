@@ -3,7 +3,7 @@ import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, InputAdornment, Paper, Grid, CardHeader,
 		Button, Card, CardActions, CardContent, 
-		Table, TableBody, TableCell, TableHead, TableRow } from 'material-ui';
+		Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import moment from 'moment';
 
 const CustomTableCell = withStyles(theme => ({

@@ -3,7 +3,7 @@ import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, TextField, Paper, Grid, FormControl,
 		Button, Card, CardActions, CardContent, CardHeader,
-		InputLabel, Input, InputAdornment, IconButton  } from 'material-ui';
+		InputLabel, Input, InputAdornment, IconButton  } from '@material-ui/core';
 import classNames from 'classnames';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';

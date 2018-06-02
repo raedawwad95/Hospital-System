@@ -4,7 +4,7 @@ import { withStyles, AppBar, Toolbar,
          Typography, IconButton, Switch, 
          FormControlLabel, FormGroup, Menu, MenuItem, Button,
          ListItemIcon, ListItemText, Paper, Divider, Grid, InputAdornment,
-         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from 'material-ui';
+         List, ListItem, ListSubheader, FormControl, Input, TextField, InputLabel } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
@@ -16,7 +16,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Collapse from 'material-ui/transitions/Collapse';
+import Collapse from '@material-ui/core/Collapse';
 import classNames from 'classnames';
 
 
