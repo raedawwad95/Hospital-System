@@ -1,34 +1,32 @@
-
  var chai = require('chai')
  var expect = chai.expect;
  var assert = require('chai').assert
   import React from 'react';
   import ReactTestUtils from 'react-dom/test-utils'; 
 
-  import Home from '../react-client/src/components/Home';
-  import Home2 from '../react-client/src/components/Home2';
+  
   import LoginLabTech from '../react-client/src/components/LabsTechnciansComponents/LoginLabTech';
-  import AddResult from '../react-client/src/components/LabsComponent/AddResults';
+  import AddLabResult from '../react-client/src/components/LabsTechnciansComponents/AddLabResult';
+  import LabHome from '../react-client/src/components/LabsTechnciansComponents/LabHome';
+  import Labs from '../react-client/src/components/LabsTechnciansComponents/LabsMain';
+  import LabsNavbar from '../react-client/src/components/LabsTechnciansComponents/LabsNavbar';
+  import UpdateLabTechncians from '../react-client/src/components/LabsTechnciansComponents/UpdateLabTechncians';
+  import Create from '../react-client/src/components/User/Create';
+  import Home from '../react-client/src/components/User/Home';
+  import Main from '../react-client/src/components/User/Main';
+  import News from '../react-client/src/components/User/News';
+  import PationtAppoinment from '../react-client/src/components/User/PationtAppoinment';
+  import UserProfile from '../react-client/src/components/User/UserProfile';
   import DoctorHome from '../react-client/src/components/DoctorComponent/DoctorHome';
   import Doctor from '../react-client/src/components/DoctorComponent/DoctorMain';
-  import DoctorNavbar from '../react-client/src/components/DoctorComponent/DoctorNavbar';
-  import UpdateDoctor from '../react-client/src/components/DoctorComponent/UpdateDoctor';
+  import DoctorApp from '../react-client/src/components/DoctorComponent/DoctorsAppointments';
   import PatientDataAddRecord from '../react-client/src/components/DoctorComponent/PatientDataAddRecord';
+  import UpdateDoctor from '../react-client/src/components/DoctorComponent/UpdateDoctor';
   import AddDepartment from '../react-client/src/components/adminComponents/addDept';
   import AddDoctor from '../react-client/src/components/adminComponents/AddDoctor';
   import AddDocToComponent from '../react-client/src/components/adminComponents/addDoctortoComponent';
   import addDoctorToDepartment from '../react-client/src/components/adminComponents/addDoctorToDepartment';
-  import AddLabTechncians from '../react-client/src/components/adminComponents/AddLabTechncians';
-  import AdminHome from '../react-client/src/components/adminComponents/AdminHome';
-  import Admin from '../react-client/src/components/adminComponents/adminMain';
-  import AdminNavbar from '../react-client/src/components/adminComponents/AdminNavbar';
-  import retriveAllDepts from '../react-client/src/components/adminComponents/retriveAllDepts';
-  import retriveAllDoctor from '../react-client/src/components/adminComponents/retriveAllDoctor';
-  import retriveLabResults from '../react-client/src/components/adminComponents/retriveLabResults';
-  import retriveLabTech from '../react-client/src/components/adminComponents/retriveLabTech';
-  import retrivePatient from '../react-client/src/components/adminComponents/retrivePatient';
-  import Navabar from '../react-client/src/components/Navabar';
-  import Appoinment from '../react-client/src/components/userpick';
+  
 
 
 
@@ -42,40 +40,7 @@
 
 
 
-
-describe('Home', function() {
- 	it('should be class component ',function(){
-		expect(React.Component.isPrototypeOf(Home)).to.be.true;
-	})
-	
- 
-    it('should render one <Navabar /> components', () => {
-    const wrapper = shallow(<Home/>);
-    expect(wrapper.find(Navabar).length).to.equal(1);
-  })
-     it('should render one <Appoinment /> components', () => {
-    const wrapper = shallow(<Home/>);
-    expect(wrapper.find(Appoinment).length).to.equal(1);
-  })
-
-});
-
-
-
-
-describe("Home2",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(Home2)).to.be.true;
-	})
-	   it('should render one <div /> components', () => {
-    const wrapper = shallow(<Home2/>);
-    expect(wrapper.find('div').length).to.equal(1);
-  })
-});
-
-
-
-
+//Labs Techncians Component Test.
 describe("LoginLabTech",function(){
 	it('should be class component',function(){
 		expect(React.Component.isPrototypeOf(LoginLabTech)).to.be.true;
@@ -85,182 +50,147 @@ describe("LoginLabTech",function(){
     expect(wrapper.find('div').length).to.equal(2);
     })
 });
-
-
-
-describe("AddResult",function(){
+describe("AddLabResult",function(){
 	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(AddResult)).to.be.true;
+		expect(React.Component.isPrototypeOf(AddLabResult)).to.be.true;
 	})
-	it('should render two <div /> components', () => {
-    const wrapper = shallow(<AddResult/>);
-    expect(wrapper.find('div').length).to.equal(2);
-    })
 });
-
-
-describe("DoctorHome",function(){
+describe("LabHome",function(){
 	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(DoctorHome)).to.be.true;
+		expect(React.Component.isPrototypeOf(LabHome)).to.be.true;
 	})
-	it('should render one <div /> components', () => {
-    const wrapper = shallow(<DoctorHome/>);
+	it('should render one <div/> components', () => {
+    const wrapper = shallow(<LabHome/>);
     expect(wrapper.find('div').length).to.equal(1);
     })
-});
-
-
-describe("Doctor",function(){
+});	
+describe("Labs",function(){
 	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(Doctor)).to.be.true;
+		expect(React.Component.isPrototypeOf(Labs)).to.be.true;
 	})
 	it('should render one <div /> components', () => {
-    const wrapper = shallow(<Doctor/>);
+    const wrapper = shallow(<Labs/>);
     expect(wrapper.find('div').length).to.equal(1);
     })
-    it('should render one <DoctorNavbar /> components', () => {
-    const wrapper = shallow(<Doctor/>);
-    expect(wrapper.find(DoctorNavbar).length).to.equal(1);
-    })
-     it('should render three <Route /> components', () => {
-    const wrapper = shallow(<Doctor/>);
+    it('should render three <Route /> components', () => {
+    const wrapper = shallow(<Labs/>);
     expect(wrapper.find('Route').length).to.equal(3);
     })
 });
-
-
-describe("DoctorNavbar",function(){
+describe("LabsNavbar",function(){
 	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(DoctorNavbar)).to.be.true;
+		expect(React.Component.isPrototypeOf(LabsNavbar)).to.be.true;
 	})
-	// it('should render two <Button /> components', () => {
- //    const wrapper = shallow(<DoctorNavbar/>);
- //    expect(wrapper.find('Button').length).to.equal(2);
- //    })
-
-});
-
-
-
-
-describe("UpdateDoctor",function(){
+ });
+describe("UpdateLabTechncians",function(){
 	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(UpdateDoctor)).to.be.true;
+		expect(React.Component.isPrototypeOf(UpdateLabTechncians)).to.be.true;
 	})
- 	it('rendered the title', function() {
-    	const wrapper = render(<Foo title="unique" />);
-    	expect(wrapper.text()).to.contain('unique');
-  	});
  });
 
 
 
+//Users Component Test
+describe("Create",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(Create)).to.be.true;
+	})
+  });
+describe("Home",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(Home)).to.be.true;
+	})
+	it('should render one <div/> components', () => {
+    const wrapper = shallow(<Home/>);
+    expect(wrapper.find('div').length).to.equal(1);
+    })
+});
+describe("Main",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(Main)).to.be.true;
+	})
+	 it('should render one <div/> components', () => {
+    const wrapper = shallow(<Main/>);
+     expect(wrapper.find('div').length).to.equal(1);
+     })
+      it('should render four <Route/> components', () => {
+    const wrapper = shallow(<Main/>);
+     expect(wrapper.find('Route').length).to.equal(4);
+     })
+ });
+describe("News",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(News)).to.be.true;
+	})
+});
+describe("PationtAppoinment",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(PationtAppoinment)).to.be.true;
+	})
+});
+describe("UserProfile",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(UserProfile)).to.be.true;
+	})
+});
+
+//Doctor components Test..
+describe("DoctorHome",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(DoctorHome)).to.be.true;
+	})
+	it('should render one <div/> components', () => {
+    const wrapper = shallow(<DoctorHome/>);
+     expect(wrapper.find('div').length).to.equal(1);
+     })
+});
+describe("Doctor",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(Doctor)).to.be.true;
+	})
+	it('should render one <div/> components', () => {
+    const wrapper = shallow(<Doctor/>);
+     expect(wrapper.find('div').length).to.equal(1);
+     })
+	it('should render four <Route/> components', () => {
+    const wrapper = shallow(<Doctor/>);
+     expect(wrapper.find('Route').length).to.equal(4);
+     })
+});
+describe("DoctorApp",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(DoctorApp)).to.be.true;
+	})
+});
 describe("PatientDataAddRecord",function(){
 	it('should be class component',function(){
 		expect(React.Component.isPrototypeOf(PatientDataAddRecord)).to.be.true;
 	})
-	// it('should render two Button components', () => {
- //    const wrapper = shallow(<PatientDataAddRecord/>);
- //    expect(wrapper.find('Button').length).to.equal(5);
- //    })
 });
-
-
-
-
+describe("UpdateDoctor",function(){
+	it('should be class component',function(){
+		expect(React.Component.isPrototypeOf(UpdateDoctor)).to.be.true;
+	})
+});
+//Admin Components Test...
 describe("AddDepartment",function(){
 	it('should be class component',function(){
 		expect(React.Component.isPrototypeOf(AddDepartment)).to.be.true;
 	})
-	 // it('should render five <Grid/> components', () => {
-  //   const wrapper = shallow(<AddDepartment/>);
-  //    expect(wrapper.find('Grid').length).to.equal(5);
-  //    })
 });
-
-
 describe("AddDoctor",function(){
 	it('should be class component',function(){
 		expect(React.Component.isPrototypeOf(AddDoctor)).to.be.true;
 	})
 });
 
-
 describe("AddDocToComponent",function(){
 	it('should be class component',function(){
 		expect(React.Component.isPrototypeOf(AddDocToComponent)).to.be.true;
 	})
 });
-
 describe("addDoctorToDepartment",function(){
 	it('should be class component',function(){
 		expect(React.Component.isPrototypeOf(addDoctorToDepartment)).to.be.true;
 	})
 });
-describe("AddLabTechncians",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(AddLabTechncians)).to.be.true;
-	})
-});
-describe("AdminHome",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(AdminHome)).to.be.true;
-	})
-	it('should render one <div /> components', () => {
-    const wrapper = shallow(<AdminHome/>);
-    expect(wrapper.find('div').length).to.equal(1);
-    })
-
-});
-describe("Admin",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(Admin)).to.be.true;
-	})
-	it('should render one <div /> components', () => {
-    const wrapper = shallow(<Admin/>);
-    expect(wrapper.find('div').length).to.equal(1);
-    })
-    it('should render one <AdminNavbar /> components', () => {
-    const wrapper = shallow(<Admin/>);
-    expect(wrapper.find(AdminNavbar).length).to.equal(1);
-    })
-    it('should render ten <Route /> components', () => {
-    const wrapper = shallow(<Admin/>);
-    expect(wrapper.find('Route').length).to.equal(11);
-    })
-
-});
-describe("AdminNavbar",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(AdminNavbar)).to.be.true;
-	})
-});
-describe("retriveAllDepts",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(retriveAllDepts)).to.be.true;
-	})
-	// it('should render Four <div /> components', () => {
- //    const wrapper = shallow(<retriveAllDepts/>);
- //    expect(wrapper.find('div').length).to.equal(3);
- //    })
-});
-describe("retriveAllDoctor",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(retriveAllDoctor)).to.be.true;
-	})
-});
-describe("retriveLabResults",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(retriveLabResults)).to.be.true;
-	})
-});
-describe("retriveLabTech",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(retriveLabTech)).to.be.true;
-	})
-});
-describe("retrivePatient",function(){
-	it('should be class component',function(){
-		expect(React.Component.isPrototypeOf(retrivePatient)).to.be.true;
-	})
-})
