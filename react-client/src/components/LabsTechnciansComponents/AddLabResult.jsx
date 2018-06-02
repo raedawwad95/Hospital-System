@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { TextField, Grid,
-    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles} from '@material-ui/core';
+    Button,CardActions,Table,TableBody,TableCell,TableHead,TableRow,Paper,withStyles, CircularProgress} from '@material-ui/core';
 import Modal from 'react-modal';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -166,7 +166,7 @@ class AddLabResult extends React.Component{
         $.ajax({
           url: `https://api.imgur.com/3/image`,
           method: 'POST',
-          headers: {"Authorization": "Client-ID bb8a64e82b834b5"},
+          headers: {"Authorization": "Client-ID 307e8453e9ee1b3"},
           data:imgCode
         })
         .done (function (data) {

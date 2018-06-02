@@ -2,6 +2,8 @@ node_modules
 react-client/dist/bundle.js
 react-client/dist/bundle.js.map 
 package-lock.json
+hospital-system-reactNative/node_modules
+
 # Logs
 logs
 *.log
