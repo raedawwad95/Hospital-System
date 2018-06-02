@@ -182,7 +182,7 @@ class DoctorNavbar extends React.Component {
                   <MenuItem onClick={this.handleClose} component={Link} to="/doctor/apppointment">Appointments</MenuItem>
                   <Divider />
                   <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">Chnage Password</MenuItem>
-                  <MenuItem onClick={this.handleClose} component={Link} to="/Doctor/logout">Logout</MenuItem>
+                  <MenuItem onClick={this.handleClose}><a href="/Doctor/logout">Logout</a></MenuItem>
                 </Menu>
               </div>
             )}

@@ -51,11 +51,11 @@ exports.login=function(req,res){
 }
 //logout 
 exports.logout = function(req,res){
-	req.session.destroy(function(){
+	req.session.destroy(function(err){
 		if(err){
 			console.log(err);
 		}
-		    res.json("logged out")
+		    res.redirect('/admin');
 	});
 }
 //check the user type that logged in 
