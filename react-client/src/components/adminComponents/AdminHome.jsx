@@ -37,7 +37,7 @@ class AdminHome extends React.Component {
         )}
       {!auth &&(
         <div>
-        <h1>Please Login</h1>     
+        <h1>Please Login</h1>
         </div>
         )}
       </div>
