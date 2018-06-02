@@ -20,11 +20,19 @@ import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-rout
 class Admin extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      refreshed: false
+    }
   }
+
+  refreshComponents(value) {
+    window.location.reload()
+  }
+
   render() {
     return (
       <div>
-      <AdminNavbar/>
+      <AdminNavbar refresh={this.refreshComponents.bind(this)}/>
       <br/>
         <Route exact path="/admin" component={AdminHome} />
         <Route path="/admin/AddLabTechncians" component={AddLabTechncians} />
