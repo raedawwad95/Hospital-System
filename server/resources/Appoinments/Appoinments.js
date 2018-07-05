@@ -23,8 +23,6 @@ var AppoinmetSchema =mongoose.Schema({
     	default: false
     }
 })
-
-
 var Appoinment =mongoose.model('Appoinment',AppoinmetSchema);
 
 module.exports=Appoinment;

@@ -9,8 +9,7 @@ labRouter.route('/')
 	.post(function (req, res) {
 		labController.createResutl(req, res);
 	})
-
-
+	
 module.exports = labRouter;
 
 

@@ -21,10 +21,8 @@ const styles = theme => ({
   },
 });
 
-
 class Pationt extends React.Component{
 	constructor(props){
-
 		super(props);
 		this.state={
     	hour:"",
@@ -41,7 +39,6 @@ class Pationt extends React.Component{
 		doctorName:'',
 
 		}
-
 		this.handleNext=this.handleNext.bind(this);
 		this.getSteps=this.getSteps.bind(this);
 		this.getStepContent=this.getStepContent.bind(this);
@@ -59,385 +56,346 @@ class Pationt extends React.Component{
 		this.final=this.final.bind(this)
 	}
 componentDidMount(){
-		var arr=[];
-		var that=this;
-		$.ajax({
-			type:'get',
-			url:'/Doctor/retrieve',
-			success:function(data){
-				for(var i=0;i<data.length;i++){
-					arr.push(data[i])
-				}
-				that.setState({
-					doctors:arr
-				})
+	var arr=[];
+	var that=this;
+	$.ajax({
+		type:'get',
+		url:'/Doctor/retrieve',
+		success:function(data){
+			for(var i=0;i<data.length;i++){
+				arr.push(data[i])
 			}
-		})
-		var today=this.formatDate(new Date);
-		this.setState({
-			today:today
-		})
-		this.getUserData();
+			that.setState({
+				doctors:arr
+			})
+		}
+	})
+	var today=this.formatDate(new Date);
+	this.setState({
+		today:today
+	})
+	this.getUserData();
+}
+getUserData() {
+    var that = this
+    $.ajax({
+      url:'/api/userController/getLogin',
+      type:'GET',
+      success:function(data){
+        that.setState({
+          user: data
+        })
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+}
+ChooseTime(){
+	const classes=this.props
+	return(
+		<TextField
+    type="time"
+    value={this.state.hour}
+    onChange={this.handleTime}
+    format={"HH:mm"}
+    className={classes.textField}
+    InputLabelProps={{
+      shrink: true,
+    }}
+    inputProps={{
+      step: 1800, // 30 min
+    }}
+  />
+)	
+}
+handleTime(e){
+	var time=e.target.value;
+	var aHour='';
+	var date='';
+	var counter=true;
+	var startWork=this.state.doc.hoursOfWork;
+	var startWork=startWork+8+'';
+	startWork=startWork+':00'
+	if(time>startWork){
+		counter=false;
 	}
-
-	getUserData() {
-	    var that = this
-	    $.ajax({
-	      url:'/api/userController/getLogin',
-	      type:'GET',
-	      success:function(data){
-	        that.setState({
-	          user: data
-	        })
-	      },
-	      error:function(err){
-	        console.log(err);
-	      }
-	    });
-	}
-
-	ChooseTime(){
-		const classes=this.props
-		return(
-			<TextField
-        type="time"
-        value={this.state.hour}
-        onChange={this.handleTime}
-        format={"HH:mm"}
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          step: 1800, // 30 min
-        }}
-      />
-			)	
-	}
-
-	handleTime(e){
-		var time=e.target.value;
-		var aHour='';
-		var date='';
-		var counter=true;
-		var startWork=this.state.doc.hoursOfWork;
-		var startWork=startWork+8+'';
-		startWork=startWork+':00'
-		if(time>startWork){
+	for(var i=0;i<this.state.appData.length;i++){
+		aHour=this.state.appData[i].hour;
+		date=this.state.appData[i].date;
+		if(time===aHour&&this.state.dataToMain===date){
 			counter=false;
 		}
-		for(var i=0;i<this.state.appData.length;i++){
-			aHour=this.state.appData[i].hour;
-			date=this.state.appData[i].date;
-			if(time===aHour&&this.state.dataToMain===date){
-				counter=false;
-			}
-		}
-
-		if(counter===true){
-			this.setState({
-				hour: e.target.value,
-			})			
-		}else{
-			alert('choose avaliable time')
-		}
-
 	}
-
-	getSteps(){
-		return ['Choose Doctor','Choose Date','Choose Time','final step'];
-	}
-
-	handleChange(e){
+	if(counter===true){
 		this.setState({
-			age:e.target.value
-		})
+			hour: e.target.value,
+		})			
+	}else{
+		alert('choose avaliable time')
 	}
-
-	getStepContent(step){
-		switch(step){
-			case 0:
-			return this.ChooseDoctor()
-			case 1:
-			return this.ChooseDate()
-			case 2:
-			return this.ChooseTime()
-			case 3:
-			return this.final();
-
-		}
-	}
-
-	final(){
-		return(
-			<div>
-			<p>
-			You pick an appoinment with Doctor <b> {this.state.doctorName} 
-			</b>
-			<br /> 
-			on <b>{this.state.dataToMain}</b> at <b>{this.state.hour}</b>
-			</p>
-			</div>
-			)
-	}
-
-	ChooseDoctor(){
-		const classes =this.props;
-		return(
-			<div>
-			<select name="Doctor" onChange={this.handleDoctor}>
-			<option value=''>chose a doctor</option>
-			{this.state.doctors.map(function(item){
-				return(
-				<option value={item._id}>{item.fullName}</option>
-					)
-			})}
-			</select>
-			</div>
-			)
-	}
-
-	handleDoctor(e){
-		var that=this;
-		this.setState({
-			move:!this.state.move
-		})
-		var that=this;
-		var appArr=[];
-		$.ajax({
-			type:'get',
-			url:'/app',
-			success:function(appdata){
-				for(var i=0;i<appdata.length;i++){
-					appArr.push(appdata[i]);
-				}
-				that.setState({
-					appData:appdata,
-				})
-			}
-		})
-//edit
-			var doctorId=e.target.value
-
-		$.ajax({
-			type:'get',
-			url:'/Doctor/t/'+doctorId,
-			success:function(doctorData){
-				that.setState({
-					doc:doctorData
-				})
-				
-			}
-		})
-
-
-
-
-	}
-
-	formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-	}
-
-	handleDate(e){
-	var appdata=[];
-	var doctorName;
-	var appstate=this.state.appData;
-		for(var i=0;i<appstate.length;i++){
-			if(appstate[i]._id===this.state.doc){
-			appdata.push(appstate[i]);
-			doctorName=appstate[i].doctorId.fullName
-		}
-	}
-
+}
+getSteps(){
+	return ['Choose Doctor','Choose Date','Choose Time','final step'];
+}
+handleChange(e){
 	this.setState({
-		appData:appdata,
-		doctorName:doctorName
+		age:e.target.value
 	})
-	var test=this.formatDate(date.value)
-	this.setState({
-		dataToMain: e.target.value,
-	})
+}
+getStepContent(step){
+	switch(step){
+		case 0:
+		return this.ChooseDoctor()
+		case 1:
+		return this.ChooseDate()
+		case 2:
+		return this.ChooseTime()
+		case 3:
+		return this.final();
 	}
-		
-	ChooseDate() {
-		const classes=this.props
-		return (
-			
-			<div>
-
-			 <TextField
-			  id="date"
-		      label='chose the date'
-		      type='date'
-		      className={classes.textField}
-		      dateFormat="LLL"
-		      value={this.state.dataToMain}
-		      name="dateC"
-		      onChange={this.handleDate}
-		      inputLabelProps={{
-		      	shrink:true
-		      }}
-		      />
-      </div>
-			
-		)
-	}
-	handleNext(){
-		if(this.state.activeStep===0){
-			if(this.state.doc){
-				this.setState({
-			activeStep:this.state.activeStep +1
-		})
-			}else{
-				alert('please select doctor')
-			}
-		}
-		if(this.state.activeStep===1){
-			if(this.state.today<=this.state.dataToMain){
-				this.setState({
-			activeStep:this.state.activeStep +1
-				})
-			}else{
-				alert('please select date')
-			}
-		}
-		if(this.state.activeStep===2){
-			if(this.state.hour){
-				this.setState({
-			activeStep:this.state.activeStep +1
-				})
-			}else{
-				alert('please select time')
-			}
-		}
-		if(this.state.activeStep===3){
-			this.setState({
-				activeStep:this.state.activeStep +1
-			})
-			this.handleComplete();
-		}
-
-	}
-
-	handleBack(){
-		this.setState({
-			activeStep:this.state.activeStep -1
-		})
-	}
-
-	handleReset(){
-		this.setState({
-			activeStep:0
-		})
-	}
-
-	handleComplete(){
-		console.log('this.state.doc handlecomplete ',this.state.doc._id)
-		var obj={
-
-			date:this.state.dataToMain,
-			hour:this.state.hour,
-			doctorId:this.state.doc._id,
-			userId:this.state.user._id
-		}
-		$.ajax({
-			url:'/app',
-			type:'post',
-			data:obj,
-			success:function(data){
-			}
-		})
-
-		this.setState({
-		hour:"",
-    	activeStep:0,
-    	appData:[],
-    	todayDate:[],
-    	doctors:[],
-    	today: '',
-		dataToMain:' ',
-		doc:'',
-		move:false,
-		user:[],
-		oneDocApp:[],
-		doctorName:''
-		})
-		this.componentDidMount()
-
-	}
-
-	render(){
-		var that=this;
-		const classes = this.props;
-		const steps=this.getSteps();
-		const activeStep =this.state.activeStep;
-		return (
+}
+final(){
+   return(
 	<div>
-		<div className={classes.root}>
-		<Stepper activeStep={activeStep} orientation="vertical">
-			{steps.map(function(label,index){
-				return(
-					<Step key={label}>
-						<StepLabel>{label}</StepLabel>
-						<StepContent>
-						<Typography>{that.getStepContent(index)}</Typography>
-						<div className={classes.actionsContainer}>
-						<div>
-						<Button
-							disabled={activeStep===0}
-							onClick={that.handleBack}
-							className={classes.button}
-						>
-						BACK
-						</Button>
-						<Button
-						variant="raised"
-						color="primary"
-						onClick={that.handleNext}
-						className={classes.button}
-						>
-						{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-						</Button>
-
-						</div>
-						</div>
-						</StepContent>
-						</Step>
-					);
-			})}
-			</Stepper>
-			{activeStep === steps.length && (
-				<Paper square elevation={0} className={classes.resetContainer}>
-					<Typography>All steps completed</Typography>
-					<Button onClick={this.handleReset} className={classes.button}>
-					reset
-					</Button>
-					</Paper>
-				)}
-      	</div>
-
-     <div>
-						</div>
-
- 
-      	</div>
+	<p>
+	You pick an appoinment with Doctor <b> {this.state.doctorName} 
+	</b>
+	<br /> 
+	on <b>{this.state.dataToMain}</b> at <b>{this.state.hour}</b>
+	</p>
+	</div>
+    )
+}
+ChooseDoctor(){
+const classes =this.props;
+return(
+	<div>
+	<select name="Doctor" onChange={this.handleDoctor}>
+	<option value=''>chose a doctor</option>
+	{this.state.doctors.map(function(item){
+		return(
+		<option value={item._id}>{item.fullName}</option>
 			)
+	})}
+	</select>
+	</div>
+	)
+}
+handleDoctor(e){
+var that=this;
+this.setState({
+	move:!this.state.move
+})
+var that=this;
+var appArr=[];
+$.ajax({
+	type:'get',
+	url:'/app',
+	success:function(appdata){
+		for(var i=0;i<appdata.length;i++){
+			appArr.push(appdata[i]);
+		}
+		that.setState({
+			appData:appdata,
+		})
+	}
+})
+var doctorId=e.target.value
+$.ajax({
+	type:'get',
+	url:'/Doctor/t/'+doctorId,
+	success:function(doctorData){
+		that.setState({
+			doc:doctorData
+		})		
+	}
+})
+}
+formatDate(date) {
+var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+if (month.length < 2) month = '0' + month;
+if (day.length < 2) day = '0' + day;
+return [year, month, day].join('-');
+}
+handleDate(e){
+var appdata=[];
+var doctorName;
+var appstate=this.state.appData;
+	for(var i=0;i<appstate.length;i++){
+		if(appstate[i]._id===this.state.doc){
+		appdata.push(appstate[i]);
+		doctorName=appstate[i].doctorId.fullName
+	}
+}
+this.setState({
+	appData:appdata,
+	doctorName:doctorName
+})
+var test=this.formatDate(date.value)
+this.setState({
+	dataToMain: e.target.value,
+})
+}
+ChooseDate() {
+const classes=this.props
+return (
+	<div>
+	 <TextField
+	  id="date"
+      label='chose the date'
+      type='date'
+      className={classes.textField}
+      dateFormat="LLL"
+      value={this.state.dataToMain}
+      name="dateC"
+      onChange={this.handleDate}
+      inputLabelProps={{
+      	shrink:true
+      }}
+      />
+</div>
+	)
+}
+handleNext(){
+
+	if(this.state.activeStep===0){
+		if(this.state.doc){
+			this.setState({
+		activeStep:this.state.activeStep +1
+	})
+		}else{
+			alert('please select doctor')
+		}
 	}
 
+	if(this.state.activeStep===1){
+		if(this.state.today<=this.state.dataToMain){
+			this.setState({
+		activeStep:this.state.activeStep +1
+			})
+		}else{
+			alert('please select date')
+		}
+	}
 
+	if(this.state.activeStep===2){
+		if(this.state.hour){
+			this.setState({
+		activeStep:this.state.activeStep +1
+			})
+		}else{
+			alert('please select time')
+		}
+	}
+
+	if(this.state.activeStep===3){
+		this.setState({
+			activeStep:this.state.activeStep +1
+		})
+		this.handleComplete();
+	}
 }
 
+handleBack(){
+	this.setState({
+		activeStep:this.state.activeStep -1
+	})
+}
+handleReset(){
+	this.setState({
+		activeStep:0
+	})
+}
+handleComplete(){
+	console.log('this.state.doc handlecomplete ',this.state.doc._id)
+	var obj={
+		date:this.state.dataToMain,
+		hour:this.state.hour,
+		doctorId:this.state.doc._id,
+		userId:this.state.user._id
+	}
+	$.ajax({
+		url:'/app',
+		type:'post',
+		data:obj,
+		success:function(data){
+		}
+	})
+	this.setState({
+	hour:"",
+	activeStep:0,
+	appData:[],
+	todayDate:[],
+	doctors:[],
+	today: '',
+	dataToMain:' ',
+	doc:'',
+	move:false,
+	user:[],
+	oneDocApp:[],
+	doctorName:''
+	})
+	this.componentDidMount()
+}
+render(){
+	var that=this;
+	const classes = this.props;
+	const steps=this.getSteps();
+	const activeStep =this.state.activeStep;
+return (
+<div>
+<div className={classes.root}>
+<Stepper activeStep={activeStep} orientation="vertical">
+{steps.map(function(label,index){
+	return(
+		<Step key={label}>
+			<StepLabel>{label}</StepLabel>
+			<StepContent>
+			<Typography>{that.getStepContent(index)}</Typography>
+			<div className={classes.actionsContainer}>
+			<div>
+			<Button
+				disabled={activeStep===0}
+				onClick={that.handleBack}
+				className={classes.button}
+			>
+			BACK
+			</Button>
+			<Button
+			variant="raised"
+			color="primary"
+			onClick={that.handleNext}
+			className={classes.button}
+			>
+			{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+			</Button>
+
+			</div>
+			</div>
+			</StepContent>
+			</Step>
+		);
+})}
+</Stepper>
+{activeStep === steps.length && (
+	<Paper square elevation={0} className={classes.resetContainer}>
+		<Typography>All steps completed</Typography>
+		<Button onClick={this.handleReset} className={classes.button}>
+		reset
+		</Button>
+		</Paper>
+	)}
+</div>
+</div>
+)
+}
+}
 Pationt.propTypes = {
-  classes: PropTypes.object,
+classes: PropTypes.object,
 };
 
 export default withStyles(styles)(Pationt);

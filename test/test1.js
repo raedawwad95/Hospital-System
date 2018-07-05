@@ -37,8 +37,6 @@ describe('test the get request from Departments', function(){
         });
     });
 
-    
-
 });
 
 //test for get data from Doctors
@@ -69,8 +67,6 @@ describe('test the get request from Doctors', function(){
         return newDoc.save();
     });
 
-
-
     it('should list all Doctors', function(done){
         var url = 'http://localhost:3000/Doctor/retrieve';
         request.get(url, (error, response, body) => {
@@ -82,7 +78,6 @@ describe('test the get request from Doctors', function(){
 });
 
 //test for get data from itDepartments
-
 describe('test the get request from itDepartments', function(){
 
     before('connect', function(){
@@ -99,8 +94,6 @@ describe('test the get request from itDepartments', function(){
             newitDep.password='1234'
         return newitDep.save();
     });
-
-
 
     it('should get the admin information', function(done){
         var url = 'http://localhost:3000/itDep/retrieve';
@@ -131,8 +124,6 @@ describe('test the get request from LabResult', function(){
         return newlRes.save();
     });
 
-
-
     it('should get the LabsResult', function(done){
         var url = 'http://localhost:3000/itDep/retrieve';
         request.get(url, (error, response, body) => {
@@ -143,10 +134,7 @@ describe('test the get request from LabResult', function(){
     });
 });
 
-
 // test for retrive data from labs technitions
-
-
 describe('test the get request from  labs technitions', function(){
 
     before('connect', function(){
@@ -171,8 +159,6 @@ describe('test the get request from  labs technitions', function(){
         return newlTech.save();
     });
 
-
-
     it('should list all Doctors', function(done){
         var url = 'http://localhost:3000/labTech/retrieve';
         request.get(url, (error, response, body) => {
@@ -183,43 +169,7 @@ describe('test the get request from  labs technitions', function(){
     });
 });
 
-
-
-// test for get from medical 
-
-// describe('test the get request from medical records ', function(){
-
-//     before('connect', function(){
-//         return mongoose.createConnection('mongodb://localhost/api/medical')
-//     })
-
-//     beforeEach(function(){
-//         return mRec.remove({})
-//     })
-
-//     beforeEach(function(){
-//         var newmRec = new mRec();
-//             newmRec.patientId='5af85bb90443504275b2fb9f'
-//             newmRec.doctorId='5af85bb90443503275b2fb9f'
-//             newmRec.description='asdcrjaksd'
-//             newmRec.image='asdasd'
-//         return newmRec.save();
-//     });
-
-
-
-//     it('should list all medical records', function(done){
-//         var url = 'http://localhost:3000/labTech/retrieve';
-//         request.get(url, (error, response, body) => {
-//             if (error) done(error)
-//             expect(response).to.be.an('Object');
-//             done();
-//         });
-//     });
-// });
-
 //test for get user
-
 describe('test the get request from  user', function(){
 
     before('connect', function(){
@@ -244,8 +194,6 @@ describe('test the get request from  user', function(){
             newuser.gender='Male'
         return newuser.save();
     });
-
-
 
     it('should list all Doctors', function(done){
         var url = 'http://localhost:3000/api/userController/test';

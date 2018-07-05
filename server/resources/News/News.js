@@ -1,6 +1,4 @@
 var mongoose = require('mongoose');
-
-
 //News Schema 
 var NewsSchema=mongoose.Schema({
 	newsSubject:{type:String},
@@ -11,5 +9,6 @@ var NewsSchema=mongoose.Schema({
 		default:Date.now
 	}
 })
-var News=mongoose.model('News',NewsSchema)
-module.exports=News
+var News=mongoose.model('News',NewsSchema);
+
+module.exports=News;

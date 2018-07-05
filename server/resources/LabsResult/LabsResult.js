@@ -23,11 +23,6 @@ var LabsResultSchema = mongoose.Schema({
 	description:{
 		type:String
 	}
-
-
-	
 });
-
 var LabsResult = mongoose.model('LabsResult', LabsResultSchema);
-
 module.exports = LabsResult;

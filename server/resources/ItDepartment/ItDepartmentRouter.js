@@ -1,6 +1,5 @@
 var ItDepartmentRouter = require('express').Router();
 var ItDepartmentController = require('./ItDepartmentController.js');
-
 //retrieve data 
 ItDepartmentRouter.route('/retrieve')
 .get(function(req,res){

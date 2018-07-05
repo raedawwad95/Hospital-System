@@ -1,7 +1,6 @@
 var LabsTechncians = require('./LabsTechncians');
 var LabsResult=require('../LabsResult/LabsResult')
 var User=require('../User/Users')
-
 //create function to creat lab Techncians panel
 exports.Create = function (req, res) {
   var labObj={
@@ -14,7 +13,6 @@ exports.Create = function (req, res) {
 		personalImgUrl:req.body.personalImgUrl,
 		gender:req.body.gender
 	}
-	
 	var newLabTech= new LabsTechncians(labObj);
 	newLabTech.save(function(err,data){
 		if (err){
@@ -33,7 +31,6 @@ exports.Create = function (req, res) {
 		res.json(data)
  	});
  };
-
 //Update Techncians information 
 exports.update=function(req,res){
 	LabsTechncians.findOne({userName:req.session.userName}).exec(function (err,tech){
@@ -48,37 +45,41 @@ exports.update=function(req,res){
 			res.json("Updated");
 		}
 	})
-
 }
 // login function for the Techncians 
 exports.login = function (req, res) {
-	LabsTechncians.findOne({userName: req.body.userName}).exec(function (err, tech) {
+LabsTechncians.findOne({userName: req.body.userName}).exec(function (err, tech) {
+
+if (err) {
+	console.error(err);
+} 
+
+if (!tech) { 
+	console.error("No user found");
+} else {  
+	tech.comparePassword(req.body.password, function(err, isMatch) {
 		if (err) {
 			console.error(err);
-		} 
-		if (!tech) { // if tech not found response
-			console.error("No user found");
-		} else { // check the password   comparePassword function 
-			tech.comparePassword(req.body.password, function(err, isMatch) {
-				if (err) {
-					console.error(err);
-				}
-				if (!isMatch) { // password not match case
-					console.error("Wrong password");
-				} else { // if true generate  a seassion
-					return req.session.regenerate(function(err) {
-		        		if (err) {
-		        			return console.error(err);
-		        		}
-		        		req.session.userName = tech.userName;
-		        		req.session.techncianType = tech.techncianType;
-		        	    req.session.ID = tech._id;
-		        		res.json(tech);
-					});
-				}
+		}
+		if (!isMatch) { 
+			console.error("Wrong password");
+		} else { 
+			return req.session.regenerate(function(err) {
+
+        		if (err) {
+        			return console.error(err);
+        		}
+
+        		req.session.userName = tech.userName;
+        		req.session.techncianType = tech.techncianType;
+        	    req.session.ID = tech._id;
+        		res.json(tech);
 			});
 		}
+
 	});
+}
+});
 };
 //Check if the logeddin is a Techncians 
 exports.isLogin = function(req, res) {
@@ -99,7 +100,6 @@ exports.logout = function (req, res) {
 		res.redirect('/labs');
 	});
 };
-
 // add a patient using populate 
 exports.addPatient=function(req,res){
 	var query={tech:req.body.id};
@@ -113,7 +113,6 @@ exports.addPatient=function(req,res){
 		res.json(data)
 	})
 }
-
 //add patient result by the lab Techncian
 exports.PatientResult=function(req,res){
 	var patientId=req.params.patientId

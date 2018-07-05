@@ -7,7 +7,6 @@ var MedicalSchema = mongoose.Schema({
 	image: String,
 	createdAt:{ type:Date, default:Date.now }
 });
-
 var Medical = mongoose.model('Medical', MedicalSchema);
 
 module.exports = Medical;

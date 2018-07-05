@@ -19,7 +19,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Collapse from '@material-ui/core/Collapse';
 import classNames from 'classnames';
 
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -57,182 +56,178 @@ const styles = theme => ({
 });
 
 class DoctorNavbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      auth: false,
-      anchorEl: null,
-      userName: "",
-      password: "",
-      showPassword: false,
-    }; 
-    // this.handleChange = this.handleChange.bind(this);
-    this.handleMenu = this.handleMenu.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
-    this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.loginDoc = this.loginDoc.bind(this);
+constructor(props) {
+  super(props);
+  this.state = {
+    auth: false,
+    anchorEl: null,
+    userName: "",
+    password: "",
+    showPassword: false,
+  }; 
+  this.handleMenu = this.handleMenu.bind(this);
+  this.handleClose = this.handleClose.bind(this);
+  this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
+  this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
+  this.onChange = this.onChange.bind(this);
+  this.loginDoc = this.loginDoc.bind(this);
+}
+
+handleMouseDownPassword(event) {
+  event.preventDefault();
+};
+
+handleClickShowPassword() {
+  this.setState({ 
+    showPassword: !this.state.showPassword 
+  });
+};
+
+onChange(e){
+  this.setState({
+    [e.target.name]:e.target.value
+  });
+}
+
+handleMenu(event) {
+  this.setState({ anchorEl: event.currentTarget });
+};
+
+handleClose() {
+  this.setState({ anchorEl: null });
+};
+
+loginDoc(){
+  var that = this
+  var obj = {
+    userName: this.state.userName,
+    password: this.state.password
   }
-
-  // handleChange(event, checked)  {
-  //   this.setState({ auth: checked });
-  // };
-  handleMouseDownPassword(event) {
-    event.preventDefault();
-  };
-
-  handleClickShowPassword() {
-    this.setState({ 
-      showPassword: !this.state.showPassword 
-    });
-  };
-
-  onChange(e){
-    this.setState({
-      [e.target.name]:e.target.value
-    });
-  }
-
-  handleMenu(event) {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose() {
-    this.setState({ anchorEl: null });
-  };
-
-  loginDoc(){
-    var that = this
-    var obj = {
-      userName: this.state.userName,
-      password: this.state.password
+  $.ajax({
+    url:'/Doctor/login',
+    type:'POST',
+    data:obj,
+    success:function(data){
+      that.setState({
+        auth: true
+      })
+    },
+    error:function(err){
+      console.log(err);
     }
-    $.ajax({
-      url:'/Doctor/login',
-      type:'POST',
-      data:obj,
-      success:function(data){
-        that.setState({
-          auth: true
-        })
-      },
-      error:function(err){
-        console.log(err);
-      }
-    });
-    setTimeout(function() {
-      that.props.refresh(true);
-    }, 2000)
-  }
+  });
+  setTimeout(function() {
+    that.props.refresh(true);
+  }, 2000)
+}
 
-  componentDidMount() {
-    var that = this
-    $.ajax({
-      url:'/Doctor/isLogin',
-      type:'GET',
-      success:function(data){
-        that.setState({
-          auth: true
-        })
-      },
-      error:function(err){
-        console.log(err);
-      }
-    });
-  }
+componentDidMount() {
+  var that = this
+  $.ajax({
+    url:'/Doctor/isLogin',
+    type:'GET',
+    success:function(data){
+      that.setState({
+        auth: true
+      })
+    },
+    error:function(err){
+      console.log(err);
+    }
+  });
+}
 
-  render() {
-    const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
-    const open = Boolean(anchorEl);
+render() {
+  const { classes } = this.props;
+  const { auth, anchorEl } = this.state;
+  const open = Boolean(anchorEl);
 
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              Doctor Panel
-            </Typography>
-            {auth && (
-              <div>
-                <Button component={Link} to="/doctor" className={classes.button2}>
-                  Home
-                </Button>
-                <IconButton
-                  aria-owns={open ? 'menu-appbar' : null}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >                    
-                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/patient">Patents</MenuItem>
-                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/apppointment">Appointments</MenuItem>
-                  <Divider />
-                  <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">Chnage Password</MenuItem>
-                  <MenuItem onClick={this.handleClose}><a href="/Doctor/logout">Logout</a></MenuItem>
-                </Menu>
-              </div>
-            )}
-            {!auth && (
-              <div>
-                <TextField
-                  required
-                  id="username"
-                  label="UserName"
-                  placeholder="Enter username"
-                  className={classes.textField}
-                  margin="normal"
-                  value={this.state.username}
-                  name="userName"
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            Doctor Panel
+          </Typography>
+          {auth && (
+            <div>
+              <Button component={Link} to="/doctor" className={classes.button2}>
+                Home
+              </Button>
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : null}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={this.handleClose}
+              >                    
+                <MenuItem onClick={this.handleClose} component={Link} to="/doctor/patient">Patents</MenuItem>
+                <MenuItem onClick={this.handleClose} component={Link} to="/doctor/apppointment">Appointments</MenuItem>
+                <Divider />
+                <MenuItem onClick={this.handleClose} component={Link} to="/doctor/update">Chnage Password</MenuItem>
+                <MenuItem onClick={this.handleClose}><a href="/Doctor/logout">Logout</a></MenuItem>
+              </Menu>
+            </div>
+          )}
+          {!auth && (
+            <div>
+              <TextField
+                required
+                id="username"
+                label="UserName"
+                placeholder="Enter username"
+                className={classes.textField}
+                margin="normal"
+                value={this.state.username}
+                name="userName"
+                onChange={this.onChange}
+              />
+              <FormControl className={classNames(classes.margin, classes.textField)}>
+                <InputLabel htmlFor="adornment-password">Password</InputLabel>
+                <Input
+                  id="adornment-password"
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  value={this.state.password}
+                  name="password"
                   onChange={this.onChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="Toggle password visibility"
+                        onClick={this.handleClickShowPassword}
+                        onMouseDown={this.handleMouseDownPassword}
+                      >
+                        {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                 />
-                <FormControl className={classNames(classes.margin, classes.textField)}>
-                  <InputLabel htmlFor="adornment-password">Password</InputLabel>
-                  <Input
-                    id="adornment-password"
-                    type={this.state.showPassword ? 'text' : 'password'}
-                    value={this.state.password}
-                    name="password"
-                    onChange={this.onChange}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="Toggle password visibility"
-                          onClick={this.handleClickShowPassword}
-                          onMouseDown={this.handleMouseDownPassword}
-                        >
-                          {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                <Button variant="raised" color="secondary" className={classes.button} onClick={this.loginDoc}>
-                  Login
-                </Button>
-              </div>
-            )}
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
+              </FormControl>
+              <Button variant="raised" color="secondary" className={classes.button} onClick={this.loginDoc}>
+                Login
+              </Button>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}
 }
 
 DoctorNavbar.propTypes = {

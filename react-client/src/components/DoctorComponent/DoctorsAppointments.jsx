@@ -3,8 +3,6 @@ import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { withStyles, Paper, Table, SnackbarContent,
 		 TableBody, TableCell, TableHead, TableRow ,MailIcon,IconButton,Button,Badge} from '@material-ui/core';
-
-
 const styles = theme => ({
   	snackbar: {
     	margin: theme.spacing.unit,
@@ -19,198 +17,197 @@ const styles = theme => ({
     }
 	});
 class DoctorApp extends React.Component{
-	constructor(props){
-		super(props);
-		this.state={
-			app:[],				// store all appoinment
-			doc:'',            //store the doctor id
-			show:false,			//show or hide the app to screen
-			today:'',          // today date
-			todayApp:[],       // store the appoinment of this day
-			doctor:[],
-			unReadMsg:0
-			
+constructor(props){
+	super(props);
+	this.state={
+		app:[],				// store all appoinment
+		doc:'',            //store the doctor id
+		show:false,			//show or hide the app to screen
+		today:'',          // today date
+		todayApp:[],       // store the appoinment of this day
+		doctor:[],
+		unReadMsg:0	
+	}
+	this.sort=this.sort.bind(this);
+	this.formatDate=this.formatDate.bind(this);
+	this.getDoctorData=this.getDoctorData.bind(this);
+	this.getStripedStyle=this.getStripedStyle.bind(this)
+}
+
+componentDidMount(){
+	var that=this;
+	var c=0;
+	this.getDoctorData();
+	var appArr=[];		
+	$.ajax({
+		type:'get',
+		url:'/app',
+		success:function(data1){
+			console.log('data1 from doctor com ',data1[0].doctorId._id)
+			console.log('state from doctor com ',that.state.doctor._id)
+
+			for(var j=0;j<data1.length;j++){
+				appArr.push(data1[j])
+				if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
+					c++
+				}
+			}
+			that.setState({		
+			app:appArr,
+			unReadMsg:c
+		})
+			//declare var unReadM;
+			//unReadM=c;
+			console.log('c==',c)
+
+
 		}
-		this.sort=this.sort.bind(this);
-		this.formatDate=this.formatDate.bind(this);
-		this.getDoctorData=this.getDoctorData.bind(this);
-		this.getStripedStyle=this.getStripedStyle.bind(this)
+	})
+	var today=this.formatDate(new Date);
+	this.setState({
+		today:today
+	})
+}
+
+getDoctorData() {
+    var that = this
+    $.ajax({
+      url:'/Doctor/getOne',
+      type:'GET',
+      success:function(doct){
+        that.setState({
+          doctor: doct
+        })
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+}
+
+formatDate(date) {
+var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+if (month.length < 2) month = '0' + month;
+if (day.length < 2) day = '0' + day;
+
+return [year, month, day].join('-');
+}
+sort(){
+	var thisDay=this.state.today;
+	var that=this;
+	var app=this.state.app;
+	var docApp=[];
+	var min=app[0];
+	var j=0;
+
+	while(app[j]){
+		for(var i=0;i<app.length;i++){
+			if(app[j].date<app[i].date){
+				min=app[j];
+				app[j]=app[i];
+				app[i]=min;
+			}
+		}
+		j++
+	}
+
+	for(var i=0;i<app.length;i++){
+		if(app[i].doctorId._id==this.state.doctor._id){
+			docApp.push(app[i])
+		}
+	}
+
+	var todayApp=[];
+
+	for(var i=0;i<app.length;i++){
+		if(thisDay==app[i].date){
+			todayApp.push(app[i])
+		}
 	}
 	
-	componentDidMount(){
-		var that=this;
-		var c=0;
-		this.getDoctorData();
-		var appArr=[];		
-		$.ajax({
-			type:'get',
-			url:'/app',
-			success:function(data1){
-				console.log('data1 from doctor com ',data1[0].doctorId._id)
-				console.log('state from doctor com ',that.state.doctor._id)
-
-				for(var j=0;j<data1.length;j++){
-					appArr.push(data1[j])
-					if(data1[j].doctorId._id===that.state.doctor._id&&data1[j].read===false){
-						c++
-					}
-				}
-				that.setState({		
-				app:appArr,
-				unReadMsg:c
-			})
-				//declare var unReadM;
-				//unReadM=c;
-				console.log('c==',c)
-
-
-			}
-		})
-		var today=this.formatDate(new Date);
-		this.setState({
-			today:today
-		})
+	var s =this.state.show;
+	this.setState({
+		app:docApp,
+		show:!s,
+		todayApp:todayApp
+	})
+	var doctorid=this.state.app[0].doctorId._id
+	console.log('doctoriddoctoriddoctoriddoctoriddoctorid ',doctorid)
+	var obj={
+		docId:doctorid
 	}
-
-	getDoctorData() {
-	    var that = this
-	    $.ajax({
-	      url:'/Doctor/getOne',
-	      type:'GET',
-	      success:function(doct){
-	        that.setState({
-	          doctor: doct
-	        })
-	      },
-	      error:function(err){
-	        console.log(err);
-	      }
-	    });
-	}
-
-	formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-	}
-	sort(){
-		var thisDay=this.state.today;
-		var that=this;
-		var app=this.state.app;
-		var docApp=[];
-		var min=app[0];
-		var j=0;
-
-		while(app[j]){
-			for(var i=0;i<app.length;i++){
-				if(app[j].date<app[i].date){
-					min=app[j];
-					app[j]=app[i];
-					app[i]=min;
-				}
-			}
-			j++
+	$.ajax({
+		url:'/app',
+		type:'PUT',
+		data:obj,
+		dataType:"json",
+		success:function(){
+			console.log('unread massege updated')
 		}
-		for(var i=0;i<app.length;i++){
-			if(app[i].doctorId._id==this.state.doctor._id){
-				docApp.push(app[i])
-			}
-		}
-		var todayApp=[];
-		for(var i=0;i<app.length;i++){
-			if(thisDay==app[i].date){
-				todayApp.push(app[i])
-			}
-		}
-
-
-		var s =this.state.show;
-		this.setState({
-			app:docApp,
-			show:!s,
-			todayApp:todayApp
-		})
-		var doctorid=this.state.app[0].doctorId._id
-		console.log('doctoriddoctoriddoctoriddoctoriddoctorid ',doctorid)
-		var obj={
-			docId:doctorid
-		}
-		$.ajax({
-			url:'/app',
-			type:'PUT',
-			data:obj,
-			dataType:"json",
-			success:function(){
-				console.log('unread massege updated')
-			}
-		})
-
+	})
+}
+getStripedStyle() {
+return { background:  '#fafafa'  };
 	}
 
-	getStripedStyle() {
-    return { background:  '#fafafa'  };
-  	}
+render(){
+console.log(this.state)
+const classes=this.props
+var that=this
+return(
+	<div>
+  		<Badge color="primary" badgeContent={this.state.unReadMsg} className={classes.margin}>
+		 		<Button variant="raised" onClick={that.sort}>show Appointment</Button>
+			</Badge>
 
-	render(){
-		console.log(this.state)
-		const classes=this.props
-		var that=this
-		return(
-			<div>
-          		<Badge color="primary" badgeContent={this.state.unReadMsg} className={classes.margin}>
-       		 		<Button variant="raised" onClick={that.sort}>show Appointment</Button>
-     			</Badge>
+		{this.state.show&&(
+			<Paper className={classes.root}>
+			      <Table className={classes.table}>
+			        <TableHead>
+			          <TableRow>
+			            <TableCell>pationt name</TableCell>
+			            <TableCell>date</TableCell>
+			            <TableCell>hour</TableCell>
+			          </TableRow>
+			        </TableHead>
+			        <TableBody>
+			          {this.state.app.map(function(item){
+			          	if(!item.read){
+			          	return (
+			              <TableRow>
+			                <TableCell>{item.userId.FullName}</TableCell>
+			                <TableCell>{item.date}</TableCell>
+			                <TableCell>{item.hour}</TableCell>
+			                <TableCell>
+  								<Badge color="primary" badgeContent='NEW' className={classes.margin}>
+			                	</Badge>	
+			                </TableCell>
+			              </TableRow>
+			            );
+			          	}else{
+			          		return (
+			              <TableRow>
+			                <TableCell>{item.userId.FullName}</TableCell>
+			                <TableCell>{item.date}</TableCell>
+			                <TableCell>{item.hour}</TableCell>
+			                <TableCell>
+			                </TableCell>
+			              </TableRow>
+			            );	
+			          	}
 
-				{this.state.show&&(
-					<Paper className={classes.root}>
-					      <Table className={classes.table}>
-					        <TableHead>
-					          <TableRow>
-					            <TableCell>pationt name</TableCell>
-					            <TableCell>date</TableCell>
-					            <TableCell>hour</TableCell>
-					          </TableRow>
-					        </TableHead>
-					        <TableBody>
-					          {this.state.app.map(function(item){
-					          	if(!item.read){
-					          	return (
-					              <TableRow>
-					                <TableCell>{item.userId.FullName}</TableCell>
-					                <TableCell>{item.date}</TableCell>
-					                <TableCell>{item.hour}</TableCell>
-					                <TableCell>
-          								<Badge color="primary" badgeContent='NEW' className={classes.margin}>
-					                	</Badge>	
-					                </TableCell>
-					              </TableRow>
-					            );
-					          	}else{
-					          		return (
-					              <TableRow>
-					                <TableCell>{item.userId.FullName}</TableCell>
-					                <TableCell>{item.date}</TableCell>
-					                <TableCell>{item.hour}</TableCell>
-					                <TableCell>
-					                </TableCell>
-					              </TableRow>
-					            );	
-					          	}
-
-					          })}
-					        </TableBody>
-					      </Table>
-					    </Paper>					
-					)}
-			</div>
-			)
-	}
+			          })}
+			        </TableBody>
+			      </Table>
+			    </Paper>					
+			)}
+	</div>
+	)
+}
 }
 
 export default DoctorApp;

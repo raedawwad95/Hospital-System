@@ -6,23 +6,25 @@ exports.createDept=function(req,res){
 		nameOfDept:req.body.nameOfDept,
 		idOfDept:req.body.idOfDept
 	})
-
 	Dept.save(function(err,data){
+
 		if(err){
 			return err;
 		}
+
 		res.json("Department added");
 	})
-
 }
 //retrive departments 
 exports.retriveDepts=function(req,res){
 	Departments.find({}).
 	populate('doctorsId').
 	exec(function(err,data){
+
 		if(err){
 			res.json('error')
 		}
+
 		res.json(data)
 	})
 	
@@ -32,6 +34,7 @@ exports.addDoctor=function(req,res){
 	var query={idOfDept:req.body.idOfDept};
 	Doctor.findOne({userName: req.body.docName})
 	.exec(function (err, doctor) {
+
 		if (err) {
 			console.error(err);
 		}
@@ -47,6 +50,7 @@ exports.addDoctor=function(req,res){
 				res.json(data)
 			})
 		}
+
 	})
 }
 //retrive One Department 
@@ -54,6 +58,7 @@ exports.retriveOneDept = function (req, res) {
 	Departments.find({nameOfDept:req.params.nameOfDep})
 		.populate('doctorsId')
 		.exec(function (err, doctor) {
+
 			if (err) {
 				console.error(err);
 			}
@@ -62,13 +67,14 @@ exports.retriveOneDept = function (req, res) {
 			} else {
 				res.json(doctor);
 			}
+
 		})
 }
-
 //to be continued ....
 exports.DeleteDocFromDep=function(req,res){
 	var query={idOfDept:req.body.idOfDept};
 	Doctor.findOne({userName: req.body.docName}).exec(function (err, doctor) {
+
 		if (err) {
 			console.error(err);
 		}
@@ -84,6 +90,7 @@ exports.DeleteDocFromDep=function(req,res){
 				res.json(data)
 			})
 		}
+		
 	})
 }
 

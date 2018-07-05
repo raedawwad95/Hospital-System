@@ -7,19 +7,18 @@ import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-rout
 
 class Labs extends React.Component {
   constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div>
-      <LabsNavbar/>
-      <br/>
-        <Route exact path="/labs" component={LabHome} />
-        <Route path='/labs/AddLabResult' component={AddLabResult} />
-        <Route path="/labs/update" component={UpdateLabTechncians} />
-      </div>
-    )
-  }
+  super(props);
+}
+render() {
+  return (
+    <div>
+    <LabsNavbar/>
+    <br/>
+      <Route exact path="/labs" component={LabHome} />
+      <Route path='/labs/AddLabResult' component={AddLabResult} />
+      <Route path="/labs/update" component={UpdateLabTechncians} />
+    </div>
+  )
+}
 }
 export default Labs;      

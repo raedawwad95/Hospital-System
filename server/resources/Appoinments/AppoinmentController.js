@@ -1,5 +1,4 @@
 var Appoinment =require('./Appoinments');
-
 // create an appointment 
 exports.add=function(req,res){
 	var Appoint=new Appoinment({
@@ -14,7 +13,6 @@ exports.add=function(req,res){
 		}
 		res.json(data);
 	})
-	
 }
 // retrive appointments 
 exports.retrive=function(req,res){
@@ -22,6 +20,7 @@ exports.retrive=function(req,res){
 	.populate('doctorId')
 	.populate('userId')
 	.exec(function(err,data){
+
 		if(err){
 			console.log('there is an err')
 		}
@@ -30,13 +29,11 @@ exports.retrive=function(req,res){
 		}else{
 		res.json(data)
 		}
+		
 	});
 }
 //update the appointment 
 exports.update=function(req,res){
-	//Appoinment.update({"doctorId":req.body.docId},{$set:{"read":true}}, {"multi": true})
-	//Appoinment.save()
-	console.log('yyyyyyyyyyyyyyyyyyyyy ',req.body.docId)
 	Appoinment.find({"doctorId":req.body.docId},function(err,appoinments){
 		appoinments.forEach(function(appoinment){
 			appoinment.read=true;

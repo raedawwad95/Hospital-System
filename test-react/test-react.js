@@ -1,44 +1,35 @@
- var chai = require('chai')
- var expect = chai.expect;
- var assert = require('chai').assert
-  import React from 'react';
-  import ReactTestUtils from 'react-dom/test-utils'; 
-
-  
-  import LoginLabTech from '../react-client/src/components/LabsTechnciansComponents/LoginLabTech';
-  import AddLabResult from '../react-client/src/components/LabsTechnciansComponents/AddLabResult';
-  import LabHome from '../react-client/src/components/LabsTechnciansComponents/LabHome';
-  import Labs from '../react-client/src/components/LabsTechnciansComponents/LabsMain';
-  import LabsNavbar from '../react-client/src/components/LabsTechnciansComponents/LabsNavbar';
-  import UpdateLabTechncians from '../react-client/src/components/LabsTechnciansComponents/UpdateLabTechncians';
-  import Create from '../react-client/src/components/User/Create';
-  import Home from '../react-client/src/components/User/Home';
-  import Main from '../react-client/src/components/User/Main';
-  import News from '../react-client/src/components/User/News';
-  import PationtAppoinment from '../react-client/src/components/User/PationtAppoinment';
-  import UserProfile from '../react-client/src/components/User/UserProfile';
-  import DoctorHome from '../react-client/src/components/DoctorComponent/DoctorHome';
-  import Doctor from '../react-client/src/components/DoctorComponent/DoctorMain';
-  import DoctorApp from '../react-client/src/components/DoctorComponent/DoctorsAppointments';
-  import PatientDataAddRecord from '../react-client/src/components/DoctorComponent/PatientDataAddRecord';
-  import UpdateDoctor from '../react-client/src/components/DoctorComponent/UpdateDoctor';
-  import AddDepartment from '../react-client/src/components/adminComponents/addDept';
-  import AddDoctor from '../react-client/src/components/adminComponents/AddDoctor';
-  import AddDocToComponent from '../react-client/src/components/adminComponents/addDoctortoComponent';
-  import addDoctorToDepartment from '../react-client/src/components/adminComponents/addDoctorToDepartment';
-  
-
-
-
-
- import ShallowRenderer from 'react-test-renderer/shallow';
- import sinon from 'sinon';
- import { configure } from 'enzyme';
- import { shallow } from 'enzyme';
- import Adapter from 'enzyme-adapter-react-15';
- configure({ adapter: new Adapter() });
-
-
+var chai = require('chai')
+var expect = chai.expect;
+var assert = require('chai').assert
+import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils'; 
+import LoginLabTech from '../react-client/src/components/LabsTechnciansComponents/LoginLabTech';
+import AddLabResult from '../react-client/src/components/LabsTechnciansComponents/AddLabResult';
+import LabHome from '../react-client/src/components/LabsTechnciansComponents/LabHome';
+import Labs from '../react-client/src/components/LabsTechnciansComponents/LabsMain';
+import LabsNavbar from '../react-client/src/components/LabsTechnciansComponents/LabsNavbar';
+import UpdateLabTechncians from '../react-client/src/components/LabsTechnciansComponents/UpdateLabTechncians';
+import Create from '../react-client/src/components/User/Create';
+import Home from '../react-client/src/components/User/Home';
+import Main from '../react-client/src/components/User/Main';
+import News from '../react-client/src/components/User/News';
+import PationtAppoinment from '../react-client/src/components/User/PationtAppoinment';
+import UserProfile from '../react-client/src/components/User/UserProfile';
+import DoctorHome from '../react-client/src/components/DoctorComponent/DoctorHome';
+import Doctor from '../react-client/src/components/DoctorComponent/DoctorMain';
+import DoctorApp from '../react-client/src/components/DoctorComponent/DoctorsAppointments';
+import PatientDataAddRecord from '../react-client/src/components/DoctorComponent/PatientDataAddRecord';
+import UpdateDoctor from '../react-client/src/components/DoctorComponent/UpdateDoctor';
+import AddDepartment from '../react-client/src/components/adminComponents/addDept';
+import AddDoctor from '../react-client/src/components/adminComponents/AddDoctor';
+import AddDocToComponent from '../react-client/src/components/adminComponents/addDoctortoComponent';
+import addDoctorToDepartment from '../react-client/src/components/adminComponents/addDoctorToDepartment'
+import ShallowRenderer from 'react-test-renderer/shallow';
+import sinon from 'sinon';
+import { configure } from 'enzyme';
+import { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
+configure({ adapter: new Adapter() });
 
 //Labs Techncians Component Test.
 describe("LoginLabTech",function(){
@@ -87,8 +78,6 @@ describe("UpdateLabTechncians",function(){
 		expect(React.Component.isPrototypeOf(UpdateLabTechncians)).to.be.true;
 	})
  });
-
-
 
 //Users Component Test
 describe("Create",function(){

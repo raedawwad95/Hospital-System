@@ -1,6 +1,5 @@
 var Doctor = require('./Doctor.js');
 var User = require('../User/Users')
-
 //retrieve .. find and retrieve data
 exports.retrieve=function(req,res){
 	Doctor.find({},function(err,data){
@@ -10,7 +9,6 @@ exports.retrieve=function(req,res){
 		res.json(data);
 	});
 }
-
 // create new Doctor 
 exports.create=function(req,res){
 	var doctorObj={
@@ -26,16 +24,15 @@ exports.create=function(req,res){
 		hoursOfWork:req.body.hoursOfWork,
 		gender:req.body.gender
 	}
-
 	var doctor =new Doctor(doctorObj);
 	doctor.save(function(err,data){
 		res.json(data)
 	});
 }
-
 //Update doctor information 
 exports.update=function(req,res){
 	Doctor.findOne({userName:req.session.userName}).exec(function (err,doctor){
+
 		if(err){
 			console.error(err);
 		}
@@ -46,28 +43,28 @@ exports.update=function(req,res){
 			doctor.save();
 			res.json("Updated");
 		}
+
 	})
 }
-
 //function for login
-
 exports.login = function(req,res){
 	Doctor.findOne({userName:req.body.userName}).exec(function (err,doctor){
+
 		if(err){
 			console.error(err);
 		}
-		if(!doctor){//Not found user
+		if(!doctor){
 			console.error("No doctor found");
-		}else{ //found user check password  by comparePassword method
+		}else{ 
 			doctor.comparePassword(req.body.password,function(err,isMatch){
 				if(err){
 					console.error(err);
 				}
-				if(!isMatch){//not match
+				if(!isMatch){
 					console.error("Wrong password");
 				}else{ 
 					return req.session.regenerate(function(err){
-						if(err){ //if match generate seassion
+						if(err){ 
 							return console.error(err)
 						}
 						req.session.userName = doctor.userName;
@@ -77,10 +74,10 @@ exports.login = function(req,res){
 					    res.json(doctor);
 					});
 				}
+
 			});
 		}
 	});
-
 }
 // Logout function 
 exports.logout=function(req,res){
@@ -94,7 +91,6 @@ exports.logout=function(req,res){
 //retrive patient from user 
 exports.retrievePatient=function(req,res){
 	var userName=req.params.userNamePatient;
-	
 	User.findOne({"username":userName},function(err,data){
 		if(err){
 			console.log(err);
@@ -115,30 +111,34 @@ exports.isLogin = function(req, res) {
 // Retrive one Doctor by user name 
 exports.retrieveOne=function(req,res){
 	Doctor.findOne({userName : req.session.userName},function(err,data){
+
 		if(err){
 			res.send(err);
 		}
+		
 		res.json(data);
 	});
 }
-
 //Delete doctor 
 exports.deleteOne=function(req,res){
 	var userName=req.params.userNameDoctor;
 	Doctor.findOneAndRemove({userName:userName},function(err,deleted){
+
 		if(err){
 			console.log("error");
 		}
+
 		res.send(deleted)
 	})
 }
-
 exports.retrieveDoctor=function(req,res){
 	console.log(req.params.doctorId)
 	Doctor.findOne({_id : req.params.doctorId},function(err,data){
+
 		if(err){
 			res.send(err);
 		}
+
 		res.json(data);
 	});
 }

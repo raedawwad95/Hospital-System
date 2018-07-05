@@ -7,10 +7,7 @@ var Medical = require('../server/resources/MedicalRecorde/Medical')
 var mongoose = require('mongoose');
 var chai = require('chai');  
 var expect = chai.expect;   
-
-
 //test for Department Model
-
 describe('Department Model', function () {
 
 	it('should be a Mongoose model', function () {
@@ -29,8 +26,6 @@ describe('Department Model', function () {
     expect(Department.schema.paths.nameOfDept.options.type.name).to.equal('String');
   });
 
-
-
   it('should have a `idOfDept` property', function () {
     expect(Department.schema.paths.idOfDept).to.exist;
   });
@@ -39,7 +34,6 @@ describe('Department Model', function () {
     expect(Department.schema.paths.idOfDept.options.type.name).to.equal('Number');
   });
 
- 
   it('should have a `doctorsId` property', function () {
     expect(Department.schema.paths.doctorsId).to.exist;
   });
@@ -47,8 +41,6 @@ describe('Department Model', function () {
 });
 
 //test for Doctors Model
-
-
 describe('Doctors Model',function(){
 	it ('should be a mongoose model',function(){
 		expect(new Doctors()).to.be.instanceOf(mongoose.Model);
@@ -93,7 +85,6 @@ describe('Doctors Model',function(){
     it('should have a `spicilityStatus` property', function () {
     expect(Doctors.schema.paths.spicilityStatus).to.exist;
     });
-
 
     it('should have a `hoursOfWork` property', function () {
     expect(Doctors.schema.paths.hoursOfWork).to.exist;
@@ -140,9 +131,7 @@ describe('Doctors Model',function(){
     });
 })
 
-
 //test for ItDepartment Model
-
 describe('ItDepartment Model', function(){
     it('should a mongoose model', function(){
         expect(new ItDepartment()).to.be.instanceOf(mongoose.Model)
@@ -169,9 +158,7 @@ describe('ItDepartment Model', function(){
     
 });
 
-
 //test for LabsResult Model
-
 describe('LabsResult Model', function(){
     it('should a mongoose Model', function(){
         expect(new LabsResult()).to.be.instanceOf(mongoose.Model);
@@ -209,14 +196,9 @@ describe('LabsResult Model', function(){
     it('should have a `imageOfResult` property that is a string', function(){
         expect(LabsResult.schema.paths.imageOfResult.options.type.name).to.equal('String');
     });
-
-
 });
 
-
-
 //test for LabsTechncians Model
-    
 describe('LabsTechncians Model', function(){
     it('should a mongoose Model', function(){
         expect(new LabsTechncians()).to.be.instanceOf(mongoose.Model);
@@ -267,9 +249,7 @@ describe('LabsTechncians Model', function(){
 
 });
 
-
 //test for Medical Model
-
 describe('Medical Model', function(){
     it('should a mongoose Model', function(){
         expect(new Medical()).to.be.instanceOf(mongoose.Model);

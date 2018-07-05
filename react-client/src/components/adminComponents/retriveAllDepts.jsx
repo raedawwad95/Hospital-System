@@ -29,68 +29,62 @@ const styles = theme => ({
     },
   },
 });
-
 class retriveAllDepts extends React.Component{
-	constructor(props){
-		super(props);
-		this.state={
-			depts:[]
-		}
+constructor(props){
+	super(props);
+	this.state={
+		depts:[]
 	}
-
-	componentDidMount() {
-    	var that=this;
-    	$.ajax({
-    	type:'GET',
-		dataType: "json",
- 		url: '/dept',
- 		success:function(data){
- 			that.setState({
- 				depts:data
- 			});
- 		}
-		});
-
-    }
-
-render(){
-	const { classes } = this.props;
-	return(
-		<div>
-		<div className="card">
-			<div> <h2 style={{textAlign:'center'}}>All Departments</h2> <br /> </div>
-			<div className="container">
-			<Paper className={classes.root}>
-	        <Table className={classes.table}>
-	          <TableHead>
-	          <TableRow>
-	            <CustomTableCell>Name Of Dept</CustomTableCell>
-	            <CustomTableCell>Id Of Dept</CustomTableCell>
-	          </TableRow>
-	        </TableHead>
-	        <TableBody>
-	           {this.state.depts.map(function(item, index){
-	            return (
-	              <TableRow className={classes.row} key={index}>
-	                <CustomTableCell component="th" scope="row">
-	                  {item.nameOfDept}
-	                </CustomTableCell>
-	                <CustomTableCell>{item.idOfDept}</CustomTableCell>
-	              </TableRow>
-	            );
-	          })}
-	        </TableBody>
-	      </Table>
-         </Paper>
-         <br/>
-         </div>
-	    </div>
-	    </div>
-		)
-	}
-
 }
-
+componentDidMount() {
+	var that=this;
+	$.ajax({
+	type:'GET',
+	dataType: "json",
+		url: '/dept',
+		success:function(data){
+			that.setState({
+				depts:data
+			});
+		}
+	});
+}
+render(){
+const { classes } = this.props;
+return(
+	<div>
+	<div className="card">
+		<div> <h2 style={{textAlign:'center'}}>All Departments</h2> <br /> </div>
+		<div className="container">
+		<Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+          <TableRow>
+            <CustomTableCell>Name Of Dept</CustomTableCell>
+            <CustomTableCell>Id Of Dept</CustomTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+           {this.state.depts.map(function(item, index){
+            return (
+              <TableRow className={classes.row} key={index}>
+                <CustomTableCell component="th" scope="row">
+                  {item.nameOfDept}
+                </CustomTableCell>
+                <CustomTableCell>{item.idOfDept}</CustomTableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+     </Paper>
+     <br/>
+     </div>
+    </div>
+    </div>
+	)
+}
+}
 retriveAllDepts.propTypes = {
   classes: PropTypes.object.isRequired,
 };

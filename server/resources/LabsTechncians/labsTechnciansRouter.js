@@ -12,19 +12,17 @@ labsTechnciansRouter.route('/')
 	//add Patient
 	.put(function(req,res){
 	LabsTechnciansController.addPatient(req,res);
-})
+    })
 	// techncian update 
 	labsTechnciansRouter.route('/update')
 	.put(function(req,res){
 	 LabsTechnciansController.update(req,res);
 	})
-
 	//techncian login .
 	labsTechnciansRouter.route('/login')
 	.post(function(req,res){
 		LabsTechnciansController.login(req,res)
 	})
-
 	// techncian logout
 	labsTechnciansRouter.route('/logout')
 	.get(function (req, res) {
@@ -34,7 +32,6 @@ labsTechnciansRouter.route('/')
 		.get(function(req , res) {
 			LabsTechnciansController.isLogin(req , res);
 		})
-
 	//get patient result by patintId
 	labsTechnciansRouter.route('/:patintId')
 	.get(function(req,res){

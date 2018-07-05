@@ -1,7 +1,5 @@
 var NewsRouter=require('express').Router();
 var NewsController=require('./NewsController');
-
-
 //for create new News
 NewsRouter.route('/')
 .post(function(req,res){
@@ -16,5 +14,4 @@ NewsRouter.route('/:id')
 .delete(function(req,res){
 	NewsController.Delete(req,res)
 })
-
 module.exports=NewsRouter;
