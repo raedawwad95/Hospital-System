@@ -66,7 +66,6 @@ const styles = theme => ({
     height: 60,
   },
 });
-
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -88,185 +87,185 @@ class Navbar extends React.Component {
     this.getUserData = this.getUserData.bind(this);
   }
 
-  handleChange(event, checked)  {
-    this.setState({ auth: checked });
-  };
+handleChange(event, checked)  {
+  this.setState({ auth: checked });
+};
 
-  handleMenu(event) {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+handleMenu(event) {
+  this.setState({ anchorEl: event.currentTarget });
+};
 
-  handleClose() {
-    this.setState({ anchorEl: null });
-  };
+handleClose() {
+  this.setState({ anchorEl: null });
+};
 
-  onChange(e){
-    this.setState({
-      [e.target.name]:e.target.value
-    });
+onChange(e){
+  this.setState({
+    [e.target.name]:e.target.value
+  });
+}
+
+handleMouseDownPassword(event) {
+  event.preventDefault();
+};
+
+handleClickShowPassword() {
+  this.setState({ 
+    showPassword: !this.state.showPassword 
+  });
+};
+
+login(){
+  var that = this
+  var obj = {
+    username: this.state.username,
+    password: this.state.password
   }
-
-  handleMouseDownPassword(event) {
-    event.preventDefault();
-  };
-
-  handleClickShowPassword() {
-    this.setState({ 
-      showPassword: !this.state.showPassword 
-    });
-  };
-
-  login(){
-    var that = this
-    var obj = {
-      username: this.state.username,
-      password: this.state.password
+  $.ajax({
+    url:'/api/userController/login',
+    type:'POST',
+    data:obj,
+    success:function(data){
+      alert("Login sucess");
+      that.setState({
+        auth: true
+      })
+      that.getUserData();
+    },
+    error:function(err){
+      console.log(err);
     }
-    $.ajax({
-      url:'/api/userController/login',
-      type:'POST',
-      data:obj,
-      success:function(data){
-        alert("Login sucess");
-        that.setState({
-          auth: true
-        })
-        that.getUserData();
-      },
-      error:function(err){
-        console.log(err);
-      }
-    });
-  }
+  });
+}
 
-  componentDidMount() {
-    var that = this
-    $.ajax({
-      url:'/api/userController/isLogin',
-      type:'GET',
-      success:function(data){
-        that.setState({
-          auth: true
-        })
-        that.getUserData();
-      },
-      error:function(err){
-        console.log(err);
-      }
-    });
-  }
+componentDidMount() {
+  var that = this
+  $.ajax({
+    url:'/api/userController/isLogin',
+    type:'GET',
+    success:function(data){
+      that.setState({
+        auth: true
+      })
+      that.getUserData();
+    },
+    error:function(err){
+      console.log(err);
+    }
+  });
+}
 
-  getUserData() {
-    var that = this
-    $.ajax({
-      url:'/api/userController/getLogin',
-      type:'GET',
-      success:function(data){
-        that.setState({
-          user: data
-        })
-      },
-      error:function(err){
-        console.log(err);
-      }
-    });
-  }
+getUserData() {
+  var that = this
+  $.ajax({
+    url:'/api/userController/getLogin',
+    type:'GET',
+    success:function(data){
+      that.setState({
+        user: data
+      })
+    },
+    error:function(err){
+      console.log(err);
+    }
+  });
+}
 
-  render() {
-    const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
-    const open = Boolean(anchorEl);
+render() {
+const { classes } = this.props;
+const { auth, anchorEl } = this.state;
+const open = Boolean(anchorEl);
 
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              Hospital-System
-            </Typography>
-            {auth && (
-              <div className={classes.row}>
-                <Button component={Link} to="/" className={classes.button2}>
-                  Home
-                </Button>
-                <Avatar
-                  alt="Adelle Charles"
-                  src={this.state.user.personalImgUrl}
-                  className={classNames(classes.avatar, classes.bigAvatar)}
-                  aria-owns={open ? 'menu-appbar' : null}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                />
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                > 
-                  <MenuItem onClick={this.handleClose} component={Link} to="/user/profile">View your profile</MenuItem>
-                  <Divider />                   
-                  <MenuItem onClick={this.handleClose} component={Link} to="/user/appointment">Get appointment</MenuItem>
-                  <Divider />
-                  <MenuItem onClick={this.handleClose} component={Link} to="/user/update">Change password</MenuItem>
-                  <MenuItem onClick={this.handleClose} component={Link} to="/api/userController/logout">Logout</MenuItem>
-                </Menu>
-              </div>
-            )}
-            {!auth && (
-              <div>
-              <Button component={Link} to="/user/create" className={classes.button2}>
-                  Create Account
-                </Button>
-                <TextField
-                  required
-                  id="username"
-                  label="UserName"
-                  placeholder="Enter username"
-                  className={classes.textField}
-                  margin="normal"
-                  value={this.state.username}
-                  name="username"
-                  onChange={this.onChange}
-                />
-                <FormControl className={classNames(classes.margin, classes.textField)}>
-                  <InputLabel htmlFor="adornment-password">Password</InputLabel>
-                  <Input
-                    id="adornment-password"
-                    type={this.state.showPassword ? 'text' : 'password'}
-                    value={this.state.password}
-                    name="password"
-                    onChange={this.onChange}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="Toggle password visibility"
-                          onClick={this.handleClickShowPassword}
-                          onMouseDown={this.handleMouseDownPassword}
-                        >
-                          {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                <Button variant="raised" color="secondary" className={classes.button} onClick={this.login}>
-                  Login
-                </Button>
-              </div>
-            )}
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
+return (
+  <div className={classes.root}>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="title" color="inherit" className={classes.flex}>
+          Hospital-System
+        </Typography>
+        {auth && (
+          <div className={classes.row}>
+            <Button component={Link} to="/" className={classes.button2}>
+              Home
+            </Button>
+            <Avatar
+              alt="Adelle Charles"
+              src={this.state.user.personalImgUrl}
+              className={classNames(classes.avatar, classes.bigAvatar)}
+              aria-owns={open ? 'menu-appbar' : null}
+              aria-haspopup="true"
+              onClick={this.handleMenu}
+            />
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={this.handleClose}
+            > 
+              <MenuItem onClick={this.handleClose} component={Link} to="/user/profile">View your profile</MenuItem>
+              <Divider />                   
+              <MenuItem onClick={this.handleClose} component={Link} to="/user/appointment">Get appointment</MenuItem>
+              <Divider />
+              <MenuItem onClick={this.handleClose} component={Link} to="/user/update">Change password</MenuItem>
+              <MenuItem onClick={this.handleClose} component={Link} to="/api/userController/logout">Logout</MenuItem>
+            </Menu>
+          </div>
+        )}
+        {!auth && (
+          <div>
+          <Button component={Link} to="/user/create" className={classes.button2}>
+              Create Account
+            </Button>
+            <TextField
+              required
+              id="username"
+              label="UserName"
+              placeholder="Enter username"
+              className={classes.textField}
+              margin="normal"
+              value={this.state.username}
+              name="username"
+              onChange={this.onChange}
+            />
+            <FormControl className={classNames(classes.margin, classes.textField)}>
+              <InputLabel htmlFor="adornment-password">Password</InputLabel>
+              <Input
+                id="adornment-password"
+                type={this.state.showPassword ? 'text' : 'password'}
+                value={this.state.password}
+                name="password"
+                onChange={this.onChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="Toggle password visibility"
+                      onClick={this.handleClickShowPassword}
+                      onMouseDown={this.handleMouseDownPassword}
+                    >
+                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <Button variant="raised" color="secondary" className={classes.button} onClick={this.login}>
+              Login
+            </Button>
+          </div>
+        )}
+      </Toolbar>
+    </AppBar>
+  </div>
+);
+}
 }
 
 Navbar.propTypes = {

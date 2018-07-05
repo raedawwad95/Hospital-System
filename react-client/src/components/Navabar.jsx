@@ -262,7 +262,6 @@ class Navabar extends React.Component {
     );
   }
 }
-
 Navabar.propTypes = {
   classes: PropTypes.object.isRequired,
 };

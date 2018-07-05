@@ -1,6 +1,5 @@
 var MedicalRouter = require('express').Router();
 var MedicalController = require('./MedicalController');
-
 //Create medical records
 MedicalRouter.route('/')
 	.post(function (req, res) {
@@ -16,5 +15,4 @@ MedicalRouter.route('/addRecorde')
 	.post(function (req, res) {
 		MedicalController.addRecord(req, res);
 	})
-
 module.exports = MedicalRouter;

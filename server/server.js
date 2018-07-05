@@ -39,6 +39,4 @@ app.use('/emergency',EmergencyRouter);
 app.get('*', function (req, res){
     res.sendFile(path.resolve(__dirname, '../react-client/dist', 'index.html'));
 })
-
-
 module.exports = app;

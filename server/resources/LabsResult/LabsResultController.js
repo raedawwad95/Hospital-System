@@ -1,13 +1,14 @@
 var LabsResult = require('./LabsResult');
 var Users = require('../User/Users');
-
 //Create function to create a lab result panel 
 exports.Create = function (req, res) {
 	var newLabRes= new LabsResult(req.body);
 	newLabRes.save(function(err,data){
+
 		if (err){
 			return console.error(err);
 		}
+
 		res.json(data)
 	});
 };
@@ -15,6 +16,7 @@ exports.Create = function (req, res) {
 exports.createResutl=function(req,res){
 	Users.findOne({username:req.body.username})
 	.exec(function(err,user){
+
 		if(err){
 			res.json(err);
 		}
@@ -31,24 +33,27 @@ exports.createResutl=function(req,res){
 		}
 		var labRes=new LabsResult(obj);
 		labRes.save(function(err,data){
+
 			if(err){
 				res.json(err);
 			}else{
 				//res.json(data);
 			}
+
 		});
 		user.labResults.push(labRes._id);
 		user.save(function(err,data){
+
 			if(err){
 				res.json(err);
 			}else{
 				//res.json(data);
 			}
+
 		});
 		res.json("LabsResult been saved in database");
 		}
 	});
-
 }
 //retrive all lab result 
  exports.Retrive=function(req,res){
@@ -56,6 +61,7 @@ exports.createResutl=function(req,res){
  	.populate('patientId','FullName')
  	.populate('labTechnicianId','fullName')
  	.exec(function(err,data){
+
  		if(err){
  			console.error(err);
  		}
@@ -64,5 +70,6 @@ exports.createResutl=function(req,res){
  		}else{
  			res.json(data)
  		}
+ 		
  	});
  };

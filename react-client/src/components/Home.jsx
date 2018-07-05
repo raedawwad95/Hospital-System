@@ -4,8 +4,6 @@ import UserAppoinment from './UserpickApp.jsx'
 import DoctorAppointments from './DoctorPickApp.jsx'
 import News from './News.jsx'
 
-
-
 class Home extends React.Component {
   constructor(props) {
     super(props);

@@ -15,7 +15,6 @@ const CustomTableCell = withStyles(theme => ({
     fontSize: 14,
   },
 }))(TableCell);
-
 const styles = theme => ({
   root: {
     width: '100%',
@@ -34,96 +33,93 @@ const styles = theme => ({
     margin: theme.spacing.unit,
   },
 });
-
 class RetriveEmergency extends React.Component{
-	constructor(props){
-		super(props);
-		this.state={
-			emergency:[]
-		}
-		this.delete = this.delete.bind(this)
+constructor(props){
+	super(props);
+	this.state={
+		emergency:[]
 	}
+	this.delete = this.delete.bind(this)
+}
 
-	componentDidMount() {
-    	var that=this;
-    	$.ajax({
-	    	type:'GET',
-			dataType: "json",
-	 		url: '/emergency',
-	 		success:function(data){
-	 			that.setState({
-	 				emergency:data
-	 			});
-    			console.log(that.state.emergency);
-	 		}
-		});
-    }
-
-    delete(id){
- 		var that=this;
- 		var id = id.target.value
- 		var obj = {
- 			_id : id
+componentDidMount() {
+	var that=this;
+	$.ajax({
+    	type:'GET',
+		dataType: "json",
+ 		url: '/emergency',
+ 		success:function(data){
+ 			that.setState({
+ 				emergency:data
+ 			});
+			console.log(that.state.emergency);
  		}
- 		$.ajax({
- 			type:"Delete",
- 			url:'/emergency',
- 			data:obj,
- 			success:function(data){
- 				alert('data deleted')
- 				that.componentDidMount();
- 			},
- 			error:function(err){
- 				console.log(err)
- 			}
- 		})
- 	}
+	});
+}
 
+delete(id){
+		var that=this;
+		var id = id.target.value
+		var obj = {
+			_id : id
+		}
+		$.ajax({
+			type:"Delete",
+			url:'/emergency',
+			data:obj,
+			success:function(data){
+				alert('data deleted')
+				that.componentDidMount();
+			},
+			error:function(err){
+				console.log(err)
+			}
+		})
+	}
 render(){
-	const { classes } = this.props;
-	if (this.state.emergency.length === 0) {
-		return (
-			<h3> No emergency calls </h3>
-		)
-	}
-	return(
-		<Paper className={classes.root}>
-	      <Table className={classes.table}>
-	        <TableHead>
-	          <TableRow>
-	            <CustomTableCell>Name</CustomTableCell>
-	            <CustomTableCell numeric>Phone</CustomTableCell>
-	            <CustomTableCell numeric>Long</CustomTableCell>
-	            <CustomTableCell numeric>Lat</CustomTableCell>
-	            <CustomTableCell>Created At</CustomTableCell>
-	            <CustomTableCell>Delete</CustomTableCell>
-	          </TableRow>
-	        </TableHead>
-	        <TableBody>
-	          {this.state.emergency.map(n => {
-	            return (
-	              <TableRow className={classes.row} key={n.id}>
-	                <CustomTableCell component="th" scope="row">
-	                  {n.user.FullName}
-	                </CustomTableCell>
-	                <CustomTableCell numeric>{n.user.phone}</CustomTableCell>
-	                <CustomTableCell numeric>{n.longitude}</CustomTableCell>
-	                <CustomTableCell numeric>{n.latitude}</CustomTableCell>
-	                <CustomTableCell>{moment(n.createdAt).calendar()}</CustomTableCell>
-	                <CustomTableCell>
-	                	<button value={n._id} onClick={this.delete} className='btn btn-danger'>
-				        	Delete
-				        </button>
-				    </CustomTableCell>
-	              </TableRow>
-	            );
-	          })}
-	        </TableBody>
-	      </Table>
-	    </Paper>
-		)
-	}
-
+const { classes } = this.props;
+if (this.state.emergency.length === 0) {
+	return (
+		<h3> No emergency calls </h3>
+	)
+}
+return(
+	<Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <CustomTableCell>Name</CustomTableCell>
+            <CustomTableCell numeric>Phone</CustomTableCell>
+            <CustomTableCell numeric>Long</CustomTableCell>
+            <CustomTableCell numeric>Lat</CustomTableCell>
+            <CustomTableCell>Created At</CustomTableCell>
+            <CustomTableCell>Delete</CustomTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.state.emergency.map(n => {
+            return (
+              <TableRow className={classes.row} key={n.id}>
+                <CustomTableCell component="th" scope="row">
+                  {n.user.FullName}
+                </CustomTableCell>
+                <CustomTableCell numeric>{n.user.phone}</CustomTableCell>
+                <CustomTableCell numeric>{n.longitude}</CustomTableCell>
+                <CustomTableCell numeric>{n.latitude}</CustomTableCell>
+                <CustomTableCell>{moment(n.createdAt).calendar()}</CustomTableCell>
+                <CustomTableCell>
+                	<button value={n._id} onClick={this.delete} className='btn btn-danger'>
+			        	Delete
+			        </button>
+			    </CustomTableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </Paper>
+	)
+}
 }
 
 RetriveEmergency.propTypes = {

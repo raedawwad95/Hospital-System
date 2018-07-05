@@ -16,10 +16,8 @@ var DepartmentSchema=mongoose.Schema({
 		}
 	},
 	doctorsId:[{type: mongoose.Schema.Types.ObjectId, ref: 'Doctors'}]
-	
 })
-
-
 var Department=mongoose.model('Department',DepartmentSchema);
+
 module.exports=Department
 

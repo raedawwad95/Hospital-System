@@ -31,69 +31,68 @@ const styles = theme => ({
 });
 
 class retrivePatient extends React.Component{
-	constructor(props){
-		super(props);
-		this.state={
-			userData:[],
-		}
+constructor(props){
+	super(props);
+	this.state={
+		userData:[],
 	}
-	componentDidMount() {
-    	var that=this;
-    	$.ajax({
-    	type:'GET',
-		dataType: "json",
- 		url: '/api/userController/retrive/allPatient',
- 		success:function(data){
- 			that.setState({
- 				userData:data
- 			});
- 		}
-		});
-    }
+}
+componentDidMount() {
+  	var that=this;
+  	$.ajax({
+  	type:'GET',
+	dataType: "json",
+		url: '/api/userController/retrive/allPatient',
+		success:function(data){
+			that.setState({
+				userData:data
+			});
+		}
+	});
+  }
 render(){
-	const { classes } = this.props;
-	return(
-		<div>
-		<div className="card">
-		<div className='container-fluid'>	
-	    <h1 style={{textAlign:'center'}}>Patients data</h1>      	
-		<Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-          <TableRow>
-            <CustomTableCell>User Name</CustomTableCell>
-            <CustomTableCell>Full Name</CustomTableCell>
-            <CustomTableCell numeric>Id Card Number</CustomTableCell>
-            <CustomTableCell numeric>Phone</CustomTableCell>
-            <CustomTableCell>Email</CustomTableCell>
-            <CustomTableCell>Gender</CustomTableCell>
+const { classes } = this.props;
+return(
+<div>
+<div className="card">
+<div className='container-fluid'>	
+  <h1 style={{textAlign:'center'}}>Patients data</h1>      	
+<Paper className={classes.root}>
+    <Table className={classes.table}>
+      <TableHead>
+      <TableRow>
+        <CustomTableCell>User Name</CustomTableCell>
+        <CustomTableCell>Full Name</CustomTableCell>
+        <CustomTableCell numeric>Id Card Number</CustomTableCell>
+        <CustomTableCell numeric>Phone</CustomTableCell>
+        <CustomTableCell>Email</CustomTableCell>
+        <CustomTableCell>Gender</CustomTableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {this.state.userData.map((item, index) =>{
+        return (
+          <TableRow className={classes.row} key={index}>
+            <CustomTableCell component="th" scope="row">
+              {item.username}
+            </CustomTableCell>
+            <CustomTableCell>{item.FullName}</CustomTableCell>
+            <CustomTableCell numeric>{item.idCardNumber}</CustomTableCell>
+            <CustomTableCell numeric>{item.phone}</CustomTableCell>
+            <CustomTableCell>{item.email}</CustomTableCell>
+            <CustomTableCell>{item.gender}</CustomTableCell>
           </TableRow>
-        </TableHead>
-        <TableBody>
-          {this.state.userData.map((item, index) =>{
-            return (
-              <TableRow className={classes.row} key={index}>
-                <CustomTableCell component="th" scope="row">
-                  {item.username}
-                </CustomTableCell>
-                <CustomTableCell>{item.FullName}</CustomTableCell>
-                <CustomTableCell numeric>{item.idCardNumber}</CustomTableCell>
-                <CustomTableCell numeric>{item.phone}</CustomTableCell>
-                <CustomTableCell>{item.email}</CustomTableCell>
-                <CustomTableCell>{item.gender}</CustomTableCell>
-              </TableRow>
-            );
-          })}
-	        </TableBody>
-	      </Table>
-	    </Paper>
-	    <br/>
-         </div> 
-         </div>   
-         <br />
-         </div>
-		)	
-
+        );
+      })}
+      </TableBody>
+    </Table>
+  </Paper>
+  <br/>
+     </div> 
+     </div>   
+     <br />
+     </div>
+)	
 }
 }
 retrivePatient.propTypes = {

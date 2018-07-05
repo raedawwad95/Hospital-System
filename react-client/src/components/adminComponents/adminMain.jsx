@@ -18,39 +18,38 @@ import RetriveEmergency from './RetriveEmergency.jsx';
 import { browserHistory, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 
 class Admin extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshed: false
-    }
-  }
-
-  refreshComponents(value) {
-    window.location.reload()
-  }
-
-  render() {
-    return (
-      <div>
-      <AdminNavbar refresh={this.refreshComponents.bind(this)}/>
-      <br/>
-        <Route exact path="/admin" component={AdminHome} />
-        <Route path="/admin/AddLabTechncians" component={AddLabTechncians} />
-        <Route path="/admin/addDept" component={addDept} />  
-        <Route path="/admin/addDoctorToDepartment" component={addDoctorToDepartment} />  
-        <Route path="/admin/AddDoctor" component={AddDoctor} />
-        <Route path="/admin/retriveAllDepts" component={retriveAllDepts} />
-        <Route path="/admin/retriveAllDoctor" component={retriveAllDoctor} />
-        <Route path="/admin/retriveLabResults" component={retriveLabResults} />
-        <Route path="/admin/retriveLabTech" component={retriveLabTech} />
-        <Route path='/admin/retrivePatient' component={retrivePatient} />
-        <Route path='/admin/RetriveAllPatient' component={RetriveAllPatient} />
-        <Route path='/admin/RetriveDoctorInDepartment' component={RetriveDoctorInDepartment} />
-        <Route path='/admin/addNews' component={addNews} />
-        <Route path='/admin/DeleteNews' component={DeleteNews} />
-        <Route path='/admin/RetriveEmergency' component={RetriveEmergency} />
-      </div>
-    )
+constructor(props) {
+  super(props);
+  this.state = {
+    refreshed: false
   }
 }
+refreshComponents(value) {
+  window.location.reload()
+}
+render() {
+  return (
+    <div>
+    <AdminNavbar refresh={this.refreshComponents.bind(this)}/>
+    <br/>
+      <Route exact path="/admin" component={AdminHome} />
+      <Route path="/admin/AddLabTechncians" component={AddLabTechncians} />
+      <Route path="/admin/addDept" component={addDept} />  
+      <Route path="/admin/addDoctorToDepartment" component={addDoctorToDepartment} />  
+      <Route path="/admin/AddDoctor" component={AddDoctor} />
+      <Route path="/admin/retriveAllDepts" component={retriveAllDepts} />
+      <Route path="/admin/retriveAllDoctor" component={retriveAllDoctor} />
+      <Route path="/admin/retriveLabResults" component={retriveLabResults} />
+      <Route path="/admin/retriveLabTech" component={retriveLabTech} />
+      <Route path='/admin/retrivePatient' component={retrivePatient} />
+      <Route path='/admin/RetriveAllPatient' component={RetriveAllPatient} />
+      <Route path='/admin/RetriveDoctorInDepartment' component={RetriveDoctorInDepartment} />
+      <Route path='/admin/addNews' component={addNews} />
+      <Route path='/admin/DeleteNews' component={DeleteNews} />
+      <Route path='/admin/RetriveEmergency' component={RetriveEmergency} />
+    </div>
+  )
+}
+}
+
 export default Admin;  
