@@ -4,40 +4,40 @@ exports.create = function (req, res) {
 var user = new Users(req.body);
 user.save(function(err, user) {
 
-	if (err) {
-		console.error(err);
-	}
+  if (err) {
+	console.error(err);
+  }
 
 	res.redirect('/login');
- })
+})
 };
 // Login function for Reactjs
 exports.login = function (req, res) {
 Users.findOne({username: req.body.username})
 .exec(function (err, user) {
 if (err) {
-	console.error(err);
+  console.error(err);
 } 
 if (!user) { 
-	console.error("No user found");
+  console.error("No user found");
 } else { 
-	user.comparePassword(req.body.password, function(err, isMatch) {
-		if (err) {
-			console.error(err);
-		}
-		if (!isMatch) { 
-			console.error("Wrong password");
-		} else { 
-			return req.session.regenerate(function(err) {
-        		if (err) {
-        			return console.error(err);
-        		}
-        		req.session.username = user.username;
-        		req.session.userType = user.userType;
-        		res.json(user);
-			});
-		}
-	});
+  user.comparePassword(req.body.password, function(err, isMatch) {
+if (err) {
+  console.error(err);
+}
+if (!isMatch) { 
+  console.error("Wrong password");
+} else { 
+  return req.session.regenerate(function(err) {
+if (err) {
+  return console.error(err);
+}
+  req.session.username = user.username;
+  req.session.userType = user.userType;
+  res.json(user);
+});
+}
+});
 }
 });
 };

@@ -27,18 +27,18 @@ doctorRouter.route('/logout')
 })
 //check if doctor login
 doctorRouter.route('/isLogin')
-	.get(function (req, res) {
-		DoctorController.isLogin(req, res);
-	})
+.get(function (req, res) {
+	DoctorController.isLogin(req, res);
+})
 //get login doctor data
 doctorRouter.route('/getOne')
-	.get(function (req, res) {
-		DoctorController.retrieveOne(req, res);
-	})
+.get(function (req, res) {
+	DoctorController.retrieveOne(req, res);
+})
 doctorRouter.route('/test')
-	.get(function (req, res) {
-		res.json(req.session);
-	})	
+.get(function (req, res) {
+	res.json(req.session);
+})	
 //get patient info by the userName
 doctorRouter.route('/:userNamePatient')
 .get(function(req,res){
@@ -52,12 +52,6 @@ doctorRouter.route('/:userNameDoctor')
 doctorRouter.route('/t/:doctorId')
 .get(function(req,res){
 	DoctorController.retrieveDoctor(req,res);
-
 })
-
-
-
-
-
 
 module.exports = doctorRouter;
