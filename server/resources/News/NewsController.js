@@ -3,10 +3,9 @@ var News =require ('./News');
 exports.create=function(req,res){
   var newNews=new News(req.body)
   newNews.save(function(err,data){
-
-	if(err){
+    if(err){
 		console.log(err)
-	}
+    }
 
 	res.json(data)
   })
